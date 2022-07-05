@@ -1,10 +1,13 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "composite": true,
     "baseUrl": ".",
+    "outDir": "dist",
+    "rootDir": "./src",
     "paths": {
       "~/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["./src/**/*.ts"]
 }
