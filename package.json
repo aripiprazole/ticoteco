@@ -6,5 +6,11 @@
   "repository": "https://github.com/gabrielleeg1/ticoteco",
   "author": "Gabrielle Guimarães de Oliveira",
   "license": "GPL-3.0+",
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "workspaces": [
+    "packages/web"
+  ],
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
 }
