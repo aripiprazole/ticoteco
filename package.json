@@ -1,0 +1,10 @@
+{
+  "name": "ticoteco",
+  "version": "1.0.0",
+  "description": "Tiktok web clone",
+  "main": "index.js",
+  "repository": "https://github.com/gabrielleeg1/ticoteco",
+  "author": "Gabrielle Guimarães de Oliveira",
+  "license": "GPL-3.0+",
+  "packageManager": "yarn@3.2.1"
+}
