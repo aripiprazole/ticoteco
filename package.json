@@ -7,10 +7,25 @@
   "author": "Gabrielle Guimarães de Oliveira",
   "license": "GPL-3.0+",
   "packageManager": "yarn@3.2.1",
+  "scripts": {
+    "web:dev": "yarn workspace @ticoteco/web dev",
+    "web:build": "yarn workspace @ticoteco/web build",
+    "lint": "eslint"
+  },
   "workspaces": [
     "packages/web"
   ],
   "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "@next/eslint-plugin-next": "^12.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.30.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "typescript": "^4.7.4"
   }
 }
