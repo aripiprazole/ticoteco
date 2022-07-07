@@ -19,6 +19,6 @@
 import {GraphQLObjectType} from 'graphql';
 
 export const QueryType = new GraphQLObjectType({
-  name: 'Mutation',
+  name: 'Query',
   fields: () => ({}),
 });
