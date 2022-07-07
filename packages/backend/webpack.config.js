@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const ReloadServerPlugin = require('./webpack/ReloadServerPlugin');
+
 const {TsconfigPathsPlugin} = require('tsconfig-paths-webpack-plugin');
 
 const cwd = process.cwd();
@@ -35,6 +37,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new ReloadServerPlugin({
+      script: path.resolve('build', 'server.js'),
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
