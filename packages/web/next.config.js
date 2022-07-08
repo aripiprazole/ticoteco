@@ -1,4 +1,7 @@
-const withTM = require('next-transpile-modules')(['@ticoteco/ui']);
+const withTM = require('next-transpile-modules')([
+  '@ticoteco/ui',
+  '@ticoteco/shared',
+]);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

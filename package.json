@@ -18,6 +18,7 @@
   "workspaces": [
     "packages/web",
     "packages/ui",
+    "packages/shared",
     "packages/backend"
   ],
   "devDependencies": {

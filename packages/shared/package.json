@@ -1,0 +1,9 @@
+{
+  "name": "@ticoteco/shared",
+  "version": "1.0.0",
+  "description": "ticoteco's shared",
+  "main": "./src/index.ts",
+  "repository": "https://github.com/gabrielleeg1/ticoteco",
+  "author": "Gabrielle Guimarães de Oliveira",
+  "license": "GPL-3.0+"
+}

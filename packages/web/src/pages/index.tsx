@@ -19,6 +19,9 @@
 import React from 'react';
 
 import {HelloWorld} from '@ticoteco/ui';
+import {User} from '@ticoteco/shared';
+
+console.log('Log-in', new User('gabi'));
 
 export default function Index() {
   return <HelloWorld />;

@@ -7,6 +7,7 @@ module.exports = {
     relative: true,
     extensions: [
       '.ts',
+      '.js',
     ],
     rootDir: '.',
     tsconfig: 'tsconfig.json',

@@ -12,6 +12,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ticoteco/shared": "workspace:^",
     "@ticoteco/ui": "workspace:^",
     "next": "12.2.0",
     "next-transpile-modules": "^9.0.0",

@@ -16,17 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createServer} from '~/server';
-import {User} from '@ticoteco/shared';
-
-// TODO: fix production build with workspaces
-console.log(new User('hello'));
-
-async function startBackend() {
-  const app = createServer();
-
-  // TODO: get PORT from environment and use 8000 as fallback
-  app.listen(8000);
+class User {
+  public constructor(
+    public readonly username: string,
+  ) {
+  }
 }
 
-startBackend();
+export default User;
