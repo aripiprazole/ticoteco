@@ -17,6 +17,7 @@
   },
   "workspaces": [
     "packages/web",
+    "packages/ui",
     "packages/backend"
   ],
   "devDependencies": {

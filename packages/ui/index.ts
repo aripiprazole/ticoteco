@@ -16,10 +16,4 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-
-import {HelloWorld} from '@ticoteco/ui';
-
-export default function Index() {
-  return <HelloWorld />;
-}
+export {default as HelloWorld} from './src/HelloWorld';

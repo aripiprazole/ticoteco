@@ -18,8 +18,6 @@
 
 import React from 'react';
 
-import {HelloWorld} from '@ticoteco/ui';
-
-export default function Index() {
-  return <HelloWorld />;
+export default function HelloWorld() {
+  return <div>Hello, world!</div>;
 }
