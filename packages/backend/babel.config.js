@@ -4,11 +4,11 @@ module.exports = {
     ['@babel/preset-env', {targets: {node: 'current'}}],
   ],
   plugins: [['babel-plugin-tsconfig-paths', {
-    'relative': true,
-    'extensions': [
+    relative: true,
+    extensions: [
       '.ts',
     ],
-    'rootDir': '.',
-    'tsconfig': 'tsconfig.json',
+    rootDir: '.',
+    tsconfig: 'tsconfig.json',
   }]],
 };

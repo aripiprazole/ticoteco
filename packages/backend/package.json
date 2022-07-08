@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "webpack --watch --progress",
     "start": "node dist/index.js",
-    "build": "tsc --build --verbose"
+    "prebuild": "tsc --build --verbose",
+    "build": "babel src --out-dir dist --extensions '.ts'"
   },
   "dependencies": {
     "@koa/router": "^11.0.1",
