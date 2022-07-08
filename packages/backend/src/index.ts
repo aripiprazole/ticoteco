@@ -17,10 +17,6 @@
  */
 
 import {createServer} from '~/server';
-import {User} from '@ticoteco/shared';
-
-// TODO: fix production build with workspaces
-console.log(new User('hello'));
 
 async function startBackend() {
   const app = createServer();
