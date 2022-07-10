@@ -18,7 +18,7 @@
 
 import {createGlobalStyle} from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   :root {
     --background: #f3f3f3;
   }
@@ -66,5 +66,3 @@ const GlobalStyle = createGlobalStyle`
     list-style: none;
   }
 `;
-
-export default GlobalStyle;

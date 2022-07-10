@@ -19,7 +19,7 @@
 import React from 'react';
 import {AppProps} from 'next/app';
 
-import GlobalStyle from '~/styles/GlobalStyle';
+import {GlobalStyle} from '@ticoteco/ui';
 
 export default function App({Component, pageProps}: AppProps) {
   return (
