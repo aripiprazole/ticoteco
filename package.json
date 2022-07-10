@@ -11,7 +11,10 @@
     "backend:dev": "yarn workspace @ticoteco/backend dev",
     "backend:start": "yarn workspace @ticoteco/backend start",
     "backend:build": "yarn workspace @ticoteco/backend build",
+    "ui:storybook": "yarn workspace @ticoteco/ui storybook",
+    "ui:build-storybook": "yarn workspace @ticoteco/ui build-storybook",
     "web:dev": "yarn workspace @ticoteco/web dev",
+    "web:start": "yarn workspace @ticoteco/web start",
     "web:build": "yarn workspace @ticoteco/web build",
     "lint": "eslint"
   },
@@ -35,5 +38,13 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "typescript": "^4.7.4"
+  },
+  "dependenciesMeta": {
+    "open@7.4.2": {
+      "unplugged": true
+    },
+    "open@8.4.0": {
+      "unplugged": true
+    }
   }
 }
