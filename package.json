@@ -17,6 +17,7 @@
     "web:dev": "yarn workspace @ticoteco/web dev",
     "web:start": "yarn workspace @ticoteco/web start",
     "web:build": "yarn workspace @ticoteco/web build",
+    "chromatic": "yarn workspace @ticoteco/ui chromatic",
     "lint": "eslint"
   },
   "workspaces": [
