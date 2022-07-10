@@ -16,6 +16,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from './src/timeline/Timeline';
-export * from './src/navigation/Navigation';
-export * from './src/layout/Layout';
+import React from 'react';
+
+import {Container} from './Navigation.styles';
+
+export function Navigation() {
+  return (
+    <Container>
+      <span>Logo</span>
+
+      <ul>Hello, world!</ul>
+    </Container>
+  );
+}

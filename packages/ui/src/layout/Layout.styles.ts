@@ -16,6 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from './src/timeline/Timeline';
-export * from './src/navigation/Navigation';
-export * from './src/layout/Layout';
+import styled from 'styled-components';
+
+export const Container = styled.div``;

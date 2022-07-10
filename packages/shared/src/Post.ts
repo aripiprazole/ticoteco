@@ -16,6 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from './src/timeline/Timeline';
-export * from './src/navigation/Navigation';
-export * from './src/layout/Layout';
+export class Post {
+  public constructor(
+    public readonly title: string,
+  ) {
+  }
+}

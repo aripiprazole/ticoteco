@@ -16,11 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-class User {
+export class User {
   public constructor(
     public readonly username: string,
   ) {
   }
 }
-
-export default User;

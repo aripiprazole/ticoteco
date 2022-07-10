@@ -18,6 +18,22 @@
 
 import React from 'react';
 
-export default function HelloWorld() {
-  return <div>Hello, world!</div>;
+import {Navigation} from '@ticoteco/ui';
+
+import {Container} from './Layout.styles';
+
+export type LayoutProps = {
+  readonly children?: React.ReactNode;
+};
+
+export function Layout({children}: LayoutProps) {
+  return (
+    <Container>
+      <Navigation />
+
+      <main>
+        {children}
+      </main>
+    </Container>
+  );
 }

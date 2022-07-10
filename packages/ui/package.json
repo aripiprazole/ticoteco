@@ -7,6 +7,7 @@
   "author": "Gabrielle Guimarães de Oliveira",
   "license": "GPL-3.0+",
   "dependencies": {
+    "@ticoteco/shared": "workspace:^",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",

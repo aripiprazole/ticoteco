@@ -18,8 +18,12 @@
 
 import React from 'react';
 
-import {HelloWorld} from '@ticoteco/ui';
+import {Layout, Timeline} from '@ticoteco/ui';
 
 export default function Index() {
-  return <HelloWorld />;
+  return (
+    <Layout>
+      <Timeline posts={[]} />
+    </Layout>
+  );
 }

@@ -16,6 +16,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from './src/timeline/Timeline';
-export * from './src/navigation/Navigation';
-export * from './src/layout/Layout';
+import React from 'react';
+
+import {Post} from '@ticoteco/shared';
+
+import {Container} from './Timeline.styles';
+
+export type TimelineProps = {
+  readonly posts: readonly Post[];
+}
+
+export function Timeline({posts}: TimelineProps) {
+  return (
+    <Container>
+      {posts.map(({title}) => title)}
+    </Container>
+  );
+}
