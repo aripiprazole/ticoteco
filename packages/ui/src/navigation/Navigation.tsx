@@ -18,14 +18,25 @@
 
 import React from 'react';
 
-import {Container} from './Navigation.styles';
+import {FiBox} from 'react-icons/fi';
+
+import {Search, AuthButtons} from '@ticoteco/ui';
+
+import {Container, Logo, Nav} from './Navigation.styles';
 
 export function Navigation() {
   return (
     <Container>
-      <span>Logo</span>
+      <Nav>
+        <Logo>
+          <FiBox /> {/* TODO: create ticoteco's logo */}
+          ticoteco
+        </Logo>
 
-      <ul>Hello, world!</ul>
+        <Search />
+
+        <AuthButtons />
+      </Nav>
     </Container>
   );
 }

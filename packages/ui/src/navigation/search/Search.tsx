@@ -16,28 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import styled from 'styled-components';
+import React from 'react';
 
-export const Container = styled.div`
-  padding: 1rem 0.5rem;
-  background: #fefefe;
-  border-bottom: 1px solid #e6e6e6;
-`;
+import {Container} from './Search.styles';
 
-export const Logo = styled.span`
-  display: flex;
-  align-items: center;
-  gap: 0.2rem;
-  
-  font-size: 1.5rem;
-`;
-
-export const Nav = styled.nav`
-  max-width: 80rem;
-  width: 100%;
-  margin: auto;
-  
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
+export function Search() {
+  return <Container>Search</Container>;
+}

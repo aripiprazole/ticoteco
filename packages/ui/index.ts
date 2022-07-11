@@ -18,5 +18,7 @@
 
 export * from './src/style/GlobalStyle';
 export * from './src/timeline/Timeline';
+export * from './src/navigation/search/Search';
+export * from './src/navigation/auth-buttons/AuthButtons';
 export * from './src/navigation/Navigation';
 export * from './src/layout/Layout';
