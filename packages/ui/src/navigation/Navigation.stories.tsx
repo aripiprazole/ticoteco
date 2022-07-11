@@ -27,6 +27,6 @@ export default {
   component: Navigation,
 } as ComponentMeta<typeof Navigation>;
 
-export const HeaderNavigation: ComponentStory<typeof Navigation> = () => {
+export const Main: ComponentStory<typeof Navigation> = () => {
   return <Navigation />;
 };

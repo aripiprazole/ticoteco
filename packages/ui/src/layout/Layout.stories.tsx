@@ -27,6 +27,6 @@ export default {
   component: Layout,
 } as ComponentMeta<typeof Layout>;
 
-export const MainLayout: ComponentStory<typeof Layout> = () => {
+export const Main: ComponentStory<typeof Layout> = () => {
   return <Layout />;
 };

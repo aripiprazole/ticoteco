@@ -27,6 +27,6 @@ export default {
   component: Timeline,
 } as ComponentMeta<typeof Timeline>;
 
-export const FullTimeline: ComponentStory<typeof Timeline> = () => {
+export const Main: ComponentStory<typeof Timeline> = () => {
   return <Timeline posts={[]} />;
 };

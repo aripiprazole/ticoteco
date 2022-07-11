@@ -27,6 +27,6 @@ export default {
   component: Search,
 } as ComponentMeta<typeof Search>;
 
-export const HeaderSearch: ComponentStory<typeof Search> = () => {
+export const Main: ComponentStory<typeof Search> = () => {
   return <Search />;
 };
