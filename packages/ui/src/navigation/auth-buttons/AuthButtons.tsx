@@ -18,8 +18,16 @@
 
 import React from 'react';
 
+import {Button, useAuth} from '@ticoteco/ui';
+
 import {Container} from './AuthButtons.styles';
 
 export function AuthButtons() {
-  return <Container>Authentication</Container>;
+  const {login} = useAuth();
+
+  return (
+    <Container>
+      <Button onClick={login}>Login</Button>
+    </Container>
+  );
 }

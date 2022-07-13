@@ -12,8 +12,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@firebase/app": "^0.7.28",
+    "@firebase/auth": "^0.20.5",
     "@ticoteco/shared": "workspace:^",
     "@ticoteco/ui": "workspace:^",
+    "firebase": "^9.9.0",
     "next": "12.2.0",
     "next-transpile-modules": "^9.0.0",
     "react": "18.2.0",

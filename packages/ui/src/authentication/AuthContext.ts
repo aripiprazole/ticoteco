@@ -16,14 +16,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Contexts
-export * from './src/authentication/AuthContext';
+import {createContext, useContext} from 'react';
 
-// UI Components
-export * from './src/style/GlobalStyle';
-export * from './src/button/Button';
-export * from './src/timeline/Timeline';
-export * from './src/navigation/search/Search';
-export * from './src/navigation/auth-buttons/AuthButtons';
-export * from './src/navigation/Navigation';
-export * from './src/layout/Layout';
+export type AuthContextData = {
+  readonly user: any; // TODO: use application user
+  readonly login: () => void;
+};
+
+export const AuthContext = createContext<AuthContextData>({
+  user: {},
+  login: () => {},
+});
+
+export function useAuth(): AuthContextData {
+  return useContext(AuthContext);
+}
