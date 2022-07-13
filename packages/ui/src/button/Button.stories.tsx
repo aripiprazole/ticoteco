@@ -16,10 +16,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from './src/style/GlobalStyle';
-export * from './src/button/Button';
-export * from './src/timeline/Timeline';
-export * from './src/navigation/search/Search';
-export * from './src/navigation/auth-buttons/AuthButtons';
-export * from './src/navigation/Navigation';
-export * from './src/layout/Layout';
+import React from 'react';
+
+import {ComponentMeta, ComponentStory} from '@storybook/react';
+
+import {Button} from './Button';
+
+export default {
+  title: 'UI Kit/Button',
+  component: Button,
+} as ComponentMeta<typeof Button>;
+
+export const Main: ComponentStory<typeof Button> = () => {
+  return <Button />;
+};
