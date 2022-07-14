@@ -20,7 +20,7 @@ import Koa from 'koa';
 import Router from '@koa/router';
 
 import {graphqlHTTP} from 'koa-graphql';
-import {schema} from '~/schema';
+import {schema} from '@/schema';
 
 export function createServer(): Koa {
   const app = new Koa();

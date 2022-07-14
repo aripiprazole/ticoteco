@@ -27,7 +27,7 @@ import {
   UserCredential,
 } from '@firebase/auth';
 
-import '~/config/firebase';
+import '@/config/firebase';
 
 export function AuthProvider({children}: PropsWithChildren) {
   const auth = getAuth();
