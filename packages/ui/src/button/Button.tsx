@@ -16,14 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Contexts
-export * from './src/authentication/AuthContext';
+import React from 'react';
 
-// UI Components
-export * from './src/style/GlobalStyle';
-export * from './src/button/Button';
-export * from './src/timeline/Timeline';
-export * from './src/navigation/search/Search';
-export * from './src/navigation/auth-buttons/AuthButtons';
-export * from './src/navigation/Navigation';
-export * from './src/layout/Layout';
+import {Container} from './Button.styles';
+
+export type ButtonProps = React.ButtonHTMLAttributes<any> & {
+  readonly children?: React.ReactNode;
+};
+
+export function Button({children, ...props}: ButtonProps) {
+  return <Container {...props}>{children}</Container>;
+}

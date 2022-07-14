@@ -21,11 +21,13 @@ import {AppProps} from 'next/app';
 
 import {GlobalStyle} from '@ticoteco/ui';
 
+import {AuthProvider} from '~/providers/AuthProvider';
+
 export default function App({Component, pageProps}: AppProps) {
   return (
-    <>
+    <AuthProvider>
       <GlobalStyle />
       <Component {...pageProps} />
-    </>
+    </AuthProvider>
   );
 };

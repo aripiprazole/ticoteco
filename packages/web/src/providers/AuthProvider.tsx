@@ -16,14 +16,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Contexts
-export * from './src/authentication/AuthContext';
+import React, {PropsWithChildren, useState} from 'react';
 
-// UI Components
-export * from './src/style/GlobalStyle';
-export * from './src/button/Button';
-export * from './src/timeline/Timeline';
-export * from './src/navigation/search/Search';
-export * from './src/navigation/auth-buttons/AuthButtons';
-export * from './src/navigation/Navigation';
-export * from './src/layout/Layout';
+import {AuthContext} from '@ticoteco/ui';
+
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  UserCredential,
+} from '@firebase/auth';
+
+import '~/config/firebase';
+
+export function AuthProvider({children}: PropsWithChildren) {
+  const auth = getAuth();
+  const [user, setUser] = useState<UserCredential>();
+
+  function login() {
+    signInWithPopup(auth, new GoogleAuthProvider()).then((user) => {
+      setUser(user);
+    });
+  }
+
+  return (
+    <AuthContext.Provider value={{user, login}}>
+      {children}
+    </AuthContext.Provider>
+  );
+}

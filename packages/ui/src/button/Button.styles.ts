@@ -16,14 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Contexts
-export * from './src/authentication/AuthContext';
+import styled from 'styled-components';
 
-// UI Components
-export * from './src/style/GlobalStyle';
-export * from './src/button/Button';
-export * from './src/timeline/Timeline';
-export * from './src/navigation/search/Search';
-export * from './src/navigation/auth-buttons/AuthButtons';
-export * from './src/navigation/Navigation';
-export * from './src/layout/Layout';
+export const Container = styled.button``;
