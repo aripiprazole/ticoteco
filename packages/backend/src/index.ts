@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createServer} from '~/server';
+import {createServer} from '@/server';
 
 async function startBackend() {
   const app = createServer();
