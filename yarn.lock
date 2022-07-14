@@ -4463,6 +4463,8 @@ __metadata:
   resolution: "@ticoteco/ui@workspace:packages/ui"
   dependencies:
     "@babel/core": ^7.18.6
+    "@firebase/app": ^0.7.28
+    "@firebase/auth": ^0.20.5
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^6.5.9
     "@storybook/addon-docs": ^6.5.9

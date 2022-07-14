@@ -24,13 +24,14 @@ import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
+  UserCredential,
 } from '@firebase/auth';
 
 import '~/config/firebase';
 
 export function AuthProvider({children}: PropsWithChildren) {
   const auth = getAuth();
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState<UserCredential>();
 
   function login() {
     signInWithPopup(auth, new GoogleAuthProvider()).then((user) => {

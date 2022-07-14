@@ -18,13 +18,15 @@
 
 import {createContext, useContext} from 'react';
 
+import {UserCredential} from '@firebase/auth';
+
 export type AuthContextData = {
-  readonly user: any; // TODO: use application user
+  readonly user: UserCredential; // TODO: use application user
   readonly login: () => void;
 };
 
 export const AuthContext = createContext<AuthContextData>({
-  user: {},
+  user: {} as any,
   login: () => {},
 });
 
