@@ -6,7 +6,13 @@
   "repository": "https://github.com/gabrielleeg1/ticoteco",
   "author": "Gabrielle Guimarães de Oliveira",
   "license": "GPL-3.0+",
-  "packageManager": "yarn@3.2.1",
+  "private": true,
+  "workspaces": [
+    "packages/shared",
+    "packages/ui",
+    "packages/web",
+    "packages/backend"
+  ],
   "scripts": {
     "backend:dev": "yarn workspace @ticoteco/backend dev",
     "backend:start": "yarn workspace @ticoteco/backend start",
@@ -23,17 +29,10 @@
     "chromatic": "yarn workspace @ticoteco/ui chromatic",
     "lint": "eslint"
   },
-  "workspaces": [
-    "packages/web",
-    "packages/ui",
-    "packages/shared",
-    "packages/backend"
-  ],
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@next/eslint-plugin-next": "^12.2.0",
-    "@ticoteco/backend": "workspace:^",
     "@types/node": "^18.0.1",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
