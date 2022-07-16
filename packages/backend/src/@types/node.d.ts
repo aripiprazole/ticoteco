@@ -16,18 +16,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createServer} from '@/server';
-import {connectToMongo} from '@/mongo';
+/* eslint-disable no-unused-vars */
 
-// Set up the dotenv variables when running in development mode.
-require('dotenv')?.config();
-
-async function startBackend() {
-  const app = createServer();
-
-  // TODO: get PORT from environment and use 8000 as fallback
-  app.listen(8000);
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      readonly NODE_ENV: 'development' | 'production' | 'test';
+      readonly MONGO_URI: string;
+    }
+  }
 }
-
-connectToMongo();
-startBackend();

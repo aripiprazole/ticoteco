@@ -16,18 +16,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createServer} from '@/server';
-import {connectToMongo} from '@/mongo';
+import {Schema, model, connect} from 'mongoose';
 
-// Set up the dotenv variables when running in development mode.
-require('dotenv')?.config();
+type User = {
+  readonly name: string,
+  readonly email: string,
+  readonly avatar?: string,
+};
 
-async function startBackend() {
-  const app = createServer();
+const userSchema = new Schema({
+  name: {type: String, required: true},
+  email: {type: String, required: true},
+  avatar: String,
+});
 
-  // TODO: get PORT from environment and use 8000 as fallback
-  app.listen(8000);
+const User = model<User>('User', userSchema);
+
+export async function connectToMongo() {
+  await connect(process.env.MONGO_URI);
+
+  const user = new User({
+    name: 'Gabrielle',
+    email: 'contact@devgabi.me',
+    avatar: 'https://avatars1.githubusercontent.com/u/527098?s=460&v=4',
+  });
+
+  user.save();
 }
-
-connectToMongo();
-startBackend();
