@@ -9,6 +9,7 @@
   "dependencies": {
     "@firebase/app": "^0.7.28",
     "@firebase/auth": "^0.20.5",
+    "@ticoteco/shared": "workspace:^",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",

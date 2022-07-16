@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@koa/router": "^11.0.1",
+    "@ticoteco/shared": "workspace:^",
     "graphql": "^16.5.0",
     "graphql-relay": "^0.10.0",
     "koa": "^2.13.4",
