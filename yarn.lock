@@ -4442,6 +4442,7 @@ __metadata:
     "@types/koa__router": ^8.0.11
     babel-loader: ^8.2.5
     babel-plugin-tsconfig-paths: ^1.0.3
+    dotenv: ^16.0.1
     graphql: ^16.5.0
     graphql-relay: ^0.10.0
     koa: ^2.13.4
@@ -8277,6 +8278,13 @@ __metadata:
   version: 5.1.0
   resolution: "dotenv-expand@npm:5.1.0"
   checksum: 8017675b7f254384915d55f9eb6388e577cf0a1231a28d54b0ca03b782be9501b0ac90ac57338636d395fa59051e6209e9b44b8ddf169ce6076dffb5dea227d3
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^16.0.1":
+  version: 16.0.1
+  resolution: "dotenv@npm:16.0.1"
+  checksum: f459ffce07b977b7f15d8cc4ee69cdff77d4dd8c5dc8c85d2d485ee84655352c2415f9dd09d42b5b5985ced3be186130871b34e2f3e2569ebc72fbc2e8096792
   languageName: node
   linkType: hard
 

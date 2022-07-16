@@ -18,6 +18,9 @@
 
 import {createServer} from '@/server';
 
+// Set up the dotenv variables when running in development mode.
+require('dotenv')?.config();
+
 async function startBackend() {
   const app = createServer();
 
