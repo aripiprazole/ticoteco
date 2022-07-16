@@ -5,6 +5,7 @@
     "baseUrl": "./src",
     "outDir": "dist",
     "rootDir": "./src",
+    "isolatedModules": false,
     "paths": {
       "@/*": ["./*"]
     }
