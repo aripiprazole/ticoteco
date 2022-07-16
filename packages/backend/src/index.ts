@@ -20,7 +20,9 @@ import {createServer} from '@/server';
 import {connectToMongo} from '@/mongo';
 
 // Set up the dotenv variables when running in development mode.
-require('dotenv')?.config();
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config();
+}
 
 async function startBackend() {
   const app = createServer();
