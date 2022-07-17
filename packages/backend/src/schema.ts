@@ -16,4 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from './currentUserQuery';
+import {GraphQLSchema} from 'graphql';
+
+import {buildMutation} from './schema/mutation';
+import {buildQuery} from './schema/query';
+
+export function buildSchema(): GraphQLSchema {
+  return new GraphQLSchema({
+    mutation: buildMutation(),
+    query: buildQuery(),
+  });
+}
