@@ -16,15 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import * as admin from 'firebase-admin';
 
-import {currentUserQuery} from '@/users/queries';
+export type Firebase = admin.app.App;
 
-export function buildQuery(): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      currentUser: currentUserQuery,
-    }),
+export function initializeFirebase(): Firebase {
+  return admin.initializeApp({
+    credential: process.env.GOOGLE_APPLICATION_CREDENTIALS ?
+        admin.credential.applicationDefault() :
+         // TODO: test
+        admin.credential.cert(process.env.FIREBASE_SERVICE_ACCOUNT_KEY),
   });
 }

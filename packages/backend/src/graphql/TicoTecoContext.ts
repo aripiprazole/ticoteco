@@ -16,15 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import UserModel from '@/users/infra/UserModel';
 
-import {currentUserQuery} from '@/users/queries';
+type TicoTecoContext = {
+  readonly user: UserModel | null;
+};
 
-export function buildQuery(): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      currentUser: currentUserQuery,
-    }),
-  });
-}
+export default TicoTecoContext;

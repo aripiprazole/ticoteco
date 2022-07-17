@@ -16,15 +16,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import React from 'react';
 
-import {currentUserQuery} from '@/users/queries';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 
-export function buildQuery(): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      currentUser: currentUserQuery,
-    }),
-  });
-}
+import {Landing} from './Landing';
+
+export default {
+  title: 'Web/landing',
+  component: Landing,
+} as ComponentMeta<typeof Landing>;
+
+export const Main: ComponentStory<typeof Landing> = () => {
+  return <Landing />;
+};

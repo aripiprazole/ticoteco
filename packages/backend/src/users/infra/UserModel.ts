@@ -16,15 +16,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import {model, Schema, Types} from 'mongoose';
 
-import {currentUserQuery} from '@/users/queries';
+export const userSchema = new Schema<UserModel>({
+  username: {type: String, required: true},
+  displayName: {type: String, required: true},
+  firebaseUid: {type: String, required: true},
+});
 
-export function buildQuery(): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      currentUser: currentUserQuery,
-    }),
-  });
-}
+type UserModel = {
+  readonly _id: Types.ObjectId;
+  readonly username: string;
+  readonly displayName: string;
+  readonly firebaseUid: string;
+};
+
+const UserModel = model<UserModel>('User', userSchema);
+
+export default UserModel;

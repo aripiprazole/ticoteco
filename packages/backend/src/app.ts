@@ -16,15 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import {Mongoose} from 'mongoose';
 
-import {currentUserQuery} from '@/users/queries';
+import {Firebase} from '@/firebase';
 
-export function buildQuery(): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      currentUser: currentUserQuery,
-    }),
-  });
+export type TicoTecoAppData = {
+  readonly firebase: Firebase;
+  readonly mongoose: Mongoose;
 }

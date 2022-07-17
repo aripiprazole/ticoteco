@@ -19,11 +19,13 @@
 import React from 'react';
 
 import {Layout, Timeline} from '@ticoteco/ui';
+import {Landing} from '@/screens/landing/Landing';
 
 export default function Index() {
   return (
     <Layout>
       <Timeline posts={[]} />
+      <Landing />
     </Layout>
   );
 }

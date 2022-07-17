@@ -16,15 +16,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import {createServer} from '@/server';
+import {connectToMongo} from '@/mongo';
+import {initializeFirebase} from '@/firebase';
 
-import {currentUserQuery} from '@/users/queries';
-
-export function buildQuery(): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      currentUser: currentUserQuery,
-    }),
-  });
+// Set up the dotenv variables when running in development mode.
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config();
 }
+
+async function startBackend() {
+  const mongoose = await connectToMongo();
+  const firebase = await initializeFirebase();
+
+  const app = createServer({
+    mongoose,
+    firebase,
+  });
+
+  // TODO: get PORT from environment and use 8000 as fallback
+  app.listen(8000);
+}
+
+startBackend();

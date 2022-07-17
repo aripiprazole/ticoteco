@@ -16,15 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
-
-import {currentUserQuery} from '@/users/queries';
-
-export function buildQuery(): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      currentUser: currentUserQuery,
-    }),
-  });
+declare module 'cookie-cutter' {
+  export function get(name: string): string | undefined;
+  export function set(name: string, value: string, options?: any);
 }

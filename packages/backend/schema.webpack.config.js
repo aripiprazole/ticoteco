@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const ReloadServerPlugin = require('./webpack/ReloadServerPlugin');
 const {TsconfigPathsPlugin} = require('tsconfig-paths-webpack-plugin');
 
 const nodeExternals = require('webpack-node-externals');
@@ -28,11 +27,11 @@ module.exports = {
   mode: env('production', 'development'),
   devtool: 'eval-cheap-source-map',
   entry: {
-    server: './scripts/runServer.ts',
+    server: './scripts/generateSchema.ts',
   },
   output: {
-    path: env(path.resolve('dist'), path.resolve('build')),
-    filename: 'server.js',
+    path: path.resolve('build'),
+    filename: 'generateSchema.js',
   },
   node: {
     __dirname: true,
@@ -54,12 +53,8 @@ module.exports = {
   },
   plugins: [
     ...onlyDev([
-      new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('development'),
-      }),
-      new ReloadServerPlugin({
-        script: path.resolve('build', 'server.js'),
       }),
     ]),
   ],

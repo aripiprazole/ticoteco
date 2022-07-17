@@ -16,24 +16,40 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Koa from 'koa';
+import Koa, {Request} from 'koa';
 import Router from '@koa/router';
+import cors from '@koa/cors';
+import bodyparser from 'koa-bodyparser';
 
-import {graphqlHTTP} from 'koa-graphql';
+import {graphqlHTTP, OptionsData} from 'koa-graphql';
 
-import {Mongoose} from 'mongoose';
+import {TicoTecoAppData} from '@/app';
+import {buildSchema} from '@/schema';
+import TicoTecoContext from '@/graphql/TicoTecoContext';
+import findCurrentUser from '@/users/infra/findCurrentUser';
 
-import {schema} from '@/schema';
+const setupGraphQLConnection = (appData: TicoTecoAppData) =>
+  async (request: Request): Promise<OptionsData> => {
+    const currentUser = await findCurrentUser(appData)(request);
 
-export function createServer(mongoose: Mongoose): Koa {
+    return {
+      schema: buildSchema(),
+      graphiql: true,
+      pretty: true,
+      context: <TicoTecoContext>{
+        user: currentUser,
+      },
+    };
+  };
+
+export function createServer(appData: TicoTecoAppData): Koa {
   const app = new Koa();
   const router = new Router();
 
-  router.all('/graphql', graphqlHTTP({
-    schema,
-    graphiql: true,
-  }));
+  router.all('/graphql', graphqlHTTP(setupGraphQLConnection(appData)));
 
+  app.use(cors());
+  app.use(bodyparser());
   app.use(router.routes());
 
   return app;

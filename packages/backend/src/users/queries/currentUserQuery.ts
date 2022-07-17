@@ -16,15 +16,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import {GraphQLFieldConfig} from 'graphql/type';
 
-import {currentUserQuery} from '@/users/queries';
+import UserGraphQLType from '@/users/types/UserGraphQLType';
+import TicoTecoContext from '@/graphql/TicoTecoContext';
 
-export function buildQuery(): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      currentUser: currentUserQuery,
-    }),
-  });
-}
+export const currentUserQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
+  type: UserGraphQLType,
+  description: 'Get the current logged user',
+  resolve: (_root, _args, context) => context.user,
+};

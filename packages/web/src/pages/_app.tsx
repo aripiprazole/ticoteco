@@ -17,17 +17,42 @@
  */
 
 import React from 'react';
-import {AppProps} from 'next/app';
+import {AppContext, AppProps} from 'next/app';
+
+import {RelayEnvironmentProvider} from 'react-relay';
+
+import Cookies from 'cookies';
 
 import {GlobalStyle} from '@ticoteco/ui';
 
+import buildRelayEnvironment, {AUTHORIZATION_KEY} from '@/relay';
 import {AuthProvider} from '@/providers/AuthProvider';
 
-export default function App({Component, pageProps}: AppProps) {
-  return (
-    <AuthProvider>
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </AuthProvider>
-  );
+export type TicoTecoAppProps = {
+  readonly authorization: string;
 };
+
+function App({
+  Component,
+  pageProps,
+  authorization,
+}: AppProps & TicoTecoAppProps) {
+  return (
+    <RelayEnvironmentProvider
+      environment={buildRelayEnvironment(authorization)}
+    >
+      <AuthProvider>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </AuthProvider>
+    </RelayEnvironmentProvider>
+  );
+}
+
+App.getInitialProps = async ({ctx}: AppContext): Promise<TicoTecoAppProps> => {
+  const cookies = new Cookies(ctx.req, ctx.res);
+
+  return {authorization: cookies.get(AUTHORIZATION_KEY)};
+};
+
+export default App;

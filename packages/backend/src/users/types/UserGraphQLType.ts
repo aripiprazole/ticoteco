@@ -16,15 +16,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import {GraphQLObjectType, GraphQLString} from 'graphql';
 
-import {currentUserQuery} from '@/users/queries';
+import UserModel from '@/users/infra/UserModel';
 
-export function buildQuery(): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      currentUser: currentUserQuery,
-    }),
-  });
-}
+const UserGraphQLType = new GraphQLObjectType<UserModel>({
+  name: 'User',
+  fields: () => ({
+    id: {
+      type: GraphQLString,
+      resolve: (user) => user._id.toString(),
+    },
+    username: {
+      type: GraphQLString,
+      resolve: (user) => user.username,
+    },
+    displayName: {
+      type: GraphQLString,
+      resolve: (user) => user.displayName,
+    },
+  }),
+});
+
+export default UserGraphQLType;
+

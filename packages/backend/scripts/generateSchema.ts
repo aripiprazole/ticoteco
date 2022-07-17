@@ -16,20 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createServer} from '@/server';
-import {connectToMongo} from '@/mongo';
+import {printSchema} from 'graphql/utilities';
+import fs from 'fs/promises';
+import path from 'path';
 
-// Set up the dotenv variables when running in development mode.
-if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config();
+import {buildSchema} from '@/schema';
+
+async function generateSchema() {
+  const schema = printSchema(buildSchema());
+  const targetFile = path.resolve(
+      __dirname,
+      '..',
+      '..',
+      '..',
+      'schema.graphql',
+  );
+
+  await fs.writeFile(targetFile, schema);
 }
 
-async function startBackend() {
-  const mongoose = await connectToMongo();
-  const app = createServer(mongoose);
-
-  // TODO: get PORT from environment and use 8000 as fallback
-  app.listen(8000);
-}
-
-startBackend();
+generateSchema();

@@ -5,5 +5,8 @@
   "main": "./src/index.ts",
   "repository": "https://github.com/gabrielleeg1/ticoteco",
   "author": "Gabrielle Guimarães de Oliveira",
-  "license": "GPL-3.0+"
+  "license": "GPL-3.0+",
+  "dependencies": {
+    "graphql": "^16.5.0"
+  }
 }
