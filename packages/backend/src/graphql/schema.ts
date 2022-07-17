@@ -18,8 +18,8 @@
 
 import {GraphQLSchema} from 'graphql';
 
-import mutation from './schema/mutation';
-import query from './schema/query';
+import mutation from '@/schema/mutation';
+import query from '@/schema/query';
 
 const schema = new GraphQLSchema({
   mutation,
