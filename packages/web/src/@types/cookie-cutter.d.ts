@@ -16,29 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Request} from 'koa';
-
-import {TicoTecoAppData} from '@/app';
-import UserModel from '@/users/infra/UserModel';
-
-const findCurrentUser = (appData: TicoTecoAppData) =>
-  async (request: Request): Promise<UserModel | null> => {
-    const header = request.headers.authorization;
-    if (!header) {
-      return null;
-    }
-
-    try {
-      console.log('AUTHORIZATION', header);
-      await appData.firebase.auth().verifyIdToken(header);
-
-      return new UserModel({
-        username: 'devgabi',
-        displayName: 'Gabii',
-      });
-    } catch {
-      return null;
-    }
-  };
-
-export default findCurrentUser;
+declare module 'cookie-cutter' {
+  export function get(name: string): string | undefined;
+  export function set(name: string, value: string, options?: any);
+}

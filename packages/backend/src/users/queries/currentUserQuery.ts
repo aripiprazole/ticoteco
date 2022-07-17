@@ -24,7 +24,5 @@ import TicoTecoContext from '@/graphql/TicoTecoContext';
 export const currentUserQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
   type: UserGraphQLType,
   description: 'Get the current logged user',
-  resolve(_root, _args, context) {
-    return context.user;
-  },
+  resolve: (_root, _args, context) => context.user,
 };

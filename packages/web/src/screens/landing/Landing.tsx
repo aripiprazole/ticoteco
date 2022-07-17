@@ -44,7 +44,7 @@ function Content() {
 
   const {currentUser} = query;
 
-  return <Container>Hello, {currentUser.displayName}</Container>;
+  return <Container>Hello, {currentUser?.displayName}</Container>;
 }
 
 export function Landing() {

@@ -26,27 +26,35 @@ import {
   Variables,
 } from 'relay-runtime';
 
-const GRAPHQL_API_URL = process.env.NEXT_PUBLIC_GRAPHQL_API_URL ??
+export const GRAPHQL_API_URL = process.env.NEXT_PUBLIC_GRAPHQL_API_URL ??
     'http://localhost:8000/graphql';
 
-async function fetchGraphQL(
-    query: RequestParameters,
-    variables: Variables,
-): Promise<GraphQLResponse> {
-  // Fetch data from GitHub's GraphQL API:
-  const response = await fetch(GRAPHQL_API_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({query: query.text, variables}),
-  });
+export const AUTHORIZATION_KEY = 'Authorization';
 
-  // Get the response as JSON
-  return await response.json();
+const fetchGraphQL = (authorization: string) =>
+  async (
+      query: RequestParameters,
+      variables: Variables,
+  ): Promise<GraphQLResponse> => {
+  // Fetch data from GitHub's GraphQL API:
+    const response = await fetch(GRAPHQL_API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': authorization,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({query: query.text, variables}),
+    });
+
+    // Get the response as JSON
+    return await response.json();
+  };
+
+function buildRelayEnvironment(authorization: string): Environment {
+  return new Environment({
+    network: Network.create(fetchGraphQL(authorization)),
+    store: new Store(new RecordSource()),
+  });
 }
 
-const RelayEnvironment = new Environment({
-  network: Network.create(fetchGraphQL),
-  store: new Store(new RecordSource()),
-});
-
-export default RelayEnvironment;
+export default buildRelayEnvironment;

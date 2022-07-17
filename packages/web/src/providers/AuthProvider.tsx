@@ -18,6 +18,8 @@
 
 import React, {PropsWithChildren, useState} from 'react';
 
+import cookieCutter from 'cookie-cutter';
+
 import {AuthContext} from '@ticoteco/ui';
 
 import {
@@ -28,15 +30,18 @@ import {
 } from '@firebase/auth';
 
 import '@/config/firebase';
+import {AUTHORIZATION_KEY} from '@/relay';
 
 export function AuthProvider({children}: PropsWithChildren) {
   const auth = getAuth();
   const [user, setUser] = useState<UserCredential>();
 
-  function login() {
-    signInWithPopup(auth, new GoogleAuthProvider()).then((user) => {
-      setUser(user);
-    });
+  async function login() {
+    const credential = await signInWithPopup(auth, new GoogleAuthProvider());
+
+    setUser(credential);
+
+    cookieCutter.set(AUTHORIZATION_KEY, await credential.user.getIdToken());
   }
 
   return (
