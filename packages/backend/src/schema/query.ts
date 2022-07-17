@@ -20,7 +20,7 @@ import {GraphQLObjectType} from 'graphql';
 
 import {currentUserQuery} from '@/users/queries';
 
-export function createQuery(): GraphQLObjectType {
+export function buildQuery(): GraphQLObjectType {
   return new GraphQLObjectType({
     name: 'Query',
     fields: () => ({

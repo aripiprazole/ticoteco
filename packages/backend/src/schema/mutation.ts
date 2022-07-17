@@ -18,7 +18,7 @@
 
 import {GraphQLObjectType, GraphQLString} from 'graphql';
 
-export function createMutation(): GraphQLObjectType {
+export function buildMutation(): GraphQLObjectType {
   return new GraphQLObjectType({
     name: 'Mutation',
     fields: () => ({
