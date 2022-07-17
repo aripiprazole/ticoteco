@@ -18,14 +18,14 @@
 
 import {GraphQLObjectType, GraphQLString} from 'graphql';
 
-export function buildMutation(): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Mutation',
-    fields: () => ({
-      hello: {
-        type: GraphQLString,
-        resolve: () => 'Hello world!',
-      },
-    }),
-  });
-}
+const mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: () => ({
+    hello: {
+      type: GraphQLString,
+      resolve: () => 'Hello world!',
+    },
+  }),
+});
+
+export default mutation;

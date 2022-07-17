@@ -18,12 +18,12 @@
 
 import {GraphQLSchema} from 'graphql';
 
-import {buildMutation} from './schema/mutation';
-import {buildQuery} from './schema/query';
+import mutation from './schema/mutation';
+import query from './schema/query';
 
-export function buildSchema(): GraphQLSchema {
-  return new GraphQLSchema({
-    mutation: buildMutation(),
-    query: buildQuery(),
-  });
-}
+const schema = new GraphQLSchema({
+  mutation,
+  query,
+});
+
+export default schema;

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import UserModel from '@/users/infra/UserModel';
+import UserModel from '@/users/UserModel';
 
 type TicoTecoContext = {
   readonly user: UserModel | null;
