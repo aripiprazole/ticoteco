@@ -1,0 +1,14 @@
+type Query {
+  """Get the current logged user"""
+  currentUser: User
+}
+
+type User {
+  id: String
+  username: String
+  displayName: String
+}
+
+type Mutation {
+  hello: String
+}
