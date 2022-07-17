@@ -18,6 +18,7 @@
 
 import {createServer} from '@/server';
 import {connectToMongo} from '@/mongo';
+import {initializeFirebase} from '@/firebase';
 
 // Set up the dotenv variables when running in development mode.
 if (process.env.NODE_ENV === 'development') {
@@ -26,7 +27,12 @@ if (process.env.NODE_ENV === 'development') {
 
 async function startBackend() {
   const mongoose = await connectToMongo();
-  const app = createServer(mongoose);
+  const firebase = await initializeFirebase();
+
+  const app = createServer({
+    mongoose,
+    firebase,
+  });
 
   // TODO: get PORT from environment and use 8000 as fallback
   app.listen(8000);

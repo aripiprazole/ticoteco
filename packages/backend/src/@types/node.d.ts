@@ -23,6 +23,7 @@ declare global {
     interface ProcessEnv {
       readonly NODE_ENV: 'development' | 'production' | 'test';
       readonly MONGO_URI: string;
+      readonly GOOGLE_APPLICATION_CREDENTIALS: undefined | string;
     }
   }
 }

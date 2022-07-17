@@ -21,30 +21,30 @@ import Router from '@koa/router';
 
 import {graphqlHTTP, OptionsData} from 'koa-graphql';
 
-import {Mongoose} from 'mongoose';
-
-import {schema} from '@/schema';
+import {createSchema} from '@/schema';
 import TicoTecoContext from '@/graphql/TicoTecoContext';
 import UserModel from '@/users/infra/UserModel';
+import {TicoTecoAppData} from '@/app';
 
-const setupGraphQLConnection = async (request: Request): Promise<OptionsData> =>
-  ({
-    schema,
-    graphiql: true,
-    pretty: true,
-    context: <TicoTecoContext>{
-      user: new UserModel({
-        displayName: 'Gabrielle',
-        username: 'devgabi',
-      }),
-    },
-  });
+const setupGraphQLConnection = (appData: TicoTecoAppData) =>
+  async (_request: Request): Promise<OptionsData> =>
+    ({
+      schema: createSchema(appData),
+      graphiql: true,
+      pretty: true,
+      context: <TicoTecoContext>{
+        user: new UserModel({
+          displayName: 'Gabrielle',
+          username: 'devgabi',
+        }),
+      },
+    });
 
-export function createServer(mongoose: Mongoose): Koa {
+export function createServer(appData: TicoTecoAppData): Koa {
   const app = new Koa();
   const router = new Router();
 
-  router.all('/graphql', graphqlHTTP(setupGraphQLConnection));
+  router.all('/graphql', graphqlHTTP(setupGraphQLConnection(appData)));
 
   app.use(router.routes());
 

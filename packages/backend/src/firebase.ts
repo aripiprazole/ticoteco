@@ -16,17 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType, GraphQLString} from 'graphql';
-import {TicoTecoAppData} from '@/app';
+import {app, credential, initializeApp} from 'firebase-admin';
 
-export function createMutation(_appData: TicoTecoAppData): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Mutation',
-    fields: () => ({
-      hello: {
-        type: GraphQLString,
-        resolve: () => 'Hello world!',
-      },
-    }),
+export type Firebase = app.App;
+
+export function initializeFirebase(): Firebase {
+  return initializeApp({
+    credential: process.env.GOOGLE_APPLICATION_CREDENTIALS ?
+        credential.applicationDefault() :
+        credential.cert(process.env.FIREBASE_SERVICE_ACCOUNT_KEY), // TODO: test
   });
 }

@@ -18,11 +18,15 @@
 
 import {GraphQLObjectType} from 'graphql';
 
+import {TicoTecoAppData} from '@/app';
+
 import {currentUserQuery} from '@/users/queries';
 
-export const QueryType = new GraphQLObjectType({
-  name: 'Query',
-  fields: () => ({
-    currentUser: currentUserQuery,
-  }),
-});
+export function createQuery(_appData: TicoTecoAppData): GraphQLObjectType {
+  return new GraphQLObjectType({
+    name: 'Query',
+    fields: () => ({
+      currentUser: currentUserQuery,
+    }),
+  });
+}

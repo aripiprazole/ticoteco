@@ -18,10 +18,14 @@
 
 import {GraphQLSchema} from 'graphql';
 
-import {MutationType} from './mutation';
-import {QueryType} from './query';
+import {TicoTecoAppData} from '@/app';
 
-export const schema = new GraphQLSchema({
-  mutation: MutationType,
-  query: QueryType,
-});
+import {createMutation} from './mutation';
+import {createQuery} from './query';
+
+export function createSchema(appData: TicoTecoAppData): GraphQLSchema {
+  return new GraphQLSchema({
+    mutation: createMutation(appData),
+    query: createQuery(appData),
+  });
+}

@@ -16,17 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType, GraphQLString} from 'graphql';
-import {TicoTecoAppData} from '@/app';
+import {Mongoose} from 'mongoose';
 
-export function createMutation(_appData: TicoTecoAppData): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Mutation',
-    fields: () => ({
-      hello: {
-        type: GraphQLString,
-        resolve: () => 'Hello world!',
-      },
-    }),
-  });
+import {Firebase} from '@/firebase';
+
+export type TicoTecoAppData = {
+  readonly firebase: Firebase;
+  readonly mongoose: Mongoose;
 }
