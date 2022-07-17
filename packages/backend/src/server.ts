@@ -28,8 +28,10 @@ import {buildSchema} from '@/schema';
 import TicoTecoContext from '@/graphql/TicoTecoContext';
 import findCurrentUser from '@/users/infra/findCurrentUser';
 
-const setupGraphQLConnection = (appData: TicoTecoAppData) =>
-  async (request: Request): Promise<OptionsData> => {
+export function createServer(appData: TicoTecoAppData): Koa {
+  async function setupGraphQLConnection(
+      request: Request,
+  ): Promise<OptionsData> {
     const currentUser = await findCurrentUser(appData)(request);
 
     return {
@@ -40,13 +42,12 @@ const setupGraphQLConnection = (appData: TicoTecoAppData) =>
         user: currentUser,
       },
     };
-  };
+  }
 
-export function createServer(appData: TicoTecoAppData): Koa {
   const app = new Koa();
   const router = new Router();
 
-  router.all('/graphql', graphqlHTTP(setupGraphQLConnection(appData)));
+  router.all('/graphql', graphqlHTTP(setupGraphQLConnection));
 
   app.use(cors());
   app.use(bodyparser());
