@@ -16,15 +16,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as admin from 'firebase-admin';
+import {Request} from 'koa';
 
-export type Firebase = admin.app.App;
+import {TicoTecoAppData} from '@/app';
+import UserModel from '@/users/infra/UserModel';
 
-export function initializeFirebase(): Firebase {
-  return admin.initializeApp({
-    credential: process.env.GOOGLE_APPLICATION_CREDENTIALS ?
-        admin.credential.applicationDefault() :
-         // TODO: test
-        admin.credential.cert(process.env.FIREBASE_SERVICE_ACCOUNT_KEY),
-  });
-}
+const findCurrentUser = (appData: TicoTecoAppData) =>
+  async (request: Request): Promise<UserModel | null> => {
+    // const header = request.headers.authorization;
+
+    try {
+      // await appData.firebase.auth().verifyIdToken(header);
+
+      return new UserModel({
+        username: 'devgabi',
+        displayName: 'Gabii',
+      });
+    } catch {
+      return null;
+    }
+  };
+
+export default findCurrentUser;

@@ -21,24 +21,24 @@ import Router from '@koa/router';
 
 import {graphqlHTTP, OptionsData} from 'koa-graphql';
 
+import {TicoTecoAppData} from '@/app';
 import {createSchema} from '@/schema';
 import TicoTecoContext from '@/graphql/TicoTecoContext';
-import UserModel from '@/users/infra/UserModel';
-import {TicoTecoAppData} from '@/app';
+import findCurrentUser from '@/users/infra/findCurrentUser';
 
 const setupGraphQLConnection = (appData: TicoTecoAppData) =>
-  async (_request: Request): Promise<OptionsData> =>
-    ({
+  async (request: Request): Promise<OptionsData> => {
+    const currentUser = await findCurrentUser(appData)(request);
+
+    return {
       schema: createSchema(appData),
       graphiql: true,
       pretty: true,
       context: <TicoTecoContext>{
-        user: new UserModel({
-          displayName: 'Gabrielle',
-          username: 'devgabi',
-        }),
+        user: currentUser,
       },
-    });
+    };
+  };
 
 export function createServer(appData: TicoTecoAppData): Koa {
   const app = new Koa();
