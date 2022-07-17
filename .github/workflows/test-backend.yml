@@ -14,4 +14,4 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Run backend tests
-        run: yarn backend:test -- --coverage
+        run: yarn backend:test --coverage
