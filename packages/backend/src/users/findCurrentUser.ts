@@ -19,7 +19,7 @@
 import {Request} from 'koa';
 
 import {TicoTecoAppData} from '@/app';
-import UserModel from '@/users/infra/UserModel';
+import UserModel from '@/users/UserModel';
 
 const findCurrentUser = (appData: TicoTecoAppData) =>
   async (request: Request): Promise<UserModel | null> => {

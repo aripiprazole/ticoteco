@@ -26,7 +26,7 @@ import {graphqlHTTP, OptionsData} from 'koa-graphql';
 import {TicoTecoAppData} from '@/app';
 import {buildSchema} from '@/schema';
 import TicoTecoContext from '@/graphql/TicoTecoContext';
-import findCurrentUser from '@/users/infra/findCurrentUser';
+import findCurrentUser from '@/users/findCurrentUser';
 
 export function createServer(appData: TicoTecoAppData): Koa {
   async function setupGraphQLConnection(
