@@ -2,8 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 
 const ReloadServerPlugin = require('./webpack/ReloadServerPlugin');
-
 const {TsconfigPathsPlugin} = require('tsconfig-paths-webpack-plugin');
+
+const nodeExternals = require('webpack-node-externals');
 
 const cwd = process.cwd();
 const isProduction = process.env.NODE_ENV === 'production';
@@ -18,6 +19,12 @@ function onlyDev(value, onProd = Array.isArray(value) ? [] : {}) {
 
 module.exports = {
   target: 'node',
+  externals: [
+    nodeExternals(),
+    nodeExternals({
+      modulesDir: path.resolve(__dirname, '../../node_modules'),
+    }),
+  ],
   mode: env('production', 'development'),
   devtool: 'eval-cheap-source-map',
   entry: {
