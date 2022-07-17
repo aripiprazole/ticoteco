@@ -29,14 +29,22 @@ const findCurrentUser = (appData: TicoTecoAppData) =>
     }
 
     try {
-      console.log('AUTHORIZATION', header);
-      await appData.firebase.auth().verifyIdToken(header);
+      const idToken = await appData.firebase.auth().verifyIdToken(header);
+      const firebaseUser = await appData.firebase.auth().getUser(idToken.uid);
 
-      return new UserModel({
-        username: 'devgabi',
-        displayName: 'Gabii',
-      });
-    } catch {
+      const user =
+          await UserModel.findOne({firebaseUid: firebaseUser.uid}).exec() ??
+          new UserModel({
+            username: firebaseUser.displayName,
+            displayName: firebaseUser.displayName,
+            firebaseUid: idToken.uid,
+          });
+
+      await user.save();
+
+      return user;
+    } catch (err) {
+      console.error(err);
       return null;
     }
   };

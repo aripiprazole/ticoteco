@@ -21,12 +21,14 @@ import {model, Schema, Types} from 'mongoose';
 export const userSchema = new Schema<UserModel>({
   username: {type: String, required: true},
   displayName: {type: String, required: true},
+  firebaseUid: {type: String, required: true},
 });
 
 type UserModel = {
   readonly _id: Types.ObjectId;
   readonly username: string;
   readonly displayName: string;
+  readonly firebaseUid: string;
 };
 
 const UserModel = model<UserModel>('User', userSchema);
