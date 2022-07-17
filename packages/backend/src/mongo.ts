@@ -16,20 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createServer} from '@/server';
-import {connectToMongo} from '@/mongo';
+import {connect, Mongoose} from 'mongoose';
 
-// Set up the dotenv variables when running in development mode.
-if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config();
+export async function connectToMongo(): Promise<Mongoose> {
+  return await connect(process.env.MONGO_URI);
 }
-
-async function startBackend() {
-  const mongoose = await connectToMongo();
-  const app = createServer(mongoose);
-
-  // TODO: get PORT from environment and use 8000 as fallback
-  app.listen(8000);
-}
-
-startBackend();
