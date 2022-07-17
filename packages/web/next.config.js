@@ -7,6 +7,10 @@ const withTM = require('next-transpile-modules')([
 const nextConfig = {
   reactStrictMode: true,
 
+  compiler: {
+    relay: require('./relay.config'),
+  },
+
   webpack: (config) => {
     config.resolve.fallback = {fs: false, module: false};
 
