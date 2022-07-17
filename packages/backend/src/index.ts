@@ -25,11 +25,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 async function startBackend() {
-  const app = createServer();
+  const mongoose = await connectToMongo();
+  const app = createServer(mongoose);
 
   // TODO: get PORT from environment and use 8000 as fallback
   app.listen(8000);
 }
 
-connectToMongo();
 startBackend();

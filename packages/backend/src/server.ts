@@ -20,9 +20,12 @@ import Koa from 'koa';
 import Router from '@koa/router';
 
 import {graphqlHTTP} from 'koa-graphql';
+
+import {Mongoose} from 'mongoose';
+
 import {schema} from '@/schema';
 
-export function createServer(): Koa {
+export function createServer(mongoose: Mongoose): Koa {
   const app = new Koa();
   const router = new Router();
 
