@@ -16,30 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Schema, model, connect} from 'mongoose';
+import {connect, Mongoose} from 'mongoose';
 
-type User = {
-  readonly name: string,
-  readonly email: string,
-  readonly avatar?: string,
-};
-
-const userSchema = new Schema({
-  name: {type: String, required: true},
-  email: {type: String, required: true},
-  avatar: String,
-});
-
-const User = model<User>('User', userSchema);
-
-export async function connectToMongo() {
-  await connect(process.env.MONGO_URI);
-
-  const user = new User({
-    name: 'Gabrielle',
-    email: 'contact@devgabi.me',
-    avatar: 'https://avatars1.githubusercontent.com/u/527098?s=460&v=4',
-  });
-
-  user.save();
+export async function connectToMongo(): Promise<Mongoose> {
+  return await connect(process.env.MONGO_URI);
 }
