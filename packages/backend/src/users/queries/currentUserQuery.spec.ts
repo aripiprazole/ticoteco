@@ -17,8 +17,9 @@
  */
 
 import {graphql} from 'graphql/graphql';
-import {buildSchema} from '@/schema';
-import UserModel from '@/users/infra/UserModel';
+
+import schema from '@/schema';
+import UserModel from '@/users/UserModel';
 
 describe('currentUserQuery tests', () => {
   it('should return the current user', async () => {
@@ -38,7 +39,7 @@ describe('currentUserQuery tests', () => {
     });
 
     const result = await graphql({
-      schema: buildSchema(),
+      schema,
       source: query,
       rootValue: {},
       variableValues: {},

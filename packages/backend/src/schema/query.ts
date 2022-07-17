@@ -20,11 +20,11 @@ import {GraphQLObjectType} from 'graphql';
 
 import {currentUserQuery} from '@/users/queries/currentUserQuery';
 
-export function buildQuery(): GraphQLObjectType {
-  return new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      currentUser: currentUserQuery,
-    }),
-  });
-}
+const query = new GraphQLObjectType({
+  name: 'Query',
+  fields: () => ({
+    currentUser: currentUserQuery,
+  }),
+});
+
+export default query;
