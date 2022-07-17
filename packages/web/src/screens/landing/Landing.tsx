@@ -17,22 +17,40 @@
  */
 
 import React from 'react';
-import {AppProps} from 'next/app';
 
-import {RelayEnvironmentProvider} from 'react-relay';
+import {useLazyLoadQuery} from 'react-relay';
 
-import {GlobalStyle} from '@ticoteco/ui';
+import graphql from 'babel-plugin-relay/macro';
 
-import RelayEnvironment from '@/relay';
-import {AuthProvider} from '@/providers/AuthProvider';
+import {
+  LandingCurrentUserQuery,
+} from '@/__generated__/LandingCurrentUserQuery.graphql';
 
-export default function App({Component, pageProps}: AppProps) {
+import {Container} from './Landing.styles';
+
+const LandingCurrentUserGql = graphql`
+  query LandingCurrentUserQuery {
+    currentUser {
+      id,
+      username,
+      displayName,
+    }
+  }
+`;
+
+function Content() {
+  const query =
+      useLazyLoadQuery<LandingCurrentUserQuery>(LandingCurrentUserGql, {});
+
+  const {currentUser} = query;
+
+  return <Container>Hello, {currentUser.displayName}</Container>;
+}
+
+export function Landing() {
   return (
-    <RelayEnvironmentProvider environment={RelayEnvironment}>
-      <AuthProvider>
-        <GlobalStyle />
-        <Component {...pageProps} />
-      </AuthProvider>
-    </RelayEnvironmentProvider>
+    <React.Suspense fallback={'loading...'}>
+      <Content />
+    </React.Suspense>
   );
-};
+}

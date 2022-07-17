@@ -22,6 +22,7 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       readonly NODE_ENV: 'development' | 'production' | 'test';
+      readonly NEXT_PUBLIC_GRAPHQL_API_URL: string;
       readonly NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY: string;
       readonly NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: string;
       readonly NEXT_PUBLIC_FIREBASE_PROJECT_ID: string;

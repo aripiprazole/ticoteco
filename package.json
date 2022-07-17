@@ -19,6 +19,7 @@
     "web:dev": "yarn workspace @ticoteco/web dev",
     "web:start": "yarn workspace @ticoteco/web start",
     "web:build": "yarn workspace @ticoteco/web build",
+    "web:compile-relay": "yarn workspace @ticoteco/web compile-relay",
     "storybook": "yarn workspace @ticoteco/ui storybook",
     "build-storybook": "yarn workspace @ticoteco/ui build-storybook",
     "chromatic": "yarn workspace @ticoteco/ui chromatic",

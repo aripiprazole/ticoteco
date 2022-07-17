@@ -17,22 +17,16 @@
  */
 
 import React from 'react';
-import {AppProps} from 'next/app';
 
-import {RelayEnvironmentProvider} from 'react-relay';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 
-import {GlobalStyle} from '@ticoteco/ui';
+import {Landing} from './Landing';
 
-import RelayEnvironment from '@/relay';
-import {AuthProvider} from '@/providers/AuthProvider';
+export default {
+  title: 'Web/landing',
+  component: Landing,
+} as ComponentMeta<typeof Landing>;
 
-export default function App({Component, pageProps}: AppProps) {
-  return (
-    <RelayEnvironmentProvider environment={RelayEnvironment}>
-      <AuthProvider>
-        <GlobalStyle />
-        <Component {...pageProps} />
-      </AuthProvider>
-    </RelayEnvironmentProvider>
-  );
+export const Main: ComponentStory<typeof Landing> = () => {
+  return <Landing />;
 };

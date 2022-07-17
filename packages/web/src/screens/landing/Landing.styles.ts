@@ -16,23 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import {AppProps} from 'next/app';
+import styled from 'styled-components';
 
-import {RelayEnvironmentProvider} from 'react-relay';
-
-import {GlobalStyle} from '@ticoteco/ui';
-
-import RelayEnvironment from '@/relay';
-import {AuthProvider} from '@/providers/AuthProvider';
-
-export default function App({Component, pageProps}: AppProps) {
-  return (
-    <RelayEnvironmentProvider environment={RelayEnvironment}>
-      <AuthProvider>
-        <GlobalStyle />
-        <Component {...pageProps} />
-      </AuthProvider>
-    </RelayEnvironmentProvider>
-  );
-};
+export const Container = styled.div``;
