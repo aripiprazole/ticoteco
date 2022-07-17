@@ -20,10 +20,9 @@ import {printSchema} from 'graphql/utilities';
 import fs from 'fs/promises';
 import path from 'path';
 
-import {buildSchema} from '@/schema';
+import schema from '@/graphql/schema';
 
 async function generateSchema() {
-  const schema = printSchema(buildSchema());
   const targetFile = path.resolve(
       __dirname,
       '..',
@@ -32,7 +31,7 @@ async function generateSchema() {
       'schema.graphql',
   );
 
-  await fs.writeFile(targetFile, schema);
+  await fs.writeFile(targetFile, printSchema(schema));
 }
 
 generateSchema();
