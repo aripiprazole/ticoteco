@@ -37,7 +37,7 @@ async function fetchGraphQL(
   const response = await fetch(GRAPHQL_API_URL, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({query, variables}),
+    body: JSON.stringify({query: query.text, variables}),
   });
 
   // Get the response as JSON
