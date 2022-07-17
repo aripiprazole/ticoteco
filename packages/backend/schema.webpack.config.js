@@ -30,7 +30,7 @@ module.exports = {
     server: './scripts/generateSchema.ts',
   },
   output: {
-    path: env(path.resolve('dist'), path.resolve('build')),
+    path: path.resolve('build'),
     filename: 'generateSchema.js',
   },
   node: {
@@ -53,7 +53,6 @@ module.exports = {
   },
   plugins: [
     ...onlyDev([
-      new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('development'),
       }),
