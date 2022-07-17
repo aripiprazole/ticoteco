@@ -8,6 +8,7 @@
   "license": "GPL-3.0+",
   "scripts": {
     "dev": "webpack --watch --progress",
+    "generate-schema": "webpack --config schema.webpack.config.js --watch --progress",
     "start": "node dist/server.js",
     "test": "jest",
     "prebuild": "tsc --build --verbose",

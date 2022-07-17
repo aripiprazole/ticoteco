@@ -17,9 +17,8 @@
  */
 
 import {GraphQLObjectType, GraphQLString} from 'graphql';
-import {TicoTecoAppData} from '@/app';
 
-export function createMutation(_appData: TicoTecoAppData): GraphQLObjectType {
+export function createMutation(): GraphQLObjectType {
   return new GraphQLObjectType({
     name: 'Mutation',
     fields: () => ({

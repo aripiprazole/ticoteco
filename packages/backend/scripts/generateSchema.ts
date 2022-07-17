@@ -16,14 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLSchema} from 'graphql';
+import {printSchema} from 'graphql/utilities';
+import fs from 'fs/promises';
 
-import {createMutation} from './mutation';
-import {createQuery} from './query';
+import {createSchema} from '@/schema';
 
-export function createSchema(): GraphQLSchema {
-  return new GraphQLSchema({
-    mutation: createMutation(),
-    query: createQuery(),
-  });
+async function generateSchema() {
+  const schema = printSchema(createSchema());
+
+  await fs.writeFile('schema.graphql', schema);
 }
+
+generateSchema();

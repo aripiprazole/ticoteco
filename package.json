@@ -11,6 +11,7 @@
     "backend:dev": "yarn workspace @ticoteco/backend dev",
     "backend:start": "yarn workspace @ticoteco/backend start",
     "backend:build": "yarn workspace @ticoteco/backend build",
+    "backend:generate-schema": "yarn workspace @ticoteco/backend generate-schema",
     "backend:test": "yarn workspace @ticoteco/backend test",
     "ui:storybook": "yarn workspace @ticoteco/ui storybook",
     "ui:chromatic": "yarn workspace @ticoteco/ui chromatic",
