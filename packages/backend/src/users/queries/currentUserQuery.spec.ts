@@ -32,7 +32,7 @@ describe('currentUserQuery tests', () => {
       }
     `;
 
-    const currentUser: UserModel = new UserModel({
+    const currentUser = new UserModel({
       username: 'devgabi',
       displayName: 'Gabrielle Guimarães',
     });
