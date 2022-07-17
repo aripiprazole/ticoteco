@@ -18,6 +18,8 @@
 
 import Koa, {Request} from 'koa';
 import Router from '@koa/router';
+import cors from '@koa/cors';
+import bodyparser from 'koa-bodyparser';
 
 import {graphqlHTTP, OptionsData} from 'koa-graphql';
 
@@ -31,7 +33,7 @@ const setupGraphQLConnection = (appData: TicoTecoAppData) =>
     const currentUser = await findCurrentUser(appData)(request);
 
     return {
-      schema: buildSchema(appData),
+      schema: buildSchema(),
       graphiql: true,
       pretty: true,
       context: <TicoTecoContext>{
@@ -46,6 +48,8 @@ export function createServer(appData: TicoTecoAppData): Koa {
 
   router.all('/graphql', graphqlHTTP(setupGraphQLConnection(appData)));
 
+  app.use(cors());
+  app.use(bodyparser());
   app.use(router.routes());
 
   return app;

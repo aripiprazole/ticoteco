@@ -3080,6 +3080,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@koa/cors@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@koa/cors@npm:3.3.0"
+  dependencies:
+    vary: ^1.1.2
+  checksum: bb49c680e0d151aec1b19c24c14d61b65f430eb379e63d83789602cc7d8e52706ebcd74867cdb60b1d50ddb6f3d59be04e1c46328fae5721aeaf50e0d4fc2d28
+  languageName: node
+  linkType: hard
+
 "@koa/router@npm:^11.0.1":
   version: 11.0.1
   resolution: "@koa/router@npm:11.0.1"
@@ -4885,10 +4894,13 @@ __metadata:
     "@babel/node": ^7.18.6
     "@babel/preset-env": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
+    "@koa/cors": ^3.3.0
     "@koa/router": ^11.0.1
     "@ticoteco/shared": "workspace:^"
     "@types/jest": ^28.1.6
     "@types/koa": ^2.13.4
+    "@types/koa-bodyparser": ^4.3.7
+    "@types/koa__cors": ^3.3.0
     "@types/koa__router": ^8.0.11
     "@types/mongoose": ^5.11.97
     babel-jest: ^28.1.3
@@ -4900,6 +4912,7 @@ __metadata:
     graphql-relay: ^0.10.0
     jest: ^28.1.3
     koa: ^2.13.4
+    koa-bodyparser: ^4.3.0
     koa-graphql: ^0.12.0
     mongodb: ^4.8.0
     mongodb-client-encryption: ^2.1.0
@@ -5311,6 +5324,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/koa-bodyparser@npm:^4.3.7":
+  version: 4.3.7
+  resolution: "@types/koa-bodyparser@npm:4.3.7"
+  dependencies:
+    "@types/koa": "*"
+  checksum: 3a2cac14cb4a720d017d7708fbe9e8a310b5ecebbe62703a2606bb48c775fbeaf9fd601ba9cb7add03c7059f90327d8bcad3d70443eaea383b117b5c020054ec
+  languageName: node
+  linkType: hard
+
 "@types/koa-compose@npm:*":
   version: 3.2.5
   resolution: "@types/koa-compose@npm:3.2.5"
@@ -5333,6 +5355,15 @@ __metadata:
     "@types/koa-compose": "*"
     "@types/node": "*"
   checksum: 35a54e68944f74d6763537d55d01f8ed870d0ef816b5f27fce97a317b237540b7c249dc4a54abab44ad0afd0ce010b335122c9efb490b9589affe7929201d707
+  languageName: node
+  linkType: hard
+
+"@types/koa__cors@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@types/koa__cors@npm:3.3.0"
+  dependencies:
+    "@types/koa": "*"
+  checksum: c1aeb10b070e72b6c01a2f6abb4b0a936017794ef4eab3469697a4e24ef2054bc371519afa90c8e6c5ea9dbeda58395a64400bd499c3fda207cb593b751b44ca
   languageName: node
   linkType: hard
 
@@ -8051,6 +8082,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"co-body@npm:^6.0.0":
+  version: 6.1.0
+  resolution: "co-body@npm:6.1.0"
+  dependencies:
+    inflation: ^2.0.0
+    qs: ^6.5.2
+    raw-body: ^2.3.3
+    type-is: ^1.6.16
+  checksum: d0a78831a6651f2085fce16b0ecdc49f45fb5baf4f94148c2f499e7ec89d188205362548b9c500eae15a819360cfda208079e68a72c204cf66ca3ffa2fc0f57e
+  languageName: node
+  linkType: hard
+
 "co@npm:^4.6.0":
   version: 4.6.0
   resolution: "co@npm:4.6.0"
@@ -8394,6 +8437,13 @@ __metadata:
   version: 0.1.1
   resolution: "copy-descriptor@npm:0.1.1"
   checksum: d4b7b57b14f1d256bb9aa0b479241048afd7f5bcf22035fc7b94e8af757adeae247ea23c1a774fe44869fd5694efba4a969b88d966766c5245fdee59837fe45b
+  languageName: node
+  linkType: hard
+
+"copy-to@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "copy-to@npm:2.0.1"
+  checksum: 05ea12875bdc96ae053a3b30148e9d992026035ff2bfcc0b615e8d49d1cf8fc3d1f40843f9a4b7b1b6d9118eeebcba31e621076d7de525828aa9c07d22a81dab
   languageName: node
   linkType: hard
 
@@ -11751,6 +11801,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"inflation@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "inflation@npm:2.0.0"
+  checksum: a0494871b12275afdef9e2710ee1af1e0fc642b04613a9be69c05ef8b5e9627f3bd7d358a937fa47aa20235ee7313a4f30255048533add0ad4918beb918a586e
+  languageName: node
+  linkType: hard
+
 "inflight@npm:^1.0.4":
   version: 1.0.6
   resolution: "inflight@npm:1.0.6"
@@ -13363,6 +13420,16 @@ __metadata:
   version: 2.0.5
   resolution: "klona@npm:2.0.5"
   checksum: 8c976126ea252b766e648a4866e1bccff9d3b08432474ad80c559f6c7265cf7caede2498d463754d8c88c4759895edd8210c85c0d3155e6aae4968362889466f
+  languageName: node
+  linkType: hard
+
+"koa-bodyparser@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "koa-bodyparser@npm:4.3.0"
+  dependencies:
+    co-body: ^6.0.0
+    copy-to: ^2.0.1
+  checksum: c227fe0fb5a55b98fc91d865e80229b60178d216d53b732b07833eb38f48a7ed6aa768a083bc06e359db33298547e9a65842fbe9d3f0fdaf5149fe0becafc88f
   languageName: node
   linkType: hard
 
@@ -16275,7 +16342,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:^6.10.0":
+"qs@npm:^6.10.0, qs@npm:^6.5.2":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
   dependencies:
@@ -16352,7 +16419,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"raw-body@npm:2.5.1, raw-body@npm:^2.4.1":
+"raw-body@npm:2.5.1, raw-body@npm:^2.3.3, raw-body@npm:^2.4.1":
   version: 2.5.1
   resolution: "raw-body@npm:2.5.1"
   dependencies:
