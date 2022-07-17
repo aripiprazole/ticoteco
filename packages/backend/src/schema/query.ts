@@ -18,7 +18,11 @@
 
 import {GraphQLObjectType} from 'graphql';
 
+import {currentUserQuery} from '@/users/queries';
+
 export const QueryType = new GraphQLObjectType({
   name: 'Query',
-  fields: () => ({}),
+  fields: () => ({
+    currentUser: currentUserQuery,
+  }),
 });

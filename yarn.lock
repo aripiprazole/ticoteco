@@ -4835,6 +4835,8 @@ __metadata:
 "@ticoteco/shared@workspace:^, @ticoteco/shared@workspace:packages/shared":
   version: 0.0.0-use.local
   resolution: "@ticoteco/shared@workspace:packages/shared"
+  dependencies:
+    graphql: ^16.5.0
   languageName: unknown
   linkType: soft
 

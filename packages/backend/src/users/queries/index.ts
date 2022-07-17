@@ -16,14 +16,4 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType, GraphQLString} from 'graphql';
-
-export const MutationType = new GraphQLObjectType({
-  name: 'Mutation',
-  fields: () => ({
-    hello: {
-      type: GraphQLString,
-      resolve: () => 'Hello world!',
-    },
-  }),
-});
+export * from './currentUserQuery';

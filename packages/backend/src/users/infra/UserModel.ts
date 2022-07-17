@@ -16,14 +16,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType, GraphQLString} from 'graphql';
+import {model, Schema, Types} from 'mongoose';
 
-export const MutationType = new GraphQLObjectType({
-  name: 'Mutation',
-  fields: () => ({
-    hello: {
-      type: GraphQLString,
-      resolve: () => 'Hello world!',
-    },
-  }),
+export const userSchema = new Schema<UserModel>({
+  username: {type: String, required: true},
+  displayName: {type: String, required: true},
 });
+
+type UserModel = {
+  readonly _id: Types.ObjectId;
+  readonly username: string;
+  readonly displayName: string;
+};
+
+const UserModel = model<UserModel>('User', userSchema);
+
+export default UserModel;

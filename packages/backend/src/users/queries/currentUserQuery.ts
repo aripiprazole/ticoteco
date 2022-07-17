@@ -16,37 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Koa, {Request} from 'koa';
-import Router from '@koa/router';
+import {GraphQLFieldConfig} from 'graphql/type';
 
-import {graphqlHTTP, OptionsData} from 'koa-graphql';
-
-import {Mongoose} from 'mongoose';
-
-import {schema} from '@/schema';
+import UserGraphQLType from '@/users/types/UserGraphQLType';
 import TicoTecoContext from '@/graphql/TicoTecoContext';
-import UserModel from '@/users/infra/UserModel';
 
-const setupGraphQLConnection = async (request: Request): Promise<OptionsData> =>
-  ({
-    schema,
-    graphiql: true,
-    pretty: true,
-    context: <TicoTecoContext>{
-      user: new UserModel({
-        displayName: 'Gabrielle',
-        username: 'devgabi',
-      }),
-    },
-  });
-
-export function createServer(mongoose: Mongoose): Koa {
-  const app = new Koa();
-  const router = new Router();
-
-  router.all('/graphql', graphqlHTTP(setupGraphQLConnection));
-
-  app.use(router.routes());
-
-  return app;
-}
+export const currentUserQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
+  type: UserGraphQLType,
+  description: 'Get the current logged user',
+  resolve(_root, _args, context) {
+    return context.user;
+  },
+};
