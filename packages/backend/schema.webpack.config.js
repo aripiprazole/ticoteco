@@ -31,7 +31,7 @@ module.exports = {
   },
   output: {
     path: env(path.resolve('dist'), path.resolve('build')),
-    filename: 'server.js',
+    filename: 'generateSchema.js',
   },
   node: {
     __dirname: true,
