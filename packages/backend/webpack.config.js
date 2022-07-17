@@ -28,7 +28,7 @@ module.exports = {
   mode: env('production', 'development'),
   devtool: 'eval-cheap-source-map',
   entry: {
-    server: './src/index.ts',
+    server: './scripts/runServer.ts',
   },
   output: {
     path: env(path.resolve('dist'), path.resolve('build')),
