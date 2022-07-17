@@ -18,7 +18,7 @@
 
 import {graphql} from 'graphql/graphql';
 
-import schema from '@/schema';
+import schema from '@/graphql/schema';
 import UserModel from '@/users/UserModel';
 
 describe('currentUserQuery tests', () => {
