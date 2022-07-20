@@ -18,25 +18,15 @@
 
 import React from 'react';
 
-import {FiBox} from 'react-icons/fi';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 
-import {Search, AuthButtons} from '@ticoteco/ui';
+import {Layout} from './Layout';
 
-import {Container, Logo, Nav} from './Navigation.styles';
+export default {
+  title: 'Web/Layout',
+  component: Layout,
+} as ComponentMeta<typeof Layout>;
 
-export function Navigation() {
-  return (
-    <Container>
-      <Nav>
-        <Logo>
-          <FiBox /> {/* TODO: create ticoteco's logo */}
-          ticoteco
-        </Logo>
-
-        <Search />
-
-        <AuthButtons />
-      </Nav>
-    </Container>
-  );
-}
+export const Main: ComponentStory<typeof Layout> = () => {
+  return <Layout />;
+};

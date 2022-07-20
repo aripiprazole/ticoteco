@@ -20,13 +20,13 @@ import React from 'react';
 
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 
-import {Search} from './Search';
+import {AuthButtons} from './AuthButtons';
 
 export default {
-  title: 'UI Kit/Navigation/Search',
-  component: Search,
-} as ComponentMeta<typeof Search>;
+  title: 'Web/Navigation/Auth Buttons',
+  component: AuthButtons,
+} as ComponentMeta<typeof AuthButtons>;
 
-export const Main: ComponentStory<typeof Search> = () => {
-  return <Search />;
+export const LoggedOut: ComponentStory<typeof AuthButtons> = () => {
+  return <AuthButtons />;
 };

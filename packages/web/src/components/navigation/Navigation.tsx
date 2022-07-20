@@ -18,15 +18,26 @@
 
 import React from 'react';
 
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {FiBox} from 'react-icons/fi';
 
-import {Layout} from './Layout';
+import {Search} from '@/components/navigation/search/Search';
+import {AuthButtons} from '@/components/navigation/auth-buttons/AuthButtons';
 
-export default {
-  title: 'UI Kit/Layout',
-  component: Layout,
-} as ComponentMeta<typeof Layout>;
+import {Container, Logo, Nav} from './Navigation.styles';
 
-export const Main: ComponentStory<typeof Layout> = () => {
-  return <Layout />;
-};
+export function Navigation() {
+  return (
+    <Container>
+      <Nav>
+        <Logo>
+          <FiBox /> {/* TODO: create ticoteco's logo */}
+          ticoteco
+        </Logo>
+
+        <Search />
+
+        <AuthButtons />
+      </Nav>
+    </Container>
+  );
+}

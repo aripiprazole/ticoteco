@@ -18,15 +18,22 @@
 
 import React from 'react';
 
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Navigation} from '@/components/navigation/Navigation';
 
-import {Navigation} from './Navigation';
+import {Container} from './Layout.styles';
 
-export default {
-  title: 'UI Kit/Navigation',
-  component: Navigation,
-} as ComponentMeta<typeof Navigation>;
-
-export const Main: ComponentStory<typeof Navigation> = () => {
-  return <Navigation />;
+export type LayoutProps = {
+  readonly children?: React.ReactNode;
 };
+
+export function Layout({children}: LayoutProps) {
+  return (
+    <Container>
+      <Navigation />
+
+      <main>
+        {children}
+      </main>
+    </Container>
+  );
+}

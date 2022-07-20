@@ -18,16 +18,15 @@
 
 import React from 'react';
 
-import {Button, useAuth} from '@ticoteco/ui';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 
-import {Container} from './AuthButtons.styles';
+import {Navigation} from './Navigation';
 
-export function AuthButtons() {
-  const {login} = useAuth();
+export default {
+  title: 'Web/Navigation',
+  component: Navigation,
+} as ComponentMeta<typeof Navigation>;
 
-  return (
-    <Container>
-      <Button onClick={login}>Login</Button>
-    </Container>
-  );
-}
+export const Main: ComponentStory<typeof Navigation> = () => {
+  return <Navigation />;
+};
