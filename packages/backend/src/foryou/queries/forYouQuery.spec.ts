@@ -16,17 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+describe('forYouQuery tests', () => {
 
-import {currentUserQuery} from '@/users/queries/currentUserQuery';
-import {forYouQuery} from '@/foryou/queries/forYouQuery';
-
-const query = new GraphQLObjectType({
-  name: 'Query',
-  fields: () => ({
-    currentUser: currentUserQuery,
-    forYou: forYouQuery,
-  }),
 });
-
-export default query;
