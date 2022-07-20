@@ -18,7 +18,7 @@
 
 import {GraphQLObjectType, GraphQLString} from 'graphql';
 
-import UserModel from '@/users/infra/UserModel';
+import UserModel from '@/users/UserModel';
 
 const UserGraphQLType = new GraphQLObjectType<UserModel>({
   name: 'User',
