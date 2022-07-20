@@ -22,7 +22,6 @@ export * from './src/authentication/AuthContext';
 // UI Components
 export * from './src/style/GlobalStyle';
 export * from './src/button/Button';
-export * from './src/timeline/Timeline';
 export * from './src/navigation/search/Search';
 export * from './src/navigation/auth-buttons/AuthButtons';
 export * from './src/navigation/Navigation';
