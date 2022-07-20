@@ -23,8 +23,8 @@ import bodyparser from 'koa-bodyparser';
 
 import {graphqlHTTP, OptionsData} from 'koa-graphql';
 
+import schema from '@/graphql/schema';
 import {TicoTecoAppData} from '@/app';
-import {buildSchema} from '@/schema';
 import TicoTecoContext from '@/graphql/TicoTecoContext';
 import findCurrentUser from '@/users/findCurrentUser';
 
@@ -35,7 +35,7 @@ export function createServer(appData: TicoTecoAppData): Koa {
     const currentUser = await findCurrentUser(appData)(request);
 
     return {
-      schema: buildSchema(),
+      schema,
       graphiql: true,
       pretty: true,
       context: <TicoTecoContext>{
