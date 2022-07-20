@@ -16,17 +16,37 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import {connectionDefinitions} from 'graphql-relay';
 
-import {currentUserQuery} from '@/users/queries/currentUserQuery';
-import {forYouQuery} from '@/foryou/queries/forYouQuery';
-
-const query = new GraphQLObjectType({
-  name: 'Query',
+const PostGraphQLType = new GraphQLObjectType({
+  name: 'Post',
   fields: () => ({
-    currentUser: currentUserQuery,
-    forYou: forYouQuery,
+    title: {
+      type: new GraphQLNonNull(GraphQLString),
+      resolve: (post) => post.title,
+    },
+
+    description: {
+      type: new GraphQLNonNull(GraphQLString),
+      resolve: (post) => post.description,
+    },
+
+    video: {
+      type: new GraphQLNonNull(GraphQLString),
+      resolve: (post) => post.videoUrl,
+    },
+
+    preview: {
+      type: new GraphQLNonNull(GraphQLString),
+      resolve: (post) => post.previewUrl,
+    },
   }),
 });
 
-export default query;
+export const PostConnection = connectionDefinitions({
+  name: 'Post',
+  nodeType: PostGraphQLType,
+});
+
+export default PostGraphQLType;

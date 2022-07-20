@@ -18,8 +18,10 @@
 
 import React from 'react';
 
-import {Layout, Timeline} from '@ticoteco/ui';
+import {Layout} from '@ticoteco/ui';
+
 import {Landing} from '@/screens/landing/Landing';
+import {Timeline} from '@/components/timeline/Timeline';
 
 export default function Index() {
   return (

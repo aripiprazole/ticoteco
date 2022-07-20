@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType, GraphQLString} from 'graphql';
+import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
 import UserModel from '@/users/UserModel';
 
@@ -24,15 +24,15 @@ const UserGraphQLType = new GraphQLObjectType<UserModel>({
   name: 'User',
   fields: () => ({
     id: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       resolve: (user) => user._id.toString(),
     },
     username: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       resolve: (user) => user.username,
     },
     displayName: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       resolve: (user) => user.displayName,
     },
   }),
