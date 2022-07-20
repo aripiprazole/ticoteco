@@ -18,22 +18,18 @@
 
 import React from 'react';
 
-import {Navigation} from '@ticoteco/ui';
+import {Button} from '@ticoteco/ui';
 
-import {Container} from './Layout.styles';
+import {useAuth} from '@/authentication/AuthContext';
 
-export type LayoutProps = {
-  readonly children?: React.ReactNode;
-};
+import {Container} from './AuthButtons.styles';
 
-export function Layout({children}: LayoutProps) {
+export function AuthButtons() {
+  const {login} = useAuth();
+
   return (
     <Container>
-      <Navigation />
-
-      <main>
-        {children}
-      </main>
+      <Button onClick={login}>Login</Button>
     </Container>
   );
 }

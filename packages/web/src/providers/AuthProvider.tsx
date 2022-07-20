@@ -20,7 +20,7 @@ import React, {PropsWithChildren, useState} from 'react';
 
 import cookieCutter from 'cookie-cutter';
 
-import {AuthContext} from '@ticoteco/ui';
+import {AuthContext} from '@/authentication/AuthContext';
 
 import {
   getAuth,

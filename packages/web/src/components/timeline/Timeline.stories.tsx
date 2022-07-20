@@ -23,7 +23,7 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {Timeline} from './Timeline';
 
 export default {
-  title: 'UI Kit/Timeline',
+  title: 'Web/Timeline',
   component: Timeline,
 } as ComponentMeta<typeof Timeline>;
 
