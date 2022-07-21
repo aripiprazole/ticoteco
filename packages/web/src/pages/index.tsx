@@ -16,18 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-
 import {Landing} from '@/screens/landing/Landing';
 
-import {Timeline} from '@/components/timeline/Timeline';
-import {Layout} from '@/components/layout/Layout';
-
-export default function Index() {
-  return (
-    <Layout>
-      <Timeline posts={[]} />
-      <Landing />
-    </Layout>
-  );
-}
+export default Landing;

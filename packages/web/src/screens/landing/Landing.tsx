@@ -18,39 +18,13 @@
 
 import React from 'react';
 
-import {useLazyLoadQuery} from 'react-relay';
-
-import graphql from 'babel-plugin-relay/macro';
-
-import {
-  LandingCurrentUserQuery,
-} from '@/__generated__/LandingCurrentUserQuery.graphql';
-
-import {Container} from './Landing.styles';
-
-const LandingCurrentUserGql = graphql`
-  query LandingCurrentUserQuery {
-    currentUser {
-      id,
-      username,
-      displayName,
-    }
-  }
-`;
-
-function Content() {
-  const query =
-      useLazyLoadQuery<LandingCurrentUserQuery>(LandingCurrentUserGql, {});
-
-  const {currentUser} = query;
-
-  return <Container>Hello, {currentUser?.displayName}</Container>;
-}
+import {Timeline} from '@/components/timeline/Timeline';
+import {Layout} from '@/components/layout/Layout';
 
 export function Landing() {
   return (
-    <React.Suspense fallback={'loading...'}>
-      <Content />
-    </React.Suspense>
+    <Layout>
+      <Timeline />
+    </Layout>
   );
 }

@@ -22,6 +22,11 @@ import {connectionDefinitions} from 'graphql-relay';
 const PostGraphQLType = new GraphQLObjectType({
   name: 'Post',
   fields: () => ({
+    id: {
+      type: new GraphQLNonNull(GraphQLString),
+      resolve: (post) => post._id.toString(),
+    },
+
     title: {
       type: new GraphQLNonNull(GraphQLString),
       resolve: (post) => post.title,

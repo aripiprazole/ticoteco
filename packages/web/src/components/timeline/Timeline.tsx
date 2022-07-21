@@ -16,20 +16,80 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {
+  useQueryLoader,
+  usePreloadedQuery,
+  PreloadedQuery,
+} from 'react-relay';
 
-import {Post} from '@ticoteco/shared';
+import graphql from 'babel-plugin-relay/macro';
 
 import {Container} from './Timeline.styles';
 
-export type TimelineProps = {
-  readonly posts: readonly Post[];
+import {TimelineQuery} from '@/__generated__/TimelineQuery.graphql';
+
+const TimelineQuery = graphql`
+  query TimelineQuery($after: String) {
+    forYou(first: 3, after: $after) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          id
+          title
+          description
+          preview
+          video
+        }
+      }
+    }
+  }
+`;
+
+type CurrentPostProps = {
+  readonly queryRef: PreloadedQuery<TimelineQuery>;
+  readonly setAfterPost: (afterPost: string) => void;
+};
+
+function CurrentPost({queryRef, setAfterPost}: CurrentPostProps) {
+  const {forYou} = usePreloadedQuery(TimelineQuery, queryRef);
+
+  return (
+    <div>
+      {forYou.edges.map(({node: {title}}) => title)}
+
+      <button onClick={() => {
+        setAfterPost(forYou.pageInfo.endCursor);
+      }}>
+        Next video...
+      </button>
+    </div>
+  );
 }
 
-export function Timeline({posts}: TimelineProps) {
+export function Timeline() {
+  const [queryRef, loadQuery] = useQueryLoader<TimelineQuery>(TimelineQuery);
+
+  const [afterPost, setAfterPost] = useState<string>();
+
+  useEffect(() => {
+    // Fetches initial posts to make the timeline fluid for the initial view
+    loadQuery({after: afterPost});
+  }, [afterPost]);
+
   return (
     <Container>
-      {posts.map(({title}) => title)}
+      {queryRef && (
+        <React.Suspense fallback="Loading...">
+          <CurrentPost queryRef={queryRef} setAfterPost={setAfterPost} />
+        </React.Suspense>
+      )}
     </Container>
   );
 }
