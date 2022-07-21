@@ -18,4 +18,10 @@
 
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  main {
+    max-width: 80rem;
+    width: 100%;
+    margin: auto;
+  }
+`;
