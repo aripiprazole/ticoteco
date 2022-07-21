@@ -29,7 +29,36 @@ export const forYouQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
   resolve: (_root, args, _context): Connection<unknown> => {
     const posts = [
       {
+        _id: '1',
         title: 'Dance 1',
+        description: '#dance',
+        videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        previewUrl: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+      },
+      {
+        _id: '2',
+        title: 'Dance 2',
+        description: '#dance',
+        videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        previewUrl: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+      },
+      {
+        _id: '3',
+        title: 'Dance 3',
+        description: '#dance',
+        videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        previewUrl: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+      },
+      {
+        _id: '4',
+        title: 'Dance 4',
+        description: '#dance',
+        videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        previewUrl: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+      },
+      {
+        _id: '5',
+        title: 'Dance 5',
         description: '#dance',
         videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         previewUrl: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',

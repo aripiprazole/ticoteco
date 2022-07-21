@@ -58,6 +58,7 @@ type PostEdge {
 }
 
 type Post {
+  id: String!
   title: String!
   description: String!
   video: String!
