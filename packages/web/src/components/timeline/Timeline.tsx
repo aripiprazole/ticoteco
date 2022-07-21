@@ -30,26 +30,26 @@ import {Container} from './Timeline.styles';
 import {TimelineQuery} from '@/__generated__/TimelineQuery.graphql';
 
 const TimelineQuery = graphql`
-    query TimelineQuery($after: String) {
-        forYou(first: 3, after: $after) {
-            pageInfo {
-                hasNextPage
-                hasPreviousPage
-                startCursor
-                endCursor
-            }
-            edges {
-                cursor
-                node {
-                    id
-                    title
-                    description
-                    preview
-                    video
-                }
-            }
+  query TimelineQuery($after: String) {
+    forYou(first: 3, after: $after) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          id
+          title
+          description
+          preview
+          video
         }
+      }
     }
+  }
 `;
 
 type CurrentPostProps = {
