@@ -17,8 +17,17 @@
  */
 
 import React from 'react';
+import {FiHeart, FiMessageCircle, FiShare2} from 'react-icons/fi';
 
-import {Container} from './Post.styles';
+import {
+  Container,
+  PostPreview,
+  PostActions,
+  PostVideo,
+  Like,
+  Comment,
+  Share,
+} from './Post.styles';
 
 import {TimelineQuery$data} from '@/__generated__/TimelineQuery.graphql';
 
@@ -31,7 +40,17 @@ export function Post(props: PostProps) {
 
   return (
     <Container>
-      {data.title}
+      <h4>{data.title} {data.description}</h4>
+
+      <PostVideo>
+        <PostPreview src={data.preview} />
+
+        <PostActions>
+          <Like><FiHeart fill='#000' /></Like>
+          <Comment><FiMessageCircle fill='#000' /></Comment>
+          <Share><FiShare2 fill='#000' /></Share>
+        </PostActions>
+      </PostVideo>
     </Container>
   );
 }
