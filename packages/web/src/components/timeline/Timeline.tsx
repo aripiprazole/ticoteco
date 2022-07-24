@@ -28,6 +28,7 @@ import graphql from 'babel-plugin-relay/macro';
 import {Container} from './Timeline.styles';
 
 import {TimelineQuery} from '@/__generated__/TimelineQuery.graphql';
+import {Post} from '@/components/timeline/post/Post';
 
 const TimelineQuery = graphql`
   query TimelineQuery($after: String) {
@@ -57,12 +58,14 @@ type CurrentPostProps = {
   readonly setAfterPost: (afterPost: string) => void;
 };
 
-function CurrentPost({queryRef, setAfterPost}: CurrentPostProps) {
+function CurrentPosts({queryRef, setAfterPost}: CurrentPostProps) {
   const {forYou} = usePreloadedQuery(TimelineQuery, queryRef);
 
   return (
     <div>
-      {forYou.edges.map(({node: {title}}) => title)}
+      {forYou.edges.map(({node, cursor}) => (
+        <Post data={node} key={cursor} />
+      ))}
 
       <button onClick={() => {
         setAfterPost(forYou.pageInfo.endCursor);
@@ -87,7 +90,7 @@ export function Timeline() {
     <Container>
       {queryRef && (
         <React.Suspense fallback="Loading...">
-          <CurrentPost queryRef={queryRef} setAfterPost={setAfterPost} />
+          <CurrentPosts queryRef={queryRef} setAfterPost={setAfterPost} />
         </React.Suspense>
       )}
     </Container>
