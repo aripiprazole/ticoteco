@@ -28,5 +28,5 @@ export default {
 } as ComponentMeta<typeof Timeline>;
 
 export const Main: ComponentStory<typeof Timeline> = () => {
-  return <Timeline posts={[]} />;
+  return <Timeline />;
 };
