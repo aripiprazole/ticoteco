@@ -27,8 +27,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-relay": "^14.0.0",
-    "relay-runtime": "^14.0.0",
-    "styled-components": "^5.3.5"
+    "relay-runtime": "^14.0.0"
   },
   "devDependencies": {
     "@chakra-ui/react": "^2.2.4",
@@ -39,7 +38,6 @@
     "@types/react-dom": "18.0.5",
     "@types/react-relay": "^13.0.2",
     "@types/relay-runtime": "^13.0.3",
-    "@types/styled-components": "^5.1.25",
     "babel-plugin-relay": "^14.0.0",
     "babel-plugin-styled-components": "^2.0.7",
     "eslint": "^8.19.0",
