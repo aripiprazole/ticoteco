@@ -31,11 +31,11 @@ import {
 
 import {TimelineQuery$data} from '@/__generated__/TimelineQuery.graphql';
 
-export type PostProps = {
+type PostProps = {
   readonly data: TimelineQuery$data['forYou']['edges'][0]['node'];
 }
 
-export function Post(props: PostProps) {
+function Post(props: PostProps) {
   const {data} = props;
 
   return (
@@ -81,3 +81,5 @@ function ActionButton(props: ActionButtonProps) {
     </IconButton>
   );
 }
+
+export default Post;

@@ -20,6 +20,8 @@ import React from 'react';
 
 import {Box} from '@chakra-ui/react';
 
-export function Search() {
+function Search() {
   return <Box>Search</Box>;
 }
+
+export default Search;

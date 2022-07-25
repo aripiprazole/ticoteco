@@ -27,8 +27,9 @@ import {Box} from '@chakra-ui/react';
 
 import graphql from 'babel-plugin-relay/macro';
 
+import Post from '@/components/timeline/post/Post';
+
 import {TimelineQuery} from '@/__generated__/TimelineQuery.graphql';
-import {Post} from '@/components/timeline/post/Post';
 
 const TimelineQuery = graphql`
   query TimelineQuery($after: String) {
@@ -76,7 +77,7 @@ function CurrentPosts({queryRef, setAfterPost}: CurrentPostProps) {
   );
 }
 
-export function Timeline() {
+function Timeline() {
   const [queryRef, loadQuery] = useQueryLoader<TimelineQuery>(TimelineQuery);
 
   const [afterPost, setAfterPost] = useState<string>();
@@ -96,3 +97,5 @@ export function Timeline() {
     </Box>
   );
 }
+
+export default Timeline;

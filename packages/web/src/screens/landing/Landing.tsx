@@ -18,13 +18,15 @@
 
 import React from 'react';
 
-import {Timeline} from '@/components/timeline/Timeline';
-import {Layout} from '@/components/layout/Layout';
+import Timeline from '@/components/timeline/Timeline';
+import Layout from '@/components/layout/Layout';
 
-export function Landing() {
+function Landing() {
   return (
     <Layout>
       <Timeline />
     </Layout>
   );
 }
+
+export default Landing;
