@@ -16,7 +16,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-declare module 'cookie-cutter' {
-  export function get(name: string): string | undefined;
-  export function set(name: string, value?: string, options?: any);
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+
+import cookieCutter from 'cookie-cutter';
+
+function useCookieState(
+    key: string,
+): [string | undefined, Dispatch<SetStateAction<string | undefined>>] {
+  const [value, setValue] = useState<string>();
+
+  const setCookieValue: Dispatch<SetStateAction<string | undefined>> =
+    (newState: any) => {
+      const newValue = typeof newState === 'function' ?
+        newState(value) :
+          newState;
+
+      cookieCutter.set(key, newValue);
+
+      setValue(newValue);
+    };
+
+  useEffect(() => {
+    setValue(cookieCutter.get(key));
+  }, []);
+
+  return [value, setCookieValue];
 }
+
+export default useCookieState;

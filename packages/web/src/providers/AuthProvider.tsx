@@ -16,32 +16,63 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, {PropsWithChildren, useState} from 'react';
+import React, {PropsWithChildren, useEffect, useState} from 'react';
+import {useRelayEnvironment} from 'react-relay';
 
-import cookieCutter from 'cookie-cutter';
+import {fetchQuery} from 'relay-runtime';
 
-import {AuthContext} from '@/auth/AuthContext';
+import graphql from 'babel-plugin-relay/macro';
+
+import useCookieState from '@/hooks/useCookieState';
+
+import {AuthContext, AuthenticatedUser} from '@/auth/AuthContext';
 
 import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
-  UserCredential,
 } from '@firebase/auth';
 
 import '@/config/firebase';
 import {AUTHORIZATION_KEY} from '@/relay';
 
+import {AuthProviderQuery} from '@/__generated__/AuthProviderQuery.graphql';
+
+const AuthProviderQuery = graphql`
+  query AuthProviderQuery {
+    currentUser {
+      id
+      profile {
+        id
+        avatar
+        username
+        displayName
+      }
+    }
+  }
+`;
+
 export function AuthProvider({children}: PropsWithChildren) {
   const auth = getAuth();
-  const [user, setUser] = useState<UserCredential>();
+
+  const environment = useRelayEnvironment();
+
+  const [authKey, setAuthKey] = useCookieState<string>(AUTHORIZATION_KEY);
+  const [user, setUser] = useState<AuthenticatedUser>();
+
+  useEffect(() => {
+    fetchQuery<AuthProviderQuery>(environment, AuthProviderQuery, {})
+        .subscribe({
+          next: (data) => {
+            setUser(data.currentUser);
+          },
+        });
+  }, [authKey]);
 
   async function login() {
     const credential = await signInWithPopup(auth, new GoogleAuthProvider());
 
-    setUser(credential);
-
-    cookieCutter.set(AUTHORIZATION_KEY, await credential.user.getIdToken());
+    setAuthKey(await credential.user.getIdToken());
   }
 
   return (
