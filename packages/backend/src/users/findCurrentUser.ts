@@ -40,7 +40,6 @@ const findCurrentUser = (appData: TicoTecoAppData) =>
 
       return await new UserModel({
         username: firebaseUser.displayName,
-        displayName: firebaseUser.displayName,
         firebaseUid: idToken.uid,
       }).save();
     } catch (err) {

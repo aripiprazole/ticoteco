@@ -21,7 +21,6 @@ type Query {
 type User {
   id: String!
   username: String!
-  displayName: String!
 }
 
 """A connection to a list of items."""

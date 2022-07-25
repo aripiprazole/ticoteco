@@ -31,10 +31,6 @@ const UserGraphQLType = new GraphQLObjectType<UserModel>({
       type: new GraphQLNonNull(GraphQLString),
       resolve: (user) => user.username,
     },
-    displayName: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (user) => user.displayName,
-    },
   }),
 });
 
