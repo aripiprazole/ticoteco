@@ -18,18 +18,16 @@
 
 import React from 'react';
 
-import {Button} from '@chakra-ui/react';
+import {Box, Button} from '@chakra-ui/react';
 
 import {useAuth} from '@/authentication/AuthContext';
-
-import {Container} from './AuthButtons.styles';
 
 export function AuthButtons() {
   const {login} = useAuth();
 
   return (
-    <Container>
+    <Box>
       <Button onClick={login}>Login</Button>
-    </Container>
+    </Box>
   );
 }
