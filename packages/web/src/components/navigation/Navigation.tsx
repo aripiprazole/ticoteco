@@ -22,7 +22,7 @@ import {FiBox} from 'react-icons/fi';
 import {Box, Flex} from '@chakra-ui/react';
 
 import Search from './search/Search';
-import AuthButtons from './auth-buttons/AuthButtons';
+import AuthButtons from './AuthButtons';
 
 export function Navigation() {
   return (
