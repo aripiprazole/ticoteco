@@ -18,6 +18,7 @@
 
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
+import ProfileGraphQLType from '@/profile/types/ProfileGraphQLType';
 
 const PostGraphQLType = new GraphQLObjectType({
   name: 'Post',
@@ -45,6 +46,11 @@ const PostGraphQLType = new GraphQLObjectType({
     preview: {
       type: new GraphQLNonNull(GraphQLString),
       resolve: (post) => post.previewUrl,
+    },
+
+    profile: {
+      type: new GraphQLNonNull(ProfileGraphQLType),
+      resolve: (post) => post.profile,
     },
   }),
 });

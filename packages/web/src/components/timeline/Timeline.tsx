@@ -48,6 +48,12 @@ const TimelineQuery = graphql`
           description
           preview
           video
+          profile {
+            id
+            avatar
+            username
+            displayName
+          }
         }
       }
     }
