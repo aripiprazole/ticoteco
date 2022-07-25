@@ -16,4 +16,4 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export * from './src/style/GlobalStyle';
+export {default as theme} from './src/theme';

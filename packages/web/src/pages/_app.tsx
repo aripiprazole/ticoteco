@@ -25,7 +25,7 @@ import {ChakraProvider} from '@chakra-ui/react';
 
 import Cookies from 'cookies';
 
-import {GlobalStyle} from '@ticoteco/ui';
+import {theme} from '@ticoteco/ui';
 
 import buildRelayEnvironment, {AUTHORIZATION_KEY} from '@/relay';
 import {AuthProvider} from '@/providers/AuthProvider';
@@ -40,12 +40,11 @@ function App({
   authorization,
 }: AppProps & TicoTecoAppProps) {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <RelayEnvironmentProvider
         environment={buildRelayEnvironment(authorization)}
       >
         <AuthProvider>
-          <GlobalStyle />
           <Component {...pageProps} />
         </AuthProvider>
       </RelayEnvironmentProvider>
