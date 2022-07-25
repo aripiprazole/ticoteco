@@ -4,6 +4,8 @@ import {addDecorator} from '@storybook/react';
 
 import {ChakraProvider} from '@chakra-ui/react';
 
+import theme from '@ticoteco/ui/src/theme';
+
 export const parameters = {
   actions: {argTypesRegex: "^on[A-Z].*"},
   controls: {
@@ -14,4 +16,8 @@ export const parameters = {
   },
 };
 
-addDecorator(s => <ChakraProvider>{s()}</ ChakraProvider>);
+addDecorator(s => (
+  <ChakraProvider theme={theme}>
+    {s()}
+  </ChakraProvider>
+));

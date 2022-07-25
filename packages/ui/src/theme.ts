@@ -16,4 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export {default as theme} from './src/theme';
+import {extendTheme} from '@chakra-ui/react';
+
+const theme = extendTheme({});
+
+export default theme;
