@@ -45,6 +45,7 @@ function Post(props: PostProps) {
           src={data.profile.avatar}
           aria-label={`${data.profile.username}'s avatar`}
           height='4rem'
+          width='4rem'
           borderRadius='50%'
         />
       </Box>
