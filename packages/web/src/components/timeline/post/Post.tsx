@@ -18,16 +18,16 @@
 
 import React from 'react';
 import {FiHeart, FiMessageCircle, FiShare2} from 'react-icons/fi';
+import {IconType} from 'react-icons';
 
 import {
-  Container,
-  PostPreview,
-  PostActions,
-  PostVideo,
-  Like,
-  Comment,
-  Share,
-} from './Post.styles';
+  Box,
+  chakra,
+  Flex,
+  IconButton,
+  Image,
+  Text,
+} from '@chakra-ui/react';
 
 import {TimelineQuery$data} from '@/__generated__/TimelineQuery.graphql';
 
@@ -39,18 +39,45 @@ export function Post(props: PostProps) {
   const {data} = props;
 
   return (
-    <Container>
-      <h4>{data.title} {data.description}</h4>
+    <Box>
+      <Text>
+        {data.title}{' '}
+        <chakra.span fontWeight={600}>{data.description}</chakra.span>
+      </Text>
 
-      <PostVideo>
-        <PostPreview src={data.preview} />
+      <Flex gap='0.5rem'>
+        <Image
+          src={data.preview}
+          borderRadius='0.5rem'
+          sx={{
+            width: '20rem',
+            height: 'calc(20rem / 9 * 16)',
+          }}
+        />
 
-        <PostActions>
-          <Like><FiHeart fill='#000' /></Like>
-          <Comment><FiMessageCircle fill='#000' /></Comment>
-          <Share><FiShare2 fill='#000' /></Share>
-        </PostActions>
-      </PostVideo>
-    </Container>
+        <Flex direction='column' justify='end' gap='0.5rem'>
+          <ActionButton label='Like' icon={FiHeart} />
+          <ActionButton label='Comments' icon={FiMessageCircle} />
+          <ActionButton label='Share' icon={FiShare2} />
+        </Flex>
+      </Flex>
+    </Box>
+  );
+}
+
+type ActionButtonProps = {label: string; icon: IconType};
+
+function ActionButton(props: ActionButtonProps) {
+  const {icon: Icon, label} = props;
+
+  return (
+    <IconButton
+      aria-label={label}
+      borderRadius='50%'
+      height='fit-content'
+      sx={{padding: '1rem'}}
+    >
+      <Icon fill='#000' size='1.3rem' />
+    </IconButton>
   );
 }
