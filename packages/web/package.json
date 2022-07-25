@@ -31,6 +31,9 @@
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
+    "@chakra-ui/react": "^2.2.4",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "@types/node": "18.0.1",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
@@ -40,6 +43,7 @@
     "babel-plugin-relay": "^14.0.0",
     "babel-plugin-styled-components": "^2.0.7",
     "eslint": "^8.19.0",
+    "framer-motion": "^6.5.1",
     "relay-compiler": "^14.0.0",
     "typescript": "4.7.4"
   }
