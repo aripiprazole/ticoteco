@@ -17,4 +17,3 @@
  */
 
 export * from './src/style/GlobalStyle';
-export * from './src/button/Button';
