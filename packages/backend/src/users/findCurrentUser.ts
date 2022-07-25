@@ -20,6 +20,7 @@ import {Request} from 'koa';
 
 import {TicoTecoAppData} from '@/app';
 import UserModel from '@/users/UserModel';
+import ProfileModel from '@/profile/ProfileModel';
 
 const findCurrentUser = (appData: TicoTecoAppData) =>
   async (request: Request): Promise<UserModel | null> => {
@@ -39,8 +40,12 @@ const findCurrentUser = (appData: TicoTecoAppData) =>
       if (appUser) return appUser;
 
       return await new UserModel({
-        username: firebaseUser.displayName,
         firebaseUid: idToken.uid,
+        profile: new ProfileModel({
+          displayName: firebaseUser.displayName,
+          username: firebaseUser.displayName,
+          avatarUrl: 'https://i.pravatar.cc/300',
+        }),
       }).save();
     } catch (err) {
       console.error(err);
