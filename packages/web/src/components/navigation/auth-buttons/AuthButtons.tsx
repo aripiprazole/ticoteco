@@ -18,7 +18,7 @@
 
 import React from 'react';
 
-import {Button} from '@ticoteco/ui';
+import {Button} from '@chakra-ui/react';
 
 import {useAuth} from '@/authentication/AuthContext';
 
