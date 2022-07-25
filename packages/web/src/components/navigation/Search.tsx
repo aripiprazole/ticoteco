@@ -21,7 +21,7 @@ import React from 'react';
 import {Box} from '@chakra-ui/react';
 
 function Search() {
-  return <Box>Search</Box>;
+  return <Box />;
 }
 
 export default Search;
