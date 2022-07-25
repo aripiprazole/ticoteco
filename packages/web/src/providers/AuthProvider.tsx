@@ -20,7 +20,7 @@ import React, {PropsWithChildren, useState} from 'react';
 
 import cookieCutter from 'cookie-cutter';
 
-import {AuthContext} from '@/authentication/AuthContext';
+import {AuthContext} from '@/auth/AuthContext';
 
 import {
   getAuth,
