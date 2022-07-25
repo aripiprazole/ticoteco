@@ -22,7 +22,7 @@ import {Box, Button} from '@chakra-ui/react';
 
 import {useAuth} from '@/authentication/AuthContext';
 
-export function AuthButtons() {
+function AuthButtons() {
   const {login} = useAuth();
 
   return (
@@ -31,3 +31,5 @@ export function AuthButtons() {
     </Box>
   );
 }
+
+export default AuthButtons;

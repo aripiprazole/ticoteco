@@ -22,11 +22,11 @@ import {Box} from '@chakra-ui/react';
 
 import {Navigation} from '@/components/navigation/Navigation';
 
-export type LayoutProps = {
+type LayoutProps = {
   readonly children?: React.ReactNode;
 };
 
-export function Layout({children}: LayoutProps) {
+function Layout({children}: LayoutProps) {
   return (
     <Box>
       <Navigation />
@@ -37,3 +37,5 @@ export function Layout({children}: LayoutProps) {
     </Box>
   );
 }
+
+export default Layout;
