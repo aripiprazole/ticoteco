@@ -18,11 +18,11 @@
 
 import {model, Schema, Types} from 'mongoose';
 
-import ProfileModel from '@/profile/ProfileModel';
+import ProfileModel, {profileSchema} from '@/profile/ProfileModel';
 
 export const userSchema = new Schema<UserModel>({
   firebaseUid: {type: String, required: true},
-  profile: {type: ProfileModel, required: true},
+  profile: {type: profileSchema, required: true},
 });
 
 type UserModel = {
