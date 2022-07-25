@@ -59,7 +59,9 @@ type CurrentPostProps = {
   readonly setAfterPost: (afterPost: string) => void;
 };
 
-function CurrentPosts({queryRef, setAfterPost}: CurrentPostProps) {
+function CurrentPosts(props: CurrentPostProps) {
+  const {queryRef, setAfterPost} = props;
+
   const {forYou} = usePreloadedQuery(TimelineQuery, queryRef);
 
   return (
