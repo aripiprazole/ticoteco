@@ -17,27 +17,37 @@
  */
 
 import React from 'react';
-
 import {FiBox} from 'react-icons/fi';
 
-import {Search} from '@/components/navigation/search/Search';
-import {AuthButtons} from '@/components/navigation/auth-buttons/AuthButtons';
+import {Box, Flex} from '@chakra-ui/react';
 
-import {Container, Logo, Nav} from './Navigation.styles';
+import {Search} from './search/Search';
+import {AuthButtons} from './auth-buttons/AuthButtons';
 
 export function Navigation() {
   return (
-    <Container>
-      <Nav>
-        <Logo>
+    <Box
+      background='#fefefe'
+      padding='1rem 0.5rem'
+      borderBottom='1px solid #e6e6e6'
+    >
+      <Flex
+        as='nav'
+        margin='auto'
+        width='100%'
+        maxWidth='80rem'
+        justify='space-between'
+        align='center'
+      >
+        <Flex gap='0.2rem' align='center' fontSize='1.5rem'>
           <FiBox /> {/* TODO: create ticoteco's logo */}
           ticoteco
-        </Logo>
+        </Flex>
 
         <Search />
 
         <AuthButtons />
-      </Nav>
-    </Container>
+      </Flex>
+    </Box>
   );
 }
