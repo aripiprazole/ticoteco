@@ -18,8 +18,8 @@
 
 import React from 'react';
 
-import {Container} from './Search.styles';
+import {Box} from '@chakra-ui/react';
 
 export function Search() {
-  return <Container>Search</Container>;
+  return <Box>Search</Box>;
 }
