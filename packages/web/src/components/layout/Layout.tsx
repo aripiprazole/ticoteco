@@ -18,9 +18,9 @@
 
 import React from 'react';
 
-import {Navigation} from '@/components/navigation/Navigation';
+import {Box} from '@chakra-ui/react';
 
-import {Container} from './Layout.styles';
+import {Navigation} from '@/components/navigation/Navigation';
 
 export type LayoutProps = {
   readonly children?: React.ReactNode;
@@ -28,12 +28,12 @@ export type LayoutProps = {
 
 export function Layout({children}: LayoutProps) {
   return (
-    <Container>
+    <Box>
       <Navigation />
 
-      <main>
+      <Box as='main' margin='auto' width='100%' maxWidth='80rem'>
         {children}
-      </main>
-    </Container>
+      </Box>
+    </Box>
   );
 }
