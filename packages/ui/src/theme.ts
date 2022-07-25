@@ -16,8 +16,50 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {extendTheme} from '@chakra-ui/react';
+import {extendTheme, Theme} from '@chakra-ui/react';
 
-const theme = extendTheme({});
+const theme: Partial<Theme> = {
+  styles: {
+    global: () => ({
+      '*': {
+        margin: '0',
+        padding: '0',
+        boxSizing: 'border-box',
+      },
 
-export default theme;
+      'html, body, #root, #__next': {
+        height: '100%',
+        width: '100%',
+        minWidth: '25rem',
+        fontSize: '14px',
+      },
+
+      'html, body, #root': {
+        background: '#f3f3f3',
+      },
+
+      '*, input, button, select, textarea, optgroup, option': {
+        fontFamily: '-apple-system, \'Montserrat\', BlinkMacSystemFont,' +
+          ' \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\',' +
+          ' \'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
+        WebkitFontSmoothing: 'antialiased',
+        MozOsxFontSmoothing: 'grayscale',
+      },
+
+      'button': {
+        border: 'none',
+        outline: 'none',
+      },
+
+      'a': {
+        textDecoration: 'none',
+      },
+
+      'ul, li': {
+        listStyle: 'none',
+      },
+    }),
+  },
+};
+
+export default extendTheme(theme);
