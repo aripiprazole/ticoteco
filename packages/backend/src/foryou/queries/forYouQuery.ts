@@ -27,6 +27,13 @@ export const forYouQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
   description: 'Get for you post connection',
   args: connectionArgs,
   resolve: (_root, args, _context): Connection<unknown> => {
+    const profile = {
+      _id: '1',
+      avatarUrl: 'https://i.pravatar.cc/300',
+      username: 'gabi',
+      displayName: 'Gabrielle Guimarães de Oliveira',
+    };
+
     const posts = [
       {
         _id: '1',
@@ -34,6 +41,7 @@ export const forYouQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
         description: '#dance',
         videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         previewUrl: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+        profile,
       },
       {
         _id: '2',
@@ -41,6 +49,7 @@ export const forYouQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
         description: '#dance',
         videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         previewUrl: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+        profile,
       },
       {
         _id: '3',
@@ -48,6 +57,7 @@ export const forYouQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
         description: '#dance',
         videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         previewUrl: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+        profile,
       },
       {
         _id: '4',
@@ -55,6 +65,7 @@ export const forYouQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
         description: '#dance',
         videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         previewUrl: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+        profile,
       },
       {
         _id: '5',
@@ -62,6 +73,7 @@ export const forYouQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
         description: '#dance',
         videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         previewUrl: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+        profile,
       },
     ];
 

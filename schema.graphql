@@ -63,6 +63,14 @@ type Post {
   description: String!
   video: String!
   preview: String!
+  profile: Profile!
+}
+
+type Profile {
+  id: String!
+  avatar: String!
+  username: String!
+  displayName: String!
 }
 
 type Mutation {
