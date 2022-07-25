@@ -2,7 +2,7 @@ import React from 'react';
 
 import {addDecorator} from '@storybook/react';
 
-import {GlobalStyle} from '..';
+import {ChakraProvider} from '@chakra-ui/react';
 
 export const parameters = {
   actions: {argTypesRegex: "^on[A-Z].*"},
@@ -14,4 +14,4 @@ export const parameters = {
   },
 };
 
-addDecorator(s => <><GlobalStyle />{s()}</>);
+addDecorator(s => <ChakraProvider>{s()}</ ChakraProvider>);
