@@ -24,7 +24,7 @@ import {Box, Flex} from '@chakra-ui/react';
 import Search from './Search';
 import AuthButtons from './AuthButtons';
 
-export function Navigation() {
+function Navigation() {
   return (
     <Box
       background='#fefefe'
@@ -51,3 +51,5 @@ export function Navigation() {
     </Box>
   );
 }
+
+export default Navigation;

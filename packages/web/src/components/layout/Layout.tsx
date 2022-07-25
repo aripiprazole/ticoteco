@@ -20,7 +20,7 @@ import React from 'react';
 
 import {Box} from '@chakra-ui/react';
 
-import {Navigation} from '@/components/navigation/Navigation';
+import Navigation from '@/components/navigation/Navigation';
 
 type LayoutProps = {
   readonly children?: React.ReactNode;
