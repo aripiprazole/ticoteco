@@ -23,7 +23,7 @@ import {IconType} from 'react-icons';
 import {
   Box,
   chakra,
-  Flex,
+  Flex, Heading,
   IconButton,
   Image,
   Text,
@@ -39,29 +39,48 @@ function Post(props: PostProps) {
   const {data} = props;
 
   return (
-    <Box>
-      <Text>
-        {data.title}{' '}
-        <chakra.span fontWeight={600}>{data.description}</chakra.span>
-      </Text>
-
-      <Flex gap='0.5rem'>
+    <Flex gap='0.5rem' padding='1.5rem 0' borderBottom='1px solid #cecece'>
+      <Box>
         <Image
-          src={data.preview}
-          borderRadius='0.5rem'
-          sx={{
-            width: '20rem',
-            height: 'calc(20rem / 9 * 16)',
-          }}
+          src={data.profile.avatar}
+          aria-label={`${data.profile.username}'s avatar`}
+          height='4rem'
+          borderRadius='50%'
         />
+      </Box>
 
-        <Flex direction='column' justify='end' gap='0.5rem'>
-          <ActionButton label='Like' icon={FiHeart} />
-          <ActionButton label='Comments' icon={FiMessageCircle} />
-          <ActionButton label='Share' icon={FiShare2} />
+      <Flex direction='column' gap='0.5rem'>
+        <Heading fontSize='1.5rem' lineHeight='0.8'>
+          {data.profile.username}{' '}
+
+          <chakra.span fontSize='1rem' fontWeight={400}>
+            {data.profile.displayName}
+          </chakra.span>
+        </Heading>
+
+        <Text fontSize='1rem'>
+          {data.title}{' '}
+          <chakra.span fontWeight={600}>{data.description}</chakra.span>
+        </Text>
+
+        <Flex gap='0.5rem'>
+          <Image
+            src={data.preview}
+            borderRadius='0.5rem'
+            sx={{
+              width: '20rem',
+              height: 'calc(20rem / 9 * 16)',
+            }}
+          />
+
+          <Flex direction='column' justify='end' gap='0.5rem'>
+            <ActionButton label='Like' icon={FiHeart} />
+            <ActionButton label='Comments' icon={FiMessageCircle} />
+            <ActionButton label='Share' icon={FiShare2} />
+          </Flex>
         </Flex>
       </Flex>
-    </Box>
+    </Flex>
   );
 }
 
