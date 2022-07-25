@@ -23,9 +23,9 @@ import {
   PreloadedQuery,
 } from 'react-relay';
 
-import graphql from 'babel-plugin-relay/macro';
+import {Box} from '@chakra-ui/react';
 
-import {Container} from './Timeline.styles';
+import graphql from 'babel-plugin-relay/macro';
 
 import {TimelineQuery} from '@/__generated__/TimelineQuery.graphql';
 import {Post} from '@/components/timeline/post/Post';
@@ -87,12 +87,12 @@ export function Timeline() {
   }, [afterPost]);
 
   return (
-    <Container>
+    <Box>
       {queryRef && (
         <React.Suspense fallback="Loading...">
           <CurrentPosts queryRef={queryRef} setAfterPost={setAfterPost} />
         </React.Suspense>
       )}
-    </Container>
+    </Box>
   );
 }
