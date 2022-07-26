@@ -16,10 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import UserModel from '@/users/UserModel';
+import User from '@/users/User';
 
 type TicoTecoContext = {
-  readonly user: UserModel | null;
+  readonly user: User | null;
 };
 
 export default TicoTecoContext;

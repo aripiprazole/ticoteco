@@ -19,7 +19,7 @@
 import {graphql} from 'graphql/graphql';
 
 import schema from '@/graphql/schema';
-import UserModel from '@/users/UserModel';
+import User from '@/users/User';
 
 describe('currentUserQuery tests', () => {
   it('should return the current user', async () => {
@@ -33,7 +33,7 @@ describe('currentUserQuery tests', () => {
       }
     `;
 
-    const currentUser = new UserModel({
+    const currentUser = new User({
       username: 'devgabi',
       displayName: 'Gabrielle Guimarães',
     });
