@@ -57,7 +57,7 @@ export function AuthProvider({children}: PropsWithChildren) {
 
   const environment = useRelayEnvironment();
 
-  const [authKey, setAuthKey] = useCookieState<string>(AUTHORIZATION_KEY);
+  const [authKey, setAuthKey] = useCookieState(AUTHORIZATION_KEY);
   const [user, setUser] = useState<AuthenticatedUser>();
 
   useEffect(() => {
