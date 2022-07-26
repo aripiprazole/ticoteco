@@ -20,6 +20,7 @@ import Koa, {Request} from 'koa';
 import Router from '@koa/router';
 import cors from '@koa/cors';
 import bodyparser from 'koa-bodyparser';
+import {graphqlUploadKoa} from 'graphql-upload';
 
 import {graphqlHTTP, OptionsData} from 'koa-graphql';
 
@@ -49,6 +50,7 @@ export function createServer(appData: TicoTecoAppData): Koa {
 
   router.all('/graphql', graphqlHTTP(setupGraphQLConnection));
 
+  app.use(graphqlUploadKoa({maxFileSize: 10000000, maxFiles: 10}));
   app.use(cors());
   app.use(bodyparser());
   app.use(router.routes());

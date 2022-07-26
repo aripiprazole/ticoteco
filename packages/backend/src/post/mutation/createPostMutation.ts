@@ -18,6 +18,7 @@
 
 import {GraphQLNonNull, GraphQLString} from 'graphql';
 import {mutationWithClientMutationId} from 'graphql-relay';
+import {GraphQLUpload, Upload} from 'graphql-upload';
 
 import TicoTecoContext from '@/graphql/TicoTecoContext';
 import GraphQLPost from '@/post/types/GraphQLPost';
@@ -25,6 +26,7 @@ import GraphQLPost from '@/post/types/GraphQLPost';
 type CreatePostArgs = {
   readonly title: string;
   readonly description: string;
+  readonly video: Upload;
 };
 
 export const createPostMutation = mutationWithClientMutationId({
@@ -32,6 +34,7 @@ export const createPostMutation = mutationWithClientMutationId({
   inputFields: {
     title: {type: new GraphQLNonNull(GraphQLString)},
     description: {type: new GraphQLNonNull(GraphQLString)},
+    video: {type: new GraphQLNonNull(GraphQLUpload)},
   },
   outputFields: () => ({
     post: {
@@ -39,7 +42,7 @@ export const createPostMutation = mutationWithClientMutationId({
       resolve: ({post}) => post,
     },
   }),
-  mutateAndGetPayload: async (_args: CreatePostArgs, _ctx: TicoTecoContext) => {
-
+  mutateAndGetPayload: async (args: CreatePostArgs, ctx: TicoTecoContext) => {
+    console.log('video', await args.video.promise.then((a) => a.filename));
   },
 });
