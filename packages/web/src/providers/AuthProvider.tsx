@@ -33,7 +33,7 @@ import {
   GoogleAuthProvider,
 } from '@firebase/auth';
 
-import '@/config/firebase';
+import '@/firebase';
 import {AUTHORIZATION_KEY} from '@/relay';
 
 import {AuthProviderQuery} from '@/__generated__/AuthProviderQuery.graphql';
