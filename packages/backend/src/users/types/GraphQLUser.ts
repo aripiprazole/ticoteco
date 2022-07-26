@@ -18,26 +18,22 @@
 
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
-const ProfileGraphQLType = new GraphQLObjectType({
-  name: 'Profile',
+import UserModel from '@/users/UserModel';
+import GraphQLProfile from '@/profile/types/GraphQLProfile';
+
+const GraphQLUser = new GraphQLObjectType<UserModel>({
+  name: 'User',
   fields: () => ({
     id: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: (post) => post._id.toString(),
+      resolve: (user) => user._id.toString(),
     },
-    avatar: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (post) => post.avatarUrl.toString(),
-    },
-    username: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (post) => post.username.toString(),
-    },
-    displayName: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (post) => post.displayName.toString(),
+    profile: {
+      type: new GraphQLNonNull(GraphQLProfile),
+      resolve: (user) => user.profile,
     },
   }),
 });
 
-export default ProfileGraphQLType;
+export default GraphQLUser;
+

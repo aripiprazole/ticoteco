@@ -20,10 +20,10 @@ import {GraphQLFieldConfig} from 'graphql/type';
 import {Connection, connectionArgs, connectionFromArray} from 'graphql-relay';
 
 import TicoTecoContext from '@/graphql/TicoTecoContext';
-import {PostConnection} from '@/post/types/PostGraphQLType';
+import {GraphQLPostConnection} from '@/post/types/GraphQLPost';
 
 export const forYouQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
-  type: PostConnection.connectionType,
+  type: GraphQLPostConnection.connectionType,
   description: 'Get for you post connection',
   args: connectionArgs,
   resolve: (_root, args, _context): Connection<unknown> => {

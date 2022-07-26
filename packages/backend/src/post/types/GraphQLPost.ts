@@ -18,9 +18,9 @@
 
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
-import ProfileGraphQLType from '@/profile/types/ProfileGraphQLType';
+import GraphQLProfile from '@/profile/types/GraphQLProfile';
 
-const PostGraphQLType = new GraphQLObjectType({
+const GraphQLPost = new GraphQLObjectType({
   name: 'Post',
   fields: () => ({
     id: {
@@ -49,15 +49,15 @@ const PostGraphQLType = new GraphQLObjectType({
     },
 
     profile: {
-      type: new GraphQLNonNull(ProfileGraphQLType),
+      type: new GraphQLNonNull(GraphQLProfile),
       resolve: (post) => post.profile,
     },
   }),
 });
 
-export const PostConnection = connectionDefinitions({
+export const GraphQLPostConnection = connectionDefinitions({
   name: 'Post',
-  nodeType: PostGraphQLType,
+  nodeType: GraphQLPost,
 });
 
-export default PostGraphQLType;
+export default GraphQLPost;
