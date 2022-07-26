@@ -33,11 +33,14 @@ function VideoInputs(props: VideoInputsProps) {
 
   const inputRef = useRef<HTMLInputElement>();
 
+  const isUploaded = formik.values.video !== null;
+
   return (
     <Flex
       padding='0 1.5rem'
       height='100%'
       border='2px dashed #cecece'
+      borderColor={isUploaded ? 'lightskyblue' : '#cecece'}
       borderRadius='1rem'
       align='center'
       justify='center'
@@ -51,8 +54,11 @@ function VideoInputs(props: VideoInputsProps) {
           Only MP4
         </chakra.span>
 
-        <Button onClick={() => inputRef.current.click()}>
-          Select file
+        <Button
+          colorScheme={isUploaded ? 'blue' : 'gray'}
+          onClick={() => inputRef.current.click()}
+        >
+          {isUploaded ? 'Change video' : 'Select video'}
         </Button>
 
         <Input
