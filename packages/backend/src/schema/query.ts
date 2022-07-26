@@ -19,7 +19,7 @@
 import {GraphQLObjectType} from 'graphql';
 
 import {currentUserQuery} from '@/users/queries/currentUserQuery';
-import {forYouQuery} from '@/foryou/queries/forYouQuery';
+import {forYouQuery} from '@/post/queries/forYouQuery';
 
 const query = new GraphQLObjectType({
   name: 'Query',
