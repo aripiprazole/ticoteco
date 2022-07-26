@@ -16,40 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-
-import {Box, Button, Flex, Image} from '@chakra-ui/react';
-
-import {useAuth} from '@/auth/AuthContext';
-
-import Upload from './upload/Upload';
-
-function AuthButtons() {
-  const {user, login} = useAuth();
-
-  if (!user) {
-    return (
-      <Box>
-        <Button onClick={login}>Login</Button>
-      </Box>
-    );
-  }
-
-  return (
-    <Flex gap='1rem'>
-      <Upload />
-
-      <Image
-        aria-label={`${user.profile.username}'s avatar`}
-        src={user.profile.avatar}
-        cursor='pointer'
-        height='2.4rem'
-        width='2.4rem'
-        border='1px solid #1c1c1c'
-        borderRadius='50%'
-      />
-    </Flex>
-  );
+type UploadForm = {
+  readonly title: string;
+  readonly description: string;
+  readonly video: File | null;
 }
 
-export default AuthButtons;
+export default UploadForm;
