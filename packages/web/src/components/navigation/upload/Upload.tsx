@@ -74,10 +74,10 @@ function Upload() {
         <ModalOverlay />
 
         <ModalContent maxHeight='40rem' maxWidth='50rem'>
-          <chakra.form>
-            <ModalHeader>Upload a video</ModalHeader>
-            <ModalCloseButton />
+          <ModalHeader>Upload a video</ModalHeader>
+          <ModalCloseButton />
 
+          <chakra.form onSubmit={formik.handleSubmit}>
             <ModalBody>
               <HStack gap='1rem' height='20rem' align='start'>
                 <VideoInputs formik={formik} />
