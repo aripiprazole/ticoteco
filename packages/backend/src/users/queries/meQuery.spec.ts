@@ -22,11 +22,11 @@ import schema from '@/graphql/schema';
 import User from '@/users/User';
 import Profile from '@/profile/Profile';
 
-describe('currentUserQuery tests', () => {
+describe('meQuery tests', () => {
   it('should return the current user', async () => {
     const query = `
-      query CurrentUserQuery {
-        currentUser {
+      query MeQuery {
+        me {
           id,
           profile {
             id,

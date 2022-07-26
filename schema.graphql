@@ -1,6 +1,6 @@
 type Query {
   """Get the current logged user"""
-  currentUser: User
+  me: User
 
   """Get for you post connection"""
   forYou(
