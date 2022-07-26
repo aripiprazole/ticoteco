@@ -18,19 +18,19 @@
 
 import {model, Schema, Types} from 'mongoose';
 
-import ProfileModel, {profileSchema} from '@/profile/ProfileModel';
+import Profile, {profileSchema} from '@/profile/Profile';
 
-export const userSchema = new Schema<UserModel>({
+export const userSchema = new Schema<User>({
   firebaseUid: {type: String, required: true},
   profile: {type: profileSchema, required: true},
 });
 
-type UserModel = {
+type User = {
   readonly _id: Types.ObjectId;
   readonly firebaseUid: string;
-  readonly profile: ProfileModel;
+  readonly profile: Profile;
 };
 
-const UserModel = model<UserModel>('User', userSchema);
+const User = model<User>('User', userSchema);
 
-export default UserModel;
+export default User;

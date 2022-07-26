@@ -19,11 +19,11 @@
 import {Request} from 'koa';
 
 import {TicoTecoAppData} from '@/app';
-import UserModel from '@/users/UserModel';
-import ProfileModel from '@/profile/ProfileModel';
+import User from '@/users/User';
+import Profile from '@/profile/Profile';
 
 const findCurrentUser = (appData: TicoTecoAppData) =>
-  async (request: Request): Promise<UserModel | null> => {
+  async (request: Request): Promise<User | null> => {
     const header = request.headers.authorization;
     if (!header) {
       return null;
@@ -33,15 +33,15 @@ const findCurrentUser = (appData: TicoTecoAppData) =>
       const idToken = await appData.firebase.auth().verifyIdToken(header);
       const firebaseUser = await appData.firebase.auth().getUser(idToken.uid);
 
-      const appUser = await UserModel
+      const appUser = await User
           .findOne({firebaseUid: firebaseUser.uid})
           .exec();
 
       if (appUser) return appUser;
 
-      return await new UserModel({
+      return await new User({
         firebaseUid: idToken.uid,
-        profile: new ProfileModel({
+        profile: new Profile({
           displayName: firebaseUser.displayName,
           username: firebaseUser.displayName,
           avatarUrl: 'https://i.pravatar.cc/300',

@@ -18,19 +18,19 @@
 
 import {model, Schema, Types} from 'mongoose';
 
-export const profileSchema = new Schema<ProfileModel>({
+export const profileSchema = new Schema<Profile>({
   username: {type: String, required: true},
   displayName: {type: String, required: true},
   avatarUrl: {type: String, required: true},
 });
 
-type ProfileModel = {
+type Profile = {
   readonly _id: Types.ObjectId;
   readonly username: string;
   readonly displayName: string;
   readonly avatarUrl: string;
 };
 
-const ProfileModel = model<ProfileModel>('Profile', profileSchema);
+const Profile = model<Profile>('Profile', profileSchema);
 
-export default ProfileModel;
+export default Profile;
