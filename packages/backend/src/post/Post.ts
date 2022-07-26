@@ -19,7 +19,7 @@
 import {model, Schema, Types, SchemaTypes} from 'mongoose';
 
 export const postSchema = new Schema<Post>({
-  profile: {type: SchemaTypes.ObjectId, required: true},
+  user: {type: SchemaTypes.ObjectId, required: true},
   title: {type: String, required: true},
   description: {type: String, required: true},
   videoUrl: {type: String, required: true},
@@ -28,7 +28,7 @@ export const postSchema = new Schema<Post>({
 
 type Post = {
   readonly _id: Types.ObjectId;
-  readonly profile: Types.ObjectId;
+  readonly user: Types.ObjectId;
   readonly title: string;
   readonly description: string;
   readonly videoUrl: string;

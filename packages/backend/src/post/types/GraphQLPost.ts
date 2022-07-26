@@ -22,6 +22,7 @@ import {connectionDefinitions} from 'graphql-relay';
 import GraphQLProfile from '@/profile/types/GraphQLProfile';
 
 import Post from '@/post/Post';
+import User from '@/users/User';
 
 const GraphQLPost = new GraphQLObjectType<Post>({
   name: 'Post',
@@ -53,7 +54,11 @@ const GraphQLPost = new GraphQLObjectType<Post>({
 
     profile: {
       type: new GraphQLNonNull(GraphQLProfile),
-      resolve: (post) => post.profile,
+      resolve: async (post) => {
+        const user = await User.findById(post.user);
+
+        return user.profile;
+      },
     },
   }),
 });

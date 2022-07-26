@@ -3024,6 +3024,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@entria/graphql-mongoose-loader@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@entria/graphql-mongoose-loader@npm:4.4.0"
+  peerDependencies:
+    graphql: "*"
+    graphql-relay: "*"
+    mongoose: "*"
+  checksum: b90ffb33d1291b43d4f10260900208869c9a04c2412b8da2eb951cdce0765eaf1542429e0db115b71f97dd5717526a38e7f95d5f70656684e756b3a41b1ae90d
+  languageName: node
+  linkType: hard
+
 "@eslint/eslintrc@npm:^1.3.0":
   version: 1.3.0
   resolution: "@eslint/eslintrc@npm:1.3.0"
@@ -5945,6 +5956,7 @@ __metadata:
     "@babel/node": ^7.18.6
     "@babel/preset-env": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
+    "@entria/graphql-mongoose-loader": ^4.4.0
     "@koa/cors": ^3.3.0
     "@koa/router": ^11.0.1
     "@ticoteco/shared": "workspace:^"
@@ -5957,6 +5969,7 @@ __metadata:
     babel-jest: ^28.1.3
     babel-loader: ^8.2.5
     babel-plugin-tsconfig-paths: ^1.0.3
+    dataloader: ^2.1.0
     dotenv: ^16.0.1
     firebase-admin: ^11.0.0
     graphql: ^16.5.0
@@ -9896,6 +9909,13 @@ __metadata:
   version: 7.0.0
   resolution: "dargs@npm:7.0.0"
   checksum: b8f1e3cba59c42e1f13a114ad4848c3fc1cf7470f633ee9e9f1043762429bc97d91ae31b826fb135eefde203a3fdb20deb0c0a0222ac29d937b8046085d668d1
+  languageName: node
+  linkType: hard
+
+"dataloader@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "dataloader@npm:2.1.0"
+  checksum: bbd43496c41697766f8611f60ed3bae437b450985499140b9603a2447c10d45975d3a0661caaebaa9750bc1bc9fd154676a314423294916c8b8ca1a59a08d139
   languageName: node
   linkType: hard
 
