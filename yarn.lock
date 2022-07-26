@@ -5872,7 +5872,6 @@ __metadata:
     "@koa/cors": ^3.3.0
     "@koa/router": ^11.0.1
     "@ticoteco/shared": "workspace:^"
-    "@types/graphql-upload": ^8.0.11
     "@types/jest": ^28.1.6
     "@types/koa": ^2.13.4
     "@types/koa-bodyparser": ^4.3.7
@@ -5887,7 +5886,7 @@ __metadata:
     firebase-admin: ^11.0.0
     graphql: ^16.5.0
     graphql-relay: ^0.10.0
-    graphql-upload: ^16.0.0
+    graphql-upload-minimal: ^1.5.1
     jest: ^28.1.3
     koa: ^2.13.4
     koa-bodyparser: ^4.3.0
@@ -6087,15 +6086,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/busboy@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "@types/busboy@npm:1.5.0"
-  dependencies:
-    "@types/node": "*"
-  checksum: ffa7bf25c0395f6927526b7d97e70cd2df789e4ca0d231e41855fb08542fa236891ce457d83cc50cac6e5cef6be092ab80597070dcf1413f736462690a23e987
-  languageName: node
-  linkType: hard
-
 "@types/connect@npm:*":
   version: 3.4.35
   resolution: "@types/connect@npm:3.4.35"
@@ -6188,15 +6178,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/fs-capacitor@npm:*":
-  version: 2.0.0
-  resolution: "@types/fs-capacitor@npm:2.0.0"
-  dependencies:
-    "@types/node": "*"
-  checksum: 367079834ddb8984e9b740d4219d01cfa9683e8552b1dfda473817e7f2b33d750453adda148d1b99cb67bd6e990fad8bd31e4034b5e9311dfb9803e6f1fbb0dc
-  languageName: node
-  linkType: hard
-
 "@types/glob@npm:*, @types/glob@npm:^7.1.1":
   version: 7.2.0
   resolution: "@types/glob@npm:7.2.0"
@@ -6213,18 +6194,6 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: d076bb61f45d0fc42dee496ef8b1c2f8742e15d5e47e90e20d0243386e426c04d4efd408a48875ab432f7960b4ce3414db20ed0fbbfc7bcc89d84e574f6e045a
-  languageName: node
-  linkType: hard
-
-"@types/graphql-upload@npm:^8.0.11":
-  version: 8.0.11
-  resolution: "@types/graphql-upload@npm:8.0.11"
-  dependencies:
-    "@types/express": "*"
-    "@types/fs-capacitor": "*"
-    "@types/koa": "*"
-    graphql: 0.13.1 - 16
-  checksum: 8af6c023ed8c9118950a6695ddc682781f4de8619e7c5bc49f3a2e0b0a25f04c55a53ecc9879de264665ed19409293ce65a2384ab14eb4c77b69756e37a02eaa
   languageName: node
   linkType: hard
 
@@ -6493,13 +6462,6 @@ __metadata:
   version: 4.1.4
   resolution: "@types/npmlog@npm:4.1.4"
   checksum: 740f7431ccfc0e127aa8d162fe05c6ce8aa71290be020d179b2824806d19bd2c706c7e0c9a3c9963cefcdf2ceacb1dec6988c394c3694451387759dafe0aa927
-  languageName: node
-  linkType: hard
-
-"@types/object-path@npm:^0.11.1":
-  version: 0.11.1
-  resolution: "@types/object-path@npm:0.11.1"
-  checksum: 007e819d1d9dc830491b60023b1502ef1e421416d9953d6fefcda7d06eb91548eef8ee30073a9cfb6a834ac977042f6e1a761cde2d6a7973b06ddca753be91e3
   languageName: node
   linkType: hard
 
@@ -11651,13 +11613,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-capacitor@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "fs-capacitor@npm:8.0.0"
-  checksum: 531c8c4ac12fe3a75f9564cb3ce41571f148ec81cf111fed04f6921a5a2de1eadacf44497c223dd281243472fe6ccc98005f34674e8e471d6370b7437860f774
-  languageName: node
-  linkType: hard
-
 "fs-constants@npm:^1.0.0":
   version: 1.0.0
   resolution: "fs-constants@npm:1.0.0"
@@ -12259,34 +12214,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-upload@npm:^16.0.0":
-  version: 16.0.0
-  resolution: "graphql-upload@npm:16.0.0"
+"graphql-upload-minimal@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "graphql-upload-minimal@npm:1.5.1"
   dependencies:
-    "@types/busboy": ^1.5.0
-    "@types/node": "*"
-    "@types/object-path": ^0.11.1
     busboy: ^1.6.0
-    fs-capacitor: ^8.0.0
-    http-errors: ^2.0.0
-    object-path: ^0.11.8
   peerDependencies:
-    "@types/express": ^4.0.29
-    "@types/koa": ^2.11.4
-    graphql: ^16.3.0
-  peerDependenciesMeta:
-    "@types/express":
-      optional: true
-    "@types/koa":
-      optional: true
-  checksum: 244597f2da8e5f42d619697487fbc22fa0ac4f07c76d8cf587fab0d54da9be3d9e7fda053ca08c407fc0c4652152713754a5f42ba799daea87eb70c571a64c44
-  languageName: node
-  linkType: hard
-
-"graphql@npm:0.13.1 - 16, graphql@npm:^16.5.0":
-  version: 16.5.0
-  resolution: "graphql@npm:16.5.0"
-  checksum: a82a926d085818934d04fdf303a269af170e79de943678bd2726370a96194f9454ade9d6d76c2de69afbd7b9f0b4f8061619baecbbddbe82125860e675ac219e
+    graphql: 0.13.1 - 16
+  checksum: 129ea456e335874dd850ce1ebb43b79685f1c67e2294402860b168999aeceb8f26ea73f7cd7cb1684de40b5180b442c8679c8b93c3c7f3bb2758f13db44d5fcb
   languageName: node
   linkType: hard
 
@@ -12294,6 +12229,13 @@ __metadata:
   version: 15.3.0
   resolution: "graphql@npm:15.3.0"
   checksum: df18079e3a1ecb875821a71531b74eb1e6099ec1fb8d6e79faff4b43561cb23acbb80c9e05845292e08b6321d507e55dc7d5a60d72cdd093720a6f0f00983d1e
+  languageName: node
+  linkType: hard
+
+"graphql@npm:^16.5.0":
+  version: 16.5.0
+  resolution: "graphql@npm:16.5.0"
+  checksum: a82a926d085818934d04fdf303a269af170e79de943678bd2726370a96194f9454ade9d6d76c2de69afbd7b9f0b4f8061619baecbbddbe82125860e675ac219e
   languageName: node
   linkType: hard
 
@@ -16299,13 +16241,6 @@ __metadata:
   version: 1.1.1
   resolution: "object-keys@npm:1.1.1"
   checksum: b363c5e7644b1e1b04aa507e88dcb8e3a2f52b6ffd0ea801e4c7a62d5aa559affe21c55a07fd4b1fd55fc03a33c610d73426664b20032405d7b92a1414c34d6a
-  languageName: node
-  linkType: hard
-
-"object-path@npm:^0.11.8":
-  version: 0.11.8
-  resolution: "object-path@npm:0.11.8"
-  checksum: 684ccf0fb6b82f067dc81e2763481606692b8485bec03eb2a64e086a44dbea122b2b9ef44423a08e09041348fe4b4b67bd59985598f1652f67df95f0618f5968
   languageName: node
   linkType: hard
 

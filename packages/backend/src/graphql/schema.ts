@@ -17,7 +17,7 @@
  */
 
 import {GraphQLSchema} from 'graphql';
-import {GraphQLUpload} from 'graphql-upload';
+import {GraphQLUpload} from 'graphql-upload-minimal';
 
 import mutation from '@/schema/mutation';
 import query from '@/schema/query';
