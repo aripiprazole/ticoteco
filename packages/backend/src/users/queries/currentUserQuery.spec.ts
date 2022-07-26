@@ -20,6 +20,7 @@ import {graphql} from 'graphql/graphql';
 
 import schema from '@/graphql/schema';
 import User from '@/users/User';
+import Profile from '@/profile/Profile';
 
 describe('currentUserQuery tests', () => {
   it('should return the current user', async () => {
@@ -27,15 +28,22 @@ describe('currentUserQuery tests', () => {
       query CurrentUserQuery {
         currentUser {
           id,
-          username,
-          displayName,        
+          profile {
+            id,
+            avatar
+            username
+            displayName
+          }
         }
       }
     `;
 
     const currentUser = new User({
-      username: 'devgabi',
-      displayName: 'Gabrielle Guimarães',
+      profile: new Profile({
+        avatarUrl: 'https://avatars0.githubusercontent.com/u/527098?s=460&v=4',
+        username: 'devgabi',
+        displayName: 'Gabrielle Guimarães',
+      }),
     });
 
     const result = await graphql({
@@ -50,8 +58,12 @@ describe('currentUserQuery tests', () => {
 
     expect(result.data.currentUser).toEqual({
       id: currentUser._id.toString(),
-      username: currentUser.username,
-      displayName: currentUser.displayName,
+      profile: {
+        id: currentUser.profile._id.toString(),
+        avatar: currentUser.profile.avatarUrl,
+        username: currentUser.profile.username,
+        displayName: currentUser.profile.displayName,
+      },
     });
   });
 });
