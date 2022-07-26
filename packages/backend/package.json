@@ -23,6 +23,7 @@
     "firebase-admin": "^11.0.0",
     "graphql": "^16.5.0",
     "graphql-relay": "^0.10.0",
+    "graphql-upload-minimal": "^1.5.1",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-graphql": "^0.12.0",
