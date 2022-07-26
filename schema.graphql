@@ -73,5 +73,16 @@ type Post {
 }
 
 type Mutation {
-  hello: String
+  createPost(input: CreatePostInput!): CreatePostPayload
+}
+
+type CreatePostPayload {
+  post: Post
+  clientMutationId: String
+}
+
+input CreatePostInput {
+  title: String!
+  description: String!
+  clientMutationId: String
 }

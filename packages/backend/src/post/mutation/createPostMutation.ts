@@ -16,15 +16,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import {GraphQLNonNull, GraphQLString} from 'graphql';
+import {mutationWithClientMutationId} from 'graphql-relay';
 
-import {createPostMutation} from '@/post/mutation/createPostMutation';
+import TicoTecoContext from '@/graphql/TicoTecoContext';
+import GraphQLPost from '@/post/types/GraphQLPost';
 
-const mutation = new GraphQLObjectType({
-  name: 'Mutation',
-  fields: () => ({
-    createPost: createPostMutation,
+type CreatePostArgs = {
+  readonly title: string;
+  readonly description: string;
+};
+
+export const createPostMutation = mutationWithClientMutationId({
+  name: 'CreatePost',
+  inputFields: {
+    title: {type: new GraphQLNonNull(GraphQLString)},
+    description: {type: new GraphQLNonNull(GraphQLString)},
+  },
+  outputFields: () => ({
+    post: {
+      type: GraphQLPost,
+      resolve: ({post}) => post,
+    },
   }),
-});
+  mutateAndGetPayload: async (_args: CreatePostArgs, _ctx: TicoTecoContext) => {
 
-export default mutation;
+  },
+});
