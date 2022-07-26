@@ -18,9 +18,12 @@
 
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
+
 import GraphQLProfile from '@/profile/types/GraphQLProfile';
 
-const GraphQLPost = new GraphQLObjectType({
+import Post from '@/post/Post';
+
+const GraphQLPost = new GraphQLObjectType<Post>({
   name: 'Post',
   fields: () => ({
     id: {
