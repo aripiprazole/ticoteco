@@ -23,19 +23,19 @@ const GraphQLProfile = new GraphQLObjectType({
   fields: () => ({
     id: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: (post) => post._id.toString(),
+      resolve: (profile) => profile._id.toString(),
     },
     avatar: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: (post) => post.avatarUrl.toString(),
+      resolve: (profile) => profile.avatarUrl.toString(),
     },
     username: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: (post) => post.username.toString(),
+      resolve: (profile) => profile.username.toString(),
     },
     displayName: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: (post) => post.displayName.toString(),
+      resolve: (profile) => profile.displayName.toString(),
     },
   }),
 });
