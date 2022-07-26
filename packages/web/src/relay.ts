@@ -17,12 +17,14 @@
  */
 
 import {
+  CacheConfig,
   Environment,
   GraphQLResponse,
   Network,
   RecordSource,
   RequestParameters,
   Store,
+  UploadableMap,
   Variables,
 } from 'relay-runtime';
 
@@ -35,15 +37,36 @@ const fetchGraphQL = (authorization: string) =>
   async (
       query: RequestParameters,
       variables: Variables,
+      _cacheConfig: CacheConfig,
+      uploadables?: UploadableMap | null,
   ): Promise<GraphQLResponse> => {
-  // Fetch data from GitHub's GraphQL API:
+    let body: any;
+    let contentType: string;
+
+    if (!uploadables) {
+      contentType = 'application/json';
+      body = JSON.stringify({query: query.text, variables});
+    } else {
+      const data = new FormData();
+
+      data.append('query', query.text);
+      data.append('variables', JSON.stringify(variables));
+
+      Object.entries(uploadables).forEach(([key, value]) => {
+        data.append(key, value);
+      });
+
+      contentType = 'multipart/form-data';
+      body = data;
+    }
+
     const response = await fetch(GRAPHQL_API_URL, {
       method: 'POST',
       headers: {
         'Authorization': authorization,
-        'Content-Type': 'application/json',
+        'Content-Type': contentType,
       },
-      body: JSON.stringify({query: query.text, variables}),
+      body,
     });
 
     // Get the response as JSON

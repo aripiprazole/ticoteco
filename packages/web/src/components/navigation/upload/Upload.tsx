@@ -17,7 +17,10 @@
  */
 
 import React from 'react';
+import {useMutation} from 'react-relay';
 import {FiUpload} from 'react-icons/fi';
+
+import graphql from 'babel-plugin-relay/macro';
 
 import {useFormik} from 'formik';
 
@@ -37,14 +40,37 @@ import {
 } from '@chakra-ui/react';
 
 import * as Yup from 'yup';
-
 import VideoInputs from './VideoInputs';
-import DataInputs from './DataInputs';
 
+import DataInputs from './DataInputs';
 import UploadForm from './UploadForm';
+import {UploadMutation} from '@/__generated__/UploadMutation.graphql';
+
+const UploadMutation = graphql`
+  mutation UploadMutation(
+    $title: String!,
+    $description: String!,
+    $video: Upload!,
+  ) {
+    createPost(input: {
+      title: $title,
+      description: $description,
+      video: $video,
+    }) {
+      post {
+        id
+        title
+      }
+    }
+  }
+`;
 
 function Upload() {
   const {isOpen, onOpen, onClose} = useDisclosure();
+
+  const [commitMutation, isMutationInFlight] = useMutation<UploadMutation>(
+      UploadMutation,
+  );
 
   const formik = useFormik<UploadForm>({
     validationSchema: Yup.object({
@@ -58,7 +84,18 @@ function Upload() {
       video: null,
     },
     onSubmit: (values) => {
-      console.log('success', values);
+      commitMutation({
+        variables: {
+          title: values.title,
+          description: values.description,
+        } as any,
+        uploadables: {
+          video: values.video,
+        },
+        onCompleted: () => {
+          onClose();
+        },
+      });
     },
   });
 
@@ -87,7 +124,9 @@ function Upload() {
             </ModalBody>
 
             <ModalFooter>
-              <Button ml='auto' type='submit'>Upload</Button>
+              <Button ml='auto' type='submit' disabled={isMutationInFlight}>
+                Upload
+              </Button>
             </ModalFooter>
           </chakra.form>
         </ModalContent>

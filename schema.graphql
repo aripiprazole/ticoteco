@@ -1,3 +1,6 @@
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
 type Query {
   """Get the current logged user"""
   currentUser: User
@@ -84,5 +87,6 @@ type CreatePostPayload {
 input CreatePostInput {
   title: String!
   description: String!
+  video: Upload!
   clientMutationId: String
 }
