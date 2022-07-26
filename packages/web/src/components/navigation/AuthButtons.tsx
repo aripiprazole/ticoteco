@@ -18,9 +18,11 @@
 
 import React from 'react';
 
-import {Box, Button, Image} from '@chakra-ui/react';
+import {Box, Button, Flex, Image} from '@chakra-ui/react';
 
 import {useAuth} from '@/auth/AuthContext';
+
+import Upload from './Upload';
 
 function AuthButtons() {
   const {user, login} = useAuth();
@@ -34,7 +36,9 @@ function AuthButtons() {
   }
 
   return (
-    <Box>
+    <Flex gap='1rem'>
+      <Upload />
+
       <Image
         aria-label={`${user.profile.username}'s avatar`}
         src={user.profile.avatar}
@@ -44,7 +48,7 @@ function AuthButtons() {
         border='1px solid #1c1c1c'
         borderRadius='50%'
       />
-    </Box>
+    </Flex>
   );
 }
 
