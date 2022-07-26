@@ -18,9 +18,13 @@
 
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
+
 import GraphQLProfile from '@/profile/types/GraphQLProfile';
 
-const GraphQLPost = new GraphQLObjectType({
+import Post from '@/post/Post';
+import User from '@/users/User';
+
+const GraphQLPost = new GraphQLObjectType<Post>({
   name: 'Post',
   fields: () => ({
     id: {
@@ -50,7 +54,11 @@ const GraphQLPost = new GraphQLObjectType({
 
     profile: {
       type: new GraphQLNonNull(GraphQLProfile),
-      resolve: (post) => post.profile,
+      resolve: async (post) => {
+        const user = await User.findById(post.user);
+
+        return user.profile;
+      },
     },
   }),
 });

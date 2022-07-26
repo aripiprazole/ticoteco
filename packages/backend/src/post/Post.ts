@@ -16,17 +16,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import {model, Schema, Types, SchemaTypes} from 'mongoose';
 
-import {currentUserQuery} from '@/users/queries/currentUserQuery';
-import {forYouQuery} from '@/post/queries/forYouQuery';
-
-const query = new GraphQLObjectType({
-  name: 'Query',
-  fields: () => ({
-    currentUser: currentUserQuery,
-    forYou: forYouQuery,
-  }),
+export const postSchema = new Schema<Post>({
+  user: {type: SchemaTypes.ObjectId, required: true},
+  title: {type: String, required: true},
+  description: {type: String, required: true},
+  videoUrl: {type: String, required: true},
+  previewUrl: {type: String, required: true},
 });
 
-export default query;
+type Post = {
+  readonly _id: Types.ObjectId;
+  readonly user: Types.ObjectId;
+  readonly title: string;
+  readonly description: string;
+  readonly videoUrl: string;
+  readonly previewUrl: string;
+};
+
+const Post = model<Post>('Post', postSchema);
+
+export default Post;
