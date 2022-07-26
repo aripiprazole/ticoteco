@@ -16,24 +16,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 
-import UserModel from '@/users/UserModel';
-import ProfileGraphQLType from '@/profile/types/ProfileGraphQLType';
+import cookieCutter from 'cookie-cutter';
 
-const UserGraphQLType = new GraphQLObjectType<UserModel>({
-  name: 'User',
-  fields: () => ({
-    id: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (user) => user._id.toString(),
-    },
-    profile: {
-      type: new GraphQLNonNull(ProfileGraphQLType),
-      resolve: (user) => user.profile,
-    },
-  }),
-});
+function useCookieState(
+    key: string,
+): [string | undefined, Dispatch<SetStateAction<string | undefined>>] {
+  const [value, setValue] = useState<string>();
 
-export default UserGraphQLType;
+  const setCookieValue: Dispatch<SetStateAction<string | undefined>> =
+    (newState: any) => {
+      const newValue = typeof newState === 'function' ?
+        newState(value) :
+          newState;
 
+      cookieCutter.set(key, newValue);
+
+      setValue(newValue);
+    };
+
+  useEffect(() => {
+    setValue(cookieCutter.get(key));
+  }, []);
+
+  return [value, setCookieValue];
+}
+
+export default useCookieState;

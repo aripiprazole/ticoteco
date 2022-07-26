@@ -16,24 +16,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import {model, Schema, Types} from 'mongoose';
 
-import UserModel from '@/users/UserModel';
-import ProfileGraphQLType from '@/profile/types/ProfileGraphQLType';
-
-const UserGraphQLType = new GraphQLObjectType<UserModel>({
-  name: 'User',
-  fields: () => ({
-    id: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (user) => user._id.toString(),
-    },
-    profile: {
-      type: new GraphQLNonNull(ProfileGraphQLType),
-      resolve: (user) => user.profile,
-    },
-  }),
+export const profileSchema = new Schema<ProfileModel>({
+  username: {type: String, required: true},
+  displayName: {type: String, required: true},
+  avatarUrl: {type: String, required: true},
 });
 
-export default UserGraphQLType;
+type ProfileModel = {
+  readonly _id: Types.ObjectId;
+  readonly username: string;
+  readonly displayName: string;
+  readonly avatarUrl: string;
+};
 
+const ProfileModel = model<ProfileModel>('Profile', profileSchema);
+
+export default ProfileModel;

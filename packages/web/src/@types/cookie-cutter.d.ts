@@ -18,5 +18,5 @@
 
 declare module 'cookie-cutter' {
   export function get(name: string): string | undefined;
-  export function set(name: string, value: string, options?: any);
+  export function set(name: string, value?: string, options?: any);
 }
