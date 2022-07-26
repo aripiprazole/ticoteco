@@ -3,7 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": "./src",
-    "outDir": "dist",
+    "outDir": "build",
     "rootDir": "./src",
     "isolatedModules": false,
     "paths": {
