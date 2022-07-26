@@ -56,7 +56,7 @@ describe('meQuery tests', () => {
       },
     });
 
-    expect(result.data.currentUser).toEqual({
+    expect(result.data.me).toEqual({
       id: currentUser._id.toString(),
       profile: {
         id: currentUser.profile._id.toString(),
