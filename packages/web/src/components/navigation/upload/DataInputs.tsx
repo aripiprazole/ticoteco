@@ -38,7 +38,7 @@ function DataInputs(props: DataInputsProps) {
   const {formik} = props;
 
   return (
-    <VStack gap='0.5rem'>
+    <VStack gap='0.5rem' flex='1'>
       <FormControl isInvalid={Boolean(formik.errors.title)}>
         <FormLabel>Title</FormLabel>
 
