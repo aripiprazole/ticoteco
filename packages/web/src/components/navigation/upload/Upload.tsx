@@ -49,7 +49,7 @@ import {UploadMutation} from '@/__generated__/UploadMutation.graphql';
 const UploadMutation = graphql`
   mutation UploadMutation(
     $title: String!,
-    $description: String!,
+    $description: String,
     $video: Upload,
   ) {
     createPost(input: {

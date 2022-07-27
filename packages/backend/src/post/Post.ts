@@ -21,7 +21,7 @@ import mongoose from 'mongoose';
 export const postSchema = new mongoose.Schema<Post>({
   user: {type: mongoose.SchemaTypes.ObjectId, required: true},
   title: {type: String, required: true},
-  description: {type: String, required: true},
+  description: {type: String, required: false},
 });
 
 type Post = {
