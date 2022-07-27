@@ -19,10 +19,10 @@
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
 
-import GraphQLProfile from '@/profile/types/GraphQLProfile';
+import GraphQLProfile from '../../profile/types/GraphQLProfile';
 
-import Post from '@/post/Post';
-import User from '@/users/User';
+import Post from '../../post/Post';
+import User from '../../users/User';
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
 const GraphQLPost = new GraphQLObjectType<Post>({

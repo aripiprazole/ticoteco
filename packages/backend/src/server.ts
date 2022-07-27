@@ -24,10 +24,10 @@ import graphqlUploadKoa from 'graphql-upload/graphqlUploadKoa.mjs';
 
 import {graphqlHTTP, OptionsData} from 'koa-graphql';
 
-import schema from '@/graphql/schema';
-import {TicoTecoAppData} from '@/app';
-import TicoTecoContext from '@/graphql/TicoTecoContext';
-import findCurrentUser from '@/users/findCurrentUser';
+import schema from './graphql/schema';
+import {TicoTecoAppData} from './app';
+import TicoTecoContext from './graphql/TicoTecoContext';
+import findCurrentUser from './users/findCurrentUser';
 
 export function createServer(appData: TicoTecoAppData): Koa {
   async function setupGraphQLConnection(

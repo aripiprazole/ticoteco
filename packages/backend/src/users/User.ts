@@ -18,7 +18,7 @@
 
 import mongoose from 'mongoose';
 
-import Profile, {profileSchema} from '@/profile/Profile';
+import Profile, {profileSchema} from '../profile/Profile';
 
 export const userSchema = new mongoose.Schema<User>({
   firebaseUid: {type: String, required: true},

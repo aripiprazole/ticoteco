@@ -18,9 +18,9 @@
 
 import {Request} from 'koa';
 
-import {TicoTecoAppData} from '@/app';
-import User from '@/users/User';
-import Profile from '@/profile/Profile';
+import {TicoTecoAppData} from '../app';
+import User from '../users/User';
+import Profile from '../profile/Profile';
 
 const findCurrentUser = (appData: TicoTecoAppData) =>
   async (request: Request): Promise<User | null> => {
