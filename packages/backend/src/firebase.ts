@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as admin from 'firebase-admin';
+import admin from 'firebase-admin';
 
 export type Firebase = admin.app.App;
 

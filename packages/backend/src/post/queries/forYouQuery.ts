@@ -23,7 +23,7 @@ import {
 } from 'graphql-relay';
 import DataLoader from 'dataloader';
 
-import * as graphqlMongooseLoader from '@entria/graphql-mongoose-loader';
+import graphqlMongooseLoader from '@entria/graphql-mongoose-loader';
 
 import {GraphQLPostConnection} from '@/post/types/GraphQLPost';
 import Post from '@/post/Post';
