@@ -16,15 +16,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import admin from 'firebase-admin';
+import firebase from 'firebase-admin';
 
-export type Firebase = admin.app.App;
-
-export function initializeFirebase(): Firebase {
-  return admin.initializeApp({
+export function initializeFirebase(): firebase.app.App {
+  return firebase.initializeApp({
     credential: process.env.GOOGLE_APPLICATION_CREDENTIALS ?
-        admin.credential.applicationDefault() :
+        firebase.credential.applicationDefault() :
          // TODO: test
-        admin.credential.cert(process.env.FIREBASE_SERVICE_ACCOUNT_KEY),
+        firebase.credential.cert(process.env.FIREBASE_SERVICE_ACCOUNT_KEY),
   });
 }
