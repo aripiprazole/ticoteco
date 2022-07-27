@@ -19,8 +19,8 @@
 import {GraphQLSchema} from 'graphql';
 import GraphQLUpload from 'graphql-upload/GraphQLUpload.mjs';
 
-import mutation from '../schema/mutation.js';
-import query from '../schema/query.js';
+import mutation from './mutation.js';
+import query from './query.js';
 
 const schema = new GraphQLSchema({
   mutation,
