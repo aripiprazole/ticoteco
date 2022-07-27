@@ -11,7 +11,7 @@ function customResolvePath(sourceFile, currentFile, opts) {
 export default {
   presets: [
     '@babel/preset-typescript',
-    ['@babel/preset-env', {targets: {node: 'current'}}],
+    ['@babel/preset-env', {targets: {node: 'current'}, modules: false}],
   ],
   plugins: [
     ['tsconfig-paths-module-resolver', {resolvePath: customResolvePath}],
