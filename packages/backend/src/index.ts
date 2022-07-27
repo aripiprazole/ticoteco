@@ -21,7 +21,7 @@ import {connectToMongo} from '@/mongo';
 import {initializeFirebase} from '@/firebase';
 
 // Set up the dotenv variables when running in development mode.
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
