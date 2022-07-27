@@ -20,12 +20,12 @@ import {createServer} from '@/server';
 import {connectToMongo} from '@/mongo';
 import {initializeFirebase} from '@/firebase';
 
-// Set up the dotenv variables when running in development mode.
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
-
 async function startBackend() {
+  // Set up the dotenv variables when running in development mode.
+  if (process.env.NODE_ENV !== 'production') {
+    await import('dotenv').then((dotenv) => dotenv.config());
+  }
+
   const mongoose = await connectToMongo();
   const firebase = await initializeFirebase();
 
