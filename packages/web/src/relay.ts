@@ -50,16 +50,32 @@ const fetchGraphQL = (authorization: string) =>
     if (!uploadables) {
       body = {query: query.text, variables};
     } else {
-      const data = new FormData();
+      const formData = new FormData();
 
-      data.append('query', query.text);
-      data.append('variables', JSON.stringify(variables));
+      const requestText = query?.text?.replace(/\n/g, '');
 
-      Object.entries(uploadables).forEach(([key, value]) => {
-        data.append(key, value);
+      const operations = JSON.stringify({
+        query: requestText,
+        variables,
       });
 
-      body = data;
+      formData.append('operations', operations);
+
+      const map: Record<number, string[]> = {};
+
+      const prefix = 'variables';
+
+      Object.keys(uploadables).forEach((field: string) => {
+        const file = uploadables[field];
+
+        map[0] = [`${prefix}.${field}`];
+        formData.append('map', JSON.stringify(map));
+        formData.append('0', file);
+      });
+
+      formData.append('map', JSON.stringify(map));
+
+      body = formData;
     }
 
     const response = await api.post('/graphql', body, {

@@ -87,6 +87,6 @@ type CreatePostPayload {
 input CreatePostInput {
   title: String!
   description: String!
-  video: Upload!
+  video: Upload
   clientMutationId: String
 }

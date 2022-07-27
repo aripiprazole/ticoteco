@@ -35,7 +35,7 @@ export const createPostMutation = mutationWithClientMutationId({
   inputFields: {
     title: {type: new GraphQLNonNull(GraphQLString)},
     description: {type: new GraphQLNonNull(GraphQLString)},
-    video: {type: new GraphQLNonNull(GraphQLUpload)},
+    video: {type: GraphQLUpload},
   },
   outputFields: () => ({
     post: {

@@ -50,7 +50,7 @@ const UploadMutation = graphql`
   mutation UploadMutation(
     $title: String!,
     $description: String!,
-    $video: Upload!,
+    $video: Upload,
   ) {
     createPost(input: {
       title: $title,
@@ -88,7 +88,7 @@ function Upload() {
         variables: {
           title: values.title,
           description: values.description,
-        } as any,
+        },
         uploadables: {
           video: values.video,
         },
