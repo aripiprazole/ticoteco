@@ -27,9 +27,9 @@ import {Box} from '@chakra-ui/react';
 
 import graphql from 'babel-plugin-relay/macro';
 
-import Post from '@/components/timeline/Post';
+import Post from './Post';
 
-import {TimelineQuery} from '@/__generated__/TimelineQuery.graphql';
+import {TimelineQuery} from '../../__generated__/TimelineQuery.graphql';
 
 const TimelineQuery = graphql`
   query TimelineQuery($after: String) {

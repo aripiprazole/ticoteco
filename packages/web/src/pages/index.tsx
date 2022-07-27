@@ -16,6 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Landing from '@/screens/landing/Landing';
+import Landing from '../screens/landing/Landing';
 
 export default Landing;
