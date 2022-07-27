@@ -1,6 +1,4 @@
-const {
-  createResolvePath,
-} = require('babel-plugin-tsconfig-paths-module-resolver');
+import {createResolvePath} from 'babel-plugin-tsconfig-paths-module-resolver';
 
 const defaultResolvePath = createResolvePath();
 
@@ -10,7 +8,7 @@ function customResolvePath(sourceFile, currentFile, opts) {
   return result ? (result + '.js') : result;
 }
 
-module.exports = {
+export default {
   presets: [
     '@babel/preset-typescript',
     ['@babel/preset-env', {targets: {node: 'current'}}],

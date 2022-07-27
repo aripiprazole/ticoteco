@@ -6,6 +6,7 @@
   "repository": "https://github.com/gabrielleeg1/ticoteco",
   "author": "Gabrielle Guimarães de Oliveira",
   "license": "GPL-3.0+",
+  "type": "module",
   "scripts": {
     "dev": "yarn run build && node build/index.js",
     "schema": "yarn run build && build/generateSchema.js",
