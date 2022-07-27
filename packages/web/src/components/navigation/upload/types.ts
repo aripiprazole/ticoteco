@@ -16,10 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-type UploadForm = {
+export type UploadForm = {
   readonly title: string;
   readonly description: string;
   readonly video: File | null;
 }
-
-export default UploadForm;

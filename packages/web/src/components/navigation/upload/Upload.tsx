@@ -43,7 +43,7 @@ import * as Yup from 'yup';
 import VideoInputs from './VideoInputs';
 
 import DataInputs from './DataInputs';
-import UploadForm from './UploadForm';
+import {UploadForm} from './types';
 import {UploadMutation} from '@/__generated__/UploadMutation.graphql';
 
 const UploadMutation = graphql`

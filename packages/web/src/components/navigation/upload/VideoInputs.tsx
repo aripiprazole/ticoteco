@@ -22,7 +22,7 @@ import {useFormik} from 'formik';
 
 import {Button, chakra, Flex, Heading, Input, VStack} from '@chakra-ui/react';
 
-import UploadForm from './UploadForm';
+import {UploadForm} from './types';
 
 type VideoInputsProps = {
   readonly formik: ReturnType<typeof useFormik<UploadForm>>;

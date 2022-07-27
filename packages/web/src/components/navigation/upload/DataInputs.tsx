@@ -28,7 +28,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
-import UploadForm from './UploadForm';
+import {UploadForm} from './types';
 
 export type DataInputsProps = {
   readonly formik: ReturnType<typeof useFormik<UploadForm>>;
