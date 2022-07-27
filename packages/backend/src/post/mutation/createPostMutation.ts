@@ -18,7 +18,7 @@
 
 import {GraphQLNonNull, GraphQLString} from 'graphql';
 import {mutationWithClientMutationId} from 'graphql-relay';
-import {GraphQLUpload, Upload} from 'graphql-upload-minimal';
+import {GraphQLUpload, Upload} from 'graphql-upload';
 
 import TicoTecoContext from '@/graphql/TicoTecoContext';
 import GraphQLPost from '@/post/types/GraphQLPost';
