@@ -7,8 +7,9 @@
   "author": "Gabrielle Guimarães de Oliveira",
   "license": "GPL-3.0+",
   "scripts": {
-    "dev": "webpack --watch --progress",
-    "generate-schema": "webpack --config schema.webpack.config.js --progress && node build/generateSchema.js",
+    "dev": "webpack --progress",
+    "dev:watch": "webpack --watch --progress",
+    "schema": "webpack --config schema.webpack.config.js --progress && node build/generateSchema.js",
     "start": "node dist/server.js",
     "test": "jest",
     "prebuild": "tsc --build --verbose",

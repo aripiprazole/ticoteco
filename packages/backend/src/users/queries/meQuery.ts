@@ -21,7 +21,7 @@ import {GraphQLFieldConfig} from 'graphql/type';
 import GraphQLUser from '@/users/types/GraphQLUser';
 import TicoTecoContext from '@/graphql/TicoTecoContext';
 
-export const currentUserQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
+export const meQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
   type: GraphQLUser,
   description: 'Get the current logged user',
   resolve: (_root, _args, context) => context.user,

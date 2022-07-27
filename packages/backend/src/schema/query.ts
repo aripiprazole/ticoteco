@@ -18,13 +18,13 @@
 
 import {GraphQLObjectType} from 'graphql';
 
-import {currentUserQuery} from '@/users/queries/currentUserQuery';
+import {meQuery} from '@/users/queries/meQuery';
 import {forYouQuery} from '@/post/queries/forYouQuery';
 
 const query = new GraphQLObjectType({
   name: 'Query',
   fields: () => ({
-    currentUser: currentUserQuery,
+    me: meQuery,
     forYou: forYouQuery,
   }),
 });

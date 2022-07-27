@@ -33,14 +33,14 @@ import {
   GoogleAuthProvider,
 } from '@firebase/auth';
 
-import '@/config/firebase';
+import '@/firebase';
 import {AUTHORIZATION_KEY} from '@/relay';
 
 import {AuthProviderQuery} from '@/__generated__/AuthProviderQuery.graphql';
 
 const AuthProviderQuery = graphql`
   query AuthProviderQuery {
-    currentUser {
+    me {
       id
       profile {
         id
@@ -64,7 +64,7 @@ export function AuthProvider({children}: PropsWithChildren) {
     fetchQuery<AuthProviderQuery>(environment, AuthProviderQuery, {})
         .subscribe({
           next: (data) => {
-            setUser(data.currentUser);
+            setUser(data.me);
           },
         });
   }, [authKey]);
