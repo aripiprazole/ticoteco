@@ -16,11 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {graphql} from 'graphql/graphql';
+import {graphql} from 'graphql';
 
-import schema from '@/graphql/schema';
-import User from '@/users/User';
-import Profile from '@/profile/Profile';
+import schema from '../../graphql/schema.js';
+import User from '../../users/User.js';
+import Profile from '../../profile/Profile.js';
 
 describe('meQuery tests', () => {
   it('should return the current user', async () => {

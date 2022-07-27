@@ -16,14 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import firebase from 'firebase-admin';
 import {Bucket} from '@google-cloud/storage';
 
-import User from '@/users/User';
-import {Firebase} from '@/firebase';
+import User from '../users/User.js';
 
 type TicoTecoContext = {
   readonly user: User | null;
-  readonly firebase: Firebase;
+  readonly firebase: firebase.app.App;
   readonly bucket: Bucket;
 };
 

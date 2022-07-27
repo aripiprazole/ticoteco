@@ -16,11 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import firebase from 'firebase-admin';
 import {Mongoose} from 'mongoose';
 
-import {Firebase} from '@/firebase';
-
 export type TicoTecoAppData = {
-  readonly firebase: Firebase;
+  readonly firebase: firebase.app.App;
   readonly mongoose: Mongoose;
 }

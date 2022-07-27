@@ -16,17 +16,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import React from 'react';
 
-import {meQuery} from '@/users/queries/meQuery';
-import {forYouQuery} from '@/post/queries/forYouQuery';
+import Timeline from '../components/timeline/Timeline';
+import Layout from '../components/layout/Layout';
 
-const query = new GraphQLObjectType({
-  name: 'Query',
-  fields: () => ({
-    me: meQuery,
-    forYou: forYouQuery,
-  }),
-});
+function Landing() {
+  return (
+    <Layout>
+      <Timeline />
+    </Layout>
+  );
+}
 
-export default query;
+export default Landing;

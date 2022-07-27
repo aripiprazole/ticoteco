@@ -44,7 +44,8 @@ import VideoInputs from './VideoInputs';
 
 import DataInputs from './DataInputs';
 import {UploadForm} from './types';
-import {UploadMutation} from '@/__generated__/UploadMutation.graphql';
+
+import {UploadMutation} from '../../../__generated__/UploadMutation.graphql';
 
 const UploadMutation = graphql`
   mutation UploadMutation(

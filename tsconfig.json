@@ -8,7 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": false,
     "declaration": true,
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": false,
     "incremental": true,
     "esModuleInterop": true,
     "module": "commonjs",

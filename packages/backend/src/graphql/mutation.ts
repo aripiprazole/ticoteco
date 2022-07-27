@@ -16,17 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import {GraphQLObjectType} from 'graphql';
 
-import Timeline from '@/components/timeline/Timeline';
-import Layout from '@/components/layout/Layout';
+import {createPostMutation} from '../post/mutation/createPostMutation.js';
 
-function Landing() {
-  return (
-    <Layout>
-      <Timeline />
-    </Layout>
-  );
-}
+const mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: () => ({
+    createPost: createPostMutation,
+  }),
+});
 
-export default Landing;
+export default mutation;

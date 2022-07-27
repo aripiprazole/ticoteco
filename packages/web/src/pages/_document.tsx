@@ -20,7 +20,7 @@ import React from 'react';
 
 import Document, {Head, Html, Main, NextScript} from 'next/document';
 
-/** App custom Next.js document */
+/** App custom Next document */
 class AppDocument extends Document {
   public render(): JSX.Element {
     return (

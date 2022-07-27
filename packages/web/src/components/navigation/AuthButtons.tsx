@@ -20,7 +20,7 @@ import React from 'react';
 
 import {Box, Button, Flex, Image} from '@chakra-ui/react';
 
-import {useAuth} from '@/auth/AuthContext';
+import {useAuth} from '../../auth/AuthContext';
 
 import Upload from './upload/Upload';
 

@@ -18,13 +18,15 @@
 
 import {GraphQLObjectType} from 'graphql';
 
-import {createPostMutation} from '@/post/mutation/createPostMutation';
+import {meQuery} from '../users/queries/meQuery.js';
+import {forYouQuery} from '../post/queries/forYouQuery.js';
 
-const mutation = new GraphQLObjectType({
-  name: 'Mutation',
+const query = new GraphQLObjectType({
+  name: 'Query',
   fields: () => ({
-    createPost: createPostMutation,
+    me: meQuery,
+    forYou: forYouQuery,
   }),
 });
 
-export default mutation;
+export default query;

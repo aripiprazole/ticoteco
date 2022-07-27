@@ -23,9 +23,9 @@ import Upload from 'graphql-upload/Upload.mjs';
 
 import * as Yup from 'yup';
 
-import TicoTecoContext from '@/graphql/TicoTecoContext';
-import Post from '@/post/Post';
-import GraphQLPost from '@/post/types/GraphQLPost';
+import TicoTecoContext from '../../graphql/TicoTecoContext.js';
+import Post from '../Post.js';
+import GraphQLPost from '../types/GraphQLPost.js';
 
 type CreatePostArgs = {
   readonly title: string;

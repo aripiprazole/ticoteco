@@ -18,8 +18,8 @@
 
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
-import User from '@/users/User';
-import GraphQLProfile from '@/profile/types/GraphQLProfile';
+import User from '../User.js';
+import GraphQLProfile from '../../profile/types/GraphQLProfile.js';
 
 const GraphQLUser = new GraphQLObjectType<User>({
   name: 'User',
