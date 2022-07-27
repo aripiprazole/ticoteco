@@ -17,6 +17,7 @@
  */
 
 import {GraphQLSchema} from 'graphql';
+import GraphQLUpload from 'graphql-upload/GraphQLUpload.mjs';
 
 import mutation from '@/schema/mutation';
 import query from '@/schema/query';
@@ -24,6 +25,7 @@ import query from '@/schema/query';
 const schema = new GraphQLSchema({
   mutation,
   query,
+  types: [GraphQLUpload],
 });
 
 export default schema;

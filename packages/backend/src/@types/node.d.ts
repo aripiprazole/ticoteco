@@ -24,6 +24,7 @@ declare global {
       readonly NODE_ENV: 'development' | 'production' | 'test';
       readonly MONGO_URI: string;
       readonly GOOGLE_APPLICATION_CREDENTIALS: undefined | string;
+      readonly STORAGE_BUCKET: string;
     }
   }
 }

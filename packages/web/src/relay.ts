@@ -17,37 +17,75 @@
  */
 
 import {
+  CacheConfig,
   Environment,
   GraphQLResponse,
   Network,
   RecordSource,
   RequestParameters,
   Store,
+  UploadableMap,
   Variables,
 } from 'relay-runtime';
+import axios from 'axios';
 
 export const GRAPHQL_API_URL = process.env.NEXT_PUBLIC_GRAPHQL_API_URL ??
-    'http://localhost:8000/graphql';
+    'http://localhost:8000';
 
 export const AUTHORIZATION_KEY = 'Authorization';
+
+const api = axios.create({
+  baseURL: GRAPHQL_API_URL,
+});
 
 const fetchGraphQL = (authorization: string) =>
   async (
       query: RequestParameters,
       variables: Variables,
+      _cacheConfig: CacheConfig,
+      uploadables?: UploadableMap | null,
   ): Promise<GraphQLResponse> => {
-  // Fetch data from GitHub's GraphQL API:
-    const response = await fetch(GRAPHQL_API_URL, {
-      method: 'POST',
+    let body: any;
+
+    if (!uploadables) {
+      body = {query: query.text, variables};
+    } else {
+      const formData = new FormData();
+
+      const requestText = query?.text?.replace(/\n/g, '');
+
+      const operations = JSON.stringify({
+        query: requestText,
+        variables,
+      });
+
+      formData.append('operations', operations);
+
+      const map: Record<number, string[]> = {};
+
+      const prefix = 'variables';
+
+      Object.keys(uploadables).forEach((field: string) => {
+        const file = uploadables[field];
+
+        map[0] = [`${prefix}.${field}`];
+        formData.append('map', JSON.stringify(map));
+        formData.append('0', file);
+      });
+
+      formData.append('map', JSON.stringify(map));
+
+      body = formData;
+    }
+
+    const response = await api.post('/graphql', body, {
       headers: {
         'Authorization': authorization,
-        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({query: query.text, variables}),
     });
 
     // Get the response as JSON
-    return await response.json();
+    return response.data;
   };
 
 function buildRelayEnvironment(authorization: string): Environment {

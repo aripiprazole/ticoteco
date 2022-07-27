@@ -16,11 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {printSchema} from 'graphql/utilities';
+import {printSchema} from 'graphql';
 import fs from 'fs/promises';
-import path from 'path';
+import path, {dirname} from 'path';
+import {fileURLToPath} from 'url';
 
 import schema from '@/graphql/schema';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 async function generateSchema() {
   const targetFile = path.resolve(

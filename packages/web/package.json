@@ -8,9 +8,9 @@
   "license": "GPL-3.0+",
   "scripts": {
     "dev": "next dev",
-    "build": "yarn backend:generate-schema && yarn compile-relay && next build",
+    "build": "yarn backend:schema && yarn relay && next build",
     "start": "next start",
-    "relay": "relay-compiler",
+    "relay": "yarn backend:schema && relay-compiler",
     "relay:watch": "relay-compiler --watch"
   },
   "dependencies": {
@@ -18,9 +18,11 @@
     "@firebase/auth": "^0.20.5",
     "@ticoteco/shared": "workspace:^",
     "@ticoteco/ui": "workspace:^",
+    "axios": "^0.27.2",
     "cookie-cutter": "^0.2.0",
     "cookies-next": "^2.1.1",
     "firebase": "^9.9.0",
+    "formik": "^2.2.9",
     "fs": "^0.0.1-security",
     "next": "12.2.0",
     "next-transpile-modules": "^9.0.0",
@@ -28,7 +30,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-relay": "^14.0.0",
-    "relay-runtime": "^14.0.0"
+    "relay-runtime": "^14.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@chakra-ui/react": "^2.2.4",

@@ -23,6 +23,7 @@ import GraphQLProfile from '@/profile/types/GraphQLProfile';
 
 import Post from '@/post/Post';
 import User from '@/users/User';
+import TicoTecoContext from '../../graphql/TicoTecoContext';
 
 const GraphQLPost = new GraphQLObjectType<Post>({
   name: 'Post',
@@ -44,12 +45,23 @@ const GraphQLPost = new GraphQLObjectType<Post>({
 
     video: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: (post) => post.videoUrl,
+      resolve: async (post, _, ctx: TicoTecoContext) => {
+        const today = new Date();
+
+        const [video] = await ctx.bucket.file(`posts/${post._id}.mp4`).get();
+        const [publicUrl] = await video.getSignedUrl({
+          action: 'read',
+          expires: today.setDate(today.getDate() + 1),
+        });
+
+        return publicUrl;
+      },
     },
 
     preview: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: (post) => post.previewUrl,
+      // TODO: remove
+      resolve: () => 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
     },
 
     profile: {

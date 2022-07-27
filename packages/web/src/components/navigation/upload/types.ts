@@ -16,26 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createServer} from '@/server';
-import {connectToMongo} from '@/mongo';
-import {initializeFirebase} from '@/firebase';
-
-async function startBackend() {
-  // Set up the dotenv variables when running in development mode.
-  if (process.env.NODE_ENV !== 'production') {
-    await import('dotenv').then((dotenv) => dotenv.config());
-  }
-
-  const mongoose = await connectToMongo();
-  const firebase = await initializeFirebase();
-
-  const app = createServer({
-    mongoose,
-    firebase,
-  });
-
-  // TODO: get PORT from environment and use 8000 as fallback
-  app.listen(8000);
+export type UploadForm = {
+  readonly title: string;
+  readonly description: string;
+  readonly video: File | null;
 }
-
-startBackend();

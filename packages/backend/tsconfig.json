@@ -3,12 +3,13 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": "./src",
-    "outDir": "dist",
+    "module": "ES2020",
+    "outDir": "build",
     "rootDir": "./src",
     "isolatedModules": false,
     "paths": {
       "@/*": ["./*"]
     }
   },
-  "include": ["**/*.ts"]
+  "include": ["src/**/*.ts"]
 }

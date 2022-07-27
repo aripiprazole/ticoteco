@@ -16,8 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {connect, Mongoose} from 'mongoose';
+import mongoose from 'mongoose';
 
-export async function connectToMongo(): Promise<Mongoose> {
-  return await connect(process.env.MONGO_URI);
+export async function connectToMongo(): Promise<mongoose.Mongoose> {
+  return await mongoose.connect(process.env.MONGO_URI);
 }

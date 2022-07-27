@@ -16,15 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType, GraphQLString} from 'graphql';
+import {GraphQLObjectType} from 'graphql';
+
+import {createPostMutation} from '@/post/mutation/createPostMutation';
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
-    hello: {
-      type: GraphQLString,
-      resolve: () => 'Hello world!',
-    },
+    createPost: createPostMutation,
   }),
 });
 
