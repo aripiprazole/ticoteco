@@ -1,6 +1,6 @@
-import {createResolvePath} from 'babel-plugin-tsconfig-paths-module-resolver';
+import moduleResolver from 'babel-plugin-tsconfig-paths-module-resolver';
 
-const defaultResolvePath = createResolvePath();
+const defaultResolvePath = moduleResolver.createResolvePath();
 
 function customResolvePath(sourceFile, currentFile, opts) {
   const result = defaultResolvePath(sourceFile, currentFile, opts);
