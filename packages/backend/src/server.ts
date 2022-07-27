@@ -50,8 +50,8 @@ export function createServer(appData: TicoTecoAppData): Koa {
 
   router.all('/graphql', graphqlHTTP(setupGraphQLConnection));
 
-  app.use(graphqlUploadKoa({maxFileSize: 10000000, maxFiles: 10}));
   app.use(cors());
+  app.use(graphqlUploadKoa({maxFileSize: 10000000, maxFiles: 10}));
   app.use(bodyparser());
   app.use(router.routes());
 
