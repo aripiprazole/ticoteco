@@ -13,7 +13,7 @@
     "start": "node build/index.js",
     "test": "jest",
     "prebuild": "tsc --build --verbose",
-    "build": "babel src scripts --ignore 'src/**/*.spec.ts' -x '.ts' -d build"
+    "build": "babel src --ignore 'src/**/*.spec.ts' -x '.ts' -d build"
   },
   "dependencies": {
     "@entria/graphql-mongoose-loader": "^4.4.0",
