@@ -25,10 +25,10 @@ import DataLoader from 'dataloader';
 
 import graphqlMongooseLoader from '@entria/graphql-mongoose-loader';
 
-import {GraphQLPostConnection} from '../types/GraphQLPost';
-import Post from '../Post';
+import {GraphQLPostConnection} from '../types/GraphQLPost.js';
+import Post from '../Post.js';
 
-import TicoTecoContext from '../../graphql/TicoTecoContext';
+import TicoTecoContext from '../../graphql/TicoTecoContext.js';
 
 export type ForYouArguments = ConnectionArguments;
 

@@ -18,8 +18,8 @@
 
 import {GraphQLObjectType} from 'graphql';
 
-import {meQuery} from '../users/queries/meQuery';
-import {forYouQuery} from '../post/queries/forYouQuery';
+import {meQuery} from '../users/queries/meQuery.js';
+import {forYouQuery} from '../post/queries/forYouQuery.js';
 
 const query = new GraphQLObjectType({
   name: 'Query',

@@ -16,9 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createServer} from './server';
-import {connectToMongo} from './mongo';
-import {initializeFirebase} from './firebase';
+import {createServer} from './server.js';
+import {connectToMongo} from './mongo.js';
+import {initializeFirebase} from './firebase.js';
 
 async function startBackend() {
   // Set up the dotenv variables when running in development mode.

@@ -18,8 +18,8 @@
 
 import {Bucket} from '@google-cloud/storage';
 
-import User from '@/users/User';
-import {Firebase} from '@/firebase';
+import User from '../users/User.js';
+import {Firebase} from '../firebase';
 
 type TicoTecoContext = {
   readonly user: User | null;

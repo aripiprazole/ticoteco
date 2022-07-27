@@ -18,7 +18,7 @@
 
 import {Mongoose} from 'mongoose';
 
-import {Firebase} from './firebase';
+import {Firebase} from './firebase.js';
 
 export type TicoTecoAppData = {
   readonly firebase: Firebase;

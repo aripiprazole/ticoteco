@@ -5,6 +5,7 @@
     "module": "ES2020",
     "outDir": "build",
     "rootDir": "./src",
+    "esModuleInterop": true,
     "isolatedModules": false
   },
   "include": ["src/**/*.ts"]

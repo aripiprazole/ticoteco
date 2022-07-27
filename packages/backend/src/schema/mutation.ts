@@ -18,7 +18,7 @@
 
 import {GraphQLObjectType} from 'graphql';
 
-import {createPostMutation} from '../post/mutation/createPostMutation';
+import {createPostMutation} from '../post/mutation/createPostMutation.js';
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
