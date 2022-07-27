@@ -31,7 +31,8 @@
     "mongodb": "^4.8.0",
     "mongodb-client-encryption": "^2.1.0",
     "mongoose": "^6.4.4",
-    "snappy": "^7.1.1"
+    "snappy": "^7.1.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.6",

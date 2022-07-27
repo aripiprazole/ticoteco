@@ -21,6 +21,8 @@ import {mutationWithClientMutationId} from 'graphql-relay';
 import GraphQLUpload from 'graphql-upload/GraphQLUpload.mjs';
 import Upload from 'graphql-upload/Upload.mjs';
 
+import * as Yup from 'yup';
+
 import TicoTecoContext from '@/graphql/TicoTecoContext';
 import Post from '@/post/Post';
 import GraphQLPost from '@/post/types/GraphQLPost';
@@ -30,6 +32,19 @@ type CreatePostArgs = {
   readonly description: string;
   readonly video: Upload;
 };
+
+const createPostSchema = Yup.object({
+  title: Yup.string().required().min(4).max(32),
+  description: Yup.string().min(0).max(32),
+  video: Yup
+      .mixed()
+      .required()
+      .test(
+          'file-format',
+          'The form only accepts MP4',
+          (file) => file && (file.mimetype === 'video/mp4'),
+      ),
+});
 
 export const createPostMutation = mutationWithClientMutationId({
   name: 'CreatePost',
@@ -46,11 +61,15 @@ export const createPostMutation = mutationWithClientMutationId({
   }),
   mutateAndGetPayload: async (args: CreatePostArgs, ctx: TicoTecoContext) => {
     const video = await args.video;
+
     const post = new Post({
       title: args.title,
-      description: args.description ?? '',
+      description: args.description,
       user: ctx.user._id,
     });
+
+    // Override video to use directly the FileUpload datatype.
+    await createPostSchema.validate({...args, video});
 
     const file = ctx.bucket.file(`posts/${post._id}.mp4`);
 
