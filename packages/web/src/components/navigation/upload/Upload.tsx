@@ -65,6 +65,24 @@ const UploadMutation = graphql`
   }
 `;
 
+const uploadPostSchema = Yup.object({
+  title: Yup.string().required().min(4).max(32),
+  description: Yup.string().min(0).max(32),
+  video: Yup
+      .mixed()
+      .required()
+      .test(
+          'file-size',
+          'The file cannot be larger than 10MB',
+          (file) => file && (file.size < 10 * 1024 * 1024),
+      )
+      .test(
+          'file-format',
+          'The form only accepts MP4',
+          (file) => file && (file.type === 'video/mp4'),
+      ),
+});
+
 function Upload() {
   const {isOpen, onOpen, onClose} = useDisclosure();
 
@@ -73,11 +91,7 @@ function Upload() {
   );
 
   const formik = useFormik<UploadForm>({
-    validationSchema: Yup.object({
-      title: Yup.string().required().min(4).max(32),
-      description: Yup.string().min(0).max(32),
-      video: Yup.mixed().required(),
-    }),
+    validationSchema: uploadPostSchema,
     initialValues: {
       title: '',
       description: '',

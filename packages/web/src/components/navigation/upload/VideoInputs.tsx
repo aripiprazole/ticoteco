@@ -20,7 +20,15 @@ import React, {useRef} from 'react';
 
 import {useFormik} from 'formik';
 
-import {Button, chakra, Flex, Heading, Input, VStack} from '@chakra-ui/react';
+import {
+  Button,
+  chakra,
+  Flex, FormControl,
+  FormErrorMessage,
+  Heading,
+  Input,
+  VStack,
+} from '@chakra-ui/react';
 
 import {UploadForm} from './types';
 
@@ -33,44 +41,71 @@ function VideoInputs(props: VideoInputsProps) {
 
   const inputRef = useRef<HTMLInputElement>();
 
+  const isInvalid = Boolean(formik.errors.video);
   const isUploaded = formik.values.video !== null;
+
+  function getBorderColor() {
+    switch (true) {
+      case isInvalid: // Invalid form
+        return 'red.500';
+      case isUploaded: // Uploaded video
+        return 'lightskyblue';
+      default: // No video selected
+        return '#cecece';
+    }
+  }
 
   return (
     <Flex
       padding='0 1.5rem'
       height='100%'
       border='2px dashed #cecece'
-      borderColor={isUploaded ? 'lightskyblue' : '#cecece'}
+      borderColor={getBorderColor()}
       borderRadius='1rem'
       align='center'
       justify='center'
     >
-      <VStack>
-        <Heading as='h3' fontSize='1.2rem'>
-          Select video to upload
-        </Heading>
+      <FormControl isInvalid={isInvalid}>
+        <VStack>
+          <Heading
+            as='h3'
+            fontSize='1.2rem'
+            color={isInvalid && 'red.500'}
+          >
+            Select video to upload
+          </Heading>
 
-        <chakra.span fontSize='0.85rem' color='#5c5c5c'>
-          Only MP4
-        </chakra.span>
+          <chakra.span
+            fontSize='0.85rem'
+            color={isInvalid ? 'red.500' : '#5c5c5c'}
+          >
+            Only MP4
+          </chakra.span>
 
-        <Button
-          colorScheme={isUploaded ? 'blue' : 'gray'}
-          onClick={() => inputRef.current.click()}
-        >
-          {isUploaded ? 'Change video' : 'Select video'}
-        </Button>
+          {formik.errors.video && (
+            <FormErrorMessage>
+              {formik.errors.video.toString()}
+            </FormErrorMessage>
+          )}
 
-        <Input
-          hidden
-          ref={inputRef}
-          type='file'
-          name='video'
-          onChange={(event) => {
-            formik.setFieldValue('video', event.target.files[0]);
-          }}
-        />
-      </VStack>
+          <Button
+            colorScheme={isInvalid ? 'red' : isUploaded ? 'blue' : 'gray'}
+            onClick={() => inputRef.current.click()}
+          >
+            {isUploaded ? 'Change video' : 'Select video'}
+          </Button>
+
+          <Input
+            hidden
+            ref={inputRef}
+            type='file'
+            name='video'
+            onChange={(event) => {
+              formik.setFieldValue('video', event.target.files[0]);
+            }}
+          />
+        </VStack>
+      </FormControl>
     </Flex>
   );
 }
