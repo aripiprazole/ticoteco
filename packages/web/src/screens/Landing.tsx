@@ -18,8 +18,8 @@
 
 import React from 'react';
 
-import Timeline from '../../components/timeline/Timeline';
-import Layout from '../../components/layout/Layout';
+import Timeline from '../components/timeline/Timeline.js';
+import Layout from '../components/layout/Layout.js';
 
 function Landing() {
   return (
