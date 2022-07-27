@@ -23,10 +23,7 @@ import {
 } from 'graphql-relay';
 import DataLoader from 'dataloader';
 
-import {
-  connectionFromMongoCursor,
-  mongooseLoader,
-} from '@entria/graphql-mongoose-loader';
+import * as graphqlMongooseLoader from '@entria/graphql-mongoose-loader';
 
 import {GraphQLPostConnection} from '@/post/types/GraphQLPost';
 import Post from '@/post/Post';
@@ -43,10 +40,10 @@ export const forYouQuery: ForYouQuery = {
   args: connectionArgs,
   resolve: async (_root, args, context) => {
     const loader = new DataLoader((ids) => {
-      return mongooseLoader(Post, ids as any);
+      return graphqlMongooseLoader.mongooseLoader(Post, ids as any);
     });
 
-    return connectionFromMongoCursor({
+    return graphqlMongooseLoader.connectionFromMongoCursor({
       cursor: Post.find(),
       context,
       args,

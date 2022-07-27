@@ -16,10 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {model, Schema, Types, SchemaTypes} from 'mongoose';
+import mongoose from 'mongoose';
 
-export const postSchema = new Schema<Post>({
-  user: {type: SchemaTypes.ObjectId, required: true},
+export const postSchema = new mongoose.Schema<Post>({
+  user: {type: mongoose.SchemaTypes.ObjectId, required: true},
   title: {type: String, required: true},
   description: {type: String, required: true},
   videoUrl: {type: String, required: true},
@@ -27,14 +27,14 @@ export const postSchema = new Schema<Post>({
 });
 
 type Post = {
-  readonly _id: Types.ObjectId;
-  readonly user: Types.ObjectId;
+  readonly _id: mongoose.Types.ObjectId;
+  readonly user: mongoose.Types.ObjectId;
   readonly title: string;
   readonly description: string;
   readonly videoUrl: string;
   readonly previewUrl: string;
 };
 
-const Post = model<Post>('Post', postSchema);
+const Post = mongoose.model<Post>('Post', postSchema);
 
 export default Post;

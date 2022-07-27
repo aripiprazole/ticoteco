@@ -16,21 +16,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {model, Schema, Types} from 'mongoose';
+import mongoose from 'mongoose';
 
-export const profileSchema = new Schema<Profile>({
+export const profileSchema = new mongoose.Schema<Profile>({
   username: {type: String, required: true},
   displayName: {type: String, required: true},
   avatarUrl: {type: String, required: true},
 });
 
 type Profile = {
-  readonly _id: Types.ObjectId;
+  readonly _id: mongoose.Types.ObjectId;
   readonly username: string;
   readonly displayName: string;
   readonly avatarUrl: string;
 };
 
-const Profile = model<Profile>('Profile', profileSchema);
+const Profile = mongoose.model<Profile>('Profile', profileSchema);
 
 export default Profile;
