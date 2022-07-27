@@ -3,6 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": "./src",
+    "module": "ES2020",
     "outDir": "build",
     "rootDir": "./src",
     "isolatedModules": false,
