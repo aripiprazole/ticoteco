@@ -22,7 +22,7 @@ import {connectionDefinitions} from 'graphql-relay';
 import GraphQLProfile from '../../profile/types/GraphQLProfile.js';
 
 import Post from '../../post/Post.js';
-import User from '../../users/User.js';
+import User from '../../user/User.js';
 import TicoTecoContext from '../../graphql/TicoTecoContext.js';
 
 const GraphQLPost = new GraphQLObjectType<Post>({

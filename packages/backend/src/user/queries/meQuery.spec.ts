@@ -19,7 +19,7 @@
 import {graphql} from 'graphql';
 
 import schema from '../../graphql/schema.js';
-import User from '../../users/User.js';
+import User from '../User.js';
 import Profile from '../../profile/Profile.js';
 
 describe('meQuery tests', () => {
