@@ -8,7 +8,7 @@
   "license": "GPL-3.0+",
   "scripts": {
     "dev": "next dev",
-    "build": "yarn backend:generate-schema && yarn compile-relay && next build",
+    "build": "yarn backend:schema && yarn compile-relay && next build",
     "start": "next start",
     "relay": "relay-compiler",
     "relay:watch": "relay-compiler --watch"
