@@ -9,9 +9,9 @@
   "type": "module",
   "scripts": {
     "dev": "node --loader ts-node/esm ./src/index.ts",
-    "schema": " node --loader ts-node/esm ./src/generateSchema.js",
+    "schema": "node --loader ts-node/esm ./src/generateSchema.js",
     "start": "node build/index.js",
-    "test": "jest",
+    "test": "yarn build && yarn node --experimental-vm-modules $(yarn bin jest) build",
     "build": "tsc --build --verbose"
   },
   "dependencies": {
