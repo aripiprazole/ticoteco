@@ -19,7 +19,7 @@
 import {Request} from 'koa';
 
 import {TicoTecoAppData} from '../app.js';
-import User from '../users/User.js';
+import User from './/User.js';
 import Profile from '../profile/Profile.js';
 
 const findCurrentUser = (appData: TicoTecoAppData) =>
