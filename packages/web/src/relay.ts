@@ -27,11 +27,16 @@ import {
   UploadableMap,
   Variables,
 } from 'relay-runtime';
+import axios from 'axios';
 
 export const GRAPHQL_API_URL = process.env.NEXT_PUBLIC_GRAPHQL_API_URL ??
-    'http://localhost:8000/graphql';
+    'http://localhost:8000';
 
 export const AUTHORIZATION_KEY = 'Authorization';
+
+const api = axios.create({
+  baseURL: GRAPHQL_API_URL,
+});
 
 const fetchGraphQL = (authorization: string) =>
   async (
@@ -41,11 +46,9 @@ const fetchGraphQL = (authorization: string) =>
       uploadables?: UploadableMap | null,
   ): Promise<GraphQLResponse> => {
     let body: any;
-    let contentType: string;
 
     if (!uploadables) {
-      contentType = 'application/json';
-      body = JSON.stringify({query: query.text, variables});
+      body = {query: query.text, variables};
     } else {
       const data = new FormData();
 
@@ -56,21 +59,17 @@ const fetchGraphQL = (authorization: string) =>
         data.append(key, value);
       });
 
-      contentType = 'multipart/form-data';
       body = data;
     }
 
-    const response = await fetch(GRAPHQL_API_URL, {
-      method: 'POST',
+    const response = await api.post('/graphql', body, {
       headers: {
         'Authorization': authorization,
-        'Content-Type': contentType,
       },
-      body,
     });
 
     // Get the response as JSON
-    return await response.json();
+    return response.data;
   };
 
 function buildRelayEnvironment(authorization: string): Environment {

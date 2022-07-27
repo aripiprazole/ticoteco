@@ -44,6 +44,6 @@ export const createPostMutation = mutationWithClientMutationId({
     },
   }),
   mutateAndGetPayload: async (args: CreatePostArgs, ctx: TicoTecoContext) => {
-    console.log('video', await args.video.promise.then((a) => a.filename));
+    console.log('video');
   },
 });
