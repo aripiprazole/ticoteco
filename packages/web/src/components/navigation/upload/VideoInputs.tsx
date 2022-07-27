@@ -66,7 +66,9 @@ function VideoInputs(props: VideoInputsProps) {
           ref={inputRef}
           type='file'
           name='video'
-          onChange={formik.handleChange}
+          onChange={(event) => {
+            formik.setFieldValue('video', event.target.files[0]);
+          }}
         />
       </VStack>
     </Flex>
