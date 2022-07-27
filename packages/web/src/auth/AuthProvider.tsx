@@ -23,9 +23,9 @@ import {fetchQuery} from 'relay-runtime';
 
 import graphql from 'babel-plugin-relay/macro';
 
-import useCookieState from '../hooks/useCookieState';
+import useCookieState from '../hooks/useCookieState.js';
 
-import {AuthContext, AuthenticatedUser} from '../auth/AuthContext';
+import {AuthContext, AuthenticatedUser} from './AuthContext.js';
 
 import {
   getAuth,
@@ -33,10 +33,10 @@ import {
   GoogleAuthProvider,
 } from '@firebase/auth';
 
-import '../firebase';
-import {AUTHORIZATION_KEY} from '../relay';
+import '../firebase.js';
+import {AUTHORIZATION_KEY} from '../relay.js';
 
-import {AuthProviderQuery} from '../__generated__/AuthProviderQuery.graphql';
+import {AuthProviderQuery} from '../__generated__/AuthProviderQuery.graphql.js';
 
 const AuthProviderQuery = graphql`
   query AuthProviderQuery {
