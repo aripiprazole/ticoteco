@@ -28,7 +28,7 @@ import Cookies from 'cookies';
 import {theme} from '@ticoteco/ui';
 
 import buildRelayEnvironment, {AUTHORIZATION_KEY} from '../relay';
-import {AuthProvider} from '../auth/AuthProvider.js';
+import {AuthProvider} from '../auth/AuthProvider';
 
 export type TicoTecoAppProps = {
   readonly authorization: string;

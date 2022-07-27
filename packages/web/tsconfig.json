@@ -1,4 +1,14 @@
 {
   "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "module": "ES2020",
+    "target": "ES2020",
+    "outDir": "build",
+    "rootDir": "./src",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "allowJs": true
+  },
   "include": ["next-env.d.ts", "**/*.d.ts", "**/*.ts", "**/*.tsx"]
 }
