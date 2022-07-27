@@ -33,6 +33,9 @@ export function createServer(appData: TicoTecoAppData): Koa {
   async function setupGraphQLConnection(
       request: Request,
   ): Promise<OptionsData> {
+    const firebase = appData.firebase;
+    const bucket = firebase.storage().bucket(process.env.STORAGE_BUCKET);
+
     const currentUser = await findCurrentUser(appData)(request);
 
     return {
@@ -41,6 +44,8 @@ export function createServer(appData: TicoTecoAppData): Koa {
       pretty: true,
       context: <TicoTecoContext>{
         user: currentUser,
+        firebase: firebase,
+        bucket,
       },
     };
   }

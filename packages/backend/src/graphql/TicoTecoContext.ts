@@ -16,10 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {Bucket} from '@google-cloud/storage';
+
 import User from '@/users/User';
+import {Firebase} from '@/firebase';
 
 type TicoTecoContext = {
   readonly user: User | null;
+  readonly firebase: Firebase;
+  readonly bucket: Bucket;
 };
 
 export default TicoTecoContext;

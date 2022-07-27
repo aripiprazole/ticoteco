@@ -22,8 +22,6 @@ export const postSchema = new mongoose.Schema<Post>({
   user: {type: mongoose.SchemaTypes.ObjectId, required: true},
   title: {type: String, required: true},
   description: {type: String, required: true},
-  videoUrl: {type: String, required: true},
-  previewUrl: {type: String, required: true},
 });
 
 type Post = {
@@ -31,8 +29,6 @@ type Post = {
   readonly user: mongoose.Types.ObjectId;
   readonly title: string;
   readonly description: string;
-  readonly videoUrl: string;
-  readonly previewUrl: string;
 };
 
 const Post = mongoose.model<Post>('Post', postSchema);

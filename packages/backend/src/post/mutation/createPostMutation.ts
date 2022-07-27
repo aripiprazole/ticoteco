@@ -22,6 +22,7 @@ import GraphQLUpload from 'graphql-upload/GraphQLUpload.mjs';
 import Upload from 'graphql-upload/Upload.mjs';
 
 import TicoTecoContext from '@/graphql/TicoTecoContext';
+import Post from '@/post/Post';
 import GraphQLPost from '@/post/types/GraphQLPost';
 
 type CreatePostArgs = {
@@ -44,6 +45,31 @@ export const createPostMutation = mutationWithClientMutationId({
     },
   }),
   mutateAndGetPayload: async (args: CreatePostArgs, ctx: TicoTecoContext) => {
-    console.log('video');
+    const video = await args.video;
+    const post = new Post({
+      title: args.title,
+      description: args.description,
+      user: ctx.user._id,
+    });
+
+    const file = ctx.bucket.file(`posts/${post._id}.mp4`);
+
+    const readStream = video.createReadStream();
+    const writeStream = file.createWriteStream({
+      metadata: {
+        contentType: 'image/jpeg',
+      },
+    });
+
+    const pipedStreams = readStream.pipe(writeStream);
+
+    await new Promise<void>((resolve, reject) => {
+      pipedStreams.on('error', (err) => reject(err));
+      pipedStreams.on('finish', () => resolve());
+    });
+
+    await post.save();
+
+    return {post};
   },
 });
