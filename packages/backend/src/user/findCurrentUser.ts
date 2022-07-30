@@ -21,6 +21,8 @@ import {Request} from 'koa';
 import {TicoTecoAppData} from '../app.js';
 import User from './/User.js';
 import Profile from '../profile/Profile.js';
+import {auth} from 'firebase-admin';
+import UserRecord = auth.UserRecord;
 
 const findCurrentUser = (appData: TicoTecoAppData) =>
   async (request: Request): Promise<User | null> => {
@@ -33,24 +35,34 @@ const findCurrentUser = (appData: TicoTecoAppData) =>
       const idToken = await appData.firebase.auth().verifyIdToken(header);
       const firebaseUser = await appData.firebase.auth().getUser(idToken.uid);
 
-      const appUser = await User
-          .findOne({firebaseUid: firebaseUser.uid})
-          .exec();
+      const appUser = await User.findOne({firebaseUid: firebaseUser.uid});
 
-      if (appUser) return appUser;
-
-      return await new User({
-        firebaseUid: idToken.uid,
-        profile: new Profile({
-          displayName: firebaseUser.displayName,
-          username: firebaseUser.displayName,
-          avatarUrl: 'https://i.pravatar.cc/300',
-        }),
-      }).save();
+      return appUser ?? await createNewUser(firebaseUser);
     } catch (err) {
       console.error(err);
       return null;
     }
   };
+
+async function createNewUser(firebaseUser: UserRecord): Promise<User> {
+  const user = new User({
+    firebaseUid: firebaseUser.uid,
+    profile: null,
+  });
+
+  const profile = new Profile({
+    displayName: firebaseUser.displayName,
+    username: firebaseUser.displayName,
+    avatarUrl: 'https://i.pravatar.cc/300',
+  });
+
+  user.profile = profile._id;
+  profile.user = user._id;
+
+  await user.save();
+  await profile.save();
+
+  return user;
+}
 
 export default findCurrentUser;

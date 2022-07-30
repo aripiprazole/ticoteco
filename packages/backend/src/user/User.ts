@@ -18,17 +18,15 @@
 
 import mongoose from 'mongoose';
 
-import Profile, {profileSchema} from '../profile/Profile.js';
-
 export const userSchema = new mongoose.Schema<User>({
   firebaseUid: {type: String, required: true},
-  profile: {type: profileSchema, required: true},
+  profile: {type: mongoose.SchemaTypes.ObjectId, required: true},
 });
 
 type User = {
   readonly _id: mongoose.Types.ObjectId;
   readonly firebaseUid: string;
-  readonly profile: Profile;
+  profile: mongoose.Types.ObjectId;
 };
 
 const User = mongoose.model<User>('User', userSchema);

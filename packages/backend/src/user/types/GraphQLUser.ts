@@ -19,7 +19,9 @@
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
 import User from '../User.js';
+
 import GraphQLProfile from '../../profile/types/GraphQLProfile.js';
+import Profile from '../../profile/Profile.js';
 
 const GraphQLUser = new GraphQLObjectType<User>({
   name: 'User',
@@ -30,7 +32,7 @@ const GraphQLUser = new GraphQLObjectType<User>({
     },
     profile: {
       type: new GraphQLNonNull(GraphQLProfile),
-      resolve: (user) => user.profile,
+      resolve: (user) => Profile.findById(user.profile),
     },
   }),
 });

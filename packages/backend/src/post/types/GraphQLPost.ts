@@ -24,6 +24,7 @@ import GraphQLProfile from '../../profile/types/GraphQLProfile.js';
 import Post from '../../post/Post.js';
 import User from '../../user/User.js';
 import TicoTecoContext from '../../graphql/TicoTecoContext.js';
+import Profile from '../../profile/Profile.js';
 
 const GraphQLPost = new GraphQLObjectType<Post>({
   name: 'Post',
@@ -68,8 +69,9 @@ const GraphQLPost = new GraphQLObjectType<Post>({
       type: new GraphQLNonNull(GraphQLProfile),
       resolve: async (post) => {
         const user = await User.findById(post.user);
+        const profile = await Profile.findById(user.profile);
 
-        return user.profile;
+        return profile;
       },
     },
   }),

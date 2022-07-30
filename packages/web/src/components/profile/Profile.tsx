@@ -22,48 +22,48 @@ import graphql from 'babel-plugin-relay/macro';
 
 import {Box, Image, VStack} from '@chakra-ui/react';
 import {useLazyLoadQuery} from 'react-relay';
-
-const ProfileQuery = graphql`
-  query ProfileQuery($username: String!) {
-    profile(username: $username) {
-      id
-      username
-      displayName
-    }
-  }
-`;
-
-const ProfileVideos = graphql`
-  query ProfileVideosQuery($username: String!, $first: Int!, $after: String) {
-    profile(username: $username) {
-      videos(first: $first, after: $after) {
-        pageInfo {
-          hasNextPage
-          hasPreviousPage
-          startCursor
-          endCursor
-        }
-        edges {
-          cursor
-          node {
-            id
-            title
-            description
-            preview
-            video
-          }
-        }
-      }
-    }
-  }
-`;
+//
+// const ProfileQuery = graphql`
+//   query ProfileQuery($username: String!) {
+//     profile(username: $username) {
+//       id
+//       username
+//       displayName
+//     }
+//   }
+// `;
+//
+// const ProfileVideos = graphql`
+//   query ProfileVideosQuery($username: String!, $first: Int!, $after: String) {
+//     profile(username: $username) {
+//       videos(first: $first, after: $after) {
+//         pageInfo {
+//           hasNextPage
+//           hasPreviousPage
+//           startCursor
+//           endCursor
+//         }
+//         edges {
+//           cursor
+//           node {
+//             id
+//             title
+//             description
+//             preview
+//             video
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export type ProfileProps = {
   readonly username: string;
 }
 
 function Profile(props: ProfileProps) {
-  const query = useLazyLoadQuery(ProfileQuery, {});
+  // const query = useLazyLoadQuery(ProfileQuery, {});
 
   return <Content profile={{}} />;
 }

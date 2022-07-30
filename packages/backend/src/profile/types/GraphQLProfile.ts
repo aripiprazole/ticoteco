@@ -18,7 +18,9 @@
 
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
-const GraphQLProfile = new GraphQLObjectType({
+import Profile from '../Profile.js';
+
+const GraphQLProfile = new GraphQLObjectType<Profile>({
   name: 'Profile',
   fields: () => ({
     id: {
