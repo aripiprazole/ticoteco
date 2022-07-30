@@ -35,7 +35,7 @@ type PostProps = {
   readonly data: TimelineQuery$data['forYou']['edges'][0]['node'];
 }
 
-function Post(props: PostProps) {
+function TimelinePost(props: PostProps) {
   const {data} = props;
 
   return (
@@ -102,4 +102,4 @@ function ActionButton(props: ActionButtonProps) {
   );
 }
 
-export default Post;
+export default TimelinePost;
