@@ -18,7 +18,7 @@ type Query {
 
     """Returns the last n items from the list."""
     last: Int
-  ): PostConnection
+  ): PostConnection!
 }
 
 type User {

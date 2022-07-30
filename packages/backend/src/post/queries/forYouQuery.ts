@@ -17,6 +17,7 @@
  */
 
 import {GraphQLFieldConfig} from 'graphql/type';
+import {GraphQLNonNull} from 'graphql';
 import {
   connectionArgs,
   ConnectionArguments,
@@ -35,7 +36,7 @@ export type ForYouArguments = ConnectionArguments;
 type ForYouQuery = GraphQLFieldConfig<any, TicoTecoContext, ForYouArguments>;
 
 export const forYouQuery: ForYouQuery = {
-  type: GraphQLPostConnection.connectionType,
+  type: new GraphQLNonNull(GraphQLPostConnection.connectionType),
   description: 'Get for you post connection',
   args: connectionArgs,
   resolve: async (_root, args, context) => {
