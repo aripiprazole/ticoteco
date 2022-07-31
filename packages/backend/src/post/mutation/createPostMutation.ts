@@ -36,14 +36,13 @@ type CreatePostArgs = {
 const createPostSchema = Yup.object({
   title: Yup.string().required().min(4).max(32),
   description: Yup.string().min(0).max(32),
-  video: Yup
-      .mixed()
-      .required()
-      .test(
-          'file-format',
-          'The form only accepts MP4',
-          (file) => file && (file.mimetype === 'video/mp4'),
-      ),
+  video: Yup.mixed()
+    .required()
+    .test(
+      'file-format',
+      'The form only accepts MP4',
+      (file) => file && file.mimetype === 'video/mp4',
+    ),
 });
 
 export const createPostMutation = mutationWithClientMutationId({

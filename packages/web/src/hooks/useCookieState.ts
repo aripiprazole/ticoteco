@@ -21,20 +21,20 @@ import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import cookieCutter from 'cookie-cutter';
 
 function useCookieState(
-    key: string,
+  key: string,
 ): [string | undefined, Dispatch<SetStateAction<string | undefined>>] {
   const [value, setValue] = useState<string>();
 
-  const setCookieValue: Dispatch<SetStateAction<string | undefined>> =
-    (newState: any) => {
-      const newValue = typeof newState === 'function' ?
-        newState(value) :
-          newState;
+  const setCookieValue: Dispatch<SetStateAction<string | undefined>> = (
+    newState: any,
+  ) => {
+    const newValue =
+      typeof newState === 'function' ? newState(value) : newState;
 
-      cookieCutter.set(key, newValue);
+    cookieCutter.set(key, newValue);
 
-      setValue(newValue);
-    };
+    setValue(newValue);
+  };
 
   useEffect(() => {
     setValue(cookieCutter.get(key));

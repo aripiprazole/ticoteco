@@ -20,4 +20,4 @@ export type UploadForm = {
   readonly title: string;
   readonly description: string;
   readonly video: File | null;
-}
+};

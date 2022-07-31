@@ -36,4 +36,3 @@ const GraphQLUser = new GraphQLObjectType<User>({
 });
 
 export default GraphQLUser;
-

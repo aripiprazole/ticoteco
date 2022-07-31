@@ -22,7 +22,8 @@ import {TicoTecoAppData} from '../app.js';
 import User from './/User.js';
 import Profile from '../profile/Profile.js';
 
-const findCurrentUser = (appData: TicoTecoAppData) =>
+const findCurrentUser =
+  (appData: TicoTecoAppData) =>
   async (request: Request): Promise<User | null> => {
     const header = request.headers.authorization;
     if (!header) {
@@ -33,9 +34,9 @@ const findCurrentUser = (appData: TicoTecoAppData) =>
       const idToken = await appData.firebase.auth().verifyIdToken(header);
       const firebaseUser = await appData.firebase.auth().getUser(idToken.uid);
 
-      const appUser = await User
-          .findOne({firebaseUid: firebaseUser.uid})
-          .exec();
+      const appUser = await User.findOne({
+        firebaseUid: firebaseUser.uid,
+      }).exec();
 
       if (appUser) return appUser;
 

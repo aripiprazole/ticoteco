@@ -17,10 +17,7 @@
  */
 
 import {GraphQLFieldConfig} from 'graphql/type';
-import {
-  connectionArgs,
-  ConnectionArguments,
-} from 'graphql-relay';
+import {connectionArgs, ConnectionArguments} from 'graphql-relay';
 import DataLoader from 'dataloader';
 
 import graphqlMongooseLoader from '@entria/graphql-mongoose-loader';
