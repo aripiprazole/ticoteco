@@ -5,11 +5,7 @@ module.exports = {
     mocha: true,
     jest: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'plugin:@next/next/recommended',
-    'google',
-  ],
+  extends: ['plugin:react/recommended', 'google'],
   parser: '@typescript-eslint/parser',
   settings: {
     react: {

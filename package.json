@@ -36,7 +36,6 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@next/eslint-plugin-next": "^12.2.0",
     "@ticoteco/backend": "workspace:^",
     "@types/node": "^18.0.1",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
