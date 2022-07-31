@@ -28,11 +28,11 @@ const __dirname = dirname(__filename);
 
 async function generateSchema() {
   const targetFile = path.resolve(
-      __dirname,
-      '..',
-      '..',
-      '..',
-      'schema.graphql',
+    __dirname,
+    '..',
+    '..',
+    '..',
+    'schema.graphql',
   );
 
   await fs.writeFile(targetFile, printSchema(schema));

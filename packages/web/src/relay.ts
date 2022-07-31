@@ -29,8 +29,8 @@ import {
 } from 'relay-runtime';
 import axios from 'axios';
 
-export const GRAPHQL_API_URL = process.env.NEXT_PUBLIC_GRAPHQL_API_URL ??
-    'http://localhost:8000';
+export const GRAPHQL_API_URL =
+  process.env.NEXT_PUBLIC_GRAPHQL_API_URL ?? 'http://localhost:8000';
 
 export const AUTHORIZATION_KEY = 'Authorization';
 
@@ -38,12 +38,13 @@ const api = axios.create({
   baseURL: GRAPHQL_API_URL,
 });
 
-const fetchGraphQL = (authorization: string) =>
+const fetchGraphQL =
+  (authorization: string) =>
   async (
-      query: RequestParameters,
-      variables: Variables,
-      _cacheConfig: CacheConfig,
-      uploadables?: UploadableMap | null,
+    query: RequestParameters,
+    variables: Variables,
+    _cacheConfig: CacheConfig,
+    uploadables?: UploadableMap | null,
   ): Promise<GraphQLResponse> => {
     let body: any;
 
@@ -80,7 +81,7 @@ const fetchGraphQL = (authorization: string) =>
 
     const response = await api.post('/graphql', body, {
       headers: {
-        'Authorization': authorization,
+        Authorization: authorization,
       },
     });
 

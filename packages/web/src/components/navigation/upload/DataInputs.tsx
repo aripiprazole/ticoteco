@@ -28,10 +28,8 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
-import {UploadForm} from './types';
-
 export type DataInputsProps = {
-  readonly formik: ReturnType<typeof useFormik<UploadForm>>;
+  readonly formik: ReturnType<typeof useFormik>;
 };
 
 function DataInputs(props: DataInputsProps) {
@@ -51,9 +49,7 @@ function DataInputs(props: DataInputsProps) {
         />
 
         {formik.errors.title && (
-          <FormErrorMessage>
-            {formik.errors.title}
-          </FormErrorMessage>
+          <FormErrorMessage>{formik.errors.title as any}</FormErrorMessage>
         )}
       </FormControl>
 
@@ -70,7 +66,7 @@ function DataInputs(props: DataInputsProps) {
 
         {formik.errors.description && (
           <FormErrorMessage>
-            {formik.errors.description}
+            {formik.errors.description as any}
           </FormErrorMessage>
         )}
       </FormControl>

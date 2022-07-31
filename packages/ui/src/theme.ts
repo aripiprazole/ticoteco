@@ -39,9 +39,10 @@ const theme: Partial<Theme> = {
       },
 
       '*, input, button, select, textarea, optgroup, option': {
-        fontFamily: '-apple-system, \'Montserrat\', BlinkMacSystemFont,' +
-          ' \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\',' +
-          ' \'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif',
+        fontFamily:
+          "-apple-system, 'Montserrat', BlinkMacSystemFont," +
+          " 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell'," +
+          " 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
         WebkitFontSmoothing: 'antialiased',
         MozOsxFontSmoothing: 'grayscale',
       },

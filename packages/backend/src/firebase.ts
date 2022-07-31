@@ -20,9 +20,8 @@ import firebase from 'firebase-admin';
 
 export function initializeFirebase(): firebase.app.App {
   return firebase.initializeApp({
-    credential: process.env.GOOGLE_APPLICATION_CREDENTIALS ?
-        firebase.credential.applicationDefault() :
-         // TODO: test
-        firebase.credential.cert(process.env.FIREBASE_SERVICE_ACCOUNT_KEY),
+    credential: process.env.GOOGLE_APPLICATION_CREDENTIALS
+      ? firebase.credential.applicationDefault()
+      : firebase.credential.cert(process.env.FIREBASE_SERVICE_ACCOUNT_KEY),
   });
 }

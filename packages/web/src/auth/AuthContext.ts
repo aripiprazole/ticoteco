@@ -31,7 +31,7 @@ export type AuthenticatedUser = {
     readonly displayName: string;
     readonly avatar: string;
   };
-}
+};
 
 export const AuthContext = createContext<AuthContextData>({
   user: null,
