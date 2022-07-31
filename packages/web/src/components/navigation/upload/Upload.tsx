@@ -43,7 +43,6 @@ import * as Yup from 'yup';
 import VideoInputs from './VideoInputs';
 
 import DataInputs from './DataInputs';
-import {UploadForm} from './types';
 
 import {UploadMutation} from '../../../__generated__/UploadMutation.graphql';
 
@@ -80,6 +79,12 @@ const uploadPostSchema = Yup.object({
       (file) => file && file.type === 'video/mp4',
     ),
 });
+
+type UploadForm = {
+  readonly title: string;
+  readonly description: string;
+  readonly video: File | null;
+};
 
 function Upload() {
   const {isOpen, onOpen, onClose} = useDisclosure();

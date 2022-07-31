@@ -23,17 +23,16 @@ import {useFormik} from 'formik';
 import {
   Button,
   chakra,
-  Flex, FormControl,
+  Flex,
+  FormControl,
   FormErrorMessage,
   Heading,
   Input,
   VStack,
 } from '@chakra-ui/react';
 
-import {UploadForm} from './types';
-
 type VideoInputsProps = {
-  readonly formik: ReturnType<typeof useFormik<UploadForm>>;
+  readonly formik: ReturnType<typeof useFormik>;
 };
 
 function VideoInputs(props: VideoInputsProps) {
@@ -50,7 +49,8 @@ function VideoInputs(props: VideoInputsProps) {
         return 'red.500';
       case isUploaded: // Uploaded video
         return 'lightskyblue';
-      default: // No video selected
+      default:
+        // No video selected
         return '#cecece';
     }
   }
@@ -67,11 +67,7 @@ function VideoInputs(props: VideoInputsProps) {
     >
       <FormControl isInvalid={isInvalid}>
         <VStack>
-          <Heading
-            as='h3'
-            fontSize='1.2rem'
-            color={isInvalid && 'red.500'}
-          >
+          <Heading as='h3' fontSize='1.2rem' color={isInvalid && 'red.500'}>
             Select video to upload
           </Heading>
 
