@@ -17,69 +17,74 @@
  */
 
 import React from 'react';
+import {useLazyLoadQuery} from 'react-relay';
 
 import graphql from 'babel-plugin-relay/macro';
 
-import {Box, Image, VStack} from '@chakra-ui/react';
-import {useLazyLoadQuery} from 'react-relay';
-//
-// const ProfileQuery = graphql`
-//   query ProfileQuery($username: String!) {
-//     profile(username: $username) {
-//       id
-//       username
-//       displayName
-//     }
-//   }
-// `;
-//
-// const ProfileVideos = graphql`
-//   query ProfileVideosQuery($username: String!, $first: Int!, $after: String) {
-//     profile(username: $username) {
-//       posts(first: $first, after: $after) {
-//         pageInfo {
-//           hasNextPage
-//           hasPreviousPage
-//           startCursor
-//           endCursor
-//         }
-//         edges {
-//           cursor
-//           node {
-//             id
-//             title
-//             description
-//             preview
-//             video
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
+import {Box, Heading, HStack, Image, VStack} from '@chakra-ui/react';
+
+import {ProfileQuery} from '../../__generated__/ProfileQuery.graphql';
+
+import ProfileVideos from './ProfileVideos';
+
+const ProfileQuery = graphql`
+  query ProfileQuery($username: String!) {
+    profile(username: $username) {
+      id
+      username
+      displayName
+      avatar
+    }
+  }
+`;
 
 export type ProfileProps = {
   readonly username: string;
 }
 
 function Profile(props: ProfileProps) {
-  // const query = useLazyLoadQuery(ProfileQuery, {});
+  const {username} = props;
 
-  return <Content profile={{}} />;
+  return (
+    <React.Suspense fallback="Loading...">
+      <Content username={username} />
+    </React.Suspense>
+  );
 }
 
 type ContentProps = {
-  readonly profile: any;
+  readonly username: string;
 };
 
 function Content(props: ContentProps) {
-  const {profile} = props;
+  const {profile} = useLazyLoadQuery<ProfileQuery>(ProfileQuery, {
+    username: props.username,
+  });
+
+  if (!profile) {
+    return null;
+  }
 
   return (
-    <VStack>
-      <VStack>
-        <Image src={profile.avatar} />
-      </VStack>
+    <VStack padding='1rem 0'>
+      <HStack width='100%' gap='1rem'>
+        <Image
+          src={profile.avatar}
+          width='100'
+          height='100'
+          borderRadius='50%'
+        />
+
+        <Box height='100%'>
+          <VStack justify='start' align='start'>
+            <Heading as='h2' fontSize='22'>{profile.username}</Heading>
+
+            <Heading as='h4' fontSize='18'>{profile.displayName}</Heading>
+          </VStack>
+        </Box>
+      </HStack>
+
+      <ProfileVideos profile={profile} />
     </VStack>
   );
 }

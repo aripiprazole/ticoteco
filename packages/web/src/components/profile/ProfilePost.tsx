@@ -17,20 +17,18 @@
  */
 
 import React from 'react';
-import {useRouter} from 'next/router';
+import {Box} from '@chakra-ui/react';
 
-import Profile from '../components/profile/Profile';
-import Layout from '../components/layout/Layout';
+import {
+  ProfileVideosQuery$data,
+} from '../../__generated__/ProfileVideosQuery.graphql';
 
-function ProfilePage() {
-  const router = useRouter();
-  const {username} = router.query;
+type ProfilePostProps = {
+  readonly data: ProfileVideosQuery$data['profile']['posts']['edges'][0];
+};
 
-  return (
-    <Layout>
-      <Profile username={username as string} />
-    </Layout>
-  );
+function ProfilePost(props: ProfilePostProps) {
+  return <Box />;
 }
 
-export default ProfilePage;
+export default ProfilePost;
