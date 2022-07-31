@@ -17,9 +17,7 @@
  */
 
 import React from 'react';
-import {useLazyLoadQuery} from 'react-relay';
-
-import graphql from 'babel-plugin-relay/macro';
+import {useLazyLoadQuery, graphql} from 'react-relay';
 
 import {Box, Heading, HStack, Image, VStack} from '@chakra-ui/react';
 

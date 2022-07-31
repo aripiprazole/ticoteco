@@ -21,11 +21,10 @@ import {
   useQueryLoader,
   usePreloadedQuery,
   PreloadedQuery,
+  graphql,
 } from 'react-relay';
 
 import {Box} from '@chakra-ui/react';
-
-import graphql from 'babel-plugin-relay/macro';
 
 import TimelinePost from './TimelinePost';
 

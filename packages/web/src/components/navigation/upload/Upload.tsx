@@ -17,10 +17,8 @@
  */
 
 import React from 'react';
-import {useMutation} from 'react-relay';
+import {useMutation, graphql} from 'react-relay';
 import {FiUpload} from 'react-icons/fi';
-
-import graphql from 'babel-plugin-relay/macro';
 
 import {useFormik} from 'formik';
 

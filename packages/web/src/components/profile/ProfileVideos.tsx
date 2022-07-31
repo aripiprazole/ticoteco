@@ -17,9 +17,12 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {PreloadedQuery, usePreloadedQuery, useQueryLoader} from 'react-relay';
-
-import graphql from 'babel-plugin-relay/macro';
+import {
+  PreloadedQuery,
+  usePreloadedQuery,
+  useQueryLoader,
+  graphql,
+} from 'react-relay';
 
 import {HStack} from '@chakra-ui/react';
 
