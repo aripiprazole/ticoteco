@@ -17,8 +17,14 @@
  */
 
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import {connectionArgs, ConnectionArguments} from 'graphql-relay';
+import DataLoader from 'dataloader';
+
+import graphqlMongooseLoader from '@entria/graphql-mongoose-loader';
 
 import Profile from '../Profile.js';
+import {GraphQLPostConnection} from '../../post/types/GraphQLPost.js';
+import Post from '../../post/Post.js';
 
 const GraphQLProfile = new GraphQLObjectType<Profile>({
   name: 'Profile',
@@ -38,6 +44,22 @@ const GraphQLProfile = new GraphQLObjectType<Profile>({
     displayName: {
       type: new GraphQLNonNull(GraphQLString),
       resolve: (profile) => profile.displayName.toString(),
+    },
+    posts: {
+      type: new GraphQLNonNull(GraphQLPostConnection.connectionType),
+      args: connectionArgs,
+      resolve: async (profile, args: ConnectionArguments, context) => {
+        const loader = new DataLoader((ids) => {
+          return graphqlMongooseLoader.mongooseLoader(Post, ids as any);
+        });
+
+        return graphqlMongooseLoader.connectionFromMongoCursor({
+          cursor: Post.find({user: profile.user}),
+          context,
+          args,
+          loader: (_context, id) => loader.load(id),
+        });
+      },
     },
   }),
 });

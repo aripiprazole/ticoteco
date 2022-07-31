@@ -36,7 +36,7 @@ import {useLazyLoadQuery} from 'react-relay';
 // const ProfileVideos = graphql`
 //   query ProfileVideosQuery($username: String!, $first: Int!, $after: String) {
 //     profile(username: $username) {
-//       videos(first: $first, after: $after) {
+//       posts(first: $first, after: $after) {
 //         pageInfo {
 //           hasNextPage
 //           hasPreviousPage

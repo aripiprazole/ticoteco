@@ -42,6 +42,6 @@ export const profileQuery: ProfileQuery = {
   resolve: async (_root, args) => {
     const {username} = args;
 
-    return Profile.find({username});
+    return Profile.findOne({username});
   },
 };
