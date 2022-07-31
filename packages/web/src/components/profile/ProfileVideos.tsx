@@ -75,7 +75,7 @@ function CurrentPosts(props: CurrentPostsProps) {
   return (
     <HStack flexWrap='wrap'>
       {query.profile.posts.edges.map(({node, cursor}) => (
-        <ProfilePost data={node as any} key={cursor} />
+        <ProfilePost data={node} key={cursor} />
       ))}
     </HStack>
   );

@@ -59,6 +59,8 @@ function Content(props: ContentProps) {
     username: props.username,
   });
 
+  console.log('profile', profile);
+
   if (!profile) {
     return null;
   }
@@ -82,7 +84,9 @@ function Content(props: ContentProps) {
         </Box>
       </HStack>
 
-      <ProfileVideos profile={profile} />
+      <React.Suspense>
+        <ProfileVideos profile={profile} />
+      </React.Suspense>
     </VStack>
   );
 }

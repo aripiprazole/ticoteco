@@ -23,8 +23,10 @@ import {
   ProfileVideosQuery$data,
 } from '../../__generated__/ProfileVideosQuery.graphql';
 
-type ProfilePostProps = {
-  readonly data: ProfileVideosQuery$data['profile']['posts']['edges'][0];
+type Post = ProfileVideosQuery$data['profile']['posts']['edges'][0]['node'];
+
+export type ProfilePostProps = {
+  readonly data: Post;
 };
 
 function ProfilePost(props: ProfilePostProps) {
