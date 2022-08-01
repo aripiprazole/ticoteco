@@ -38,13 +38,13 @@ const ProfileQuery = graphql`
 
 export type ProfileProps = {
   readonly username: string;
-}
+};
 
 function Profile(props: ProfileProps) {
   const {username} = props;
 
   return (
-    <React.Suspense fallback="Loading...">
+    <React.Suspense fallback='Loading...'>
       <Content username={username} />
     </React.Suspense>
   );
@@ -58,8 +58,6 @@ function Content(props: ContentProps) {
   const {profile} = useLazyLoadQuery<ProfileQuery>(ProfileQuery, {
     username: props.username,
   });
-
-  console.log('profile', profile);
 
   if (!profile) {
     return null;
@@ -77,9 +75,13 @@ function Content(props: ContentProps) {
 
         <Box height='100%'>
           <VStack justify='start' align='start'>
-            <Heading as='h2' fontSize='22'>{profile.username}</Heading>
+            <Heading as='h2' fontSize='22'>
+              {profile.username}
+            </Heading>
 
-            <Heading as='h4' fontSize='18'>{profile.displayName}</Heading>
+            <Heading as='h4' fontSize='18'>
+              {profile.displayName}
+            </Heading>
           </VStack>
         </Box>
       </HStack>

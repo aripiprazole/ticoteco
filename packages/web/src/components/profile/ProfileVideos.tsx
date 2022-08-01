@@ -24,22 +24,20 @@ import {
   graphql,
 } from 'react-relay';
 
-import {HStack} from '@chakra-ui/react';
+import {Heading, HStack, VStack} from '@chakra-ui/react';
 
 import {ProfileQuery$data} from '../../__generated__/ProfileQuery.graphql';
+import {ProfileVideosQuery} from '../../__generated__/ProfileVideosQuery.graphql';
 
 import ProfilePost from './ProfilePost';
-import {
-  ProfileVideosQuery,
-} from '../../__generated__/ProfileVideosQuery.graphql';
 
 const ProfileVideosQuery = graphql`
-  query ProfileVideosQuery(
-    $username: String!,
-    $first: Int!,
-    $after: String,
-  ) {
+  query ProfileVideosQuery($username: String!, $first: Int!, $after: String) {
     profile(username: $username) {
+      id
+      username
+      displayName
+      avatar
       posts(first: $first, after: $after) {
         pageInfo {
           hasNextPage
@@ -73,11 +71,17 @@ function CurrentPosts(props: CurrentPostsProps) {
   const query = usePreloadedQuery(ProfileVideosQuery, preloadedQuery);
 
   return (
-    <HStack flexWrap='wrap'>
-      {query.profile.posts.edges.map(({node, cursor}) => (
-        <ProfilePost data={node} key={cursor} />
-      ))}
-    </HStack>
+    <VStack width='100%' align='start'>
+      <Heading as='h2' fontSize='1.2rem'>
+        Videos
+      </Heading>
+
+      <HStack flexWrap='wrap' justify='start' width='100%'>
+        {query.profile.posts.edges.map(({node, cursor}) => (
+          <ProfilePost data={node} key={cursor} />
+        ))}
+      </HStack>
+    </VStack>
   );
 }
 
@@ -90,9 +94,8 @@ function ProfileVideos(props: ProfileVideoProps) {
 
   const [afterPost, setAfterPost] = useState<string>();
 
-  const [preloadedQuery, loadQuery] = useQueryLoader<ProfileVideosQuery>(
-      ProfileVideosQuery,
-  );
+  const [preloadedQuery, loadQuery] =
+    useQueryLoader<ProfileVideosQuery>(ProfileVideosQuery);
 
   useEffect(() => {
     loadQuery({
@@ -107,7 +110,7 @@ function ProfileVideos(props: ProfileVideoProps) {
   }
 
   return (
-    <React.Suspense fallback="Loading posts..">
+    <React.Suspense fallback='Loading posts..'>
       <CurrentPosts
         preloadedQuery={preloadedQuery}
         setAfterPost={setAfterPost}

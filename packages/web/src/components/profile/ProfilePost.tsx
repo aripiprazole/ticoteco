@@ -17,11 +17,11 @@
  */
 
 import React from 'react';
-import {Box} from '@chakra-ui/react';
 
-import {
-  ProfileVideosQuery$data,
-} from '../../__generated__/ProfileVideosQuery.graphql';
+import {Box, Heading, Image, VStack} from '@chakra-ui/react';
+
+import {ProfileVideosQuery$data} from '../../__generated__/ProfileVideosQuery.graphql';
+import {FiPlay} from 'react-icons/all.js';
 
 type Post = ProfileVideosQuery$data['profile']['posts']['edges'][0]['node'];
 
@@ -30,7 +30,36 @@ export type ProfilePostProps = {
 };
 
 function ProfilePost(props: ProfilePostProps) {
-  return <Box />;
+  const {data} = props;
+
+  return (
+    <VStack width='12rem' gap='0.2rem' align='start'>
+      <Box
+        position='relative'
+        sx={{
+          width: '12rem',
+          height: 'calc(12rem / 9 * 16)',
+        }}
+      >
+        <Image
+          src={data.preview}
+          borderRadius='0.5rem'
+          width='100%'
+          height='100%'
+        />
+
+        <FiPlay
+          color='#fefefe'
+          size='1.2rem'
+          style={{position: 'absolute', bottom: '0.3rem', left: '0.3rem'}}
+        />
+      </Box>
+
+      <Heading as='h4' fontSize='1.2rem' fontWeight='normal'>
+        {props.data.title}
+      </Heading>
+    </VStack>
+  );
 }
 
 export default ProfilePost;

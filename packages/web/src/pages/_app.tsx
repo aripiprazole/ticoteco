@@ -39,7 +39,6 @@ function App({
   pageProps,
   authorization,
 }: AppProps & TicoTecoAppProps) {
-  console.log('App.authorization', authorization);
   return (
     <ChakraProvider theme={theme}>
       <RelayEnvironmentProvider
@@ -60,8 +59,6 @@ App.getInitialProps = async ({ctx}: AppContext): Promise<TicoTecoAppProps> => {
   const authorization = cookies.get(AUTHORIZATION_KEY);
 
   if (!authorization) return {authorization: null};
-
-  console.log('authorization', authorization);
 
   return {authorization};
 };
