@@ -17,18 +17,17 @@
  */
 
 import React from 'react';
+import Link from 'next/link';
 import {FiHeart, FiMessageCircle, FiShare2} from 'react-icons/fi';
 import {IconType} from 'react-icons';
 
 import {
-  Box,
   chakra,
   Flex, Heading,
   IconButton,
   Image,
   Text,
 } from '@chakra-ui/react';
-
 import {TimelineQuery$data} from '../../__generated__/TimelineQuery.graphql';
 
 type PostProps = {
@@ -40,15 +39,17 @@ function TimelinePost(props: PostProps) {
 
   return (
     <Flex gap='0.5rem' padding='1.5rem 0' borderBottom='1px solid #cecece'>
-      <Box>
-        <Image
-          src={data.profile.avatar}
-          aria-label={`${data.profile.username}'s avatar`}
-          height='4rem'
-          width='4rem'
-          borderRadius='50%'
-        />
-      </Box>
+      <Link href={`/${data.profile.username}`}>
+        <a>
+          <Image
+            src={data.profile.avatar}
+            aria-label={`${data.profile.username}'s avatar`}
+            height='4rem'
+            width='4rem'
+            borderRadius='50%'
+          />
+        </a>
+      </Link>
 
       <Flex direction='column' gap='0.5rem'>
         <Heading fontSize='1.5rem' lineHeight='0.8'>
