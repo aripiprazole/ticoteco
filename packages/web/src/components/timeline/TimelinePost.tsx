@@ -23,7 +23,8 @@ import {IconType} from 'react-icons';
 
 import {
   chakra,
-  Flex, Heading,
+  Flex,
+  Heading,
   IconButton,
   Image,
   Text,
@@ -32,7 +33,7 @@ import {TimelineQuery$data} from '../../__generated__/TimelineQuery.graphql';
 
 type PostProps = {
   readonly data: TimelineQuery$data['forYou']['edges'][0]['node'];
-}
+};
 
 function TimelinePost(props: PostProps) {
   const {data} = props;
@@ -54,7 +55,6 @@ function TimelinePost(props: PostProps) {
       <Flex direction='column' gap='0.5rem'>
         <Heading fontSize='1.5rem' lineHeight='0.8'>
           {data.profile.username}{' '}
-
           <chakra.span fontSize='1rem' fontWeight={400}>
             {data.profile.displayName}
           </chakra.span>

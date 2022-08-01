@@ -5,11 +5,7 @@ module.exports = {
     mocha: true,
     jest: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'plugin:@next/next/recommended',
-    'google',
-  ],
+  extends: ['plugin:react/recommended', 'google'],
   parser: '@typescript-eslint/parser',
   settings: {
     react: {
@@ -19,14 +15,23 @@ module.exports = {
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
+      modules: true,
     },
-    ecmaVersion: 12,
+    ecmaVersion: 2022,
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react', 'prettier', '@typescript-eslint'],
   rules: {
+    'prettier/prettier': ['error', {}, {usePrettierrc: true}],
     'react/prop-types': ['off'],
     'require-jsdoc': ['off'],
     'spaced-comment': ['off'],
+    'indent': ['off'],
+    'quotes': ['off'],
+    'operator-linebreak': [
+      'error',
+      'after',
+      {overrides: {'?': 'before', ':': 'before'}},
+    ],
   },
 };

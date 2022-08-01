@@ -16,27 +16,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Koa, {Request} from 'koa';
+import Koa from 'koa';
 import Router from '@koa/router';
 import cors from '@koa/cors';
 import bodyparser from 'koa-bodyparser';
 import graphqlUploadKoa from 'graphql-upload/graphqlUploadKoa.mjs';
 
-import {graphqlHTTP, OptionsData} from 'koa-graphql';
+import {graphqlHTTP, Options} from 'koa-graphql';
+
+import {Logger} from 'tslog';
 
 import schema from './graphql/schema.js';
 import {TicoTecoAppData} from './app.js';
 import TicoTecoContext from './graphql/TicoTecoContext.js';
 import findCurrentUser from './user/findCurrentUser.js';
 
+const log = new Logger({name: '@ticoteco/backend/server'});
+
 export function createServer(appData: TicoTecoAppData): Koa {
-  async function setupGraphQLConnection(
-      request: Request,
-  ): Promise<OptionsData> {
+  const app = new Koa();
+  const router = new Router();
+
+  const setupGraphql: Options = async (req) => {
     const firebase = appData.firebase;
     const bucket = firebase.storage().bucket(process.env.STORAGE_BUCKET);
 
-    const currentUser = await findCurrentUser(appData)(request);
+    const currentUser = await findCurrentUser(appData)(req);
 
     return {
       schema,
@@ -48,12 +53,20 @@ export function createServer(appData: TicoTecoAppData): Koa {
         bucket,
       },
     };
-  }
+  };
 
-  const app = new Koa();
-  const router = new Router();
+  const handleErrors: Router.Middleware = async (ctx, next) => {
+    try {
+      await next();
+    } catch (err) {
+      log.fatal(err);
 
-  router.all('/graphql', graphqlHTTP(setupGraphQLConnection));
+      throw err;
+    }
+  };
+
+  router.use(handleErrors);
+  router.all('/graphql', graphqlHTTP(setupGraphql));
 
   app.use(cors());
   app.use(graphqlUploadKoa({maxFileSize: 10000000, maxFiles: 10}));

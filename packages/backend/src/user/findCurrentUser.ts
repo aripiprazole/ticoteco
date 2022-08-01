@@ -21,10 +21,12 @@ import {Request} from 'koa';
 import {TicoTecoAppData} from '../app.js';
 import User from './/User.js';
 import Profile from '../profile/Profile.js';
+
 import {auth} from 'firebase-admin';
 import UserRecord = auth.UserRecord;
 
-const findCurrentUser = (appData: TicoTecoAppData) =>
+const findCurrentUser =
+  (appData: TicoTecoAppData) =>
   async (request: Request): Promise<User | null> => {
     const header = request.headers.authorization;
     if (!header) {

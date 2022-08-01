@@ -75,9 +75,11 @@ function CurrentPosts(props: CurrentPostProps) {
         <TimelinePost data={node} key={cursor} />
       ))}
 
-      <button onClick={() => {
-        setAfterPost(forYou.pageInfo.endCursor);
-      }}>
+      <button
+        onClick={() => {
+          setAfterPost(forYou.pageInfo.endCursor);
+        }}
+      >
         Next video...
       </button>
     </div>
@@ -97,7 +99,7 @@ function Timeline() {
   return (
     <Box>
       {queryRef && (
-        <React.Suspense fallback="Loading...">
+        <React.Suspense fallback='Loading...'>
           <CurrentPosts queryRef={queryRef} setAfterPost={setAfterPost} />
         </React.Suspense>
       )}

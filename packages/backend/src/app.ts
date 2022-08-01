@@ -22,4 +22,4 @@ import {Mongoose} from 'mongoose';
 export type TicoTecoAppData = {
   readonly firebase: firebase.app.App;
   readonly mongoose: Mongoose;
-}
+};

@@ -25,11 +25,7 @@ import useCookieState from '../hooks/useCookieState';
 
 import {AuthContext, AuthenticatedUser} from './AuthContext';
 
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from '@firebase/auth';
+import {getAuth, signInWithPopup, GoogleAuthProvider} from '@firebase/auth';
 
 import '../firebase';
 import {AUTHORIZATION_KEY} from '../relay';
@@ -59,12 +55,13 @@ export function AuthProvider({children}: PropsWithChildren) {
   const [user, setUser] = useState<AuthenticatedUser>();
 
   useEffect(() => {
-    fetchQuery<AuthProviderQuery>(environment, AuthProviderQuery, {})
-        .subscribe({
-          next: (data) => {
-            setUser(data.me);
-          },
-        });
+    fetchQuery<AuthProviderQuery>(environment, AuthProviderQuery, {}).subscribe(
+      {
+        next: (data) => {
+          setUser(data.me);
+        },
+      },
+    );
   }, [authKey]);
 
   async function login() {
