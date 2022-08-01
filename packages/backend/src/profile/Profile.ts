@@ -22,6 +22,7 @@ export const profileSchema = new mongoose.Schema<Profile>({
   username: {type: String, required: true},
   displayName: {type: String, required: true},
   avatarUrl: {type: String, required: true},
+  user: {type: mongoose.SchemaTypes.ObjectId, required: true},
 });
 
 type Profile = {
@@ -29,6 +30,7 @@ type Profile = {
   readonly username: string;
   readonly displayName: string;
   readonly avatarUrl: string;
+  user: mongoose.Types.ObjectId;
 };
 
 const Profile = mongoose.model<Profile>('Profile', profileSchema);

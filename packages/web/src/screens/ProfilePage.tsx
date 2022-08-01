@@ -16,25 +16,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import React from 'react';
+import {useRouter} from 'next/router';
 
-import User from '../User.js';
+import Profile from '../components/profile/Profile';
+import Layout from '../components/layout/Layout';
 
-import GraphQLProfile from '../../profile/types/GraphQLProfile.js';
-import Profile from '../../profile/Profile.js';
+function ProfilePage() {
+  const router = useRouter();
+  const {username} = router.query;
 
-const GraphQLUser = new GraphQLObjectType<User>({
-  name: 'User',
-  fields: () => ({
-    id: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (user) => user._id.toString(),
-    },
-    profile: {
-      type: new GraphQLNonNull(GraphQLProfile),
-      resolve: (user) => Profile.findById(user.profile),
-    },
-  }),
-});
+  return (
+    <Layout>
+      <Profile username={username as string} />
+    </Layout>
+  );
+}
 
-export default GraphQLUser;
+export default ProfilePage;

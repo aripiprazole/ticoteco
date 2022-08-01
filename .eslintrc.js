@@ -28,6 +28,7 @@ module.exports = {
     'spaced-comment': ['off'],
     'indent': ['off'],
     'quotes': ['off'],
+    'max-len': ['off'],
     'operator-linebreak': [
       'error',
       'after',

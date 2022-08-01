@@ -17,11 +17,9 @@
  */
 
 import React, {PropsWithChildren, useEffect, useState} from 'react';
-import {useRelayEnvironment} from 'react-relay';
+import {useRelayEnvironment, graphql} from 'react-relay';
 
 import {fetchQuery} from 'relay-runtime';
-
-import graphql from 'babel-plugin-relay/macro';
 
 import useCookieState from '../hooks/useCookieState';
 

@@ -31,7 +31,7 @@ import buildRelayEnvironment, {AUTHORIZATION_KEY} from '../relay';
 import {AuthProvider} from '../auth/AuthProvider';
 
 export type TicoTecoAppProps = {
-  readonly authorization: string;
+  readonly authorization?: string | null;
 };
 
 function App({
@@ -53,9 +53,14 @@ function App({
 }
 
 App.getInitialProps = async ({ctx}: AppContext): Promise<TicoTecoAppProps> => {
-  const cookies = new Cookies(ctx.req, ctx.res);
+  if (!ctx.req || !ctx.res) return {authorization: null};
 
-  return {authorization: cookies.get(AUTHORIZATION_KEY)};
+  const cookies = new Cookies(ctx.req, ctx.res);
+  const authorization = cookies.get(AUTHORIZATION_KEY);
+
+  if (!authorization) return {authorization: null};
+
+  return {authorization};
 };
 
 export default App;

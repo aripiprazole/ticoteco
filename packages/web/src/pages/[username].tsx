@@ -16,25 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import ProfilePage from '../screens/ProfilePage';
 
-import User from '../User.js';
-
-import GraphQLProfile from '../../profile/types/GraphQLProfile.js';
-import Profile from '../../profile/Profile.js';
-
-const GraphQLUser = new GraphQLObjectType<User>({
-  name: 'User',
-  fields: () => ({
-    id: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (user) => user._id.toString(),
-    },
-    profile: {
-      type: new GraphQLNonNull(GraphQLProfile),
-      resolve: (user) => Profile.findById(user.profile),
-    },
-  }),
-});
-
-export default GraphQLUser;
+export default ProfilePage;

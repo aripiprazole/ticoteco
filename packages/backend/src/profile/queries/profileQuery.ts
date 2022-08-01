@@ -16,25 +16,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import {GraphQLFieldConfig} from 'graphql/type';
+import {GraphQLNonNull, GraphQLString} from 'graphql';
 
-import User from '../User.js';
+import TicoTecoContext from '../../graphql/TicoTecoContext.js';
 
-import GraphQLProfile from '../../profile/types/GraphQLProfile.js';
-import Profile from '../../profile/Profile.js';
+import GraphQLProfile from '../types/GraphQLProfile.js';
+import Profile from '../Profile.js';
 
-const GraphQLUser = new GraphQLObjectType<User>({
-  name: 'User',
-  fields: () => ({
-    id: {
+type ProfileArguments = {
+  readonly username: string;
+};
+
+type ProfileQuery = GraphQLFieldConfig<any, TicoTecoContext, ProfileArguments>;
+
+export const profileQuery: ProfileQuery = {
+  type: GraphQLProfile,
+  args: {
+    username: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: (user) => user._id.toString(),
+      description: 'The username of the profile',
     },
-    profile: {
-      type: new GraphQLNonNull(GraphQLProfile),
-      resolve: (user) => Profile.findById(user.profile),
-    },
-  }),
-});
+  },
+  description: 'Get the profile of the queried user',
+  resolve: async (_root, args) => {
+    const {username} = args;
 
-export default GraphQLUser;
+    return Profile.findOne({username});
+  },
+};

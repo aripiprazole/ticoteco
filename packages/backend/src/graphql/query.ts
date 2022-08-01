@@ -20,12 +20,14 @@ import {GraphQLObjectType} from 'graphql';
 
 import {meQuery} from '../user/queries/meQuery.js';
 import {forYouQuery} from '../post/queries/forYouQuery.js';
+import {profileQuery} from '../profile/queries/profileQuery.js';
 
 const query = new GraphQLObjectType({
   name: 'Query',
   fields: () => ({
     me: meQuery,
     forYou: forYouQuery,
+    profile: profileQuery,
   }),
 });
 

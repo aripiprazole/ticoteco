@@ -17,13 +17,16 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {useQueryLoader, usePreloadedQuery, PreloadedQuery} from 'react-relay';
+import {
+  useQueryLoader,
+  usePreloadedQuery,
+  PreloadedQuery,
+  graphql,
+} from 'react-relay';
 
 import {Box} from '@chakra-ui/react';
 
-import graphql from 'babel-plugin-relay/macro';
-
-import Post from './Post';
+import TimelinePost from './TimelinePost';
 
 import {TimelineQuery} from '../../__generated__/TimelineQuery.graphql';
 
@@ -69,7 +72,7 @@ function CurrentPosts(props: CurrentPostProps) {
   return (
     <div>
       {forYou.edges.map(({node, cursor}) => (
-        <Post data={node} key={cursor} />
+        <TimelinePost data={node} key={cursor} />
       ))}
 
       <button

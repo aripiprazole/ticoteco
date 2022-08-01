@@ -17,7 +17,11 @@
  */
 
 import {GraphQLFieldConfig} from 'graphql/type';
-import {connectionArgs, ConnectionArguments} from 'graphql-relay';
+import {GraphQLNonNull} from 'graphql';
+import {
+  connectionArgs,
+  ConnectionArguments,
+} from 'graphql-relay';
 import DataLoader from 'dataloader';
 
 import graphqlMongooseLoader from '@entria/graphql-mongoose-loader';
@@ -32,7 +36,7 @@ export type ForYouArguments = ConnectionArguments;
 type ForYouQuery = GraphQLFieldConfig<any, TicoTecoContext, ForYouArguments>;
 
 export const forYouQuery: ForYouQuery = {
-  type: GraphQLPostConnection.connectionType,
+  type: new GraphQLNonNull(GraphQLPostConnection.connectionType),
   description: 'Get for you post connection',
   args: connectionArgs,
   resolve: async (_root, args, context) => {
