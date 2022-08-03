@@ -16,8 +16,6 @@
   "dependencies": {
     "@firebase/app": "^0.7.28",
     "@firebase/auth": "^0.20.5",
-    "@ticoteco/shared": "workspace:^",
-    "@ticoteco/ui": "workspace:^",
     "axios": "^0.27.2",
     "cookie-cutter": "^0.2.0",
     "cookies-next": "^2.1.1",
