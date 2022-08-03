@@ -17,11 +17,11 @@
  */
 
 import React from 'react';
+import {FiPlay} from 'react-icons/fi';
 
 import {Box, Heading, Image, VStack} from '@chakra-ui/react';
 
 import {ProfileVideosQuery$data} from '../../__generated__/ProfileVideosQuery.graphql';
-import {FiPlay} from 'react-icons/all.js';
 
 type Post = ProfileVideosQuery$data['profile']['posts']['edges'][0]['node'];
 

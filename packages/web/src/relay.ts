@@ -28,19 +28,17 @@ import {
   Variables,
 } from 'relay-runtime';
 import axios from 'axios';
+import {AuthUserContext} from 'next-firebase-auth';
 
 export const GRAPHQL_API_URL =
   process.env.NEXT_PUBLIC_GRAPHQL_API_URL ?? 'http://localhost:8000';
-
-export const AUTHORIZATION_KEY = 'Authorization';
 
 const api = axios.create({
   baseURL: GRAPHQL_API_URL,
 });
 
-const fetchGraphQL =
-  (authorization: string) =>
-  async (
+function buildRelayEnvironment(authUser: AuthUserContext): Environment {
+  const fetchGraphQL = async (
     query: RequestParameters,
     variables: Variables,
     _cacheConfig: CacheConfig,
@@ -81,7 +79,7 @@ const fetchGraphQL =
 
     const response = await api.post('/graphql', body, {
       headers: {
-        Authorization: authorization,
+        Authorization: await authUser.getIdToken(),
       },
     });
 
@@ -89,9 +87,8 @@ const fetchGraphQL =
     return response.data;
   };
 
-function buildRelayEnvironment(authorization: string): Environment {
   return new Environment({
-    network: Network.create(fetchGraphQL(authorization)),
+    network: Network.create(fetchGraphQL),
     store: new Store(new RecordSource()),
   });
 }

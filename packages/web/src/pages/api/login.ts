@@ -16,31 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {NextApiRequest, NextApiResponse} from 'next';
+import {setAuthCookies} from 'next-firebase-auth';
 
-import cookieCutter from 'cookie-cutter';
+import initAuth from '../../auth/initAuth';
 
-function useCookieState(
-  key: string,
-): [string | undefined, Dispatch<SetStateAction<string | undefined>>] {
-  const [value, setValue] = useState<string>();
+initAuth();
 
-  const setCookieValue: Dispatch<SetStateAction<string | undefined>> = (
-    newState: any,
-  ) => {
-    const newValue =
-      typeof newState === 'function' ? newState(value) : newState;
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    await setAuthCookies(req, res);
+  } catch (error) {
+    console.error('error logging in', error);
 
-    cookieCutter.set(key, newValue);
+    return res.status(500).json({error: 'Could not log in with firebase'});
+  }
 
-    setValue(newValue);
-  };
-
-  useEffect(() => {
-    setValue(cookieCutter.get(key));
-  }, []);
-
-  return [value, setCookieValue];
+  return res.status(200).json({status: true});
 }
 
-export default useCookieState;
+export default handler;

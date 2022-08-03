@@ -16,28 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createContext, useContext} from 'react';
+import {AuthUserContext, useAuthUser} from 'next-firebase-auth';
 
-export type TicoTecoUser = {
-  readonly id: string;
-  readonly profile: {
-    readonly id: string;
-    readonly username: string;
-    readonly displayName: string;
-    readonly avatar: string;
-  };
-};
-
-export const AuthContext = createContext<TicoTecoUser | null>(null);
-
-export function useMaybeUser(): TicoTecoUser {
-  return useContext(AuthContext);
-}
-
-export function useLoggedUser(): TicoTecoUser {
-  const user = useContext(AuthContext);
-
-  if (!user) throw Error('User not logged');
-
-  return user;
+export function useMaybeAuthUser(): AuthUserContext | null {
+  try {
+    return useAuthUser();
+  } catch {
+    return null;
+  }
 }

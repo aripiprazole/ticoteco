@@ -17,20 +17,14 @@
  */
 
 import React, {PropsWithChildren, useEffect, useState} from 'react';
-import {useRelayEnvironment, graphql} from 'react-relay';
+import {graphql, useRelayEnvironment} from 'react-relay';
 
 import {fetchQuery} from 'relay-runtime';
 
-import useCookieState from '../hooks/useCookieState';
-
-import {AuthContext, AuthenticatedUser} from './AuthContext';
-
-import {getAuth, signInWithPopup, GoogleAuthProvider} from '@firebase/auth';
-
-import '../firebase';
-import {AUTHORIZATION_KEY} from '../relay';
+import {AuthContext, TicoTecoUser} from './AuthContext';
 
 import {AuthProviderQuery} from '../__generated__/AuthProviderQuery.graphql';
+import {useMaybeAuthUser} from '../hooks/useMaybeAuthUser';
 
 const AuthProviderQuery = graphql`
   query AuthProviderQuery {
@@ -46,33 +40,29 @@ const AuthProviderQuery = graphql`
   }
 `;
 
-export function AuthProvider({children}: PropsWithChildren) {
-  const auth = getAuth();
+export function AuthProvider(props: PropsWithChildren) {
+  const {children} = props;
 
   const environment = useRelayEnvironment();
+  const authUser = useMaybeAuthUser();
 
-  const [authKey, setAuthKey] = useCookieState(AUTHORIZATION_KEY);
-  const [user, setUser] = useState<AuthenticatedUser>();
+  const [user, setUser] = useState<TicoTecoUser | null>(null);
 
   useEffect(() => {
-    fetchQuery<AuthProviderQuery>(environment, AuthProviderQuery, {}).subscribe(
-      {
-        next: (data) => {
-          setUser(data.me);
-        },
-      },
+    if (!authUser) return;
+
+    const observable = fetchQuery<AuthProviderQuery>(
+      environment,
+      AuthProviderQuery,
+      {},
     );
-  }, [authKey]);
 
-  async function login() {
-    const credential = await signInWithPopup(auth, new GoogleAuthProvider());
+    observable.subscribe({
+      next: (data) => {
+        setUser(data.me);
+      },
+    });
+  }, [authUser]);
 
-    setAuthKey(await credential.user.getIdToken());
-  }
-
-  return (
-    <AuthContext.Provider value={{user, login}}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 }

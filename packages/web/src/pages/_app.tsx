@@ -17,33 +17,30 @@
  */
 
 import React from 'react';
-import {AppContext, AppProps} from 'next/app';
+import {AppProps} from 'next/app';
+import {withAuthUser} from 'next-firebase-auth';
 
 import {RelayEnvironmentProvider} from 'react-relay';
 
 import {ChakraProvider} from '@chakra-ui/react';
 
-import Cookies from 'cookies';
-
 import {theme} from '@ticoteco/ui';
 
-import buildRelayEnvironment, {AUTHORIZATION_KEY} from '../relay';
+import 'firebaseui/dist/firebaseui.css';
+
+import buildRelayEnvironment from '../relay';
+import initAuth from '../auth/initAuth';
 import {AuthProvider} from '../auth/AuthProvider';
+import {useMaybeAuthUser} from '../hooks/useMaybeAuthUser';
 
-export type TicoTecoAppProps = {
-  readonly authorization?: string | null;
-};
+initAuth();
 
-function App({
-  Component,
-  pageProps,
-  authorization,
-}: AppProps & TicoTecoAppProps) {
+function App({Component, pageProps}: AppProps) {
+  const authUser = useMaybeAuthUser();
+
   return (
     <ChakraProvider theme={theme}>
-      <RelayEnvironmentProvider
-        environment={buildRelayEnvironment(authorization)}
-      >
+      <RelayEnvironmentProvider environment={buildRelayEnvironment(authUser)}>
         <AuthProvider>
           <Component {...pageProps} />
         </AuthProvider>
@@ -52,15 +49,4 @@ function App({
   );
 }
 
-App.getInitialProps = async ({ctx}: AppContext): Promise<TicoTecoAppProps> => {
-  if (!ctx.req || !ctx.res) return {authorization: null};
-
-  const cookies = new Cookies(ctx.req, ctx.res);
-  const authorization = cookies.get(AUTHORIZATION_KEY);
-
-  if (!authorization) return {authorization: null};
-
-  return {authorization};
-};
-
-export default App;
+export default withAuthUser({})(App);

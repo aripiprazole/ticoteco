@@ -20,17 +20,17 @@ import React from 'react';
 
 import {Box, Button, Flex, Image} from '@chakra-ui/react';
 
-import {useAuth} from '../../auth/AuthContext';
+import {useMaybeUser} from '../../auth/AuthContext';
 
 import Upload from './upload/Upload';
 
 function AuthButtons() {
-  const {user, login} = useAuth();
+  const user = useMaybeUser();
 
   if (!user) {
     return (
       <Box>
-        <Button onClick={login}>Login</Button>
+        <Button>Login {user?.profile?.displayName}</Button>
       </Box>
     );
   }
