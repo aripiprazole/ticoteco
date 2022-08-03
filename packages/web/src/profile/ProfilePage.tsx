@@ -18,14 +18,17 @@
 
 import React from 'react';
 import Head from 'next/head';
-import {useRouter} from 'next/router';
 
 import Profile from './Profile';
 import Layout from '../layout/Layout';
+import {GetServerSideProps} from 'next';
 
-function ProfilePage() {
-  const router = useRouter();
-  const {username} = router.query;
+export type ProfilePageProps = {
+  readonly username: string;
+};
+
+function ProfilePage(props: ProfilePageProps) {
+  const {username} = props;
 
   return (
     <Layout>
@@ -33,9 +36,15 @@ function ProfilePage() {
         <title>TicoTeco - {username}</title>
       </Head>
 
-      <Profile username={username as string} />
+      <Profile username={username} />
     </Layout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => ({
+  props: {
+    username: ctx.query['username'],
+  },
+});
 
 export default ProfilePage;
