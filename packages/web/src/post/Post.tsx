@@ -16,11 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
 import {graphql, useLazyLoadQuery} from 'react-relay';
 
 import {
+  Box,
   chakra,
   Flex,
   Heading,
@@ -56,23 +57,45 @@ export type PostProps = {
 function Post(props: PostProps) {
   const {postId} = props;
 
+  const videoRef = useRef<HTMLVideoElement>();
+
+  const [playing, setPlaying] = useState(false);
+
   const {post} = useLazyLoadQuery<PostQuery>(PostQuery, {id: postId});
+
+  useEffect(() => {
+    if (playing) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play();
+    }
+  }, [playing]);
 
   return (
     <HStack width='100%' height='100%' wrap='wrap'>
-      <Flex background='#111' width='70%' height='100%' justify='center'>
-        <chakra.video>
-          <chakra.source />
+      <Flex
+        background='#111'
+        minWidth={{
+          sm: '100%',
+          md: 'calc(100% / 16 * 9)',
+        }}
+        height='100%'
+        justify='center'
+      >
+        <chakra.video
+          onClick={() => setPlaying((playing) => !playing)}
+          ref={videoRef}
+          sx={{
+            width: 'calc(100% / 16 * 9)',
+            height: '100%',
+          }}
+        >
+          <chakra.source src={post.video} type='video/mp4' />
+          Use an updated browser to play TicoTeco videos.
         </chakra.video>
       </Flex>
 
-      <VStack
-        flex='1'
-        justify='start'
-        align='start'
-        height='100%'
-        style={{margin: '0'}}
-      >
+      <Box flex='1' height='100%' style={{margin: '0'}}>
         <HStack
           width='100%'
           mt='0.5rem'
@@ -107,7 +130,7 @@ function Post(props: PostProps) {
             </Text>
           </VStack>
         </HStack>
-      </VStack>
+      </Box>
     </HStack>
   );
 }
