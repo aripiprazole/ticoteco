@@ -65,6 +65,7 @@ export const createPostMutation = mutationWithClientMutationId({
       title: args.title,
       description: args.description,
       user: ctx.user._id,
+      likes: [],
     });
 
     // Override video to use directly the FileUpload datatype.

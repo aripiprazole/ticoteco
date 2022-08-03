@@ -16,7 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import {
+  GraphQLInt,
+  GraphQLNonNull,
+  GraphQLObjectType,
+  GraphQLString,
+} from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
 
 import GraphQLProfile from '../../profile/types/GraphQLProfile.js';
@@ -42,6 +47,11 @@ const GraphQLPost = new GraphQLObjectType<Post>({
     description: {
       type: new GraphQLNonNull(GraphQLString),
       resolve: (post) => post.description,
+    },
+
+    likes: {
+      type: new GraphQLNonNull(GraphQLInt),
+      resolve: (post) => post.likes.length,
     },
 
     video: {
