@@ -18,10 +18,12 @@
 
 import React, {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 import {FiHeart, FiMessageCircle, FiShare2} from 'react-icons/fi';
 import {IconType} from 'react-icons';
 
 import {chakra, Flex, Heading, IconButton, Image, Text} from '@chakra-ui/react';
+
 import {TimelineQuery$data} from '../__generated__/TimelineQuery.graphql';
 
 type PostProps = {
@@ -33,6 +35,8 @@ function TimelinePost(props: PostProps) {
   const {selected = false, data} = props;
 
   const videoRef = useRef<HTMLVideoElement>();
+
+  const router = useRouter();
 
   const [playing, setPlaying] = useState(selected);
 
@@ -102,7 +106,11 @@ function TimelinePost(props: PostProps) {
 
           <Flex direction='column' justify='end' gap='0.5rem'>
             <ActionButton label='Like' icon={FiHeart} />
-            <ActionButton label='Comments' icon={FiMessageCircle} />
+            <ActionButton
+              label='Comments'
+              icon={FiMessageCircle}
+              onClick={() => router.push(`/post/${data.id}`)}
+            />
             <ActionButton label='Share' icon={FiShare2} />
           </Flex>
         </Flex>
@@ -111,16 +119,21 @@ function TimelinePost(props: PostProps) {
   );
 }
 
-type ActionButtonProps = {label: string; icon: IconType};
+type ActionButtonProps = {
+  readonly label: string;
+  readonly icon: IconType;
+  readonly onClick?: () => void;
+};
 
 function ActionButton(props: ActionButtonProps) {
-  const {icon: Icon, label} = props;
+  const {icon: Icon, label, onClick} = props;
 
   return (
     <IconButton
       aria-label={label}
       borderRadius='50%'
       height='fit-content'
+      onClick={onClick}
       sx={{padding: '1rem'}}
     >
       <Icon fill='#000' size='1.3rem' />
