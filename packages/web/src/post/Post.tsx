@@ -18,7 +18,8 @@
 
 import React, {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
-import {FiEdit} from 'react-icons/fi';
+import {useRouter} from 'next/router';
+import {FiEdit, FiTrash} from 'react-icons/fi';
 import {graphql, useLazyLoadQuery, useMutation} from 'react-relay';
 
 import {useFormik} from 'formik';
@@ -39,6 +40,7 @@ import {
 
 import {PostQuery} from '../__generated__/PostQuery.graphql';
 import {PostUpdateMutation} from '../__generated__/PostUpdateMutation.graphql';
+import {PostDeleteMutation} from '../__generated__/PostDeleteMutation.graphql';
 
 import {useMaybeUser} from '../auth/AuthContext';
 
@@ -78,6 +80,14 @@ const PostUpdateMutation = graphql`
   }
 `;
 
+const PostDeleteMutation = graphql`
+  mutation PostDeleteMutation($input: DeletePostInput!) {
+    deletePost(input: $input) {
+      clientMutationId
+    }
+  }
+`;
+
 export type PostProps = {
   readonly postId: string;
 };
@@ -85,6 +95,7 @@ export type PostProps = {
 function Post(props: PostProps) {
   const {postId} = props;
 
+  const router = useRouter();
   const user = useMaybeUser();
 
   const videoRef = useRef<HTMLVideoElement>();
@@ -92,8 +103,10 @@ function Post(props: PostProps) {
   const [editing, setEditing] = useState(false);
   const [playing, setPlaying] = useState(false);
 
-  const [commitMutation, isFlying] =
+  const [updatePost, isUpdating] =
     useMutation<PostUpdateMutation>(PostUpdateMutation);
+  const [deletePost, isDeleting] =
+    useMutation<PostDeleteMutation>(PostDeleteMutation);
   const {post} = useLazyLoadQuery<PostQuery>(PostQuery, {id: postId});
 
   const formik = useFormik({
@@ -102,7 +115,7 @@ function Post(props: PostProps) {
       description: post?.description ?? '',
     },
     onSubmit: (values) => {
-      commitMutation({
+      updatePost({
         variables: {
           input: {
             id: post.id,
@@ -130,7 +143,18 @@ function Post(props: PostProps) {
     formik.values.title !== post.title ||
     formik.values.description !== post.description;
 
-  function edit() {
+  function handleDeletePost() {
+    deletePost({
+      variables: {
+        input: {id: post.id},
+      },
+      onCompleted: () => {
+        router.push('/');
+      },
+    });
+  }
+
+  function handleEditPost() {
     if (!isOwner) return;
     if (diff) return;
 
@@ -224,15 +248,25 @@ function Post(props: PostProps) {
           <HStack gap='0.5rem'>
             {isOwner && (
               <IconButton
-                aria-label='Edit profile'
+                aria-label='Edit post'
                 colorScheme={editing ? 'red' : null}
                 icon={<FiEdit />}
-                onClick={edit}
+                onClick={handleEditPost}
+              />
+            )}
+
+            {isOwner && (
+              <IconButton
+                aria-label='Delete post'
+                colorScheme='red'
+                icon={<FiTrash />}
+                disabled={isDeleting}
+                onClick={handleDeletePost}
               />
             )}
 
             {diff && (
-              <Button type='submit' colorScheme='green' disabled={isFlying}>
+              <Button type='submit' colorScheme='green' disabled={isUpdating}>
                 Submit
               </Button>
             )}
