@@ -16,6 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Landing from '../screens/Landing';
+import TimelinePage from '../timeline/TimelinePage';
 
-export default Landing;
+export default TimelinePage;

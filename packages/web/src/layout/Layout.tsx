@@ -18,15 +18,24 @@
 
 import React from 'react';
 
-import Timeline from '../components/timeline/Timeline';
-import Layout from '../components/layout/Layout';
+import {Box} from '@chakra-ui/react';
 
-function Landing() {
+import Navigation from './navigation/Navigation';
+
+type LayoutProps = {
+  readonly children?: React.ReactNode;
+};
+
+function Layout({children}: LayoutProps) {
   return (
-    <Layout>
-      <Timeline />
-    </Layout>
+    <Box>
+      <Navigation />
+
+      <Box as='main' margin='auto' width='100%' maxWidth='80rem'>
+        {children}
+      </Box>
+    </Box>
   );
 }
 
-export default Landing;
+export default Layout;

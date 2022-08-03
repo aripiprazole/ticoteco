@@ -17,25 +17,39 @@
  */
 
 import React from 'react';
+import {FiBox} from 'react-icons/fi';
 
-import {Box} from '@chakra-ui/react';
+import {Box, Flex} from '@chakra-ui/react';
 
-import Navigation from '../navigation/Navigation';
+import Search from './Search';
+import AuthButtons from './AuthButtons';
 
-type LayoutProps = {
-  readonly children?: React.ReactNode;
-};
-
-function Layout({children}: LayoutProps) {
+function Navigation() {
   return (
-    <Box>
-      <Navigation />
+    <Box
+      background='src/navigation/Navigation.js#fefefe'
+      padding='1rem 0.5rem'
+      borderBottom='1px solid #e6e6e6'
+    >
+      <Flex
+        as='nav'
+        margin='auto'
+        width='100%'
+        maxWidth='80rem'
+        justify='space-between'
+        align='center'
+      >
+        <Flex gap='0.2rem' align='center' fontSize='1.5rem'>
+          <FiBox /> {/* TODO: create ticoteco's logo */}
+          ticoteco
+        </Flex>
 
-      <Box as='main' margin='auto' width='100%' maxWidth='80rem'>
-        {children}
-      </Box>
+        <Search />
+
+        <AuthButtons />
+      </Flex>
     </Box>
   );
 }
 
-export default Layout;
+export default Navigation;

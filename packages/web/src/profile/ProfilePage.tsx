@@ -17,39 +17,20 @@
  */
 
 import React from 'react';
-import {FiBox} from 'react-icons/fi';
+import {useRouter} from 'next/router';
 
-import {Box, Flex} from '@chakra-ui/react';
+import Profile from './Profile';
+import Layout from '../layout/Layout';
 
-import Search from './Search';
-import AuthButtons from './AuthButtons';
+function ProfilePage() {
+  const router = useRouter();
+  const {username} = router.query;
 
-function Navigation() {
   return (
-    <Box
-      background='#fefefe'
-      padding='1rem 0.5rem'
-      borderBottom='1px solid #e6e6e6'
-    >
-      <Flex
-        as='nav'
-        margin='auto'
-        width='100%'
-        maxWidth='80rem'
-        justify='space-between'
-        align='center'
-      >
-        <Flex gap='0.2rem' align='center' fontSize='1.5rem'>
-          <FiBox /> {/* TODO: create ticoteco's logo */}
-          ticoteco
-        </Flex>
-
-        <Search />
-
-        <AuthButtons />
-      </Flex>
-    </Box>
+    <Layout>
+      <Profile username={username as string} />
+    </Layout>
   );
 }
 
-export default Navigation;
+export default ProfilePage;
