@@ -38,6 +38,7 @@ import {ProfileQuery} from '../__generated__/ProfileQuery.graphql';
 import ProfileVideos from './ProfileVideos';
 import {useMaybeUser} from '../auth/AuthContext';
 import {ProfileUpdateMutation} from '../__generated__/ProfileUpdateMutation.graphql';
+import {useRouter} from 'next/router';
 
 const ProfileQuery = graphql`
   query ProfileQuery($username: String!) {
@@ -83,6 +84,7 @@ type ContentProps = {
 
 function Content(props: ContentProps) {
   const user = useMaybeUser();
+  const router = useRouter();
 
   const [editing, setEditing] = useState(false);
 
@@ -109,6 +111,10 @@ function Content(props: ContentProps) {
         },
         onCompleted: () => {
           setEditing(false);
+
+          if (values.username !== user?.profile?.username) {
+            router.push(`/${values.username}`);
+          }
         },
       });
     },
