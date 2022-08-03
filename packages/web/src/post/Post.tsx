@@ -107,6 +107,7 @@ function Post(props: PostProps) {
           <Link href={`/${post.profile.username}`}>
             <chakra.a>
               <Image
+                cursor='pointer'
                 src={post.profile.avatar}
                 aria-label={`${post.profile.username}'s avatar`}
                 height='4rem'

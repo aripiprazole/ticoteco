@@ -22,6 +22,7 @@ import {FiPlay} from 'react-icons/fi';
 import {Box, Heading, Image, VStack} from '@chakra-ui/react';
 
 import {ProfileVideosQuery$data} from '../__generated__/ProfileVideosQuery.graphql';
+import {useRouter} from 'next/router';
 
 type Post = ProfileVideosQuery$data['profile']['posts']['edges'][0]['node'];
 
@@ -32,8 +33,16 @@ export type ProfilePostProps = {
 function ProfilePost(props: ProfilePostProps) {
   const {data} = props;
 
+  const router = useRouter();
+
   return (
-    <VStack width='12rem' gap='0.2rem' align='start'>
+    <VStack
+      width='12rem'
+      gap='0.2rem'
+      align='start'
+      cursor='pointer'
+      onClick={() => router.push(`/post/${data.id}`)}
+    >
       <Box
         position='relative'
         sx={{
