@@ -17,9 +17,8 @@
  */
 
 import React from 'react';
-import {FiBox} from 'react-icons/fi';
 
-import {Box, Flex} from '@chakra-ui/react';
+import {Box, Flex, Image} from '@chakra-ui/react';
 
 import Search from './Search';
 import AuthButtons from './AuthButtons';
@@ -27,7 +26,7 @@ import AuthButtons from './AuthButtons';
 function Navigation() {
   return (
     <Box
-      background='src/navigation/Navigation.js#fefefe'
+      background='#fefefe'
       padding='1rem 0.5rem'
       borderBottom='1px solid #e6e6e6'
     >
@@ -39,10 +38,7 @@ function Navigation() {
         justify='space-between'
         align='center'
       >
-        <Flex gap='0.2rem' align='center' fontSize='1.5rem'>
-          <FiBox /> {/* TODO: create ticoteco's logo */}
-          ticoteco
-        </Flex>
+        <Image alt='TikTok' src='/tiktok.png' height='3rem' />
 
         <Search />
 
