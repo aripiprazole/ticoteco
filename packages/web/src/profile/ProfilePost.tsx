@@ -18,11 +18,11 @@
 
 import React from 'react';
 import {FiPlay} from 'react-icons/fi';
+import {useRouter} from 'next/router';
 
-import {Box, Heading, Image, VStack} from '@chakra-ui/react';
+import {Box, chakra, Heading, VStack} from '@chakra-ui/react';
 
 import {ProfileVideosQuery$data} from '../__generated__/ProfileVideosQuery.graphql';
-import {useRouter} from 'next/router';
 
 type Post = ProfileVideosQuery$data['profile']['posts']['edges'][0]['node'];
 
@@ -50,12 +50,10 @@ function ProfilePost(props: ProfilePostProps) {
           height: 'calc(12rem / 9 * 16)',
         }}
       >
-        <Image
-          src={data.preview}
-          borderRadius='0.5rem'
-          width='100%'
-          height='100%'
-        />
+        <chakra.video borderRadius='0.5rem' width='100%' height='100%'>
+          <chakra.source src={data.video} type='video/mp4' />
+          Use an updated browser to play TicoTeco videos.
+        </chakra.video>
 
         <FiPlay
           color='#fefefe'
