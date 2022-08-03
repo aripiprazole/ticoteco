@@ -8,6 +8,7 @@
   "license": "GPL-3.0+",
   "packageManager": "yarn@3.2.1",
   "scripts": {
+    "heroku-postbuild": "yarn workspace @ticoteco/backend build",
     "backend:dev": "yarn workspace @ticoteco/backend dev",
     "backend:dev:watch": "yarn workspace @ticoteco/backend dev:watch",
     "backend:start": "yarn workspace @ticoteco/backend start",
