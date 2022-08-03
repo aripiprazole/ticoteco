@@ -18,6 +18,7 @@
 
 import {
   GraphQLInt,
+  GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString,
@@ -30,6 +31,7 @@ import Post from '../../post/Post.js';
 import User from '../../user/User.js';
 import TicoTecoContext from '../../graphql/TicoTecoContext.js';
 import Profile from '../../profile/Profile.js';
+import GraphQLComment from '../../comment/types/GraphQLComment.js';
 
 const GraphQLPost = new GraphQLObjectType<Post>({
   name: 'Post',
@@ -52,6 +54,11 @@ const GraphQLPost = new GraphQLObjectType<Post>({
     likes: {
       type: new GraphQLNonNull(GraphQLInt),
       resolve: (post) => post.likes.length,
+    },
+
+    comments: {
+      type: new GraphQLList(GraphQLComment),
+      resolve: async (post) => post.comments,
     },
 
     video: {
