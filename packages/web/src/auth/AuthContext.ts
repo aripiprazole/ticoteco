@@ -16,31 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {createContext, useContext} from 'react';
 
-import cookieCutter from 'cookie-cutter';
-
-function useCookieState(
-  key: string,
-): [string | undefined, Dispatch<SetStateAction<string | undefined>>] {
-  const [value, setValue] = useState<string>();
-
-  const setCookieValue: Dispatch<SetStateAction<string | undefined>> = (
-    newState: any,
-  ) => {
-    const newValue =
-      typeof newState === 'function' ? newState(value) : newState;
-
-    cookieCutter.set(key, newValue);
-
-    setValue(newValue);
+export type TicoTecoUser = {
+  readonly id: string;
+  readonly profile: {
+    readonly id: string;
+    readonly username: string;
+    readonly displayName: string;
+    readonly avatar: string;
   };
+};
 
-  useEffect(() => {
-    setValue(cookieCutter.get(key));
-  }, []);
+export const AuthContext = createContext<TicoTecoUser | null>(null);
 
-  return [value, setCookieValue];
+export function useMaybeUser(): TicoTecoUser {
+  return useContext(AuthContext);
 }
 
-export default useCookieState;
+export function useLoggedUser(): TicoTecoUser {
+  const user = useContext(AuthContext);
+
+  if (!user) throw Error('User not logged');
+
+  return user;
+}

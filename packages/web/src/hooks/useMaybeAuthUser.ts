@@ -16,40 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import {AuthUserContext, useAuthUser} from 'next-firebase-auth';
 
-import {Box, Button, Flex, Image} from '@chakra-ui/react';
-
-import {useMaybeUser} from '../../auth/AuthContext';
-
-import Upload from './upload/Upload';
-
-function AuthButtons() {
-  const user = useMaybeUser();
-
-  if (!user) {
-    return (
-      <Box>
-        <Button>Login {user?.profile?.displayName}</Button>
-      </Box>
-    );
+export function useMaybeAuthUser(): AuthUserContext | null {
+  try {
+    return useAuthUser();
+  } catch {
+    return null;
   }
-
-  return (
-    <Flex gap='1rem'>
-      <Upload />
-
-      <Image
-        aria-label={`${user.profile.username}'s avatar`}
-        src={user.profile.avatar}
-        cursor='pointer'
-        height='2.4rem'
-        width='2.4rem'
-        border='1px solid #1c1c1c'
-        borderRadius='50%'
-      />
-    </Flex>
-  );
 }
-
-export default AuthButtons;
