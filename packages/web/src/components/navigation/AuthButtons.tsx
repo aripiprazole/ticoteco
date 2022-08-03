@@ -18,38 +18,30 @@
 
 import React from 'react';
 
-import {Box, Button, Flex, Image} from '@chakra-ui/react';
-
-import {useAuth} from '../../auth/AuthContext';
-
-import Upload from './upload/Upload';
+import {Box, Button} from '@chakra-ui/react';
 
 function AuthButtons() {
-  const {user, login} = useAuth();
-
-  if (!user) {
-    return (
-      <Box>
-        <Button onClick={login}>Login</Button>
-      </Box>
-    );
-  }
-
   return (
-    <Flex gap='1rem'>
-      <Upload />
-
-      <Image
-        aria-label={`${user.profile.username}'s avatar`}
-        src={user.profile.avatar}
-        cursor='pointer'
-        height='2.4rem'
-        width='2.4rem'
-        border='1px solid #1c1c1c'
-        borderRadius='50%'
-      />
-    </Flex>
+    <Box>
+      <Button>Login</Button>
+    </Box>
   );
+
+  // return (
+  //   <Flex gap='1rem'>
+  //     <Upload />
+  //
+  //     <Image
+  //       aria-label={`${user.profile.username}'s avatar`}
+  //       src={user.profile.avatar}
+  //       cursor='pointer'
+  //       height='2.4rem'
+  //       width='2.4rem'
+  //       border='1px solid #1c1c1c'
+  //       borderRadius='50%'
+  //     />
+  //   </Flex>
+  // );
 }
 
 export default AuthButtons;

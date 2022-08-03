@@ -27,12 +27,16 @@ import Cookies from 'cookies';
 
 import {theme} from '@ticoteco/ui';
 
+import 'firebaseui/dist/firebaseui.css';
+
 import buildRelayEnvironment, {AUTHORIZATION_KEY} from '../relay';
-import {AuthProvider} from '../auth/AuthProvider';
+import initAuth from '../auth/initAuth';
 
 export type TicoTecoAppProps = {
   readonly authorization?: string | null;
 };
+
+initAuth();
 
 function App({
   Component,
@@ -44,9 +48,7 @@ function App({
       <RelayEnvironmentProvider
         environment={buildRelayEnvironment(authorization)}
       >
-        <AuthProvider>
-          <Component {...pageProps} />
-        </AuthProvider>
+        <Component {...pageProps} />
       </RelayEnvironmentProvider>
     </ChakraProvider>
   );

@@ -1635,7 +1635,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.15.4":
+"@babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.18.9":
   version: 7.18.9
   resolution: "@babel/runtime@npm:7.18.9"
   dependencies:
@@ -6052,9 +6052,11 @@ __metadata:
     framer-motion: ^6.5.1
     fs: ^0.0.1-security
     next: 12.2.0
+    next-firebase-auth: canary
     next-transpile-modules: ^9.0.0
     react: 18.2.0
     react-dom: 18.2.0
+    react-firebaseui: ^6.0.0
     react-icons: ^4.4.0
     react-relay: ^14.0.0
     relay-compiler: ^14.0.0
@@ -9499,7 +9501,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookies@npm:~0.8.0":
+"cookies@npm:^0.8.0, cookies@npm:~0.8.0":
   version: 0.8.0
   resolution: "cookies@npm:0.8.0"
   dependencies:
@@ -10148,6 +10150,13 @@ __metadata:
     detect: ./bin/detect-port
     detect-port: ./bin/detect-port
   checksum: 93c40febe714f56711d1fedc2b7a9cc4cbaa0fcddec0509876c46b9dd6099ed6bfd6662a4f35e5fa0301660f48ed516829253ab0fc90b9e79b823dd77786b379
+  languageName: node
+  linkType: hard
+
+"dialog-polyfill@npm:^0.4.7":
+  version: 0.4.10
+  resolution: "dialog-polyfill@npm:0.4.10"
+  checksum: f5f472542a059ade7f1f19bc7bf7acf19210a1d89f9dda99cc67027f58709307c8c8faff9e4217cf9ef4d06ef0be3bf9885d48a7304e0f5b01b4f36c0e4570e1
   languageName: node
   linkType: hard
 
@@ -11481,6 +11490,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"firebaseui@npm:^6.0.0":
+  version: 6.0.1
+  resolution: "firebaseui@npm:6.0.1"
+  dependencies:
+    dialog-polyfill: ^0.4.7
+    material-design-lite: ^1.2.0
+  peerDependencies:
+    firebase: ^9.1.3
+  checksum: 584cf1a1f5b4991c40946c728052b11d23ae38c483de22b6153f594df22dd44e21e09abe789b718a424f7c752e5a5a4e4d39f79b7028b481fbac1781bc87bf7a
+  languageName: node
+  linkType: hard
+
 "flat-cache@npm:^3.0.4":
   version: 3.0.4
   resolution: "flat-cache@npm:3.0.4"
@@ -12634,7 +12655,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.1":
+"hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.1, hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -15243,6 +15264,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"material-design-lite@npm:^1.2.0":
+  version: 1.3.0
+  resolution: "material-design-lite@npm:1.3.0"
+  checksum: f5d45f84408feb11c6e6da2389b69f73cbef3954b9259eced1f25070ad6e299f59782ca7e63e37635bdc177aea69a58aaa7b03fb9f74070a9dd6a44364d6bc9a
+  languageName: node
+  linkType: hard
+
 "md5.js@npm:^1.3.4":
   version: 1.3.5
   resolution: "md5.js@npm:1.3.5"
@@ -15947,6 +15975,32 @@ __metadata:
   version: 2.1.1
   resolution: "nested-error-stacks@npm:2.1.1"
   checksum: 5f452fad75db8480b4db584e1602894ff5977f8bf3d2822f7ba5cb7be80e89adf1fffa34dada3347ef313a4288850b4486eb0635b315c32bdfb505577e8880e3
+  languageName: node
+  linkType: hard
+
+"next-firebase-auth@npm:canary":
+  version: 1.0.0-canary.12
+  resolution: "next-firebase-auth@npm:1.0.0-canary.12"
+  dependencies:
+    "@babel/runtime": ^7.18.9
+    cookies: ^0.8.0
+    hoist-non-react-statics: ^3.3.2
+  peerDependencies:
+    firebase: ^9.0.0
+    firebase-admin: ">=9.0.0 <12"
+    next: ">=9.5.0 <13"
+    react: ">=16.8.0 <19"
+    react-dom: ">=16.8.0 <19"
+  peerDependenciesMeta:
+    firebase:
+      optional: true
+    next:
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 88c8cb8724c91bd495c70ce0d5e4a9ad8575d240c9782abe85a0c2fb0a8a51ce4f0b995176db0beeb7deba90d914ca86cc4e2fe9e70dfeac8662641a8641952f
   languageName: node
   linkType: hard
 
@@ -17801,6 +17855,18 @@ __metadata:
   version: 2.0.4
   resolution: "react-fast-compare@npm:2.0.4"
   checksum: 06046595f90a4e3e3a56f40a8078c00aa71bdb064ddb98343f577f546aa22e888831fd45f009c93b34707cc842b4c637737e956fd13d6f80607ee92fb9cf9a1c
+  languageName: node
+  linkType: hard
+
+"react-firebaseui@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "react-firebaseui@npm:6.0.0"
+  dependencies:
+    firebaseui: ^6.0.0
+  peerDependencies:
+    firebase: ^9.1.3
+    react: ">=15 <=17"
+  checksum: 05c58ddbe7b8054158366d58a024af3512be3606e982e635eb34b1de5e1c398cf3cb9f2985e75c654c5e1d31ac0ba1bed8c37913d34e25954abc0b1516dc78d9
   languageName: node
   linkType: hard
 

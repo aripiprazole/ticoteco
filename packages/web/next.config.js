@@ -5,7 +5,9 @@ const withTM = require('next-transpile-modules')([
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  // TODO: do not use react-firebaseui
+  // https://github.com/firebase/firebaseui-web-react/issues/59
+  reactStrictMode: false,
 
   compiler: {
     relay: require('./relay.config'),

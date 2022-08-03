@@ -16,28 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createContext, useContext} from 'react';
+import {NextApiRequest, NextApiResponse} from 'next';
+import {setAuthCookies} from 'next-firebase-auth';
 
-export type AuthContextData = {
-  readonly user: AuthenticatedUser | null;
-  readonly login: () => void;
-};
+import initAuth from '../../auth/initAuth';
 
-export type AuthenticatedUser = {
-  readonly id: string;
-  readonly profile: {
-    readonly id: string;
-    readonly username: string;
-    readonly displayName: string;
-    readonly avatar: string;
-  };
-};
+initAuth();
 
-export const AuthContext = createContext<AuthContextData>({
-  user: null,
-  login: () => {},
-});
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    await setAuthCookies(req, res);
+  } catch (error) {
+    console.error('error logging in', error);
 
-export function useAuth(): AuthContextData {
-  return useContext(AuthContext);
+    return res.status(500).json({error: 'Could not log in with firebase'});
+  }
+
+  return res.status(200).json({status: true});
 }
+
+export default handler;
