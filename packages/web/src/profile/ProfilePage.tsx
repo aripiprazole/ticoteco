@@ -17,6 +17,7 @@
  */
 
 import React from 'react';
+import Head from 'next/head';
 import {useRouter} from 'next/router';
 
 import Profile from './Profile';
@@ -28,6 +29,10 @@ function ProfilePage() {
 
   return (
     <Layout>
+      <Head>
+        <title>TicoTeco - {username}</title>
+      </Head>
+
       <Profile username={username as string} />
     </Layout>
   );
