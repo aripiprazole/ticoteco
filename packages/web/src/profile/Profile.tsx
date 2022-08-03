@@ -17,7 +17,7 @@
  */
 
 import React, {useState} from 'react';
-import {useLazyLoadQuery, graphql} from 'react-relay';
+import {useLazyLoadQuery, graphql, useMutation} from 'react-relay';
 import {FiEdit} from 'react-icons/fi';
 
 import {useFormik} from 'formik';
@@ -37,6 +37,7 @@ import {ProfileQuery} from '../__generated__/ProfileQuery.graphql';
 
 import ProfileVideos from './ProfileVideos';
 import {useMaybeUser} from '../auth/AuthContext';
+import {ProfileUpdateMutation} from '../__generated__/ProfileUpdateMutation.graphql';
 
 const ProfileQuery = graphql`
   query ProfileQuery($username: String!) {
@@ -45,6 +46,19 @@ const ProfileQuery = graphql`
       username
       displayName
       avatar
+    }
+  }
+`;
+
+const ProfileUpdateMutation = graphql`
+  mutation ProfileUpdateMutation($input: UpdateProfileInput!) {
+    updateProfile(input: $input) {
+      profile {
+        id
+        displayName
+        username
+        avatar
+      }
     }
   }
 `;
@@ -72,17 +86,35 @@ function Content(props: ContentProps) {
 
   const [editing, setEditing] = useState(false);
 
+  const [commitMutation, isFlying] = useMutation<ProfileUpdateMutation>(
+    ProfileUpdateMutation,
+  );
+
   const {profile} = useLazyLoadQuery<ProfileQuery>(ProfileQuery, {
     username: props.username,
   });
 
   const formik = useFormik({
     initialValues: {
-      username: profile.username,
-      displayName: profile.displayName,
+      username: profile?.username ?? '',
+      displayName: profile?.displayName ?? '',
     },
-    onSubmit: () => {},
+    onSubmit: (values) => {
+      commitMutation({
+        variables: {
+          input: {
+            username: values.username,
+            displayName: values.username,
+          },
+        },
+        onCompleted: () => {
+          setEditing(false);
+        },
+      });
+    },
   });
+
+  if (!profile) return null;
 
   const isOwner = user?.profile?.id === profile.id;
   const diff =
@@ -151,7 +183,7 @@ function Content(props: ContentProps) {
           />
 
           {diff && (
-            <Button type='submit' colorScheme='green'>
+            <Button type='submit' colorScheme='green' disabled={isFlying}>
               Submit
             </Button>
           )}

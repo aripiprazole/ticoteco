@@ -19,11 +19,13 @@
 import {GraphQLObjectType} from 'graphql';
 
 import {createPostMutation} from '../post/mutation/createPostMutation.js';
+import {updateProfileMutation} from '../profile/mutations/updateProfile.js';
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
     createPost: createPostMutation,
+    updateProfile: updateProfileMutation,
   }),
 });
 
