@@ -23,8 +23,11 @@ declare global {
     interface ProcessEnv {
       readonly NODE_ENV: 'development' | 'production' | 'test';
       readonly MONGO_URI: string;
-      readonly GOOGLE_APPLICATION_CREDENTIALS: undefined | string;
       readonly STORAGE_BUCKET: string;
+      readonly GOOGLE_APPLICATION_CREDENTIALS?: string;
+      readonly FIREBASE_PROJECT_ID?: string;
+      readonly FIREBASE_CLIENT_EMAIL?: string;
+      readonly FIREBASE_PRIVATE_KEY?: string;
     }
   }
 }
