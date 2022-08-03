@@ -17,6 +17,7 @@
  */
 
 import React from 'react';
+import Head from 'next/head';
 
 import Timeline from './Timeline';
 import Layout from '../layout/Layout';
@@ -24,6 +25,10 @@ import Layout from '../layout/Layout';
 function TimelinePage() {
   return (
     <Layout>
+      <Head>
+        <title>TicoTeco - Timeline</title>
+      </Head>
+
       <Timeline />
     </Layout>
   );

@@ -29,6 +29,7 @@ import {
   withAuthUser,
   withAuthUserTokenSSR,
 } from 'next-firebase-auth';
+import Head from 'next/head';
 
 const uiConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -64,6 +65,10 @@ function LoginPage() {
 
   return (
     <Box>
+      <Head>
+        <title>TicoTeco - Login</title>
+      </Head>
+
       {renderAuth && (
         <FirebaseAuth uiConfig={uiConfig} firebaseAuth={getAuth(getApp())} />
       )}
