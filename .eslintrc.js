@@ -24,6 +24,7 @@ module.exports = {
   rules: {
     'prettier/prettier': ['error', {}, {usePrettierrc: true}],
     'react/prop-types': ['off'],
+    'react/no-children-prop': ['off'],
     'require-jsdoc': ['off'],
     'spaced-comment': ['off'],
     'indent': ['off'],

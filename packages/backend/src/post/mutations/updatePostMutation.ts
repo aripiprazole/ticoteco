@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLNonNull, GraphQLString} from 'graphql';
+import {GraphQLID, GraphQLNonNull, GraphQLString} from 'graphql';
 import {mutationWithClientMutationId} from 'graphql-relay';
 
 import * as Yup from 'yup';
@@ -40,6 +40,7 @@ const updatePostSchema = Yup.object({
 export const updatePostMutation = mutationWithClientMutationId({
   name: 'UpdatePost',
   inputFields: {
+    id: {type: new GraphQLNonNull(GraphQLID)},
     title: {type: new GraphQLNonNull(GraphQLString)},
     description: {type: GraphQLString},
   },
@@ -56,7 +57,7 @@ export const updatePostMutation = mutationWithClientMutationId({
 
     const post = await Post.findById(id);
 
-    if (post.user !== ctx.user._id) {
+    if (!ctx.user._id.equals(post.user)) {
       throw Error('You are not allowed to update this post');
     }
 

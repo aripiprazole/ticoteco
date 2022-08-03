@@ -18,7 +18,10 @@
 
 import React, {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
-import {graphql, useLazyLoadQuery} from 'react-relay';
+import {FiEdit} from 'react-icons/fi';
+import {graphql, useLazyLoadQuery, useMutation} from 'react-relay';
+
+import {useFormik} from 'formik';
 
 import {
   Box,
@@ -35,9 +38,9 @@ import {
 } from '@chakra-ui/react';
 
 import {PostQuery} from '../__generated__/PostQuery.graphql';
-import {FiEdit} from 'react-icons/fi';
+import {PostUpdateMutation} from '../__generated__/PostUpdateMutation.graphql';
+
 import {useMaybeUser} from '../auth/AuthContext';
-import {useFormik} from 'formik';
 
 const PostQuery = graphql`
   query PostQuery($id: ID!) {
@@ -51,6 +54,25 @@ const PostQuery = graphql`
         avatar
         displayName
         username
+      }
+    }
+  }
+`;
+
+const PostUpdateMutation = graphql`
+  mutation PostUpdateMutation($input: UpdatePostInput!) {
+    updatePost(input: $input) {
+      post {
+        id
+        title
+        description
+        video
+        profile {
+          id
+          avatar
+          username
+          displayName
+        }
       }
     }
   }
@@ -70,6 +92,8 @@ function Post(props: PostProps) {
   const [editing, setEditing] = useState(false);
   const [playing, setPlaying] = useState(false);
 
+  const [commitMutation, isFlying] =
+    useMutation<PostUpdateMutation>(PostUpdateMutation);
   const {post} = useLazyLoadQuery<PostQuery>(PostQuery, {id: postId});
 
   const formik = useFormik({
@@ -77,7 +101,20 @@ function Post(props: PostProps) {
       title: post?.title ?? '',
       description: post?.description ?? '',
     },
-    onSubmit: (values) => {},
+    onSubmit: (values) => {
+      commitMutation({
+        variables: {
+          input: {
+            id: post.id,
+            title: values.title,
+            description: values.description,
+          },
+        },
+        onCompleted: () => {
+          setEditing(false);
+        },
+      });
+    },
   });
 
   useEffect(() => {
@@ -195,7 +232,7 @@ function Post(props: PostProps) {
             )}
 
             {diff && (
-              <Button type='submit' colorScheme='green'>
+              <Button type='submit' colorScheme='green' disabled={isFlying}>
                 Submit
               </Button>
             )}

@@ -132,6 +132,7 @@ type UpdatePostPayload {
 }
 
 input UpdatePostInput {
+  id: ID!
   title: String!
   description: String
   clientMutationId: String
