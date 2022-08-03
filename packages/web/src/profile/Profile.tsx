@@ -181,12 +181,14 @@ function Content(props: ContentProps) {
         </HStack>
 
         <HStack gap='0.5rem'>
-          <IconButton
-            aria-label='Edit profile'
-            colorScheme={editing ? 'red' : null}
-            icon={<FiEdit />}
-            onClick={edit}
-          />
+          {isOwner && (
+            <IconButton
+              aria-label='Edit profile'
+              colorScheme={editing ? 'red' : null}
+              icon={<FiEdit />}
+              onClick={edit}
+            />
+          )}
 
           {diff && (
             <Button type='submit' colorScheme='green' disabled={isFlying}>
