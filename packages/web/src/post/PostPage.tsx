@@ -19,7 +19,6 @@
 import React from 'react';
 import Head from 'next/head';
 import {GetServerSideProps} from 'next';
-import {useRouter} from 'next/router';
 
 import {Box} from '@chakra-ui/react';
 
@@ -33,7 +32,7 @@ function PostPage(props: PostPageProps) {
   const {post} = props;
 
   return (
-    <Box>
+    <Box height='100%'>
       <Head>
         <title>TicoTeco - {post}</title>
       </Head>
