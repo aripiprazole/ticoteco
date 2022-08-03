@@ -23,6 +23,7 @@ import {updateProfileMutation} from '../profile/mutations/updateProfile.js';
 import {updatePostMutation} from '../post/mutations/updatePostMutation.js';
 import {deletePostMutation} from '../post/mutations/deletePostMutation.js';
 import {likePostMutation} from '../post/mutations/likePostMutation.js';
+import {commentPostMutation} from '../post/mutations/commentPostMutation.js';
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -32,6 +33,7 @@ const mutation = new GraphQLObjectType({
     updatePost: updatePostMutation,
     deletePost: deletePostMutation,
     likePost: likePostMutation,
+    commentPost: commentPostMutation,
   }),
 });
 

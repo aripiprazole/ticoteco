@@ -150,11 +150,17 @@ function TimelinePost(props: PostProps) {
               </Text>
             </Box>
 
-            <ActionButton
-              label='Comments'
-              icon={FiMessageCircle}
-              onClick={() => router.push(`/post/${data.id}`)}
-            />
+            <Box>
+              <ActionButton
+                label='Comments'
+                icon={FiMessageCircle}
+                onClick={() => router.push(`/post/${data.id}`)}
+              />
+
+              <Text textAlign='center' fontSize='0.8rem'>
+                {data.comments.length}
+              </Text>
+            </Box>
 
             <ActionButton label='Share' icon={FiShare2} />
           </Flex>

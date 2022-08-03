@@ -25,7 +25,6 @@ import {graphql, useLazyLoadQuery, useMutation} from 'react-relay';
 import {useFormik} from 'formik';
 
 import {
-  Box,
   Button,
   chakra,
   Flex,
@@ -43,6 +42,8 @@ import {PostUpdateMutation} from '../__generated__/PostUpdateMutation.graphql';
 import {PostDeleteMutation} from '../__generated__/PostDeleteMutation.graphql';
 
 import {useMaybeUser} from '../auth/AuthContext';
+import PostComment from './PostComment';
+import PostAddComment from './PostAddComment';
 
 const PostQuery = graphql`
   query PostQuery($id: ID!) {
@@ -51,6 +52,15 @@ const PostQuery = graphql`
       title
       description
       video
+      comments {
+        id
+        content
+        profile {
+          id
+          avatar
+          username
+        }
+      }
       profile {
         id
         avatar
@@ -185,7 +195,7 @@ function Post(props: PostProps) {
         </chakra.video>
       </Flex>
 
-      <Box flex='1' height='100%' style={{margin: '0'}}>
+      <Flex direction='column' flex='1' height='100%' style={{margin: '0'}}>
         <HStack
           as='form'
           justify='space-between'
@@ -196,6 +206,7 @@ function Post(props: PostProps) {
         >
           <HStack
             width='100%'
+            height='100%'
             mt='0.5rem'
             style={{margin: '0'}}
             justify='start'
@@ -272,7 +283,13 @@ function Post(props: PostProps) {
             )}
           </HStack>
         </HStack>
-      </Box>
+
+        {post.comments.map((comment) => (
+          <PostComment data={comment} key={comment.id} />
+        ))}
+
+        {user && <PostAddComment postId={post.id} />}
+      </Flex>
     </HStack>
   );
 }

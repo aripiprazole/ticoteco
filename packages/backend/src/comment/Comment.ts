@@ -18,25 +18,17 @@
 
 import mongoose from 'mongoose';
 
-import Comment, {commentSchema} from '../comment/Comment.js';
-
-export const postSchema = new mongoose.Schema<Post>({
+export const commentSchema = new mongoose.Schema<Comment>({
   user: {type: mongoose.SchemaTypes.ObjectId, required: true},
-  title: {type: String, required: true},
-  description: {type: String, required: false},
-  likes: [{type: Array, required: false}],
-  comments: [{type: commentSchema, required: false}],
+  content: {type: String, required: false},
 });
 
-type Post = {
+type Comment = {
   readonly _id: mongoose.Types.ObjectId;
   readonly user: mongoose.Types.ObjectId;
-  readonly likes: mongoose.Types.ObjectId[];
-  readonly comments: Comment[];
-  title: string;
-  description: string;
+  content: string;
 };
 
-const Post = mongoose.model<Post>('Post', postSchema);
+const Comment = mongoose.model<Comment>('Comment', commentSchema);
 
-export default Post;
+export default Comment;
