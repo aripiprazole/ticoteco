@@ -16,27 +16,48 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
 import {FiHeart, FiMessageCircle, FiShare2} from 'react-icons/fi';
 import {IconType} from 'react-icons';
 
-import {
-  chakra,
-  Flex,
-  Heading,
-  IconButton,
-  Image,
-  Text,
-} from '@chakra-ui/react';
+import {chakra, Flex, Heading, IconButton, Image, Text} from '@chakra-ui/react';
 import {TimelineQuery$data} from '../__generated__/TimelineQuery.graphql';
 
 type PostProps = {
+  readonly selected?: boolean;
   readonly data: TimelineQuery$data['forYou']['edges'][0]['node'];
 };
 
 function TimelinePost(props: PostProps) {
-  const {data} = props;
+  const {selected = false, data} = props;
+
+  const videoRef = useRef<HTMLVideoElement>();
+
+  const [playing, setPlaying] = useState(selected);
+
+  useEffect(() => {
+    setPlaying(selected);
+  }, [selected]);
+
+  useEffect(() => {
+    document.onkeydown = (event) => {
+      event.preventDefault();
+
+      if (!selected) return;
+      if (event.key !== ' ') return;
+
+      setPlaying((playing) => !playing);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (playing) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play();
+    }
+  }, [playing]);
 
   return (
     <Flex gap='0.5rem' padding='1.5rem 0' borderBottom='1px solid #cecece'>
@@ -66,14 +87,18 @@ function TimelinePost(props: PostProps) {
         </Text>
 
         <Flex gap='0.5rem'>
-          <Image
-            src={data.preview}
+          <chakra.video
+            onClick={() => setPlaying((playing) => !playing)}
+            ref={videoRef}
             borderRadius='0.5rem'
             sx={{
-              width: '20rem',
-              height: 'calc(20rem / 9 * 16)',
+              width: 'calc((100vh / 100 * 76) / 16 * 9)',
+              height: 'calc(100vh / 100 * 76)',
             }}
-          />
+          >
+            <chakra.source src={data.video} type='video/mp4' />
+            Use an updated browser to play TicoTeco videos.
+          </chakra.video>
 
           <Flex direction='column' justify='end' gap='0.5rem'>
             <ActionButton label='Like' icon={FiHeart} />
