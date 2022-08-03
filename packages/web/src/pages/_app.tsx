@@ -35,7 +35,7 @@ import {useMaybeAuthUser} from '../hooks/useMaybeAuthUser';
 
 initAuth();
 
-function App({Component, pageProps}: AppProps & TicoTecoAppProps) {
+function App({Component, pageProps}: AppProps) {
   const authUser = useMaybeAuthUser();
 
   return (
