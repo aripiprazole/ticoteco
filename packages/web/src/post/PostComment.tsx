@@ -35,7 +35,7 @@ function PostComment(props: PostCommentProps) {
       style={{margin: '0'}}
       justify='start'
       align='start'
-      padding='3rem 1.5rem'
+      padding='1rem 1.5rem'
     >
       <HStack>
         <Link href='/[username]' as={`/${data.profile.username}`}>

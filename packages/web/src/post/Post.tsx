@@ -288,7 +288,7 @@ function Post(props: PostProps) {
           <PostComment data={comment} key={comment.id} />
         ))}
 
-        <PostAddComment />
+        {user && <PostAddComment postId={post.id} />}
       </Flex>
     </HStack>
   );

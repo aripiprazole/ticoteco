@@ -17,17 +17,59 @@
  */
 
 import React from 'react';
+import {graphql, useMutation} from 'react-relay';
 
 import {useFormik} from 'formik';
 
 import {Button, chakra, Input} from '@chakra-ui/react';
 
-function PostAddComment() {
+import {PostAddCommentMutation} from '../__generated__/PostAddCommentMutation.graphql';
+
+const PostAddCommentMutation = graphql`
+  mutation PostAddCommentMutation($input: CommentPostInput!) {
+    commentPost(input: $input) {
+      post {
+        id
+        comments {
+          id
+          content
+          profile {
+            id
+            avatar
+            username
+            displayName
+          }
+        }
+      }
+    }
+  }
+`;
+
+export type PostAddCommentProps = {
+  readonly postId: string;
+};
+
+function PostAddComment(props: PostAddCommentProps) {
+  const {postId} = props;
+
+  const [comment, isCommenting] = useMutation<PostAddCommentMutation>(
+    PostAddCommentMutation,
+  );
+
   const formik = useFormik({
     initialValues: {
       content: '',
     },
-    onSubmit: () => {},
+    onSubmit: (values) => {
+      comment({
+        variables: {
+          input: {
+            id: postId,
+            content: values.content,
+          },
+        },
+      });
+    },
   });
 
   return (
@@ -38,6 +80,7 @@ function PostAddComment() {
       mt='auto'
       padding='3rem 1.5rem'
       background='#fff'
+      onSubmit={formik.handleSubmit}
       sx={{
         flexDirection: 'column',
       }}
@@ -50,7 +93,7 @@ function PostAddComment() {
         onChange={formik.handleChange}
       />
 
-      <Button type='submit' colorScheme='green'>
+      <Button type='submit' colorScheme='green' disabled={isCommenting}>
         Comment
       </Button>
     </chakra.form>
