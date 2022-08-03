@@ -22,11 +22,13 @@ export const postSchema = new mongoose.Schema<Post>({
   user: {type: mongoose.SchemaTypes.ObjectId, required: true},
   title: {type: String, required: true},
   description: {type: String, required: false},
+  likes: [{type: Array, required: false}],
 });
 
 type Post = {
   readonly _id: mongoose.Types.ObjectId;
   readonly user: mongoose.Types.ObjectId;
+  readonly likes: mongoose.Types.ObjectId[];
   title: string;
   description: string;
 };

@@ -92,6 +92,7 @@ type Post {
   id: String!
   title: String!
   description: String!
+  likes: Int!
   video: String!
   preview: String!
   profile: Profile!
@@ -102,6 +103,7 @@ type Mutation {
   updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
   updatePost(input: UpdatePostInput!): UpdatePostPayload
   deletePost(input: DeletePostInput!): DeletePostPayload
+  likePost(input: LikePostInput!): LikePostPayload
 }
 
 type CreatePostPayload {
@@ -144,6 +146,16 @@ type DeletePostPayload {
 }
 
 input DeletePostInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type LikePostPayload {
+  post: Post!
+  clientMutationId: String
+}
+
+input LikePostInput {
   id: ID!
   clientMutationId: String
 }
