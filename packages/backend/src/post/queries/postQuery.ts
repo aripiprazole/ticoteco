@@ -16,21 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import {GraphQLFieldConfig, GraphQLID} from 'graphql';
 
-import {meQuery} from '../user/queries/meQuery.js';
-import {forYouQuery} from '../post/queries/forYouQuery.js';
-import {profileQuery} from '../profile/queries/profileQuery.js';
-import {postQuery} from '../post/queries/postQuery.js';
+import TicoTecoContext from '../../graphql/TicoTecoContext.js';
 
-const query = new GraphQLObjectType({
-  name: 'Query',
-  fields: () => ({
-    me: meQuery,
-    forYou: forYouQuery,
-    profile: profileQuery,
-    post: postQuery,
-  }),
-});
+import GraphQLPost from '../types/GraphQLPost.js';
+import Post from '../Post.js';
 
-export default query;
+export type PostArguments = {
+  readonly id: string;
+};
+
+type PostQuery = GraphQLFieldConfig<any, TicoTecoContext, PostArguments>;
+
+export const postQuery: PostQuery = {
+  type: GraphQLPost,
+  description: 'Finds a post by id',
+  args: {
+    id: {type: GraphQLID},
+  },
+  resolve: async (_root, args) => {
+    const {id} = args;
+
+    return Post.findById(id);
+  },
+};

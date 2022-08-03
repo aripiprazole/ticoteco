@@ -39,9 +39,8 @@ const findCurrentUser =
 
       const appUser = await User.findOne({firebaseUid: firebaseUser.uid});
 
-      return appUser ?? await createNewUser(firebaseUser);
+      return appUser ?? (await createNewUser(firebaseUser));
     } catch (err) {
-      console.error(err);
       return null;
     }
   };
