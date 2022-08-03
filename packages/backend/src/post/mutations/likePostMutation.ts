@@ -42,14 +42,11 @@ export const likePostMutation = mutationWithClientMutationId({
   mutateAndGetPayload: async (args: LikePostArgs, ctx: TicoTecoContext) => {
     const {id} = args;
 
-    const post = await Post.findOne({
-      _id: id,
-      likes: {$nin: [ctx.user._id]},
+    const post = await Post.findByIdAndUpdate(id, {
+      $addToSet: {
+        likes: ctx.user._id,
+      },
     });
-
-    post.likes.push(ctx.user._id);
-
-    await post.save();
 
     return {post};
   },
