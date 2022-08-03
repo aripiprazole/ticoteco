@@ -17,6 +17,7 @@
  */
 
 import React, {useState} from 'react';
+import {useRouter} from 'next/router';
 import {useLazyLoadQuery, graphql, useMutation} from 'react-relay';
 import {FiEdit} from 'react-icons/fi';
 
@@ -34,11 +35,10 @@ import {
 } from '@chakra-ui/react';
 
 import {ProfileQuery} from '../__generated__/ProfileQuery.graphql';
+import {ProfileUpdateMutation} from '../__generated__/ProfileUpdateMutation.graphql';
 
 import ProfileVideos from './ProfileVideos';
 import {useMaybeUser} from '../auth/AuthContext';
-import {ProfileUpdateMutation} from '../__generated__/ProfileUpdateMutation.graphql';
-import {useRouter} from 'next/router';
 
 const ProfileQuery = graphql`
   query ProfileQuery($username: String!) {
@@ -106,7 +106,7 @@ function Content(props: ContentProps) {
         variables: {
           input: {
             username: values.username,
-            displayName: values.username,
+            displayName: values.displayName,
           },
         },
         onCompleted: () => {
