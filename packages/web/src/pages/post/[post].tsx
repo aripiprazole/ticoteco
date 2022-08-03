@@ -16,21 +16,4 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
-
-import {meQuery} from '../user/queries/meQuery.js';
-import {forYouQuery} from '../post/queries/forYouQuery.js';
-import {profileQuery} from '../profile/queries/profileQuery.js';
-import {postQuery} from '../post/queries/postQuery.js';
-
-const query = new GraphQLObjectType({
-  name: 'Query',
-  fields: () => ({
-    me: meQuery,
-    forYou: forYouQuery,
-    profile: profileQuery,
-    post: postQuery,
-  }),
-});
-
-export default query;
+export {default, getServerSideProps} from '../../post/PostPage';

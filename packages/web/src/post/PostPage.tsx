@@ -16,21 +16,38 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import React from 'react';
+import Head from 'next/head';
+import {GetServerSideProps} from 'next';
 
-import {meQuery} from '../user/queries/meQuery.js';
-import {forYouQuery} from '../post/queries/forYouQuery.js';
-import {profileQuery} from '../profile/queries/profileQuery.js';
-import {postQuery} from '../post/queries/postQuery.js';
+import {Box} from '@chakra-ui/react';
 
-const query = new GraphQLObjectType({
-  name: 'Query',
-  fields: () => ({
-    me: meQuery,
-    forYou: forYouQuery,
-    profile: profileQuery,
-    post: postQuery,
-  }),
+import Post from './Post';
+
+export type PostPageProps = {
+  readonly post: string;
+};
+
+function PostPage(props: PostPageProps) {
+  const {post} = props;
+
+  return (
+    <Box height='100%'>
+      <Head>
+        <title>TicoTeco - {post}</title>
+      </Head>
+
+      <React.Suspense fallback='Loading...'>
+        <Post postId={post as string} />
+      </React.Suspense>
+    </Box>
+  );
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => ({
+  props: {
+    post: ctx.query['post'],
+  },
 });
 
-export default query;
+export default PostPage;

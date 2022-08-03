@@ -24,10 +24,9 @@ import {RelayEnvironmentProvider} from 'react-relay';
 
 import {ChakraProvider} from '@chakra-ui/react';
 
-import {theme} from '@ticoteco/ui';
-
 import 'firebaseui/dist/firebaseui.css';
 
+import theme from '../theme';
 import buildRelayEnvironment from '../relay';
 import initAuth from '../auth/initAuth';
 import {AuthProvider} from '../auth/AuthProvider';
