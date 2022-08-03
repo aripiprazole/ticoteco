@@ -27,8 +27,8 @@ export const postSchema = new mongoose.Schema<Post>({
 type Post = {
   readonly _id: mongoose.Types.ObjectId;
   readonly user: mongoose.Types.ObjectId;
-  readonly title: string;
-  readonly description: string;
+  title: string;
+  description: string;
 };
 
 const Post = mongoose.model<Post>('Post', postSchema);

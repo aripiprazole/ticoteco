@@ -33,7 +33,7 @@ function ProfilePage(props: ProfilePageProps) {
   return (
     <Layout>
       <Head>
-        <title>TicoTeco - {username}</title>
+        <title children={`TicoTeco - ${username}`} />
       </Head>
 
       <Profile username={username} />

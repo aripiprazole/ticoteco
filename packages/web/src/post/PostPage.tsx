@@ -34,7 +34,7 @@ function PostPage(props: PostPageProps) {
   return (
     <Box height='100%'>
       <Head>
-        <title>TicoTeco - {post}</title>
+        <title children={`TicoTeco - ${post}`} />
       </Head>
 
       <React.Suspense fallback='Loading...'>

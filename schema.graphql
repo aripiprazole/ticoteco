@@ -100,6 +100,7 @@ type Post {
 type Mutation {
   createPost(input: CreatePostInput!): CreatePostPayload
   updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
+  updatePost(input: UpdatePostInput!): UpdatePostPayload
 }
 
 type CreatePostPayload {
@@ -122,5 +123,17 @@ type UpdateProfilePayload {
 input UpdateProfileInput {
   username: String!
   displayName: String!
+  clientMutationId: String
+}
+
+type UpdatePostPayload {
+  post: Post!
+  clientMutationId: String
+}
+
+input UpdatePostInput {
+  id: ID!
+  title: String!
+  description: String
   clientMutationId: String
 }

@@ -18,20 +18,29 @@
 
 import React, {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
-import {graphql, useLazyLoadQuery} from 'react-relay';
+import {FiEdit} from 'react-icons/fi';
+import {graphql, useLazyLoadQuery, useMutation} from 'react-relay';
+
+import {useFormik} from 'formik';
 
 import {
   Box,
+  Button,
   chakra,
   Flex,
   Heading,
   HStack,
+  IconButton,
   Image,
+  Input,
   Text,
   VStack,
 } from '@chakra-ui/react';
 
 import {PostQuery} from '../__generated__/PostQuery.graphql';
+import {PostUpdateMutation} from '../__generated__/PostUpdateMutation.graphql';
+
+import {useMaybeUser} from '../auth/AuthContext';
 
 const PostQuery = graphql`
   query PostQuery($id: ID!) {
@@ -50,6 +59,25 @@ const PostQuery = graphql`
   }
 `;
 
+const PostUpdateMutation = graphql`
+  mutation PostUpdateMutation($input: UpdatePostInput!) {
+    updatePost(input: $input) {
+      post {
+        id
+        title
+        description
+        video
+        profile {
+          id
+          avatar
+          username
+          displayName
+        }
+      }
+    }
+  }
+`;
+
 export type PostProps = {
   readonly postId: string;
 };
@@ -57,11 +85,37 @@ export type PostProps = {
 function Post(props: PostProps) {
   const {postId} = props;
 
+  const user = useMaybeUser();
+
   const videoRef = useRef<HTMLVideoElement>();
 
+  const [editing, setEditing] = useState(false);
   const [playing, setPlaying] = useState(false);
 
+  const [commitMutation, isFlying] =
+    useMutation<PostUpdateMutation>(PostUpdateMutation);
   const {post} = useLazyLoadQuery<PostQuery>(PostQuery, {id: postId});
+
+  const formik = useFormik({
+    initialValues: {
+      title: post?.title ?? '',
+      description: post?.description ?? '',
+    },
+    onSubmit: (values) => {
+      commitMutation({
+        variables: {
+          input: {
+            id: post.id,
+            title: values.title,
+            description: values.description,
+          },
+        },
+        onCompleted: () => {
+          setEditing(false);
+        },
+      });
+    },
+  });
 
   useEffect(() => {
     if (playing) {
@@ -70,6 +124,18 @@ function Post(props: PostProps) {
       videoRef.current.play();
     }
   }, [playing]);
+
+  const isOwner = user?.profile?.id === post.profile.id;
+  const diff =
+    formik.values.title !== post.title ||
+    formik.values.description !== post.description;
+
+  function edit() {
+    if (!isOwner) return;
+    if (diff) return;
+
+    setEditing((editing) => !editing);
+  }
 
   return (
     <HStack width='100%' height='100%' wrap='wrap'>
@@ -97,39 +163,80 @@ function Post(props: PostProps) {
 
       <Box flex='1' height='100%' style={{margin: '0'}}>
         <HStack
-          width='100%'
-          mt='0.5rem'
+          as='form'
+          justify='space-between'
           padding='3rem 1.5rem'
           borderBottom='1px solid #ccc'
           background='#fff'
-          style={{margin: '0'}}
+          {...({onSubmit: formik.handleSubmit} as any)}
         >
-          <Link href={`/${post.profile.username}`}>
-            <chakra.a>
-              <Image
-                cursor='pointer'
-                src={post.profile.avatar}
-                aria-label={`${post.profile.username}'s avatar`}
-                height='4rem'
-                width='4rem'
-                borderRadius='50%'
+          <HStack
+            width='100%'
+            mt='0.5rem'
+            style={{margin: '0'}}
+            justify='start'
+            align='start'
+          >
+            <Link href={`/${post.profile.username}`}>
+              <chakra.a>
+                <Image
+                  cursor='pointer'
+                  src={post.profile.avatar}
+                  aria-label={`${post.profile.username}'s avatar`}
+                  height='4rem'
+                  width='4rem'
+                  borderRadius='50%'
+                />
+              </chakra.a>
+            </Link>
+
+            <VStack align='start' gap='0.5rem' width='100%'>
+              <Heading fontSize='1.5rem' lineHeight='0.8'>
+                {post.profile.username}{' '}
+                <chakra.span fontSize='1rem' fontWeight={400}>
+                  {post.profile.displayName}
+                </chakra.span>
+              </Heading>
+
+              {editing ? (
+                <VStack gap='0.5rem' width='80%'>
+                  <Input
+                    id='title'
+                    value={formik.values.title}
+                    onChange={formik.handleChange}
+                  />
+
+                  <Input
+                    id='description'
+                    value={formik.values.description}
+                    onChange={formik.handleChange}
+                  />
+                </VStack>
+              ) : (
+                <Text fontSize='1rem'>
+                  {post.title}{' '}
+                  <chakra.span fontWeight={600}>{post.description}</chakra.span>
+                </Text>
+              )}
+            </VStack>
+          </HStack>
+
+          <HStack gap='0.5rem'>
+            {isOwner && (
+              <IconButton
+                aria-label='Edit profile'
+                colorScheme={editing ? 'red' : null}
+                icon={<FiEdit />}
+                onClick={edit}
               />
-            </chakra.a>
-          </Link>
+            )}
 
-          <VStack align='start' gap='0.5rem'>
-            <Heading fontSize='1.5rem' lineHeight='0.8'>
-              {post.profile.username}{' '}
-              <chakra.span fontSize='1rem' fontWeight={400}>
-                {post.profile.displayName}
-              </chakra.span>
-            </Heading>
-
-            <Text fontSize='1rem'>
-              {post.title}{' '}
-              <chakra.span fontWeight={600}>{post.description}</chakra.span>
-            </Text>
-          </VStack>
+            {diff && (
+              <Button type='submit' colorScheme='green' disabled={isFlying}>
+                Submit
+              </Button>
+            )}
+          </HStack>
         </HStack>
       </Box>
     </HStack>
