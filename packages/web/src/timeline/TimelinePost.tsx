@@ -21,10 +21,33 @@ import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {FiHeart, FiMessageCircle, FiShare2} from 'react-icons/fi';
 import {IconType} from 'react-icons';
+import {graphql, useMutation} from 'react-relay';
 
 import {chakra, Flex, Heading, IconButton, Image, Text} from '@chakra-ui/react';
 
 import {TimelineQuery$data} from '../__generated__/TimelineQuery.graphql';
+import {TimelinePostLikeMutation} from '../__generated__/TimelinePostLikeMutation.graphql';
+
+const TimelinePostLikeMutation = graphql`
+  mutation TimelinePostLikeMutation($input: LikePostInput!) {
+    likePost(input: $input) {
+      post {
+        id
+        title
+        description
+        preview
+        video
+        likes
+        profile {
+          id
+          username
+          displayName
+          avatar
+        }
+      }
+    }
+  }
+`;
 
 type PostProps = {
   readonly selected?: boolean;
@@ -40,20 +63,13 @@ function TimelinePost(props: PostProps) {
 
   const [playing, setPlaying] = useState(selected);
 
+  const [like, isLiking] = useMutation<TimelinePostLikeMutation>(
+    TimelinePostLikeMutation,
+  );
+
   useEffect(() => {
     setPlaying(selected);
   }, [selected]);
-
-  useEffect(() => {
-    document.onkeydown = (event) => {
-      event.preventDefault();
-
-      if (!selected) return;
-      if (event.key !== ' ') return;
-
-      setPlaying((playing) => !playing);
-    };
-  }, []);
 
   useEffect(() => {
     if (playing) {
@@ -62,6 +78,14 @@ function TimelinePost(props: PostProps) {
       videoRef.current.play();
     }
   }, [playing]);
+
+  function handleLike() {
+    like({
+      variables: {
+        input: {id: data.id},
+      },
+    });
+  }
 
   return (
     <Flex gap='0.5rem' padding='1.5rem 0' borderBottom='1px solid #cecece'>
@@ -105,12 +129,19 @@ function TimelinePost(props: PostProps) {
           </chakra.video>
 
           <Flex direction='column' justify='end' gap='0.5rem'>
-            <ActionButton label='Like' icon={FiHeart} />
+            <ActionButton
+              label='Like'
+              icon={FiHeart}
+              onClick={handleLike}
+              disabled={isLiking}
+            />
+
             <ActionButton
               label='Comments'
               icon={FiMessageCircle}
               onClick={() => router.push(`/post/${data.id}`)}
             />
+
             <ActionButton label='Share' icon={FiShare2} />
           </Flex>
         </Flex>
@@ -123,16 +154,18 @@ type ActionButtonProps = {
   readonly label: string;
   readonly icon: IconType;
   readonly onClick?: () => void;
+  readonly disabled?: boolean;
 };
 
 function ActionButton(props: ActionButtonProps) {
-  const {icon: Icon, label, onClick} = props;
+  const {icon: Icon, label, onClick, disabled = false} = props;
 
   return (
     <IconButton
       aria-label={label}
       borderRadius='50%'
       height='fit-content'
+      disabled={disabled}
       onClick={onClick}
       sx={{padding: '1rem'}}
     >
