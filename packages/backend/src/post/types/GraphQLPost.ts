@@ -57,7 +57,9 @@ const GraphQLPost = new GraphQLObjectType<Post>({
     },
 
     comments: {
-      type: new GraphQLList(GraphQLComment),
+      type: new GraphQLNonNull(
+        new GraphQLList(new GraphQLNonNull(GraphQLComment)),
+      ),
       resolve: async (post) => post.comments,
     },
 

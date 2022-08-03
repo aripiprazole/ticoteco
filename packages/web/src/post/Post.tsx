@@ -43,6 +43,7 @@ import {PostUpdateMutation} from '../__generated__/PostUpdateMutation.graphql';
 import {PostDeleteMutation} from '../__generated__/PostDeleteMutation.graphql';
 
 import {useMaybeUser} from '../auth/AuthContext';
+import PostComment from './PostComment';
 
 const PostQuery = graphql`
   query PostQuery($id: ID!) {
@@ -51,6 +52,15 @@ const PostQuery = graphql`
       title
       description
       video
+      comments {
+        id
+        content
+        profile {
+          id
+          avatar
+          username
+        }
+      }
       profile {
         id
         avatar
@@ -272,6 +282,10 @@ function Post(props: PostProps) {
             )}
           </HStack>
         </HStack>
+
+        {post.comments.map((comment) => (
+          <PostComment data={comment} key={comment.id} />
+        ))}
       </Box>
     </HStack>
   );
