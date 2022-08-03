@@ -101,6 +101,7 @@ type Mutation {
   createPost(input: CreatePostInput!): CreatePostPayload
   updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
   updatePost(input: UpdatePostInput!): UpdatePostPayload
+  deletePost(input: DeletePostInput!): DeletePostPayload
 }
 
 type CreatePostPayload {
@@ -135,5 +136,14 @@ input UpdatePostInput {
   id: ID!
   title: String!
   description: String
+  clientMutationId: String
+}
+
+type DeletePostPayload {
+  clientMutationId: String
+}
+
+input DeletePostInput {
+  id: ID!
   clientMutationId: String
 }

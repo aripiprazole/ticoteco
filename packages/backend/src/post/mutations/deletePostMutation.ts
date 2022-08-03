@@ -16,21 +16,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLObjectType} from 'graphql';
+import {GraphQLID, GraphQLNonNull} from 'graphql';
+import {mutationWithClientMutationId} from 'graphql-relay';
 
-import {createPostMutation} from '../post/mutations/createPostMutation.js';
-import {updateProfileMutation} from '../profile/mutations/updateProfile.js';
-import {updatePostMutation} from '../post/mutations/updatePostMutation.js';
-import {deletePostMutation} from '../post/mutations/deletePostMutation.js';
+import TicoTecoContext from '../../graphql/TicoTecoContext.js';
 
-const mutation = new GraphQLObjectType({
-  name: 'Mutation',
-  fields: () => ({
-    createPost: createPostMutation,
-    updateProfile: updateProfileMutation,
-    updatePost: updatePostMutation,
-    deletePost: deletePostMutation,
-  }),
+import Post from '../Post.js';
+
+type DeletePostArgs = {
+  readonly id: string;
+};
+
+export const deletePostMutation = mutationWithClientMutationId({
+  name: 'DeletePost',
+  inputFields: {
+    id: {type: new GraphQLNonNull(GraphQLID)},
+  },
+  outputFields: () => ({}),
+  mutateAndGetPayload: async (args: DeletePostArgs, ctx: TicoTecoContext) => {
+    const {id} = args;
+
+    const post = await Post.findById(id);
+
+    if (!ctx.user._id.equals(post.user)) {
+      throw Error('You are not allowed to delete this post');
+    }
+
+    await Post.deleteOne({_id: id});
+  },
 });
-
-export default mutation;
