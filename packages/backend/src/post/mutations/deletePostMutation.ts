@@ -42,6 +42,6 @@ export const deletePostMutation = mutationWithClientMutationId({
       throw Error('You are not allowed to delete this post');
     }
 
-    await Post.deleteOne({_id: id});
+    await Post.findByIdAndDelete(id);
   },
 });
