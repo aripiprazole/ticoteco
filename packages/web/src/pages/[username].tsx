@@ -16,6 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import ProfilePage from '../screens/ProfilePage';
+import ProfilePage from '../profile/ProfilePage';
 
 export default ProfilePage;

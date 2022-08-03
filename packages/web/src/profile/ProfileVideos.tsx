@@ -26,8 +26,8 @@ import {
 
 import {Heading, HStack, VStack} from '@chakra-ui/react';
 
-import {ProfileQuery$data} from '../../__generated__/ProfileQuery.graphql';
-import {ProfileVideosQuery} from '../../__generated__/ProfileVideosQuery.graphql';
+import {ProfileQuery$data} from '../__generated__/ProfileQuery.graphql';
+import {ProfileVideosQuery} from '../__generated__/ProfileVideosQuery.graphql';
 
 import ProfilePost from './ProfilePost';
 

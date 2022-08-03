@@ -29,7 +29,7 @@ import {
   Image,
   Text,
 } from '@chakra-ui/react';
-import {TimelineQuery$data} from '../../__generated__/TimelineQuery.graphql';
+import {TimelineQuery$data} from '../__generated__/TimelineQuery.graphql';
 
 type PostProps = {
   readonly data: TimelineQuery$data['forYou']['edges'][0]['node'];

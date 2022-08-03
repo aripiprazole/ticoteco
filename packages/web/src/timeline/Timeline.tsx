@@ -28,7 +28,7 @@ import {Box} from '@chakra-ui/react';
 
 import TimelinePost from './TimelinePost';
 
-import {TimelineQuery} from '../../__generated__/TimelineQuery.graphql';
+import {TimelineQuery} from '../__generated__/TimelineQuery.graphql';
 
 const TimelineQuery = graphql`
   query TimelineQuery($after: String) {

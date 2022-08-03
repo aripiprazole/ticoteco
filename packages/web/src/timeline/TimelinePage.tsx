@@ -17,20 +17,16 @@
  */
 
 import React from 'react';
-import {useRouter} from 'next/router';
 
-import Profile from '../components/profile/Profile';
-import Layout from '../components/layout/Layout';
+import Timeline from './Timeline';
+import Layout from '../layout/Layout';
 
-function ProfilePage() {
-  const router = useRouter();
-  const {username} = router.query;
-
+function TimelinePage() {
   return (
     <Layout>
-      <Profile username={username as string} />
+      <Timeline />
     </Layout>
   );
 }
 
-export default ProfilePage;
+export default TimelinePage;

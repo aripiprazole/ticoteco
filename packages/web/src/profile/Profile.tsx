@@ -21,7 +21,7 @@ import {useLazyLoadQuery, graphql} from 'react-relay';
 
 import {Box, Heading, HStack, Image, VStack} from '@chakra-ui/react';
 
-import {ProfileQuery} from '../../__generated__/ProfileQuery.graphql';
+import {ProfileQuery} from '../__generated__/ProfileQuery.graphql';
 
 import ProfileVideos from './ProfileVideos';
 
