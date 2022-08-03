@@ -23,7 +23,15 @@ import {FiHeart, FiMessageCircle, FiShare2} from 'react-icons/fi';
 import {IconType} from 'react-icons';
 import {graphql, useMutation} from 'react-relay';
 
-import {chakra, Flex, Heading, IconButton, Image, Text} from '@chakra-ui/react';
+import {
+  Box,
+  chakra,
+  Flex,
+  Heading,
+  IconButton,
+  Image,
+  Text,
+} from '@chakra-ui/react';
 
 import {TimelineQuery$data} from '../__generated__/TimelineQuery.graphql';
 import {TimelinePostLikeMutation} from '../__generated__/TimelinePostLikeMutation.graphql';
@@ -129,12 +137,18 @@ function TimelinePost(props: PostProps) {
           </chakra.video>
 
           <Flex direction='column' justify='end' gap='0.5rem'>
-            <ActionButton
-              label='Like'
-              icon={FiHeart}
-              onClick={handleLike}
-              disabled={isLiking}
-            />
+            <Box>
+              <ActionButton
+                label='Like'
+                icon={FiHeart}
+                onClick={handleLike}
+                disabled={isLiking}
+              />
+
+              <Text textAlign='center' fontSize='0.8rem'>
+                {data.likes}
+              </Text>
+            </Box>
 
             <ActionButton
               label='Comments'

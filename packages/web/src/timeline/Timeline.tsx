@@ -47,6 +47,7 @@ const TimelineQuery = graphql`
           description
           preview
           video
+          likes
           profile {
             id
             avatar
