@@ -16,14 +16,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import {useLazyLoadQuery, graphql} from 'react-relay';
+import React, {useState} from 'react';
+import {useLazyLoadQuery, graphql, useMutation} from 'react-relay';
+import {FiEdit} from 'react-icons/fi';
 
-import {Box, Heading, HStack, Image, VStack} from '@chakra-ui/react';
+import {useFormik} from 'formik';
+
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  IconButton,
+  Image,
+  Input,
+  VStack,
+} from '@chakra-ui/react';
 
 import {ProfileQuery} from '../__generated__/ProfileQuery.graphql';
 
 import ProfileVideos from './ProfileVideos';
+import {useMaybeUser} from '../auth/AuthContext';
+import {ProfileUpdateMutation} from '../__generated__/ProfileUpdateMutation.graphql';
+import {useRouter} from 'next/router';
 
 const ProfileQuery = graphql`
   query ProfileQuery($username: String!) {
@@ -32,6 +47,19 @@ const ProfileQuery = graphql`
       username
       displayName
       avatar
+    }
+  }
+`;
+
+const ProfileUpdateMutation = graphql`
+  mutation ProfileUpdateMutation($input: UpdateProfileInput!) {
+    updateProfile(input: $input) {
+      profile {
+        id
+        displayName
+        username
+        avatar
+      }
     }
   }
 `;
@@ -55,35 +83,117 @@ type ContentProps = {
 };
 
 function Content(props: ContentProps) {
+  const user = useMaybeUser();
+  const router = useRouter();
+
+  const [editing, setEditing] = useState(false);
+
+  const [commitMutation, isFlying] = useMutation<ProfileUpdateMutation>(
+    ProfileUpdateMutation,
+  );
+
   const {profile} = useLazyLoadQuery<ProfileQuery>(ProfileQuery, {
     username: props.username,
   });
 
-  if (!profile) {
-    return null;
+  const formik = useFormik({
+    initialValues: {
+      username: profile?.username ?? '',
+      displayName: profile?.displayName ?? '',
+    },
+    onSubmit: (values) => {
+      commitMutation({
+        variables: {
+          input: {
+            username: values.username,
+            displayName: values.username,
+          },
+        },
+        onCompleted: () => {
+          setEditing(false);
+
+          if (values.username !== user?.profile?.username) {
+            router.push(`/${values.username}`);
+          }
+        },
+      });
+    },
+  });
+
+  if (!profile) return null;
+
+  const isOwner = user?.profile?.id === profile.id;
+  const diff =
+    formik.values.displayName !== profile.displayName ||
+    formik.values.username !== profile.username;
+
+  function edit() {
+    if (!isOwner) return;
+    if (diff) return;
+
+    setEditing((editing) => !editing);
   }
 
   return (
     <VStack padding='1rem 0'>
-      <HStack width='100%' gap='1rem'>
-        <Image
-          src={profile.avatar}
-          width='100'
-          height='100'
-          borderRadius='50%'
-        />
+      <HStack
+        as='form'
+        width='100%'
+        justify='space-between'
+        align='start'
+        {...({onSubmit: formik.handleSubmit} as any)}
+      >
+        <HStack width='100%' gap='1rem' align='start'>
+          <Image
+            src={profile.avatar}
+            width='100'
+            height='100'
+            borderRadius='50%'
+          />
 
-        <Box height='100%'>
-          <VStack justify='start' align='start'>
-            <Heading as='h2' fontSize='22'>
-              {profile.username}
-            </Heading>
+          <Box height='100%'>
+            <VStack justify='start' align='start'>
+              {editing ? (
+                <Input
+                  id='username'
+                  value={formik.values.username}
+                  onChange={formik.handleChange}
+                />
+              ) : (
+                <Heading as='h2' fontSize='22'>
+                  {profile.username}
+                </Heading>
+              )}
 
-            <Heading as='h4' fontSize='18'>
-              {profile.displayName}
-            </Heading>
-          </VStack>
-        </Box>
+              {editing ? (
+                <Input
+                  id='displayName'
+                  value={formik.values.displayName}
+                  onChange={formik.handleChange}
+                />
+              ) : (
+                <Heading as='h4' fontSize='18'>
+                  {profile.displayName}
+                </Heading>
+              )}
+            </VStack>
+          </Box>
+        </HStack>
+
+        <HStack gap='0.5rem'>
+          <IconButton
+            aria-label='Edit profile'
+            colorScheme={editing ? 'red' : null}
+            icon={<FiEdit />}
+            onClick={edit}
+          />
+
+          {diff && (
+            <Button type='submit' colorScheme='green' disabled={isFlying}>
+              Submit
+            </Button>
+          )}
+        </HStack>
       </HStack>
 
       <React.Suspense>

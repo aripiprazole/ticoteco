@@ -99,10 +99,11 @@ type Post {
 
 type Mutation {
   createPost(input: CreatePostInput!): CreatePostPayload
+  updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
 }
 
 type CreatePostPayload {
-  post: Post
+  post: Post!
   clientMutationId: String
 }
 
@@ -110,5 +111,16 @@ input CreatePostInput {
   title: String!
   description: String
   video: Upload
+  clientMutationId: String
+}
+
+type UpdateProfilePayload {
+  profile: Profile!
+  clientMutationId: String
+}
+
+input UpdateProfileInput {
+  username: String!
+  displayName: String!
   clientMutationId: String
 }

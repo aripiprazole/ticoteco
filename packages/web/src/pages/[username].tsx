@@ -16,6 +16,4 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import ProfilePage from '../profile/ProfilePage';
-
-export default ProfilePage;
+export {default, getServerSideProps} from '../profile/ProfilePage';

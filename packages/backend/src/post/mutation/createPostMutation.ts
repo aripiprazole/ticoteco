@@ -54,7 +54,7 @@ export const createPostMutation = mutationWithClientMutationId({
   },
   outputFields: () => ({
     post: {
-      type: GraphQLPost,
+      type: new GraphQLNonNull(GraphQLPost),
       resolve: ({post}) => post,
     },
   }),
