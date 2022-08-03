@@ -25,6 +25,9 @@ type Query {
     """The username of the profile"""
     username: String!
   ): Profile
+
+  """Finds a post by id"""
+  post(id: ID): Post
 }
 
 type User {
