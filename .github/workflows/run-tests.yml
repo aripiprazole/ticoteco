@@ -1,4 +1,4 @@
-name: Run backend tests
+name: Run tests
 on:
   pull_request:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   test-backend:
-    name: Run backend tests
+    name: Run tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
