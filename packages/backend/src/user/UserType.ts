@@ -18,12 +18,12 @@
 
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
-import User from '../User';
+import UserModel from './UserModel';
 
-import ProfileType from '../../profile/ProfileType';
-import ProfileModel from '../../profile/ProfileModel';
+import ProfileType from '../profile/ProfileType';
+import ProfileModel from '../profile/ProfileModel';
 
-const GraphQLUser = new GraphQLObjectType<User>({
+const UserType = new GraphQLObjectType<UserModel>({
   name: 'User',
   fields: () => ({
     id: {
@@ -37,4 +37,4 @@ const GraphQLUser = new GraphQLObjectType<User>({
   }),
 });
 
-export default GraphQLUser;
+export default UserType;

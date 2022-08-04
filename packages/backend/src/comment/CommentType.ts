@@ -20,7 +20,7 @@ import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
 import CommentModel from './CommentModel';
 import ProfileType from '../profile/ProfileType';
-import User from '../user/User';
+import UserModel from '../user/UserModel';
 import ProfileModel from '../profile/ProfileModel';
 
 const CommentType = new GraphQLObjectType<CommentModel>({
@@ -39,7 +39,7 @@ const CommentType = new GraphQLObjectType<CommentModel>({
     profile: {
       type: new GraphQLNonNull(ProfileType),
       resolve: async (comment) => {
-        const user = await User.findById(comment.user);
+        const user = await UserModel.findById(comment.user);
         const profile = await ProfileModel.findById(user.profile);
 
         return profile;
