@@ -26,10 +26,10 @@ import {graphqlHTTP, Options} from 'koa-graphql';
 
 import {Logger} from 'tslog';
 
-import schema from './graphql/schema.js';
-import {TicoTecoAppData} from './app.js';
-import TicoTecoContext from './graphql/TicoTecoContext.js';
-import findCurrentUser from './user/findCurrentUser.js';
+import schema from './graphql/schema';
+import {TicoTecoAppData} from './app';
+import TicoTecoContext from './graphql/TicoTecoContext';
+import findCurrentUser from './user/findCurrentUser';
 
 const log = new Logger({name: '@ticoteco/backend/server'});
 

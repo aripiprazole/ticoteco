@@ -18,8 +18,8 @@
 
 import {GraphQLFieldConfig} from 'graphql/type';
 
-import GraphQLUser from '../types/GraphQLUser.js';
-import TicoTecoContext from '../../graphql/TicoTecoContext.js';
+import GraphQLUser from '../types/GraphQLUser';
+import TicoTecoContext from '../../graphql/TicoTecoContext';
 
 export const meQuery: GraphQLFieldConfig<any, TicoTecoContext> = {
   type: GraphQLUser,

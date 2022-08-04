@@ -19,11 +19,11 @@
 import {GraphQLID, GraphQLNonNull, GraphQLString} from 'graphql';
 import {mutationWithClientMutationId} from 'graphql-relay';
 
-import TicoTecoContext from '../../graphql/TicoTecoContext.js';
+import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import Comment from '../../comment/Comment.js';
-import GraphQLPost from '../types/GraphQLPost.js';
-import Post from '../Post.js';
+import Comment from '../../comment/Comment';
+import GraphQLPost from '../types/GraphQLPost';
+import Post from '../Post';
 
 type CommentPostArgs = {
   readonly id: string;

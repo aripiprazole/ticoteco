@@ -19,10 +19,10 @@
 import {GraphQLFieldConfig} from 'graphql/type';
 import {GraphQLNonNull, GraphQLString} from 'graphql';
 
-import TicoTecoContext from '../../graphql/TicoTecoContext.js';
+import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import GraphQLProfile from '../types/GraphQLProfile.js';
-import Profile from '../Profile.js';
+import GraphQLProfile from '../types/GraphQLProfile';
+import Profile from '../Profile';
 
 type ProfileArguments = {
   readonly username: string;

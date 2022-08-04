@@ -16,9 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {createServer} from './server.js';
-import {connectToMongo} from './mongo.js';
-import {initializeFirebase} from './firebase.js';
+import {createServer} from './server';
+import {connectToMongo} from './mongo';
+import {initializeFirebase} from './firebase';
 import {Logger} from 'tslog';
 
 const log = new Logger({name: '@ticoteco/backend'});

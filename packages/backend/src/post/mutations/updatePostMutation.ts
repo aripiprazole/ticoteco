@@ -21,10 +21,10 @@ import {mutationWithClientMutationId} from 'graphql-relay';
 
 import * as Yup from 'yup';
 
-import TicoTecoContext from '../../graphql/TicoTecoContext.js';
+import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import Post from '../Post.js';
-import GraphQLPost from '../types/GraphQLPost.js';
+import Post from '../Post';
+import GraphQLPost from '../types/GraphQLPost';
 
 type UpdatePostArgs = {
   readonly id: string;
