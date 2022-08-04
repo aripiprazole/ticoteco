@@ -21,7 +21,10 @@ import {GraphQLNonNull} from 'graphql';
 import {connectionArgs, ConnectionArguments} from 'graphql-relay';
 import DataLoader from 'dataloader';
 
-import graphqlMongooseLoader from '@entria/graphql-mongoose-loader';
+import {
+  mongooseLoader,
+  connectionFromMongoCursor,
+} from '@entria/graphql-mongoose-loader';
 
 import {GraphQLPostConnection} from '../types/GraphQLPost.js';
 import Post from '../Post.js';
@@ -38,10 +41,10 @@ export const forYouQuery: ForYouQuery = {
   args: connectionArgs,
   resolve: async (_root, args, context) => {
     const loader = new DataLoader((ids) => {
-      return graphqlMongooseLoader.mongooseLoader(Post, ids as any);
+      return mongooseLoader(Post, ids as any);
     });
 
-    return graphqlMongooseLoader.connectionFromMongoCursor({
+    return connectionFromMongoCursor({
       cursor: Post.find(),
       context,
       args,
