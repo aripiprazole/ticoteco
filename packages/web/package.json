@@ -8,9 +8,9 @@
   "license": "GPL-3.0+",
   "scripts": {
     "dev": "next dev",
-    "build": "yarn backend:schema && yarn relay && next build",
+    "build": "yarn workspace @ticoteco/backend run schema && yarn run relay && next build",
     "start": "next start",
-    "relay": "yarn backend:schema && relay-compiler",
+    "relay": "yarn workspace @ticoteco/backend run schema && relay-compiler",
     "relay:watch": "relay-compiler --watch"
   },
   "dependencies": {
