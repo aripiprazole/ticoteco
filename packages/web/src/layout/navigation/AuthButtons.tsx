@@ -19,7 +19,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import {Box, Button, Flex, Image} from '@chakra-ui/react';
+import {Box, Button, chakra, Flex, Image} from '@chakra-ui/react';
 
 import {useMaybeUser} from '../../auth/AuthContext';
 
@@ -42,15 +42,19 @@ function AuthButtons() {
     <Flex gap='1rem'>
       <Upload />
 
-      <Image
-        aria-label={`${user.profile.username}'s avatar`}
-        src={user.profile.avatar}
-        cursor='pointer'
-        height='2.4rem'
-        width='2.4rem'
-        border='1px solid #1c1c1c'
-        borderRadius='50%'
-      />
+      <Link href='/[username]' as={`/${user.profile.username}`}>
+        <chakra.a>
+          <Image
+            aria-label={`${user.profile.username}'s avatar`}
+            src={user.profile.avatar}
+            cursor='pointer'
+            height='2.4rem'
+            width='2.4rem'
+            border='1px solid #1c1c1c'
+            borderRadius='50%'
+          />
+        </chakra.a>
+      </Link>
     </Flex>
   );
 }
