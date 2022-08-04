@@ -17,9 +17,7 @@
  */
 
 import {GraphQLSchema} from 'graphql';
-import graphqlUpload from 'graphql-upload-cjs';
-
-import GraphQLUpload = graphqlUpload.GraphQLUpload;
+import {GraphQLUpload} from 'graphql-upload-cjs';
 
 import mutation from './mutation.js';
 import query from './query.js';

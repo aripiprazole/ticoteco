@@ -20,7 +20,10 @@ import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 import {connectionArgs, ConnectionArguments} from 'graphql-relay';
 import DataLoader from 'dataloader';
 
-import graphqlMongooseLoader from '@entria/graphql-mongoose-loader';
+import {
+  mongooseLoader,
+  connectionFromMongoCursor,
+} from '@entria/graphql-mongoose-loader';
 
 import Profile from '../Profile.js';
 import {GraphQLPostConnection} from '../../post/types/GraphQLPost.js';
@@ -50,10 +53,10 @@ const GraphQLProfile = new GraphQLObjectType<Profile>({
       args: connectionArgs,
       resolve: async (profile, args: ConnectionArguments, context) => {
         const loader = new DataLoader((ids) => {
-          return graphqlMongooseLoader.mongooseLoader(Post, ids as any);
+          return mongooseLoader(Post, ids as any);
         });
 
-        return graphqlMongooseLoader.connectionFromMongoCursor({
+        return connectionFromMongoCursor({
           cursor: Post.find({user: profile.user}),
           context,
           args,

@@ -23,7 +23,6 @@ import User from './/User.js';
 import Profile from '../profile/Profile.js';
 
 import {auth} from 'firebase-admin';
-import UserRecord = auth.UserRecord;
 
 const findCurrentUser =
   (appData: TicoTecoAppData) =>
@@ -45,7 +44,7 @@ const findCurrentUser =
     }
   };
 
-async function createNewUser(firebaseUser: UserRecord): Promise<User> {
+async function createNewUser(firebaseUser: auth.UserRecord): Promise<User> {
   const user = new User({
     firebaseUid: firebaseUser.uid,
     profile: null,
