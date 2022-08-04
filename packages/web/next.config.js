@@ -1,4 +1,4 @@
-const withTM = require('next-transpile-modules')([]);
+const withTM = require('next-transpile-modules')(['@chakra-ui/react']);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
