@@ -16,21 +16,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import {GraphQLFieldConfig} from 'graphql/type';
+import {GraphQLNonNull, GraphQLString} from 'graphql';
+import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import UserModel from './UserModel';
+export const videoField: GraphQLFieldConfig<any, any> = {
+  type: new GraphQLNonNull(GraphQLString),
+  resolve: async (post, _, ctx: TicoTecoContext) => {
+    const today = new Date();
 
-import {profileField} from './fields/profileField';
+    const [video] = await ctx.bucket.file(`posts/${post._id}.mp4`).get();
+    const [publicUrl] = await video.getSignedUrl({
+      action: 'read',
+      expires: today.setDate(today.getDate() + 1),
+    });
 
-const UserType = new GraphQLObjectType<UserModel>({
-  name: 'User',
-  fields: () => ({
-    id: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (user) => user._id.toString(),
-    },
-    profile: profileField,
-  }),
-});
-
-export default UserType;
+    return publicUrl;
+  },
+};

@@ -25,13 +25,10 @@ import {
 } from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
 
-import ProfileType from '../profile/ProfileType';
-
 import PostModel from './PostModel';
-import UserModel from '../user/UserModel';
-import TicoTecoContext from '../graphql/TicoTecoContext';
-import ProfileModel from '../profile/ProfileModel';
 import CommentType from '../comment/CommentType';
+import {videoField} from './fields/videoField';
+import {profileField} from '../user/fields/profileField';
 
 const PostType = new GraphQLObjectType<PostModel>({
   name: 'Post',
@@ -63,35 +60,14 @@ const PostType = new GraphQLObjectType<PostModel>({
       resolve: async (post) => post.comments,
     },
 
-    video: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: async (post, _, ctx: TicoTecoContext) => {
-        const today = new Date();
+    video: videoField,
 
-        const [video] = await ctx.bucket.file(`posts/${post._id}.mp4`).get();
-        const [publicUrl] = await video.getSignedUrl({
-          action: 'read',
-          expires: today.setDate(today.getDate() + 1),
-        });
-
-        return publicUrl;
-      },
-    },
+    profile: profileField,
 
     preview: {
       type: new GraphQLNonNull(GraphQLString),
       // TODO: remove
       resolve: () => 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
-    },
-
-    profile: {
-      type: new GraphQLNonNull(ProfileType),
-      resolve: async (post) => {
-        const user = await UserModel.findById(post.user);
-        const profile = await ProfileModel.findById(user.profile);
-
-        return profile;
-      },
     },
   }),
 });
