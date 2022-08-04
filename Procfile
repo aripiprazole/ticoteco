@@ -1,1 +1,1 @@
-web: yarn run postinstall && yarn run backend:start
+web: yarn run backend:start
