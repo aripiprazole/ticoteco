@@ -24,7 +24,7 @@ import {
   graphql,
 } from 'react-relay';
 
-import {Heading, HStack, VStack} from '@chakra-ui/react';
+import {Button, Heading, HStack, VStack} from '@chakra-ui/react';
 
 import {ProfileQuery$data} from '../__generated__/ProfileQuery.graphql';
 import {ProfileVideosQuery} from '../__generated__/ProfileVideosQuery.graphql';
@@ -66,9 +66,10 @@ type CurrentPostsProps = {
 };
 
 function CurrentPosts(props: CurrentPostsProps) {
-  const {preloadedQuery} = props;
+  const {preloadedQuery, setAfterPost} = props;
 
   const query = usePreloadedQuery(ProfileVideosQuery, preloadedQuery);
+  const posts = query.profile.posts;
 
   return (
     <VStack width='100%' align='start'>
@@ -77,10 +78,20 @@ function CurrentPosts(props: CurrentPostsProps) {
       </Heading>
 
       <HStack flexWrap='wrap' justify='start' width='100%'>
-        {query.profile.posts.edges.map(({node, cursor}) => (
+        {posts.edges.map(({node, cursor}) => (
           <ProfilePost data={node} key={cursor} />
         ))}
       </HStack>
+
+      {posts.pageInfo.hasNextPage && (
+        <Button
+          onClick={() => {
+            setAfterPost(posts.pageInfo.endCursor);
+          }}
+        >
+          Load more videos
+        </Button>
+      )}
     </VStack>
   );
 }
