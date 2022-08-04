@@ -19,8 +19,8 @@
 import {Request} from 'koa';
 
 import {TicoTecoAppData} from '../app';
-import User from './/User';
-import Profile from '../profile/Profile';
+import User from './User';
+import ProfileModel from '../profile/ProfileModel';
 
 import {auth} from 'firebase-admin';
 
@@ -50,7 +50,7 @@ async function createNewUser(firebaseUser: auth.UserRecord): Promise<User> {
     profile: null,
   });
 
-  const profile = new Profile({
+  const profile = new ProfileModel({
     displayName: firebaseUser.displayName,
     username: firebaseUser.displayName,
     avatarUrl: 'https://i.pravatar.cc/300',

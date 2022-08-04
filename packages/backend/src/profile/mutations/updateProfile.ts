@@ -23,8 +23,8 @@ import TicoTecoContext from '../../graphql/TicoTecoContext';
 
 import * as Yup from 'yup';
 
-import GraphQLProfile from '../types/GraphQLProfile';
-import Profile from '../Profile';
+import ProfileType from '../ProfileType';
+import ProfileModel from '../ProfileModel';
 
 export type UpdateProfileArgs = {
   readonly username: string;
@@ -44,7 +44,7 @@ export const updateProfileMutation = mutationWithClientMutationId({
   },
   outputFields: () => ({
     profile: {
-      type: new GraphQLNonNull(GraphQLProfile),
+      type: new GraphQLNonNull(ProfileType),
       resolve: ({profile}) => profile,
     },
   }),
@@ -56,7 +56,7 @@ export const updateProfileMutation = mutationWithClientMutationId({
 
     await updateProfileSchema.validate(args);
 
-    const profile = await Profile.findById(ctx.user.profile);
+    const profile = await ProfileModel.findById(ctx.user.profile);
     profile.username = username;
     profile.displayName = displayName;
     await profile.save();

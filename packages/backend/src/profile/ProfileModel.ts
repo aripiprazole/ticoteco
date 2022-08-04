@@ -18,14 +18,14 @@
 
 import mongoose from 'mongoose';
 
-export const profileSchema = new mongoose.Schema<Profile>({
+export const profileSchema = new mongoose.Schema<ProfileModel>({
   username: {type: String, required: true},
   displayName: {type: String, required: true},
   avatarUrl: {type: String, required: true},
   user: {type: mongoose.SchemaTypes.ObjectId, required: true},
 });
 
-type Profile = {
+type ProfileModel = {
   readonly _id: mongoose.Types.ObjectId;
   readonly avatarUrl: string;
   username: string;
@@ -33,6 +33,6 @@ type Profile = {
   user: mongoose.Types.ObjectId;
 };
 
-const Profile = mongoose.model<Profile>('Profile', profileSchema);
+const ProfileModel = mongoose.model<ProfileModel>('Profile', profileSchema);
 
-export default Profile;
+export default ProfileModel;

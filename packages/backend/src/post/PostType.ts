@@ -25,12 +25,12 @@ import {
 } from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
 
-import GraphQLProfile from '../profile/types/GraphQLProfile';
+import ProfileType from '../profile/ProfileType';
 
 import Post from './PostModel';
 import User from '../user/User';
 import TicoTecoContext from '../graphql/TicoTecoContext';
-import Profile from '../profile/Profile';
+import ProfileModel from '../profile/ProfileModel';
 import GraphQLComment from '../comment/types/GraphQLComment';
 
 const PostType = new GraphQLObjectType<Post>({
@@ -85,10 +85,10 @@ const PostType = new GraphQLObjectType<Post>({
     },
 
     profile: {
-      type: new GraphQLNonNull(GraphQLProfile),
+      type: new GraphQLNonNull(ProfileType),
       resolve: async (post) => {
         const user = await User.findById(post.user);
-        const profile = await Profile.findById(user.profile);
+        const profile = await ProfileModel.findById(user.profile);
 
         return profile;
       },
