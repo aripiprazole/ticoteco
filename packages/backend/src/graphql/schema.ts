@@ -17,7 +17,7 @@
  */
 
 import {GraphQLSchema} from 'graphql';
-import graphqlUpload from 'graphql-upload';
+import graphqlUpload from 'graphql-upload-cjs';
 
 import GraphQLUpload = graphqlUpload.GraphQLUpload;
 

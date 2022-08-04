@@ -18,7 +18,7 @@
 
 import {GraphQLNonNull, GraphQLString} from 'graphql';
 import {mutationWithClientMutationId} from 'graphql-relay';
-import graphqlUpload from 'graphql-upload';
+import graphqlUpload from 'graphql-upload-cjs';
 
 import FileUpload = graphqlUpload.FileUpload;
 import GraphQLUpload = graphqlUpload.GraphQLUpload;

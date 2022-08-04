@@ -20,7 +20,7 @@ import Koa from 'koa';
 import Router from '@koa/router';
 import cors from '@koa/cors';
 import bodyparser from 'koa-bodyparser';
-import graphqlUpload from 'graphql-upload';
+import graphqlUpload from 'graphql-upload-cjs';
 
 import graphqlUploadKoa = graphqlUpload.graphqlUploadKoa;
 
