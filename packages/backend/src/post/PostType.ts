@@ -25,13 +25,10 @@ import {
 } from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
 
-import ProfileType from '../profile/ProfileType';
-
 import PostModel from './PostModel';
-import UserModel from '../user/UserModel';
-import ProfileModel from '../profile/ProfileModel';
 import CommentType from '../comment/CommentType';
 import {videoField} from './fields/videoField.js';
+import {profileField} from '../user/fields/profileField.js';
 
 const PostType = new GraphQLObjectType<PostModel>({
   name: 'Post',
@@ -65,20 +62,12 @@ const PostType = new GraphQLObjectType<PostModel>({
 
     video: videoField,
 
+    profile: profileField,
+
     preview: {
       type: new GraphQLNonNull(GraphQLString),
       // TODO: remove
       resolve: () => 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
-    },
-
-    profile: {
-      type: new GraphQLNonNull(ProfileType),
-      resolve: async (post) => {
-        const user = await UserModel.findById(post.user);
-        const profile = await ProfileModel.findById(user.profile);
-
-        return profile;
-      },
     },
   }),
 });
