@@ -127,6 +127,7 @@ function TimelinePost(props: PostProps) {
             onClick={() => setPlaying((playing) => !playing)}
             ref={videoRef}
             borderRadius='0.5rem'
+            autoPlay={false}
             sx={{
               width: 'calc((100vh / 100 * 76) / 16 * 9)',
               height: 'calc(100vh / 100 * 76)',
