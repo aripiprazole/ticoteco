@@ -23,7 +23,7 @@ import {FileUpload, GraphQLUpload} from 'graphql-upload-cjs';
 import * as Yup from 'yup';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
-import Post from '../PostModel';
+import PostModel from '../PostModel';
 import PostType from '../PostType';
 
 type CreatePostArgs = {
@@ -60,7 +60,7 @@ export const createPostMutation = mutationWithClientMutationId({
   mutateAndGetPayload: async (args: CreatePostArgs, ctx: TicoTecoContext) => {
     const video = await args.video;
 
-    const post = new Post({
+    const post = new PostModel({
       title: args.title,
       description: args.description,
       user: ctx.user._id,

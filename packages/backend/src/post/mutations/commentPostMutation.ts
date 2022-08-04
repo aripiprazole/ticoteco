@@ -23,7 +23,7 @@ import TicoTecoContext from '../../graphql/TicoTecoContext';
 
 import Comment from '../../comment/Comment';
 import PostType from '../PostType';
-import Post from '../PostModel';
+import PostModel from '../PostModel';
 
 type CommentPostArgs = {
   readonly id: string;
@@ -45,7 +45,7 @@ export const commentPostMutation = mutationWithClientMutationId({
   mutateAndGetPayload: async (args: CommentPostArgs, ctx: TicoTecoContext) => {
     const {content} = args;
 
-    const post = await Post.findByIdAndUpdate(args.id, {
+    const post = await PostModel.findByIdAndUpdate(args.id, {
       $push: {
         comments: new Comment({
           user: ctx.user._id,

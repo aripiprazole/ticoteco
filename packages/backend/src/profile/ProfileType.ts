@@ -27,7 +27,7 @@ import {
 
 import ProfileModel from './ProfileModel';
 import {GraphQLPostConnection} from '../post/PostType';
-import Post from '../post/PostModel';
+import PostModel from '../post/PostModel';
 
 const ProfileType = new GraphQLObjectType<ProfileModel>({
   name: 'Profile',
@@ -53,11 +53,11 @@ const ProfileType = new GraphQLObjectType<ProfileModel>({
       args: connectionArgs,
       resolve: async (profile, args: ConnectionArguments, context) => {
         const loader = new DataLoader((ids) => {
-          return mongooseLoader(Post, ids as any);
+          return mongooseLoader(PostModel, ids as any);
         });
 
         return connectionFromMongoCursor({
-          cursor: Post.find({user: profile.user}),
+          cursor: PostModel.find({user: profile.user}),
           context,
           args,
           loader: (_context, id) => loader.load(id),

@@ -27,13 +27,13 @@ import {connectionDefinitions} from 'graphql-relay';
 
 import ProfileType from '../profile/ProfileType';
 
-import Post from './PostModel';
+import PostModel from './PostModel';
 import User from '../user/User';
 import TicoTecoContext from '../graphql/TicoTecoContext';
 import ProfileModel from '../profile/ProfileModel';
 import GraphQLComment from '../comment/types/GraphQLComment';
 
-const PostType = new GraphQLObjectType<Post>({
+const PostType = new GraphQLObjectType<PostModel>({
   name: 'Post',
   fields: () => ({
     id: {

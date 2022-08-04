@@ -21,7 +21,7 @@ import {mutationWithClientMutationId} from 'graphql-relay';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import Post from '../PostModel';
+import PostModel from '../PostModel';
 import PostType from '../PostType';
 
 type LikePostArgs = {
@@ -42,7 +42,7 @@ export const likePostMutation = mutationWithClientMutationId({
   mutateAndGetPayload: async (args: LikePostArgs, ctx: TicoTecoContext) => {
     const {id} = args;
 
-    const post = await Post.findByIdAndUpdate(id, {
+    const post = await PostModel.findByIdAndUpdate(id, {
       $addToSet: {
         likes: ctx.user._id,
       },
