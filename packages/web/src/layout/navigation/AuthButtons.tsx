@@ -17,6 +17,7 @@
  */
 
 import React from 'react';
+import Link from 'next/link';
 
 import {Box, Button, Flex, Image} from '@chakra-ui/react';
 
@@ -30,7 +31,9 @@ function AuthButtons() {
   if (!user) {
     return (
       <Box>
-        <Button>Login {user?.profile?.displayName}</Button>
+        <Link href='/login'>
+          <Button>Login</Button>
+        </Link>
       </Box>
     );
   }
