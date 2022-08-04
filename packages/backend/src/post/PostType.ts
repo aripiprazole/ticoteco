@@ -29,9 +29,9 @@ import ProfileType from '../profile/ProfileType';
 
 import PostModel from './PostModel';
 import UserModel from '../user/UserModel';
-import TicoTecoContext from '../graphql/TicoTecoContext';
 import ProfileModel from '../profile/ProfileModel';
 import CommentType from '../comment/CommentType';
+import {videoField} from './fields/videoField.js';
 
 const PostType = new GraphQLObjectType<PostModel>({
   name: 'Post',
@@ -63,20 +63,7 @@ const PostType = new GraphQLObjectType<PostModel>({
       resolve: async (post) => post.comments,
     },
 
-    video: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: async (post, _, ctx: TicoTecoContext) => {
-        const today = new Date();
-
-        const [video] = await ctx.bucket.file(`posts/${post._id}.mp4`).get();
-        const [publicUrl] = await video.getSignedUrl({
-          action: 'read',
-          expires: today.setDate(today.getDate() + 1),
-        });
-
-        return publicUrl;
-      },
-    },
+    video: videoField,
 
     preview: {
       type: new GraphQLNonNull(GraphQLString),
