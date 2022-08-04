@@ -18,6 +18,7 @@
       <option name="FORCE_QUOTE_STYlE" value="true" />
       <option name="ENFORCE_TRAILING_COMMA" value="WhenMultiline" />
       <option name="JSX_ATTRIBUTE_VALUE" value="Quotes" />
+      <option name="USE_EXPLICIT_JS_EXTENSION" value="FALSE" />
     </JSCodeStyleSettings>
     <ScssCodeStyleSettings>
       <option name="USE_DOUBLE_QUOTES" value="false" />

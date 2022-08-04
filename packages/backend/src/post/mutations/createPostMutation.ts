@@ -23,8 +23,8 @@ import {FileUpload, GraphQLUpload} from 'graphql-upload-cjs';
 import * as Yup from 'yup';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
-import Post from '../Post';
-import GraphQLPost from '../types/GraphQLPost';
+import Post from '../PostModel';
+import PostType from '../PostType';
 
 type CreatePostArgs = {
   readonly title: string;
@@ -53,7 +53,7 @@ export const createPostMutation = mutationWithClientMutationId({
   },
   outputFields: () => ({
     post: {
-      type: new GraphQLNonNull(GraphQLPost),
+      type: new GraphQLNonNull(PostType),
       resolve: ({post}) => post,
     },
   }),

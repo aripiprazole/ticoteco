@@ -21,7 +21,7 @@ import {mutationWithClientMutationId} from 'graphql-relay';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import Post from '../Post';
+import Post from '../PostModel';
 
 type DeletePostArgs = {
   readonly id: string;

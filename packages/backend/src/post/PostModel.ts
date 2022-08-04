@@ -20,7 +20,7 @@ import mongoose from 'mongoose';
 
 import Comment, {commentSchema} from '../comment/Comment';
 
-export const postSchema = new mongoose.Schema<Post>({
+export const postSchema = new mongoose.Schema<PostModel>({
   user: {type: mongoose.SchemaTypes.ObjectId, required: true},
   title: {type: String, required: true},
   description: {type: String, required: false},
@@ -28,7 +28,7 @@ export const postSchema = new mongoose.Schema<Post>({
   comments: [{type: commentSchema, required: false}],
 });
 
-type Post = {
+type PostModel = {
   readonly _id: mongoose.Types.ObjectId;
   readonly user: mongoose.Types.ObjectId;
   readonly likes: mongoose.Types.ObjectId[];
@@ -37,6 +37,6 @@ type Post = {
   description: string;
 };
 
-const Post = mongoose.model<Post>('Post', postSchema);
+const PostModel = mongoose.model<PostModel>('Post', postSchema);
 
-export default Post;
+export default PostModel;

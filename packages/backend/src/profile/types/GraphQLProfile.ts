@@ -26,8 +26,8 @@ import {
 } from '@entria/graphql-mongoose-loader';
 
 import Profile from '../Profile';
-import {GraphQLPostConnection} from '../../post/types/GraphQLPost';
-import Post from '../../post/Post';
+import {GraphQLPostConnection} from '../../post/PostType';
+import Post from '../../post/PostModel';
 
 const GraphQLProfile = new GraphQLObjectType<Profile>({
   name: 'Profile',

@@ -25,15 +25,15 @@ import {
 } from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
 
-import GraphQLProfile from '../../profile/types/GraphQLProfile';
+import GraphQLProfile from '../profile/types/GraphQLProfile';
 
-import Post from '../../post/Post';
-import User from '../../user/User';
-import TicoTecoContext from '../../graphql/TicoTecoContext';
-import Profile from '../../profile/Profile';
-import GraphQLComment from '../../comment/types/GraphQLComment';
+import Post from './PostModel';
+import User from '../user/User';
+import TicoTecoContext from '../graphql/TicoTecoContext';
+import Profile from '../profile/Profile';
+import GraphQLComment from '../comment/types/GraphQLComment';
 
-const GraphQLPost = new GraphQLObjectType<Post>({
+const PostType = new GraphQLObjectType<Post>({
   name: 'Post',
   fields: () => ({
     id: {
@@ -98,7 +98,7 @@ const GraphQLPost = new GraphQLObjectType<Post>({
 
 export const GraphQLPostConnection = connectionDefinitions({
   name: 'Post',
-  nodeType: GraphQLPost,
+  nodeType: PostType,
 });
 
-export default GraphQLPost;
+export default PostType;

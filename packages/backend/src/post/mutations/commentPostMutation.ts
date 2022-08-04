@@ -22,8 +22,8 @@ import {mutationWithClientMutationId} from 'graphql-relay';
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
 import Comment from '../../comment/Comment';
-import GraphQLPost from '../types/GraphQLPost';
-import Post from '../Post';
+import PostType from '../PostType';
+import Post from '../PostModel';
 
 type CommentPostArgs = {
   readonly id: string;
@@ -38,7 +38,7 @@ export const commentPostMutation = mutationWithClientMutationId({
   },
   outputFields: () => ({
     post: {
-      type: new GraphQLNonNull(GraphQLPost),
+      type: new GraphQLNonNull(PostType),
       resolve: ({post}) => post,
     },
   }),

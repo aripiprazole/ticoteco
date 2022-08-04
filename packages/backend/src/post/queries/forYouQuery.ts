@@ -26,8 +26,8 @@ import {
   connectionFromMongoCursor,
 } from '@entria/graphql-mongoose-loader';
 
-import {GraphQLPostConnection} from '../types/GraphQLPost';
-import Post from '../Post';
+import {GraphQLPostConnection} from '../PostType';
+import Post from '../PostModel';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
