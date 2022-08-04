@@ -24,7 +24,7 @@ import {
   graphql,
 } from 'react-relay';
 
-import {Box} from '@chakra-ui/react';
+import {Box, Button, VStack} from '@chakra-ui/react';
 
 import TimelinePost from './TimelinePost';
 
@@ -74,19 +74,19 @@ function CurrentPosts(props: CurrentPostProps) {
   const {forYou} = usePreloadedQuery(TimelineQuery, queryRef);
 
   return (
-    <div>
+    <VStack align='start'>
       {forYou.edges.map(({node, cursor}) => (
         <TimelinePost data={node} key={cursor} />
       ))}
 
-      <button
+      <Button
         onClick={() => {
           setAfterPost(forYou.pageInfo.endCursor);
         }}
       >
-        Next video...
-      </button>
-    </div>
+        Load more videos
+      </Button>
+    </VStack>
   );
 }
 
