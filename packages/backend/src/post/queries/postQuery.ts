@@ -20,8 +20,8 @@ import {GraphQLFieldConfig, GraphQLID} from 'graphql';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import GraphQLPost from '../types/GraphQLPost';
-import Post from '../Post';
+import PostType from '../PostType';
+import PostModel from '../PostModel';
 
 export type PostArguments = {
   readonly id: string;
@@ -30,7 +30,7 @@ export type PostArguments = {
 type PostQuery = GraphQLFieldConfig<any, TicoTecoContext, PostArguments>;
 
 export const postQuery: PostQuery = {
-  type: GraphQLPost,
+  type: PostType,
   description: 'Finds a post by id',
   args: {
     id: {type: GraphQLID},
@@ -38,6 +38,6 @@ export const postQuery: PostQuery = {
   resolve: async (_root, args) => {
     const {id} = args;
 
-    return Post.findById(id);
+    return PostModel.findById(id);
   },
 };

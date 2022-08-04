@@ -26,8 +26,8 @@ import {
   connectionFromMongoCursor,
 } from '@entria/graphql-mongoose-loader';
 
-import {GraphQLPostConnection} from '../types/GraphQLPost';
-import Post from '../Post';
+import {GraphQLPostConnection} from '../PostType';
+import PostModel from '../PostModel';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
@@ -41,11 +41,11 @@ export const forYouQuery: ForYouQuery = {
   args: connectionArgs,
   resolve: async (_root, args, context) => {
     const loader = new DataLoader((ids) => {
-      return mongooseLoader(Post, ids as any);
+      return mongooseLoader(PostModel, ids as any);
     });
 
     return connectionFromMongoCursor({
-      cursor: Post.find(),
+      cursor: PostModel.find(),
       context,
       args,
       loader: (_context, id) => loader.load(id),

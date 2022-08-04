@@ -1,7 +1,0 @@
-[*.graphql]
-indent_size = 2
-
-[{*.ts, *.tsx}]
-indent_size = 2
-ij_typescript_use_explicit_js_extension = false
-

@@ -25,11 +25,11 @@ import {
   connectionFromMongoCursor,
 } from '@entria/graphql-mongoose-loader';
 
-import Profile from '../Profile';
-import {GraphQLPostConnection} from '../../post/types/GraphQLPost';
-import Post from '../../post/Post';
+import ProfileModel from './ProfileModel';
+import {GraphQLPostConnection} from '../post/PostType';
+import PostModel from '../post/PostModel';
 
-const GraphQLProfile = new GraphQLObjectType<Profile>({
+const ProfileType = new GraphQLObjectType<ProfileModel>({
   name: 'Profile',
   fields: () => ({
     id: {
@@ -53,11 +53,11 @@ const GraphQLProfile = new GraphQLObjectType<Profile>({
       args: connectionArgs,
       resolve: async (profile, args: ConnectionArguments, context) => {
         const loader = new DataLoader((ids) => {
-          return mongooseLoader(Post, ids as any);
+          return mongooseLoader(PostModel, ids as any);
         });
 
         return connectionFromMongoCursor({
-          cursor: Post.find({user: profile.user}),
+          cursor: PostModel.find({user: profile.user}),
           context,
           args,
           loader: (_context, id) => loader.load(id),
@@ -67,4 +67,4 @@ const GraphQLProfile = new GraphQLObjectType<Profile>({
   }),
 });
 
-export default GraphQLProfile;
+export default ProfileType;

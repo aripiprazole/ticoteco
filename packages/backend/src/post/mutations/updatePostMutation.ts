@@ -23,8 +23,8 @@ import * as Yup from 'yup';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import Post from '../Post';
-import GraphQLPost from '../types/GraphQLPost';
+import PostModel from '../PostModel';
+import PostType from '../PostType';
 
 type UpdatePostArgs = {
   readonly id: string;
@@ -46,7 +46,7 @@ export const updatePostMutation = mutationWithClientMutationId({
   },
   outputFields: () => ({
     post: {
-      type: new GraphQLNonNull(GraphQLPost),
+      type: new GraphQLNonNull(PostType),
       resolve: ({post}) => post,
     },
   }),
@@ -55,7 +55,7 @@ export const updatePostMutation = mutationWithClientMutationId({
 
     await updatePostSchema.validate({title, description});
 
-    const post = await Post.findById(id);
+    const post = await PostModel.findById(id);
 
     if (!ctx.user._id.equals(post.user)) {
       throw Error('You are not allowed to update this post');

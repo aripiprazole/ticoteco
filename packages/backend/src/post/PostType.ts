@@ -25,15 +25,15 @@ import {
 } from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
 
-import GraphQLProfile from '../../profile/types/GraphQLProfile';
+import ProfileType from '../profile/ProfileType';
 
-import Post from '../../post/Post';
-import User from '../../user/User';
-import TicoTecoContext from '../../graphql/TicoTecoContext';
-import Profile from '../../profile/Profile';
-import GraphQLComment from '../../comment/types/GraphQLComment';
+import PostModel from './PostModel';
+import UserModel from '../user/UserModel';
+import TicoTecoContext from '../graphql/TicoTecoContext';
+import ProfileModel from '../profile/ProfileModel';
+import CommentType from '../comment/CommentType';
 
-const GraphQLPost = new GraphQLObjectType<Post>({
+const PostType = new GraphQLObjectType<PostModel>({
   name: 'Post',
   fields: () => ({
     id: {
@@ -58,7 +58,7 @@ const GraphQLPost = new GraphQLObjectType<Post>({
 
     comments: {
       type: new GraphQLNonNull(
-        new GraphQLList(new GraphQLNonNull(GraphQLComment)),
+        new GraphQLList(new GraphQLNonNull(CommentType)),
       ),
       resolve: async (post) => post.comments,
     },
@@ -85,10 +85,10 @@ const GraphQLPost = new GraphQLObjectType<Post>({
     },
 
     profile: {
-      type: new GraphQLNonNull(GraphQLProfile),
+      type: new GraphQLNonNull(ProfileType),
       resolve: async (post) => {
-        const user = await User.findById(post.user);
-        const profile = await Profile.findById(user.profile);
+        const user = await UserModel.findById(post.user);
+        const profile = await ProfileModel.findById(user.profile);
 
         return profile;
       },
@@ -98,7 +98,7 @@ const GraphQLPost = new GraphQLObjectType<Post>({
 
 export const GraphQLPostConnection = connectionDefinitions({
   name: 'Post',
-  nodeType: GraphQLPost,
+  nodeType: PostType,
 });
 
-export default GraphQLPost;
+export default PostType;

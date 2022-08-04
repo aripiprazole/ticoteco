@@ -21,7 +21,7 @@ import {mutationWithClientMutationId} from 'graphql-relay';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import Post from '../Post';
+import PostModel from '../PostModel';
 
 type DeletePostArgs = {
   readonly id: string;
@@ -36,12 +36,12 @@ export const deletePostMutation = mutationWithClientMutationId({
   mutateAndGetPayload: async (args: DeletePostArgs, ctx: TicoTecoContext) => {
     const {id} = args;
 
-    const post = await Post.findById(id);
+    const post = await PostModel.findById(id);
 
     if (!ctx.user._id.equals(post.user)) {
       throw Error('You are not allowed to delete this post');
     }
 
-    await Post.findByIdAndDelete(id);
+    await PostModel.findByIdAndDelete(id);
   },
 });

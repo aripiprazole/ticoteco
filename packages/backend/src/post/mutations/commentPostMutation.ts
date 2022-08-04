@@ -21,9 +21,9 @@ import {mutationWithClientMutationId} from 'graphql-relay';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import Comment from '../../comment/Comment';
-import GraphQLPost from '../types/GraphQLPost';
-import Post from '../Post';
+import CommentModel from '../../comment/CommentModel';
+import PostType from '../PostType';
+import PostModel from '../PostModel';
 
 type CommentPostArgs = {
   readonly id: string;
@@ -38,16 +38,16 @@ export const commentPostMutation = mutationWithClientMutationId({
   },
   outputFields: () => ({
     post: {
-      type: new GraphQLNonNull(GraphQLPost),
+      type: new GraphQLNonNull(PostType),
       resolve: ({post}) => post,
     },
   }),
   mutateAndGetPayload: async (args: CommentPostArgs, ctx: TicoTecoContext) => {
     const {content} = args;
 
-    const post = await Post.findByIdAndUpdate(args.id, {
+    const post = await PostModel.findByIdAndUpdate(args.id, {
       $push: {
-        comments: new Comment({
+        comments: new CommentModel({
           user: ctx.user._id,
           content,
         }),

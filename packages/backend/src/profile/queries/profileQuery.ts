@@ -21,8 +21,8 @@ import {GraphQLNonNull, GraphQLString} from 'graphql';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import GraphQLProfile from '../types/GraphQLProfile';
-import Profile from '../Profile';
+import ProfileType from '../ProfileType';
+import ProfileModel from '../ProfileModel';
 
 type ProfileArguments = {
   readonly username: string;
@@ -31,7 +31,7 @@ type ProfileArguments = {
 type ProfileQuery = GraphQLFieldConfig<any, TicoTecoContext, ProfileArguments>;
 
 export const profileQuery: ProfileQuery = {
-  type: GraphQLProfile,
+  type: ProfileType,
   args: {
     username: {
       type: new GraphQLNonNull(GraphQLString),
@@ -42,6 +42,6 @@ export const profileQuery: ProfileQuery = {
   resolve: async (_root, args) => {
     const {username} = args;
 
-    return Profile.findOne({username});
+    return ProfileModel.findOne({username});
   },
 };

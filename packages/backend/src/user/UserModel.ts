@@ -18,17 +18,17 @@
 
 import mongoose from 'mongoose';
 
-export const userSchema = new mongoose.Schema<User>({
+export const userSchema = new mongoose.Schema<UserModel>({
   firebaseUid: {type: String, required: true},
   profile: {type: mongoose.SchemaTypes.ObjectId, required: true},
 });
 
-type User = {
+type UserModel = {
   readonly _id: mongoose.Types.ObjectId;
   readonly firebaseUid: string;
   profile: mongoose.Types.ObjectId;
 };
 
-const User = mongoose.model<User>('User', userSchema);
+const UserModel = mongoose.model<UserModel>('User', userSchema);
 
-export default User;
+export default UserModel;

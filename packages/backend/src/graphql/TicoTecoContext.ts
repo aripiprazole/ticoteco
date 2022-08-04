@@ -19,10 +19,10 @@
 import firebase from 'firebase-admin';
 import {Bucket} from '@google-cloud/storage';
 
-import User from '../user/User';
+import UserModel from '../user/UserModel';
 
 type TicoTecoContext = {
-  readonly user: User | null;
+  readonly user: UserModel | null;
   readonly firebase: firebase.app.App;
   readonly bucket: Bucket;
 };

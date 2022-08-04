@@ -16,27 +16,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import mongoose from 'mongoose';
+import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
-import Comment, {commentSchema} from '../comment/Comment';
+import UserModel from './UserModel';
 
-export const postSchema = new mongoose.Schema<Post>({
-  user: {type: mongoose.SchemaTypes.ObjectId, required: true},
-  title: {type: String, required: true},
-  description: {type: String, required: false},
-  likes: [{type: Array, required: false}],
-  comments: [{type: commentSchema, required: false}],
+import ProfileType from '../profile/ProfileType';
+import ProfileModel from '../profile/ProfileModel';
+
+const UserType = new GraphQLObjectType<UserModel>({
+  name: 'User',
+  fields: () => ({
+    id: {
+      type: new GraphQLNonNull(GraphQLString),
+      resolve: (user) => user._id.toString(),
+    },
+    profile: {
+      type: new GraphQLNonNull(ProfileType),
+      resolve: (user) => ProfileModel.findById(user.profile),
+    },
+  }),
 });
 
-type Post = {
-  readonly _id: mongoose.Types.ObjectId;
-  readonly user: mongoose.Types.ObjectId;
-  readonly likes: mongoose.Types.ObjectId[];
-  readonly comments: Comment[];
-  title: string;
-  description: string;
-};
-
-const Post = mongoose.model<Post>('Post', postSchema);
-
-export default Post;
+export default UserType;

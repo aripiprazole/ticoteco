@@ -18,21 +18,25 @@
 
 import mongoose from 'mongoose';
 
-export const profileSchema = new mongoose.Schema<Profile>({
-  username: {type: String, required: true},
-  displayName: {type: String, required: true},
-  avatarUrl: {type: String, required: true},
+import CommentModel, {commentSchema} from '../comment/CommentModel';
+
+export const postSchema = new mongoose.Schema<PostModel>({
   user: {type: mongoose.SchemaTypes.ObjectId, required: true},
+  title: {type: String, required: true},
+  description: {type: String, required: false},
+  likes: [{type: Array, required: false}],
+  comments: [{type: commentSchema, required: false}],
 });
 
-type Profile = {
+type PostModel = {
   readonly _id: mongoose.Types.ObjectId;
-  readonly avatarUrl: string;
-  username: string;
-  displayName: string;
-  user: mongoose.Types.ObjectId;
+  readonly user: mongoose.Types.ObjectId;
+  readonly likes: mongoose.Types.ObjectId[];
+  readonly comments: CommentModel[];
+  title: string;
+  description: string;
 };
 
-const Profile = mongoose.model<Profile>('Profile', profileSchema);
+const PostModel = mongoose.model<PostModel>('Post', postSchema);
 
-export default Profile;
+export default PostModel;
