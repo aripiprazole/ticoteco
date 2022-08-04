@@ -34,27 +34,25 @@ const findCurrentUser =
 
     try {
       const idToken = await appData.firebase.auth().verifyIdToken(header);
-      const firebaseUser = await appData.firebase.auth().getUser(idToken.uid);
+      const record = await appData.firebase.auth().getUser(idToken.uid);
 
-      const appUser = await UserModel.findOne({firebaseUid: firebaseUser.uid});
+      const appUser = await UserModel.findOne({firebaseUid: record.uid});
 
-      return appUser ?? (await createNewUser(firebaseUser));
+      return appUser ?? (await createNewUser(record));
     } catch (err) {
       return null;
     }
   };
 
-async function createNewUser(
-  firebaseUser: auth.UserRecord,
-): Promise<UserModel> {
+async function createNewUser(record: auth.UserRecord): Promise<UserModel> {
   const user = new UserModel({
-    firebaseUid: firebaseUser.uid,
+    firebaseUid: record.uid,
     profile: null,
   });
 
   const profile = new ProfileModel({
-    displayName: firebaseUser.displayName,
-    username: firebaseUser.displayName,
+    displayName: record.displayName,
+    username: record.displayName,
     avatarUrl: 'https://i.pravatar.cc/300',
   });
 
