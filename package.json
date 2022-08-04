@@ -7,6 +7,7 @@
   "author": "Gabrielle Guimarães de Oliveira",
   "license": "GPL-3.0+",
   "packageManager": "yarn@3.2.1",
+  "private": true,
   "scripts": {
     "heroku-postbuild": "yarn workspace @ticoteco/backend build",
     "backend:dev": "yarn workspace @ticoteco/backend dev",
@@ -31,7 +32,6 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@ticoteco/backend": "workspace:^",
     "@types/node": "^18.0.1",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
@@ -41,6 +41,7 @@
     "eslint-plugin-react": "^7.30.1",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
     "typescript": "^4.7.4"
   },
   "dependenciesMeta": {
