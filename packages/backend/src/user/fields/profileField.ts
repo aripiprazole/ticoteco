@@ -16,21 +16,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
+import {GraphQLFieldConfig} from 'graphql/type';
+import {GraphQLNonNull} from 'graphql';
 
-import UserModel from './UserModel';
+import ProfileType from '../../profile/ProfileType';
+import ProfileModel from '../../profile/ProfileModel';
 
-import {profileField} from './fields/profileField.js';
-
-const UserType = new GraphQLObjectType<UserModel>({
-  name: 'User',
-  fields: () => ({
-    id: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve: (user) => user._id.toString(),
-    },
-    profile: profileField,
-  }),
-});
-
-export default UserType;
+export const profileField: GraphQLFieldConfig<any, any> = {
+  type: new GraphQLNonNull(ProfileType),
+  resolve: (user) => ProfileModel.findById(user.profile),
+};
