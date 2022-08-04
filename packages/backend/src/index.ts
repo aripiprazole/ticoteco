@@ -41,7 +41,7 @@ async function startBackend() {
     firebase,
   });
 
-  app.listen(8000);
+  app.listen(port);
 
   log.info(`Backend listen connections at port ${port}`);
 }
