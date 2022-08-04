@@ -6,13 +6,12 @@
   "repository": "https://github.com/gabrielleeg1/ticoteco",
   "author": "Gabrielle Guimarães de Oliveira",
   "license": "GPL-3.0+",
-  "type": "module",
   "scripts": {
-    "dev": "node --loader ts-node/esm ./src/index.ts",
-    "schema": "node --loader ts-node/esm ./src/generateSchema.js",
+    "dev": "yarn run build && node ./dist/index.js",
+    "schema": "yarn run build && node ./dist/generateSchema.js",
     "start": "node build/index.js",
-    "test": "yarn build && yarn node --experimental-vm-modules $(yarn bin jest) build",
-    "build": "tsc --build --verbose"
+    "test": "jest",
+    "build": "babel src --extensions .ts --out-dir dist"
   },
   "dependencies": {
     "@entria/graphql-mongoose-loader": "^4.4.0",
