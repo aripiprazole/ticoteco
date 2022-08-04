@@ -18,8 +18,10 @@
 
 import {GraphQLNonNull, GraphQLString} from 'graphql';
 import {mutationWithClientMutationId} from 'graphql-relay';
-import GraphQLUpload from 'graphql-upload/GraphQLUpload.mjs';
-import Upload from 'graphql-upload/Upload.mjs';
+import graphqlUpload from 'graphql-upload-cjs';
+
+import FileUpload = graphqlUpload.FileUpload;
+import GraphQLUpload = graphqlUpload.GraphQLUpload;
 
 import * as Yup from 'yup';
 
@@ -30,7 +32,7 @@ import GraphQLPost from '../types/GraphQLPost.js';
 type CreatePostArgs = {
   readonly title: string;
   readonly description: string;
-  readonly video: Upload;
+  readonly video: Promise<FileUpload>;
 };
 
 const createPostSchema = Yup.object({
