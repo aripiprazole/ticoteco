@@ -10,7 +10,7 @@
   "private": true,
   "scripts": {
     "postinstall": "patch-package",
-    "heroku-postbuild": "yarn workspace @ticoteco/backend build",
+    "heroku-postbuild": "yarn workspace @ticoteco/backend build && yarn patch-package",
     "backend:dev": "yarn workspace @ticoteco/backend dev",
     "backend:dev:watch": "yarn workspace @ticoteco/backend dev:watch",
     "backend:start": "yarn workspace @ticoteco/backend start",
