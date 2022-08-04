@@ -17,8 +17,9 @@
  */
 
 import React from 'react';
+import Link from 'next/link';
 
-import {Box, Flex, Image} from '@chakra-ui/react';
+import {Box, chakra, Flex, Image} from '@chakra-ui/react';
 
 import Search from './Search';
 import AuthButtons from './AuthButtons';
@@ -38,7 +39,11 @@ function Navigation() {
         justify='space-between'
         align='center'
       >
-        <Image alt='TikTok' src='/tiktok.png' height='3rem' />
+        <Link href='/'>
+          <chakra.a cursor='pointer'>
+            <Image alt='TikTok' src='/tiktok.png' height='3rem' />
+          </chakra.a>
+        </Link>
 
         <Search />
 
