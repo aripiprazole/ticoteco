@@ -18,7 +18,7 @@
 
 import {GraphQLFieldConfig} from 'graphql/type';
 import {GraphQLNonNull} from 'graphql';
-import {GraphQLPostConnection} from '../../post/PostType.js';
+import {GraphQLPostConnection} from '../../post/PostType';
 import {connectionArgs, ConnectionArguments} from 'graphql-relay';
 import DataLoader from 'dataloader';
 import {

@@ -27,8 +27,8 @@ import {connectionDefinitions} from 'graphql-relay';
 
 import PostModel from './PostModel';
 import CommentType from '../comment/CommentType';
-import {videoField} from './fields/videoField.js';
-import {profileField} from '../user/fields/profileField.js';
+import {videoField} from './fields/videoField';
+import {profileField} from '../user/fields/profileField';
 
 const PostType = new GraphQLObjectType<PostModel>({
   name: 'Post',

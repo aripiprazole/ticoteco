@@ -18,9 +18,9 @@
 
 import {GraphQLFieldConfig} from 'graphql/type';
 import {GraphQLNonNull} from 'graphql';
-import ProfileType from '../../profile/ProfileType.js';
-import UserModel from '../../user/UserModel.js';
-import ProfileModel from '../../profile/ProfileModel.js';
+import ProfileType from '../../profile/ProfileType';
+import UserModel from '../../user/UserModel';
+import ProfileModel from '../../profile/ProfileModel';
 
 export const profileField: GraphQLFieldConfig<any, any> = {
   type: new GraphQLNonNull(ProfileType),

@@ -20,7 +20,7 @@ import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
 import UserModel from './UserModel';
 
-import {profileField} from './fields/profileField.js';
+import {profileField} from './fields/profileField';
 
 const UserType = new GraphQLObjectType<UserModel>({
   name: 'User',
