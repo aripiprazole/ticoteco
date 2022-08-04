@@ -9,6 +9,7 @@
   "packageManager": "yarn@3.2.1",
   "private": true,
   "scripts": {
+    "postinstall": "patch-package",
     "heroku-postbuild": "yarn workspace @ticoteco/backend build",
     "backend:dev": "yarn workspace @ticoteco/backend dev",
     "backend:dev:watch": "yarn workspace @ticoteco/backend dev:watch",
@@ -51,5 +52,8 @@
     "open@8.4.0": {
       "unplugged": true
     }
+  },
+  "dependencies": {
+    "patch-package": "^6.4.7"
   }
 }
