@@ -18,10 +18,10 @@
 
 import {GraphQLObjectType} from 'graphql';
 
-import {meQuery} from '../user/queries/meQuery.js';
-import {forYouQuery} from '../post/queries/forYouQuery.js';
-import {profileQuery} from '../profile/queries/profileQuery.js';
-import {postQuery} from '../post/queries/postQuery.js';
+import {meQuery} from '../user/queries/meQuery';
+import {forYouQuery} from '../post/queries/forYouQuery';
+import {profileQuery} from '../profile/queries/profileQuery';
+import {postQuery} from '../post/queries/postQuery';
 
 const query = new GraphQLObjectType({
   name: 'Query',

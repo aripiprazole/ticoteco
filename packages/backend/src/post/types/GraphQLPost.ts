@@ -25,13 +25,13 @@ import {
 } from 'graphql';
 import {connectionDefinitions} from 'graphql-relay';
 
-import GraphQLProfile from '../../profile/types/GraphQLProfile.js';
+import GraphQLProfile from '../../profile/types/GraphQLProfile';
 
-import Post from '../../post/Post.js';
-import User from '../../user/User.js';
-import TicoTecoContext from '../../graphql/TicoTecoContext.js';
-import Profile from '../../profile/Profile.js';
-import GraphQLComment from '../../comment/types/GraphQLComment.js';
+import Post from '../../post/Post';
+import User from '../../user/User';
+import TicoTecoContext from '../../graphql/TicoTecoContext';
+import Profile from '../../profile/Profile';
+import GraphQLComment from '../../comment/types/GraphQLComment';
 
 const GraphQLPost = new GraphQLObjectType<Post>({
   name: 'Post',

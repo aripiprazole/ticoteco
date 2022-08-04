@@ -18,9 +18,9 @@
 
 import {Request} from 'koa';
 
-import {TicoTecoAppData} from '../app.js';
-import User from './/User.js';
-import Profile from '../profile/Profile.js';
+import {TicoTecoAppData} from '../app';
+import User from './/User';
+import Profile from '../profile/Profile';
 
 import {auth} from 'firebase-admin';
 

@@ -18,12 +18,12 @@
 
 import {GraphQLObjectType} from 'graphql';
 
-import {createPostMutation} from '../post/mutations/createPostMutation.js';
-import {updateProfileMutation} from '../profile/mutations/updateProfile.js';
-import {updatePostMutation} from '../post/mutations/updatePostMutation.js';
-import {deletePostMutation} from '../post/mutations/deletePostMutation.js';
-import {likePostMutation} from '../post/mutations/likePostMutation.js';
-import {commentPostMutation} from '../post/mutations/commentPostMutation.js';
+import {createPostMutation} from '../post/mutations/createPostMutation';
+import {updateProfileMutation} from '../profile/mutations/updateProfile';
+import {updatePostMutation} from '../post/mutations/updatePostMutation';
+import {deletePostMutation} from '../post/mutations/deletePostMutation';
+import {likePostMutation} from '../post/mutations/likePostMutation';
+import {commentPostMutation} from '../post/mutations/commentPostMutation';
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',

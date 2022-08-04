@@ -19,10 +19,10 @@
 import {GraphQLID, GraphQLNonNull} from 'graphql';
 import {mutationWithClientMutationId} from 'graphql-relay';
 
-import TicoTecoContext from '../../graphql/TicoTecoContext.js';
+import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import Post from '../Post.js';
-import GraphQLPost from '../types/GraphQLPost.js';
+import Post from '../Post';
+import GraphQLPost from '../types/GraphQLPost';
 
 type LikePostArgs = {
   readonly id: string;

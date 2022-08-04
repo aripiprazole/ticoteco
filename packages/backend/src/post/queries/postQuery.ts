@@ -18,10 +18,10 @@
 
 import {GraphQLFieldConfig, GraphQLID} from 'graphql';
 
-import TicoTecoContext from '../../graphql/TicoTecoContext.js';
+import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import GraphQLPost from '../types/GraphQLPost.js';
-import Post from '../Post.js';
+import GraphQLPost from '../types/GraphQLPost';
+import Post from '../Post';
 
 export type PostArguments = {
   readonly id: string;

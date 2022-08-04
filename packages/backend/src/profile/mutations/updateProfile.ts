@@ -19,12 +19,12 @@
 import {GraphQLNonNull, GraphQLString} from 'graphql';
 import {mutationWithClientMutationId} from 'graphql-relay';
 
-import TicoTecoContext from '../../graphql/TicoTecoContext.js';
+import TicoTecoContext from '../../graphql/TicoTecoContext';
 
 import * as Yup from 'yup';
 
-import GraphQLProfile from '../types/GraphQLProfile.js';
-import Profile from '../Profile.js';
+import GraphQLProfile from '../types/GraphQLProfile';
+import Profile from '../Profile';
 
 export type UpdateProfileArgs = {
   readonly username: string;

@@ -18,10 +18,10 @@
 
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
-import Comment from '../Comment.js';
-import GraphQLProfile from '../../profile/types/GraphQLProfile.js';
-import User from '../../user/User.js';
-import Profile from '../../profile/Profile.js';
+import Comment from '../Comment';
+import GraphQLProfile from '../../profile/types/GraphQLProfile';
+import User from '../../user/User';
+import Profile from '../../profile/Profile';
 
 const GraphQLComment = new GraphQLObjectType<Comment>({
   name: 'Comment',

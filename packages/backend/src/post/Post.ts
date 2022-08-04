@@ -18,7 +18,7 @@
 
 import mongoose from 'mongoose';
 
-import Comment, {commentSchema} from '../comment/Comment.js';
+import Comment, {commentSchema} from '../comment/Comment';
 
 export const postSchema = new mongoose.Schema<Post>({
   user: {type: mongoose.SchemaTypes.ObjectId, required: true},
