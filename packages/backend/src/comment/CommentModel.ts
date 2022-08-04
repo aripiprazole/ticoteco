@@ -18,17 +18,17 @@
 
 import mongoose from 'mongoose';
 
-export const commentSchema = new mongoose.Schema<Comment>({
+export const commentSchema = new mongoose.Schema<CommentModel>({
   user: {type: mongoose.SchemaTypes.ObjectId, required: true},
   content: {type: String, required: false},
 });
 
-type Comment = {
+type CommentModel = {
   readonly _id: mongoose.Types.ObjectId;
   readonly user: mongoose.Types.ObjectId;
   content: string;
 };
 
-const Comment = mongoose.model<Comment>('Comment', commentSchema);
+const CommentModel = mongoose.model<CommentModel>('Comment', commentSchema);
 
-export default Comment;
+export default CommentModel;

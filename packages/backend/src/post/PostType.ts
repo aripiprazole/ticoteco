@@ -31,7 +31,7 @@ import PostModel from './PostModel';
 import User from '../user/User';
 import TicoTecoContext from '../graphql/TicoTecoContext';
 import ProfileModel from '../profile/ProfileModel';
-import GraphQLComment from '../comment/types/GraphQLComment';
+import CommentType from '../comment/CommentType';
 
 const PostType = new GraphQLObjectType<PostModel>({
   name: 'Post',
@@ -58,7 +58,7 @@ const PostType = new GraphQLObjectType<PostModel>({
 
     comments: {
       type: new GraphQLNonNull(
-        new GraphQLList(new GraphQLNonNull(GraphQLComment)),
+        new GraphQLList(new GraphQLNonNull(CommentType)),
       ),
       resolve: async (post) => post.comments,
     },

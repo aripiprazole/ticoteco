@@ -18,7 +18,7 @@
 
 import mongoose from 'mongoose';
 
-import Comment, {commentSchema} from '../comment/Comment';
+import CommentModel, {commentSchema} from '../comment/CommentModel';
 
 export const postSchema = new mongoose.Schema<PostModel>({
   user: {type: mongoose.SchemaTypes.ObjectId, required: true},
@@ -32,7 +32,7 @@ type PostModel = {
   readonly _id: mongoose.Types.ObjectId;
   readonly user: mongoose.Types.ObjectId;
   readonly likes: mongoose.Types.ObjectId[];
-  readonly comments: Comment[];
+  readonly comments: CommentModel[];
   title: string;
   description: string;
 };

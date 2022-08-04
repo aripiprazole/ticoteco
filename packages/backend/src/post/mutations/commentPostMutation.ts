@@ -21,7 +21,7 @@ import {mutationWithClientMutationId} from 'graphql-relay';
 
 import TicoTecoContext from '../../graphql/TicoTecoContext';
 
-import Comment from '../../comment/Comment';
+import CommentModel from '../../comment/CommentModel';
 import PostType from '../PostType';
 import PostModel from '../PostModel';
 
@@ -47,7 +47,7 @@ export const commentPostMutation = mutationWithClientMutationId({
 
     const post = await PostModel.findByIdAndUpdate(args.id, {
       $push: {
-        comments: new Comment({
+        comments: new CommentModel({
           user: ctx.user._id,
           content,
         }),

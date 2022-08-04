@@ -18,12 +18,12 @@
 
 import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
-import Comment from '../Comment';
-import ProfileType from '../../profile/ProfileType';
-import User from '../../user/User';
-import ProfileModel from '../../profile/ProfileModel';
+import CommentModel from './CommentModel';
+import ProfileType from '../profile/ProfileType';
+import User from '../user/User';
+import ProfileModel from '../profile/ProfileModel';
 
-const GraphQLComment = new GraphQLObjectType<Comment>({
+const CommentType = new GraphQLObjectType<CommentModel>({
   name: 'Comment',
   fields: () => ({
     id: {
@@ -48,4 +48,4 @@ const GraphQLComment = new GraphQLObjectType<Comment>({
   }),
 });
 
-export default GraphQLComment;
+export default CommentType;
