@@ -7,9 +7,9 @@
   "author": "Gabrielle Guimarães de Oliveira",
   "license": "GPL-3.0+",
   "scripts": {
-    "dev": "yarn run build && node ./dist/index.js",
+    "dev": "babel-node --extensions .ts src/index.ts",
     "dev:watch": "webpack --watch --progress",
-    "schema": "yarn run build && node ./dist/generateSchema.js",
+    "schema": "babel-node --extensions .ts src/generateSchema.ts",
     "start": "node dist/index.js",
     "test": "jest",
     "build": "babel src --extensions .ts --out-dir dist"
