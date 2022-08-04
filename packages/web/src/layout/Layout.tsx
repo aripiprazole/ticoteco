@@ -31,7 +31,7 @@ function Layout({children}: LayoutProps) {
     <Box>
       <Navigation />
 
-      <Box as='main' margin='auto' width='100%' maxWidth='80rem'>
+      <Box as='main' margin='auto' width='100%' maxWidth='80rem' padding='1rem'>
         {children}
       </Box>
     </Box>
