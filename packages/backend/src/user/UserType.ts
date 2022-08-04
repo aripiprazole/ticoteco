@@ -20,7 +20,8 @@ import {GraphQLNonNull, GraphQLObjectType, GraphQLString} from 'graphql';
 
 import UserModel from './UserModel';
 
-import {profileField} from './fields/profileField';
+import ProfileType from '../profile/ProfileType';
+import ProfileModel from '../profile/ProfileModel';
 
 const UserType = new GraphQLObjectType<UserModel>({
   name: 'User',
@@ -29,7 +30,10 @@ const UserType = new GraphQLObjectType<UserModel>({
       type: new GraphQLNonNull(GraphQLString),
       resolve: (user) => user._id.toString(),
     },
-    profile: profileField,
+    profile: {
+      type: new GraphQLNonNull(ProfileType),
+      resolve: (user) => ProfileModel.findById(user.profile),
+    },
   }),
 });
 
