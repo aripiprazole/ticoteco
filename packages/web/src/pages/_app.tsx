@@ -27,7 +27,7 @@ import {ChakraProvider} from '@chakra-ui/react';
 import 'firebaseui/dist/firebaseui.css';
 
 import theme from '../theme';
-import buildRelayEnvironment from '../relay';
+import buildRelayEnvironment from '../relay/environment';
 import initAuth from '../auth/initAuth';
 import {AuthProvider} from '../auth/AuthProvider';
 import {useMaybeAuthUser} from '../hooks/useMaybeAuthUser';
