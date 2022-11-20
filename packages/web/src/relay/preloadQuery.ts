@@ -16,9 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {ConcreteRequest, UploadableMap, Variables} from 'relay-runtime';
+import {GraphQLTaggedNode, UploadableMap, Variables} from 'relay-runtime';
 import {GetServerSidePropsContext} from 'next/types';
-import {AuthUserContext} from 'next-firebase-auth';
+import {AuthUser} from 'next-firebase-auth';
 
 import fetchGraphQL from './fetchGraphQL';
 
@@ -28,9 +28,9 @@ function getRequestEsm(request: any): any {
 
 export default async function preloadQuery(
   ctx: GetServerSidePropsContext<any>,
-  user: AuthUserContext,
-  request: ConcreteRequest,
-  variables: Variables,
+  user: AuthUser,
+  request: GraphQLTaggedNode,
+  variables: Variables = {},
   uploadables?: UploadableMap | null,
 ) {
   const {params} = getRequestEsm(request);

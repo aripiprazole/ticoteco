@@ -21,15 +21,23 @@ import Head from 'next/head';
 
 import Timeline from './Timeline';
 import Layout from '../layout/Layout';
+import {TimelineQuery} from '../__generated__/TimelineQuery.graphql';
+import {PreloadedQuery} from 'react-relay';
 
-function TimelinePage() {
+export type TimelinePageProps = {
+  initialQueryRef?: PreloadedQuery<TimelineQuery>;
+};
+
+function TimelinePage(props: TimelinePageProps) {
+  const {initialQueryRef} = props;
+
   return (
     <Layout>
       <Head>
         <title>TicoTeco - Timeline</title>
       </Head>
 
-      <Timeline />
+      <Timeline initialQueryRef={initialQueryRef} />
     </Layout>
   );
 }

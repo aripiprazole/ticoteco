@@ -24,7 +24,7 @@ import {
   Variables,
 } from 'relay-runtime';
 
-import {AuthUserContext} from 'next-firebase-auth';
+import {AuthUser} from 'next-firebase-auth';
 import axios from 'axios';
 
 export const GRAPHQL_API_URL =
@@ -35,7 +35,7 @@ const api = axios.create({
 });
 
 const fetchGraphQL = async (
-  authUser: AuthUserContext,
+  authUser: AuthUser,
   query: RequestParameters,
   variables: Variables,
   _cacheConfig: CacheConfig,
