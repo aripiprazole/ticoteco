@@ -16,17 +16,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Environment, Network, RecordSource, Store} from 'relay-runtime';
+import {ConcreteRequest, UploadableMap, Variables} from 'relay-runtime';
+import {GetServerSidePropsContext} from 'next/types';
 import {AuthUserContext} from 'next-firebase-auth';
+
 import fetchGraphQL from './fetchGraphQL';
 
-function buildRelayEnvironment(authUser: AuthUserContext): Environment {
-  return new Environment({
-    network: Network.create((query, variables, cacheConfig, uploadables) => {
-      return fetchGraphQL(authUser, query, variables, cacheConfig, uploadables);
-    }),
-    store: new Store(new RecordSource()),
-  });
+function getRequestEsm(request: any): any {
+  return request.default ?? request;
 }
 
-export default buildRelayEnvironment;
+export default async function preloadQuery(
+  ctx: GetServerSidePropsContext<any>,
+  user: AuthUserContext,
+  request: ConcreteRequest,
+  variables: Variables,
+  uploadables?: UploadableMap | null,
+) {
+  const {params} = getRequestEsm(request);
+
+  const response = await fetchGraphQL(user, params, variables, {}, uploadables);
+
+  return {params, variables, response};
+}
