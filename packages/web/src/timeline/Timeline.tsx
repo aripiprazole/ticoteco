@@ -106,7 +106,9 @@ function Timeline(props: TimelineProps) {
 
   useEffect(() => {
     // Fetches initial posts to make the timeline fluid for the initial view
-    loadQuery({after: afterPost});
+    if (afterPost) {
+      loadQuery({after: afterPost});
+    }
   }, [afterPost]);
 
   return (
