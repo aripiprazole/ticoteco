@@ -17,5 +17,14 @@
  */
 
 import TimelinePage from '../timeline/TimelinePage';
+import preloadQuery from '../relay/preloadQuery';
+import withTicoTecoUser from '../auth/withTicoTecoUser';
+import {timelineQuery} from '../timeline/Timeline';
+
+export const getServerSideProps = withTicoTecoUser(async ({user, ...ctx}) => ({
+  props: {
+    initialQueryRef: await preloadQuery(ctx, user, timelineQuery),
+  },
+}));
 
 export default TimelinePage;

@@ -30,7 +30,7 @@ import TimelinePost from './TimelinePost';
 
 import {TimelineQuery} from '../__generated__/TimelineQuery.graphql';
 
-const TimelineQuery = graphql`
+export const timelineQuery = graphql`
   query TimelineQuery($after: String) {
     forYou(first: 3, after: $after) {
       pageInfo {
@@ -71,7 +71,7 @@ type CurrentPostProps = {
 function CurrentPosts(props: CurrentPostProps) {
   const {queryRef, setAfterPost} = props;
 
-  const {forYou} = usePreloadedQuery(TimelineQuery, queryRef);
+  const {forYou} = usePreloadedQuery(timelineQuery, queryRef);
 
   return (
     <VStack align='start'>
@@ -90,14 +90,25 @@ function CurrentPosts(props: CurrentPostProps) {
   );
 }
 
-function Timeline() {
-  const [queryRef, loadQuery] = useQueryLoader<TimelineQuery>(TimelineQuery);
+type TimelineProps = {
+  initialQueryRef?: PreloadedQuery<TimelineQuery>;
+};
+
+function Timeline(props: TimelineProps) {
+  const {initialQueryRef} = props;
+
+  const [queryRef, loadQuery] = useQueryLoader<TimelineQuery>(
+    timelineQuery,
+    initialQueryRef,
+  );
 
   const [afterPost, setAfterPost] = useState<string>();
 
   useEffect(() => {
     // Fetches initial posts to make the timeline fluid for the initial view
-    loadQuery({after: afterPost});
+    if (afterPost) {
+      loadQuery({after: afterPost});
+    }
   }, [afterPost]);
 
   return (

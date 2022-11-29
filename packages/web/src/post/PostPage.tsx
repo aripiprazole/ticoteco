@@ -18,36 +18,32 @@
 
 import React from 'react';
 import Head from 'next/head';
-import {GetServerSideProps} from 'next';
+import {PreloadedQuery} from 'react-relay';
 
 import {Box} from '@chakra-ui/react';
 
 import Post from './Post';
 
+import {PostQuery} from '../__generated__/PostQuery.graphql';
+
 export type PostPageProps = {
-  readonly post: string;
+  readonly initialQueryRef: PreloadedQuery<PostQuery>;
 };
 
 function PostPage(props: PostPageProps) {
-  const {post} = props;
+  const {initialQueryRef} = props;
 
   return (
     <Box height='100%'>
       <Head>
-        <title children={`TicoTeco - ${post}`} />
+        <title children={`TicoTeco - Loading...`} />
       </Head>
 
       <React.Suspense fallback='Loading...'>
-        <Post postId={post as string} />
+        <Post initialQueryRef={initialQueryRef} />
       </React.Suspense>
     </Box>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => ({
-  props: {
-    post: ctx.query['post'],
-  },
-});
 
 export default PostPage;

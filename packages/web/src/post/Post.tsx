@@ -20,7 +20,12 @@ import React, {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {FiEdit, FiTrash} from 'react-icons/fi';
-import {graphql, useLazyLoadQuery, useMutation} from 'react-relay';
+import {
+  graphql,
+  PreloadedQuery,
+  useMutation,
+  usePreloadedQuery,
+} from 'react-relay';
 
 import {useFormik} from 'formik';
 
@@ -45,7 +50,7 @@ import {useMaybeUser} from '../auth/AuthContext';
 import PostComment from './PostComment';
 import PostAddComment from './PostAddComment';
 
-const PostQuery = graphql`
+export const postQuery = graphql`
   query PostQuery($id: ID!) {
     post(id: $id) {
       id
@@ -99,11 +104,11 @@ const PostDeleteMutation = graphql`
 `;
 
 export type PostProps = {
-  readonly postId: string;
+  readonly initialQueryRef: PreloadedQuery<PostQuery>;
 };
 
 function Post(props: PostProps) {
-  const {postId} = props;
+  const {initialQueryRef} = props;
 
   const router = useRouter();
   const user = useMaybeUser();
@@ -117,7 +122,7 @@ function Post(props: PostProps) {
     useMutation<PostUpdateMutation>(PostUpdateMutation);
   const [deletePost, isDeleting] =
     useMutation<PostDeleteMutation>(PostDeleteMutation);
-  const {post} = useLazyLoadQuery<PostQuery>(PostQuery, {id: postId});
+  const {post} = usePreloadedQuery<PostQuery>(postQuery, initialQueryRef);
 
   const formik = useFormik({
     initialValues: {

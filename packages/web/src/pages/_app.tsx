@@ -16,36 +16,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {AppProps} from 'next/app';
-import {withAuthUser} from 'next-firebase-auth';
-
-import {RelayEnvironmentProvider} from 'react-relay';
 
 import {ChakraProvider} from '@chakra-ui/react';
 
 import 'firebaseui/dist/firebaseui.css';
 
 import theme from '../theme';
-import buildRelayEnvironment from '../relay';
 import initAuth from '../auth/initAuth';
-import {AuthProvider} from '../auth/AuthProvider';
-import {useMaybeAuthUser} from '../hooks/useMaybeAuthUser';
+import RelayProvider from '../relay/RelayProvider';
+import {useMaybeAuthUser} from '../auth/authHooks';
 
 initAuth();
 
-function App({Component, pageProps}: AppProps) {
+function App(props: AppProps) {
+  const {_user, _idToken} = props.pageProps;
+
   const authUser = useMaybeAuthUser();
+  const [idToken, setIdToken] = useState(_idToken);
+
+  useEffect(() => {
+    authUser?.getIdToken()?.then(setIdToken);
+  }, [authUser]);
 
   return (
     <ChakraProvider theme={theme}>
-      <RelayEnvironmentProvider environment={buildRelayEnvironment(authUser)}>
-        <AuthProvider>
-          <Component {...pageProps} />
-        </AuthProvider>
-      </RelayEnvironmentProvider>
+      <RelayProvider preloadedUser={_user} idToken={idToken} {...props} />
     </ChakraProvider>
   );
 }
 
-export default withAuthUser({})(App);
+export default App;

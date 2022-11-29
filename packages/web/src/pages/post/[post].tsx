@@ -16,4 +16,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export {default, getServerSideProps} from '../../post/PostPage';
+import PostPage from '../../post/PostPage';
+import preloadQuery from '../../relay/preloadQuery';
+import withTicoTecoUser from '../../auth/withTicoTecoUser';
+import {postQuery} from '../../post/Post';
+
+export const getServerSideProps = withTicoTecoUser(async ({user, ...ctx}) => ({
+  props: {
+    initialQueryRef: await preloadQuery(ctx, user, postQuery, {
+      id: ctx.query['post'],
+    }),
+  },
+}));
+
+export default PostPage;

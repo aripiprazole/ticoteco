@@ -18,7 +18,12 @@
 
 import React, {useState} from 'react';
 import {useRouter} from 'next/router';
-import {useLazyLoadQuery, graphql, useMutation} from 'react-relay';
+import {
+  graphql,
+  useMutation,
+  PreloadedQuery,
+  usePreloadedQuery,
+} from 'react-relay';
 import {FiEdit} from 'react-icons/fi';
 
 import {useFormik} from 'formik';
@@ -34,13 +39,14 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
+import {useMaybeUser} from '../auth/AuthContext';
+
 import {ProfileQuery} from '../__generated__/ProfileQuery.graphql';
 import {ProfileUpdateMutation} from '../__generated__/ProfileUpdateMutation.graphql';
 
 import ProfileVideos from './ProfileVideos';
-import {useMaybeUser} from '../auth/AuthContext';
 
-const ProfileQuery = graphql`
+export const profileQuery = graphql`
   query ProfileQuery($username: String!) {
     profile(username: $username) {
       id
@@ -65,24 +71,12 @@ const ProfileUpdateMutation = graphql`
 `;
 
 export type ProfileProps = {
-  readonly username: string;
+  readonly initialQueryRef: PreloadedQuery<ProfileQuery>;
 };
 
 function Profile(props: ProfileProps) {
-  const {username} = props;
+  const {initialQueryRef} = props;
 
-  return (
-    <React.Suspense fallback='Loading...'>
-      <Content username={username} />
-    </React.Suspense>
-  );
-}
-
-type ContentProps = {
-  readonly username: string;
-};
-
-function Content(props: ContentProps) {
   const user = useMaybeUser();
   const router = useRouter();
 
@@ -92,9 +86,10 @@ function Content(props: ContentProps) {
     ProfileUpdateMutation,
   );
 
-  const {profile} = useLazyLoadQuery<ProfileQuery>(ProfileQuery, {
-    username: props.username,
-  });
+  const {profile} = usePreloadedQuery<ProfileQuery>(
+    profileQuery,
+    initialQueryRef,
+  );
 
   const formik = useFormik({
     initialValues: {

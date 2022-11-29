@@ -16,30 +16,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import Head from 'next/head';
+import {Environment, Network, RecordSource, Store} from 'relay-runtime';
+import fetchGraphQL from './fetchGraphQL';
 
-import Timeline from './Timeline';
-import Layout from '../layout/Layout';
-import {TimelineQuery} from '../__generated__/TimelineQuery.graphql';
-import {PreloadedQuery} from 'react-relay';
-
-export type TimelinePageProps = {
-  initialQueryRef?: PreloadedQuery<TimelineQuery>;
-};
-
-function TimelinePage(props: TimelinePageProps) {
-  const {initialQueryRef} = props;
-
-  return (
-    <Layout>
-      <Head>
-        <title>TicoTeco - Timeline</title>
-      </Head>
-
-      <Timeline initialQueryRef={initialQueryRef} />
-    </Layout>
-  );
+function buildRelayEnvironment(idToken: string): Environment {
+  return new Environment({
+    network: Network.create((query, variables, cacheConfig, uploadables) => {
+      return fetchGraphQL(idToken, query, variables, cacheConfig, uploadables);
+    }),
+    store: new Store(new RecordSource()),
+  });
 }
 
-export default TimelinePage;
+export default buildRelayEnvironment;
