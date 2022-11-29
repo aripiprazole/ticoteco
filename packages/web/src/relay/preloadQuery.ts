@@ -16,12 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-  GraphQLResponse,
-  GraphQLTaggedNode,
-  UploadableMap,
-  Variables,
-} from 'relay-runtime';
+import {GraphQLResponse, GraphQLTaggedNode, Variables} from 'relay-runtime';
 import {GetServerSidePropsContext} from 'next/types';
 import {AuthUser} from 'next-firebase-auth';
 
@@ -42,19 +37,12 @@ export default async function preloadQuery(
   user: AuthUser,
   request: GraphQLTaggedNode,
   variables: Variables = {},
-  uploadables?: UploadableMap | null,
 ) {
   const {params} = getRequestEsm(request);
 
   const idToken = await user?.getIdToken();
 
-  const response = await fetchGraphQL(
-    idToken,
-    params,
-    variables,
-    {},
-    uploadables,
-  );
+  const response = await fetchGraphQL(idToken, params, variables, {}, null);
 
   return {params, variables, response};
 }
