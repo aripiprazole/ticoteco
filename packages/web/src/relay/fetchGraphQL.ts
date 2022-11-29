@@ -74,9 +74,7 @@ const fetchGraphQL = async (
   }
 
   const response = await api.post('/graphql', body, {
-    headers: {
-      Authorization: idToken,
-    },
+    headers: idToken ? {Authorization: idToken} : {},
   });
 
   // Get the response as JSON

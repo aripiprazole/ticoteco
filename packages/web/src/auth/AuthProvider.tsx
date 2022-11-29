@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, {PropsWithChildren, useEffect, useState} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import {graphql, useRelayEnvironment} from 'react-relay';
 
 import {fetchQuery} from 'relay-runtime';
@@ -26,7 +26,7 @@ import {AuthContext, TicoTecoUser} from './AuthContext';
 import {AuthProviderQuery} from '../__generated__/AuthProviderQuery.graphql';
 import {useMaybeAuthUser} from './authHooks';
 
-const AuthProviderQuery = graphql`
+export const authProviderQuery = graphql`
   query AuthProviderQuery {
     me {
       id
@@ -40,20 +40,25 @@ const AuthProviderQuery = graphql`
   }
 `;
 
-export function AuthProvider(props: PropsWithChildren) {
-  const {children} = props;
+export type AuthProviderProps = {
+  preloadedUser: TicoTecoUser | null;
+  children: ReactNode | undefined;
+};
+
+export function AuthProvider(props: AuthProviderProps) {
+  const {preloadedUser, children} = props;
 
   const environment = useRelayEnvironment();
   const authUser = useMaybeAuthUser();
 
-  const [user, setUser] = useState<TicoTecoUser | null>(null);
+  const [user, setUser] = useState<TicoTecoUser | null>(preloadedUser);
 
   useEffect(() => {
     if (!authUser) return;
 
     const observable = fetchQuery<AuthProviderQuery>(
       environment,
-      AuthProviderQuery,
+      authProviderQuery,
       {},
     );
 

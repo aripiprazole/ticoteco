@@ -19,8 +19,6 @@
 import React, {useEffect, useState} from 'react';
 import {AppProps} from 'next/app';
 
-import {withAuthUser} from 'next-firebase-auth';
-
 import {ChakraProvider} from '@chakra-ui/react';
 
 import 'firebaseui/dist/firebaseui.css';
@@ -33,20 +31,20 @@ import {useMaybeAuthUser} from '../auth/authHooks';
 initAuth();
 
 function App(props: AppProps) {
+  const {_user, _idToken} = props.pageProps;
+
   const authUser = useMaybeAuthUser();
-  const [idToken, setIdToken] = useState(props.pageProps._idToken);
+  const [idToken, setIdToken] = useState(_idToken);
 
   useEffect(() => {
-    authUser.getIdToken().then((nextIdToken) => {
-      if (idToken !== nextIdToken) setIdToken(nextIdToken);
-    });
+    authUser?.getIdToken()?.then(setIdToken);
   }, [authUser]);
 
   return (
     <ChakraProvider theme={theme}>
-      <RelayProvider idToken={props.pageProps._idToken} {...props} />
+      <RelayProvider preloadedUser={_user} idToken={idToken} {...props} />
     </ChakraProvider>
   );
 }
 
-export default withAuthUser({})(App);
+export default App;

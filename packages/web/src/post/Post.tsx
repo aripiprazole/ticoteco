@@ -104,7 +104,6 @@ const PostDeleteMutation = graphql`
 `;
 
 export type PostProps = {
-  readonly postId: string;
   readonly initialQueryRef: PreloadedQuery<PostQuery>;
 };
 

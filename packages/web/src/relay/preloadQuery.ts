@@ -46,7 +46,15 @@ export default async function preloadQuery(
 ) {
   const {params} = getRequestEsm(request);
 
-  const response = await fetchGraphQL(user, params, variables, {}, uploadables);
+  const idToken = await user?.getIdToken();
+
+  const response = await fetchGraphQL(
+    idToken,
+    params,
+    variables,
+    {},
+    uploadables,
+  );
 
   return {params, variables, response};
 }

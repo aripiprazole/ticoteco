@@ -24,6 +24,8 @@ import {
   GetServerSidePropsResult,
   PreviewData,
 } from 'next/types';
+import preloadQuery from '../relay/preloadQuery';
+import {authProviderQuery} from './AuthProvider';
 
 export type TicoTecoGetServerSideProps<
   P extends {[key: string]: any} = {[key: string]: any},
@@ -44,10 +46,18 @@ function withTicoTecoUser(f: TicoTecoGetServerSideProps): GetServerSideProps {
     return {
       props: {
         _idToken: await user.getIdToken(),
+        _user: await preloadTicoTecoUser(ctx, user),
         ...props,
       },
     };
   });
+}
+
+async function preloadTicoTecoUser(ctx, user) {
+  const {response} = await preloadQuery(ctx, user, authProviderQuery);
+
+  // @ts-ignore
+  return response?.data?.me;
 }
 
 export default withTicoTecoUser;

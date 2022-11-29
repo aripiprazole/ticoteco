@@ -24,6 +24,7 @@ import {RelayEnvironmentProvider, useRelayEnvironment} from 'react-relay';
 import buildRelayEnvironment from './environment';
 import {EkkoPreloadedQuery} from './preloadQuery';
 import {AuthProvider} from '../auth/AuthProvider';
+import {TicoTecoUser} from '../auth/AuthContext';
 
 export type PreloadedQueryProps = {
   initialQueryRef: EkkoPreloadedQuery;
@@ -33,11 +34,12 @@ export type PreloadedQueryProps = {
 export type RelayProviderProps = {
   Component: NextComponentType<NextPageContext, any, any>;
   idToken: string;
+  preloadedUser: TicoTecoUser | null;
   pageProps: PreloadedQueryProps;
 };
 
 function RelayProvider(props: RelayProviderProps) {
-  const {Component, idToken} = props;
+  const {Component, idToken, preloadedUser} = props;
 
   const environment = useMemo(() => {
     return buildRelayEnvironment(idToken);
@@ -46,7 +48,7 @@ function RelayProvider(props: RelayProviderProps) {
   return (
     <RelayEnvironmentProvider environment={environment}>
       <Hydrate {...props}>
-        <AuthProvider>
+        <AuthProvider preloadedUser={preloadedUser}>
           <Component />
         </AuthProvider>
       </Hydrate>

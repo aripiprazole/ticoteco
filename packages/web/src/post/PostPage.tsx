@@ -27,21 +27,20 @@ import Post from './Post';
 import {PostQuery} from '../__generated__/PostQuery.graphql';
 
 export type PostPageProps = {
-  readonly post: string;
   readonly initialQueryRef: PreloadedQuery<PostQuery>;
 };
 
 function PostPage(props: PostPageProps) {
-  const {post, initialQueryRef} = props;
+  const {initialQueryRef} = props;
 
   return (
     <Box height='100%'>
       <Head>
-        <title children={`TicoTeco - ${post}`} />
+        <title children={`TicoTeco - Loading...`} />
       </Head>
 
       <React.Suspense fallback='Loading...'>
-        <Post postId={post} initialQueryRef={initialQueryRef} />
+        <Post initialQueryRef={initialQueryRef} />
       </React.Suspense>
     </Box>
   );
