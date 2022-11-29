@@ -24,14 +24,10 @@ import {graphqlUploadKoa} from 'graphql-upload-cjs';
 
 import {graphqlHTTP, Options} from 'koa-graphql';
 
-import {Logger} from 'tslog';
-
 import schema from './graphql/schema';
 import {TicoTecoAppData} from './app';
 import TicoTecoContext from './graphql/TicoTecoContext';
 import findCurrentUser from './user/findCurrentUser';
-
-const log = new Logger({name: '@ticoteco/backend/server'});
 
 export function createServer(appData: TicoTecoAppData): Koa {
   const app = new Koa();
@@ -59,7 +55,7 @@ export function createServer(appData: TicoTecoAppData): Koa {
     try {
       await next();
     } catch (err) {
-      log.fatal(err);
+      console.error(err);
 
       throw err;
     }

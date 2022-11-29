@@ -19,14 +19,11 @@
 import {createServer} from './server';
 import {connectToMongo} from './mongo';
 import {initializeFirebase} from './firebase';
-import {Logger} from 'tslog';
-
-const log = new Logger({name: '@ticoteco/backend'});
 
 const port = process.env.PORT ?? 8000;
 
 async function startBackend() {
-  log.info('Starting backend...');
+  console.log('Starting server...');
 
   // Set up the dotenv variables when running in development mode.
   if (process.env.NODE_ENV !== 'production') {
@@ -43,7 +40,7 @@ async function startBackend() {
 
   app.listen(port);
 
-  log.info(`Backend listen connections at port ${port}`);
+  console.log(`Server listening connections at port: ${port}`);
 }
 
 startBackend();
