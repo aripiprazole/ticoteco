@@ -16,19 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GetServerSideProps} from 'next';
-import {withAuthUserTokenSSR} from 'next-firebase-auth';
-
 import TimelinePage from '../timeline/TimelinePage';
 import preloadQuery from '../relay/preloadQuery';
+import withTicoTecoUser from '../auth/withTicoTecoUser';
 import {timelineQuery} from '../timeline/Timeline';
 
-export const getServerSideProps: GetServerSideProps = withAuthUserTokenSSR()(
-  async ({AuthUser: user, ...ctx}) => ({
-    props: {
-      initialQueryRef: await preloadQuery(ctx, user, timelineQuery),
-    },
-  }),
-);
+export const getServerSideProps = withTicoTecoUser(async ({user, ...ctx}) => ({
+  props: {
+    initialQueryRef: await preloadQuery(ctx, user, timelineQuery),
+  },
+}));
 
 export default TimelinePage;
