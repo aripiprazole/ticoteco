@@ -95,7 +95,7 @@ const PostUpdateMutation = graphql`
   }
 `;
 
-const PostDeleteMutation = graphql`
+export const postDeleteMutation = graphql`
   mutation PostDeleteMutation($input: DeletePostInput!) {
     deletePost(input: $input) {
       clientMutationId
@@ -121,7 +121,7 @@ function Post(props: PostProps) {
   const [updatePost, isUpdating] =
     useMutation<PostUpdateMutation>(PostUpdateMutation);
   const [deletePost, isDeleting] =
-    useMutation<PostDeleteMutation>(PostDeleteMutation);
+    useMutation<PostDeleteMutation>(postDeleteMutation);
   const {post} = usePreloadedQuery<PostQuery>(postQuery, initialQueryRef);
 
   const formik = useFormik({
