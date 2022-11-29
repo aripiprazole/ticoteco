@@ -29,7 +29,7 @@ import {
 } from '@chakra-ui/react';
 
 export type DataInputsProps = {
-  readonly formik: ReturnType<typeof useFormik>;
+  formik: ReturnType<typeof useFormik>;
 };
 
 function DataInputs(props: DataInputsProps) {

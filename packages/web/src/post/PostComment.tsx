@@ -22,7 +22,7 @@ import Link from 'next/link';
 import {chakra, Heading, HStack, Image, Text, VStack} from '@chakra-ui/react';
 
 export type PostCommentProps = {
-  readonly data: any;
+  data: any;
 };
 
 function PostComment(props: PostCommentProps) {

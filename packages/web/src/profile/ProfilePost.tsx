@@ -27,7 +27,7 @@ import {ProfileVideosQuery$data} from '../__generated__/ProfileVideosQuery.graph
 type Post = ProfileVideosQuery$data['profile']['posts']['edges'][0]['node'];
 
 export type ProfilePostProps = {
-  readonly data: Post;
+  data: Post;
 };
 
 function ProfilePost(props: ProfilePostProps) {

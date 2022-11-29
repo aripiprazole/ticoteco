@@ -27,7 +27,7 @@ import Post from './Post';
 import {PostQuery} from '../__generated__/PostQuery.graphql';
 
 export type PostPageProps = {
-  readonly initialQueryRef: PreloadedQuery<PostQuery>;
+  initialQueryRef: PreloadedQuery<PostQuery>;
 };
 
 function PostPage(props: PostPageProps) {

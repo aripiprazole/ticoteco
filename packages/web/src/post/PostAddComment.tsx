@@ -46,7 +46,7 @@ export const postAddCommentMutation = graphql`
 `;
 
 export type PostAddCommentProps = {
-  readonly postId: string;
+  postId: string;
 };
 
 function PostAddComment(props: PostAddCommentProps) {

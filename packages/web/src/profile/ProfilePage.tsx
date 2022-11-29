@@ -26,7 +26,7 @@ import Layout from '../layout/Layout';
 import {ProfileQuery} from '../__generated__/ProfileQuery.graphql';
 
 export type ProfilePageProps = {
-  readonly initialQueryRef: PreloadedQuery<ProfileQuery>;
+  initialQueryRef: PreloadedQuery<ProfileQuery>;
 };
 
 function ProfilePage(props: ProfilePageProps) {
