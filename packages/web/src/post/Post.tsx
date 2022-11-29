@@ -76,7 +76,7 @@ export const postQuery = graphql`
   }
 `;
 
-const PostUpdateMutation = graphql`
+export const postUpdateMutation = graphql`
   mutation PostUpdateMutation($input: UpdatePostInput!) {
     updatePost(input: $input) {
       post {
@@ -119,7 +119,7 @@ function Post(props: PostProps) {
   const [playing, setPlaying] = useState(false);
 
   const [updatePost, isUpdating] =
-    useMutation<PostUpdateMutation>(PostUpdateMutation);
+    useMutation<PostUpdateMutation>(postUpdateMutation);
   const [deletePost, isDeleting] =
     useMutation<PostDeleteMutation>(postDeleteMutation);
   const {post} = usePreloadedQuery<PostQuery>(postQuery, initialQueryRef);
