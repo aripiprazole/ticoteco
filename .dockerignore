@@ -1,0 +1,26 @@
+.idea
+.vscode
+
+**/.pnp.*
+**/.yarn/*
+
+**/.DS_Store
+
+# local env files
+**/.env
+
+# typescript
+**/*.tsbuildinfo
+
+**/*.log
+
+# testing
+/**/coverage
+
+# production
+/**/.vercel
+/**/.next
+/**/.swc
+/**/build
+/**/dist
+/**/node_modules
