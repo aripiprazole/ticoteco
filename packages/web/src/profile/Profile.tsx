@@ -71,7 +71,7 @@ export const profileUpdateMutation = graphql`
 `;
 
 export type ProfileProps = {
-  readonly initialQueryRef: PreloadedQuery<ProfileQuery>;
+  initialQueryRef: PreloadedQuery<ProfileQuery>;
 };
 
 function Profile(props: ProfileProps) {

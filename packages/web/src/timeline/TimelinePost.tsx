@@ -58,8 +58,8 @@ export const timelinePostLikeMutation = graphql`
 `;
 
 type TimelinePostProps = {
-  readonly selected?: boolean;
-  readonly data: TimelineQuery$data['forYou']['edges'][0]['node'];
+  selected?: boolean;
+  data: TimelineQuery$data['forYou']['edges'][0]['node'];
 };
 
 function TimelinePost(props: TimelinePostProps) {
@@ -172,10 +172,10 @@ function TimelinePost(props: TimelinePostProps) {
 }
 
 type ActionButtonProps = {
-  readonly label: string;
-  readonly icon: IconType;
-  readonly onClick?: () => void;
-  readonly disabled?: boolean;
+  label: string;
+  icon: IconType;
+  onClick?: () => void;
+  disabled?: boolean;
 };
 
 function ActionButton(props: ActionButtonProps) {

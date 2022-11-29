@@ -31,8 +31,8 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
-type VideoInputsProps = {
-  readonly formik: ReturnType<typeof useFormik>;
+export type VideoInputsProps = {
+  formik: ReturnType<typeof useFormik>;
 };
 
 function VideoInputs(props: VideoInputsProps) {

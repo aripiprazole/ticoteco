@@ -64,8 +64,8 @@ export const timelineQuery = graphql`
 `;
 
 type CurrentPostProps = {
-  readonly queryRef: PreloadedQuery<TimelineQuery>;
-  readonly setAfterPost: (afterPost: string) => void;
+  queryRef: PreloadedQuery<TimelineQuery>;
+  setAfterPost: (afterPost: string) => void;
 };
 
 function CurrentPosts(props: CurrentPostProps) {

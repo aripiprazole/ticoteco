@@ -61,8 +61,8 @@ export const profileVideosQuery = graphql`
 `;
 
 type CurrentPostsProps = {
-  readonly preloadedQuery: PreloadedQuery<ProfileVideosQuery>;
-  readonly setAfterPost: (afterPost: string) => void;
+  preloadedQuery: PreloadedQuery<ProfileVideosQuery>;
+  setAfterPost: (afterPost: string) => void;
 };
 
 function CurrentPosts(props: CurrentPostsProps) {

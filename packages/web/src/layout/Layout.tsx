@@ -22,8 +22,8 @@ import {Box} from '@chakra-ui/react';
 
 import Navigation from './navigation/Navigation';
 
-type LayoutProps = {
-  readonly children?: React.ReactNode;
+export type LayoutProps = {
+  children?: React.ReactNode;
 };
 
 function Layout({children}: LayoutProps) {
