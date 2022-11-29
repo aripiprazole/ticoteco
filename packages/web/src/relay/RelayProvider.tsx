@@ -39,7 +39,7 @@ export type RelayProviderProps = {
 };
 
 function RelayProvider(props: RelayProviderProps) {
-  const {Component, idToken, preloadedUser} = props;
+  const {idToken, preloadedUser} = props;
 
   const environment = useMemo(() => {
     return buildRelayEnvironment(idToken);
@@ -47,11 +47,9 @@ function RelayProvider(props: RelayProviderProps) {
 
   return (
     <RelayEnvironmentProvider environment={environment}>
-      <Hydrate {...props}>
-        <AuthProvider preloadedUser={preloadedUser}>
-          <Component />
-        </AuthProvider>
-      </Hydrate>
+      <AuthProvider preloadedUser={preloadedUser}>
+        <Hydrate {...props} />
+      </AuthProvider>
     </RelayEnvironmentProvider>
   );
 }

@@ -54,6 +54,7 @@ export function AuthProvider(props: AuthProviderProps) {
   const [user, setUser] = useState<TicoTecoUser | null>(preloadedUser);
 
   useEffect(() => {
+    if (user) return;
     if (!authUser) return;
 
     const observable = fetchQuery<AuthProviderQuery>(
