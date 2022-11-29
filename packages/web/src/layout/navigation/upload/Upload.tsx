@@ -44,7 +44,7 @@ import DataInputs from './DataInputs';
 
 import {UploadMutation} from '../../../__generated__/UploadMutation.graphql';
 
-const UploadMutation = graphql`
+export const uploadMutation = graphql`
   mutation UploadMutation(
     $title: String!
     $description: String
@@ -88,7 +88,7 @@ function Upload() {
   const {isOpen, onOpen, onClose} = useDisclosure();
 
   const [commitMutation, isMutationInFlight] =
-    useMutation<UploadMutation>(UploadMutation);
+    useMutation<UploadMutation>(uploadMutation);
 
   const formik = useFormik<UploadForm>({
     validationSchema: uploadPostSchema,
