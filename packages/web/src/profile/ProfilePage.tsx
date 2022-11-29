@@ -18,33 +18,31 @@
 
 import React from 'react';
 import Head from 'next/head';
+import {PreloadedQuery} from 'react-relay';
 
 import Profile from './Profile';
 import Layout from '../layout/Layout';
-import {GetServerSideProps} from 'next';
+
+import {ProfileQuery} from '../__generated__/ProfileQuery.graphql';
 
 export type ProfilePageProps = {
-  readonly username: string;
+  readonly initialQueryRef: PreloadedQuery<ProfileQuery>;
 };
 
 function ProfilePage(props: ProfilePageProps) {
-  const {username} = props;
+  const {initialQueryRef} = props;
 
   return (
     <Layout>
       <Head>
-        <title children={`TicoTeco - ${username}`} />
+        <title children={`TicoTeco - Loading...`} />
       </Head>
 
-      <Profile username={username} />
+      <React.Suspense fallback='Loading...'>
+        <Profile initialQueryRef={initialQueryRef} />
+      </React.Suspense>
     </Layout>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => ({
-  props: {
-    username: ctx.query['username'],
-  },
-});
 
 export default ProfilePage;

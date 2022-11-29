@@ -16,4 +16,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export {default, getServerSideProps} from '../profile/ProfilePage';
+import ProfilePage from '../profile/ProfilePage';
+import withTicoTecoUser from '../auth/withTicoTecoUser';
+import preloadQuery from '../relay/preloadQuery';
+import {profileQuery} from '../profile/Profile';
+
+export const getServerSideProps = withTicoTecoUser(async ({user, ...ctx}) => ({
+  props: {
+    initialQueryRef: await preloadQuery(ctx, user, profileQuery, {
+      username: ctx.query['username'],
+    }),
+  },
+}));
+
+export default ProfilePage;
