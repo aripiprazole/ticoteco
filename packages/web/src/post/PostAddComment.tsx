@@ -25,7 +25,7 @@ import {Button, chakra, Input} from '@chakra-ui/react';
 
 import {PostAddCommentMutation} from '../__generated__/PostAddCommentMutation.graphql';
 
-const PostAddCommentMutation = graphql`
+export const postAddCommentMutation = graphql`
   mutation PostAddCommentMutation($input: CommentPostInput!) {
     commentPost(input: $input) {
       post {
@@ -53,7 +53,7 @@ function PostAddComment(props: PostAddCommentProps) {
   const {postId} = props;
 
   const [comment, isCommenting] = useMutation<PostAddCommentMutation>(
-    PostAddCommentMutation,
+    postAddCommentMutation,
   );
 
   const formik = useFormik({

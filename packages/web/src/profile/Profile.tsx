@@ -57,7 +57,7 @@ export const profileQuery = graphql`
   }
 `;
 
-const ProfileUpdateMutation = graphql`
+export const profileUpdateMutation = graphql`
   mutation ProfileUpdateMutation($input: UpdateProfileInput!) {
     updateProfile(input: $input) {
       profile {
@@ -83,7 +83,7 @@ function Profile(props: ProfileProps) {
   const [editing, setEditing] = useState(false);
 
   const [commitMutation, isFlying] = useMutation<ProfileUpdateMutation>(
-    ProfileUpdateMutation,
+    profileUpdateMutation,
   );
 
   const {profile} = usePreloadedQuery<ProfileQuery>(
