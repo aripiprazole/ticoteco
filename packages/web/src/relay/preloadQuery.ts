@@ -16,11 +16,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {GraphQLTaggedNode, UploadableMap, Variables} from 'relay-runtime';
+import {
+  GraphQLResponse,
+  GraphQLTaggedNode,
+  UploadableMap,
+  Variables,
+} from 'relay-runtime';
 import {GetServerSidePropsContext} from 'next/types';
 import {AuthUser} from 'next-firebase-auth';
 
 import fetchGraphQL from './fetchGraphQL';
+
+export type EkkoPreloadedQuery = {
+  params: any;
+  variables: Variables;
+  response: GraphQLResponse;
+};
 
 function getRequestEsm(request: any): any {
   return request.default ?? request;

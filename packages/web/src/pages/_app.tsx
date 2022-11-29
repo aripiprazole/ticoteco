@@ -20,30 +20,23 @@ import React from 'react';
 import {AppProps} from 'next/app';
 import {withAuthUser} from 'next-firebase-auth';
 
-import {RelayEnvironmentProvider} from 'react-relay';
-
 import {ChakraProvider} from '@chakra-ui/react';
 
 import 'firebaseui/dist/firebaseui.css';
 
 import theme from '../theme';
-import buildRelayEnvironment from '../relay/environment';
 import initAuth from '../auth/initAuth';
-import {AuthProvider} from '../auth/AuthProvider';
 import {useMaybeAuthUser} from '../hooks/useMaybeAuthUser';
+import RelayProvider from '../relay/RelayProvider';
 
 initAuth();
 
-function App({Component, pageProps}: AppProps) {
+function App(props: AppProps) {
   const authUser = useMaybeAuthUser();
 
   return (
     <ChakraProvider theme={theme}>
-      <RelayEnvironmentProvider environment={buildRelayEnvironment(authUser)}>
-        <AuthProvider>
-          <Component {...pageProps} />
-        </AuthProvider>
-      </RelayEnvironmentProvider>
+      <RelayProvider authUser={authUser} {...props} />
     </ChakraProvider>
   );
 }

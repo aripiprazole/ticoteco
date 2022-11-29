@@ -26,6 +26,7 @@ function buildRelayEnvironment(authUser: AuthUserContext): Environment {
       return fetchGraphQL(authUser, query, variables, cacheConfig, uploadables);
     }),
     store: new Store(new RecordSource()),
+    isServer: typeof window === 'undefined',
   });
 }
 
