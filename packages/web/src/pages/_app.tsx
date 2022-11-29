@@ -16,8 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {AppProps} from 'next/app';
+
 import {withAuthUser} from 'next-firebase-auth';
 
 import {ChakraProvider} from '@chakra-ui/react';
@@ -26,17 +27,24 @@ import 'firebaseui/dist/firebaseui.css';
 
 import theme from '../theme';
 import initAuth from '../auth/initAuth';
-import {useMaybeAuthUser} from '../hooks/useMaybeAuthUser';
 import RelayProvider from '../relay/RelayProvider';
+import {useMaybeAuthUser} from '../auth/authHooks';
 
 initAuth();
 
 function App(props: AppProps) {
   const authUser = useMaybeAuthUser();
+  const [idToken, setIdToken] = useState(props.pageProps._idToken);
+
+  useEffect(() => {
+    authUser.getIdToken().then((nextIdToken) => {
+      if (idToken !== nextIdToken) setIdToken(nextIdToken);
+    });
+  }, [authUser]);
 
   return (
     <ChakraProvider theme={theme}>
-      <RelayProvider authUser={authUser} {...props} />
+      <RelayProvider idToken={props.pageProps._idToken} {...props} />
     </ChakraProvider>
   );
 }

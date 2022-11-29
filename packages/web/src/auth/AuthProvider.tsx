@@ -24,7 +24,7 @@ import {fetchQuery} from 'relay-runtime';
 import {AuthContext, TicoTecoUser} from './AuthContext';
 
 import {AuthProviderQuery} from '../__generated__/AuthProviderQuery.graphql';
-import {useMaybeAuthUser} from '../hooks/useMaybeAuthUser';
+import {useMaybeAuthUser} from './authHooks';
 
 const AuthProviderQuery = graphql`
   query AuthProviderQuery {

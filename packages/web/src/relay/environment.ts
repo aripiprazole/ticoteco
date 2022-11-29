@@ -17,16 +17,14 @@
  */
 
 import {Environment, Network, RecordSource, Store} from 'relay-runtime';
-import {AuthUserContext} from 'next-firebase-auth';
 import fetchGraphQL from './fetchGraphQL';
 
-function buildRelayEnvironment(authUser: AuthUserContext): Environment {
+function buildRelayEnvironment(idToken: string): Environment {
   return new Environment({
     network: Network.create((query, variables, cacheConfig, uploadables) => {
-      return fetchGraphQL(authUser, query, variables, cacheConfig, uploadables);
+      return fetchGraphQL(idToken, query, variables, cacheConfig, uploadables);
     }),
     store: new Store(new RecordSource()),
-    isServer: typeof window === 'undefined',
   });
 }
 

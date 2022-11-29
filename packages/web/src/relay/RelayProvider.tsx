@@ -18,7 +18,6 @@
 
 import React, {useMemo} from 'react';
 import {NextComponentType, NextPageContext} from 'next';
-import {AuthUserContext} from 'next-firebase-auth';
 
 import {RelayEnvironmentProvider, useRelayEnvironment} from 'react-relay';
 
@@ -33,16 +32,16 @@ export type PreloadedQueryProps = {
 
 export type RelayProviderProps = {
   Component: NextComponentType<NextPageContext, any, any>;
-  authUser: AuthUserContext;
+  idToken: string;
   pageProps: PreloadedQueryProps;
 };
 
 function RelayProvider(props: RelayProviderProps) {
-  const {Component, authUser} = props;
+  const {Component, idToken} = props;
 
   const environment = useMemo(() => {
-    return buildRelayEnvironment(authUser);
-  }, [authUser]);
+    return buildRelayEnvironment(idToken);
+  }, [idToken]);
 
   return (
     <RelayEnvironmentProvider environment={environment}>
