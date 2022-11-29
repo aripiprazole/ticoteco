@@ -36,7 +36,7 @@ import {
 import {TimelineQuery$data} from '../__generated__/TimelineQuery.graphql';
 import {TimelinePostLikeMutation} from '../__generated__/TimelinePostLikeMutation.graphql';
 
-const TimelinePostLikeMutation = graphql`
+export const timelinePostLikeMutation = graphql`
   mutation TimelinePostLikeMutation($input: LikePostInput!) {
     likePost(input: $input) {
       post {
@@ -72,7 +72,7 @@ function TimelinePost(props: PostProps) {
   const [playing, setPlaying] = useState(selected);
 
   const [like, isLiking] = useMutation<TimelinePostLikeMutation>(
-    TimelinePostLikeMutation,
+    timelinePostLikeMutation,
   );
 
   useEffect(() => {
