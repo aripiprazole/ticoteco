@@ -31,7 +31,7 @@ import {ProfileVideosQuery} from '../__generated__/ProfileVideosQuery.graphql';
 
 import ProfilePost from './ProfilePost';
 
-const ProfileVideosQuery = graphql`
+export const profileVideosQuery = graphql`
   query ProfileVideosQuery($username: String!, $first: Int!, $after: String) {
     profile(username: $username) {
       id
@@ -68,7 +68,7 @@ type CurrentPostsProps = {
 function CurrentPosts(props: CurrentPostsProps) {
   const {preloadedQuery, setAfterPost} = props;
 
-  const query = usePreloadedQuery(ProfileVideosQuery, preloadedQuery);
+  const query = usePreloadedQuery(profileVideosQuery, preloadedQuery);
   const posts = query.profile.posts;
 
   return (
@@ -106,7 +106,7 @@ function ProfileVideos(props: ProfileVideoProps) {
   const [afterPost, setAfterPost] = useState<string>();
 
   const [preloadedQuery, loadQuery] =
-    useQueryLoader<ProfileVideosQuery>(ProfileVideosQuery);
+    useQueryLoader<ProfileVideosQuery>(profileVideosQuery);
 
   useEffect(() => {
     loadQuery({
