@@ -57,12 +57,12 @@ export const timelinePostLikeMutation = graphql`
   }
 `;
 
-type PostProps = {
+type TimelinePostProps = {
   readonly selected?: boolean;
   readonly data: TimelineQuery$data['forYou']['edges'][0]['node'];
 };
 
-function TimelinePost(props: PostProps) {
+function TimelinePost(props: TimelinePostProps) {
   const {selected = false, data} = props;
 
   const videoRef = useRef<HTMLVideoElement>();
