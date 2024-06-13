@@ -1,5 +1,8 @@
-app = "ticoteco"
+app = "ticoteco2"
 
+[[vm]]
+  size = "shared-cpu-2x"
+  memory = "2gb"
 
 [build]
   dockerfile="dockerfile"

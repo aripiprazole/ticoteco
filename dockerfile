@@ -20,7 +20,7 @@ RUN \
   && apt-get install -y --no-install-recommends \
     g++ \
     make \
-    python \
+    python3 \
   # Install Node.js dependencies
   && yarn \
   # Generate GraphQL schema
